@@ -32,6 +32,7 @@ export interface MissionFigures {
   readonly ready: boolean;
   sync(units: readonly FigureUnit[]): { picks: readonly FigurePick[]; shown: ReadonlySet<string> };
   visual(id: string): { readonly x: number; readonly z: number } | null;
+  settle(): void;
   tick(now: number): void;
   clear(): void;
   dispose(): void;
@@ -385,6 +386,22 @@ export function createMissionFigures(scene: Scene): MissionFigures {
     return { picks, shown };
   }
 
+  function settle(): void {
+    for (const actor of actors.values()) {
+      actor.travel = null;
+      actor.anchor.position.copyFrom(place(actor, actor.cellX, actor.cellY));
+      if (actor.down) {
+        const death = findGroup(actor, "Death");
+        if (death) {
+          death.start(false);
+          death.goToFrame(death.to);
+        }
+        continue;
+      }
+      if (actor.clip !== actor.rest) play(actor, actor.rest, true);
+    }
+  }
+
   function tick(now: number): void {
     if (!ready || disposed) return;
     for (const actor of actors.values()) {
@@ -443,6 +460,7 @@ export function createMissionFigures(scene: Scene): MissionFigures {
     },
     sync,
     visual,
+    settle,
     tick,
     clear,
     dispose,

@@ -1,23 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Client } from "@colyseus/sdk";
 import { PROTOCOL_VERSION } from "@neon/sim";
-import {
-  GHOST_DOOR,
-  GHOST_EXTRACTION,
-  GHOST_HEIGHT,
-  GHOST_LOW_COVER,
-  GHOST_TERMINAL,
-  GHOST_WALLS,
-  GHOST_WIDTH,
-} from "@neon/sim/layout";
 import { timeWish } from "./helpCopy.ts";
 import { HelpPanel, SettingsPanel } from "./PrepPanels.tsx";
 import { preferenceMarks, readPreferences, writePreferences, type UiPreferences } from "./preferences.ts";
+import { TacticalView } from "./TacticalView.tsx";
 import { createTeamFeed, takeBatch, takeSnapshot, type TeamBatch } from "./teamStore.ts";
-
-const WALLS = new Set(GHOST_WALLS.map((cell) => key(cell.x, cell.y)));
-const EXTRACTION = new Set(GHOST_EXTRACTION.map((cell) => key(cell.x, cell.y)));
-const COVER = new Set(GHOST_LOW_COVER.map((cell) => key(cell.x, cell.y)));
+import type { MissionAction } from "./tactical.ts";
 
 interface SlotStand {
   runnerId: string;
@@ -59,6 +48,7 @@ interface Stand {
   reason: string;
   resultRound: number;
   notice: string;
+  commandId?: string;
   phaseSeconds?: number;
   configRevision?: number;
   lastEventId?: number;
@@ -99,10 +89,13 @@ export function MissionScreen() {
   const [stand, setStand] = useState<Stand | null>(null);
   const [feed, setFeed] = useState(createTeamFeed());
   const [moveMode, setMoveMode] = useState(false);
+  const [linked, setLinked] = useState(false);
+  const [pendingId, setPendingId] = useState<string | null>(null);
   const [prefs, setPrefs] = useState(() => readPreferences(window.localStorage));
   const [panel, setPanel] = useState<"none" | "settings" | "help">("none");
   const roomRef = useRef<JoinedRoom | null>(null);
   const commandNo = useRef(0);
+  if (pendingId && stand?.commandId === pendingId) setPendingId(null);
 
   useEffect(() => {
     if (!join) return;
@@ -121,6 +114,7 @@ export function MissionScreen() {
         }
         handle.room = room;
         roomRef.current = room;
+        setLinked(true);
         setRoomId(room.roomId);
         room.onMessage("stand", (payload) => {
           if (!isStand(payload)) return;
@@ -147,6 +141,8 @@ export function MissionScreen() {
           setError(safeText(message) ?? "Verbindung unterbrochen.");
         });
         room.onLeave(() => {
+          setLinked(false);
+          setPendingId(null);
           setError((current) => current || "Verbindung verloren.");
         });
       })
@@ -155,10 +151,37 @@ export function MissionScreen() {
       });
     return () => {
       handle.cancelled = true;
+      setLinked(false);
       handle.room?.leave();
       roomRef.current = null;
     };
   }, [join, serverUrl]);
+
+  function issue(action: MissionAction): void {
+    const room = roomRef.current;
+    if (!room || !stand?.ownRunnerId || pendingId || !linked) return;
+    commandNo.current += 1;
+    const commandId = `${stand.ownRunnerId}-${commandNo.current}`;
+    setPendingId(commandId);
+    room.send("befehl", {
+      protocol: PROTOCOL_VERSION,
+      missionId: "ghost-floor",
+      commandId,
+      round: stand.round,
+      phase: "crew",
+      epoch: 1,
+      unitId: stand.ownRunnerId,
+      action,
+    });
+  }
+
+  function leaveToGate(): void {
+    setJoin(null);
+    setStand(null);
+    setPendingId(null);
+    setMoveMode(false);
+    setError("");
+  }
 
   function updatePrefs(next: UiPreferences): void {
     setPrefs(writePreferences(window.localStorage, next));
@@ -168,24 +191,24 @@ export function MissionScreen() {
   if (panel === "help") return <HelpPanel prefs={prefs} onBack={() => setPanel("none")} />;
 
   if (stand?.outcome === "sieg" || stand?.outcome === "niederlage") {
-    return <Result stand={stand} prefs={prefs} onHelp={() => setPanel("help")} onSettings={() => setPanel("settings")} />;
+    return <Result stand={stand} prefs={prefs} onHelp={() => setPanel("help")} onSettings={() => setPanel("settings")} onLeave={leaveToGate} />;
   }
   if (stand?.roomPhase === "mission") {
     return (
-      <Battle
-        stand={stand}
+      <TacticalView
+        payload={stand}
         prefs={prefs}
         gap={feed.gap}
-        onHelp={() => setPanel("help")}
-        onSettings={() => setPanel("settings")}
+        linked={linked}
+        pending={pendingId !== null}
         moveMode={moveMode}
         onMoveMode={() => setMoveMode((value) => !value)}
-        onCell={(x, y) => {
-          if (!moveMode) return;
-          sendCommand(roomRef.current, stand, commandNo, { kind: "move", x, y });
-          setMoveMode(false);
+        onCommand={(action) => {
+          issue(action);
+          if (action.kind === "move") setMoveMode(false);
         }}
-        onCommand={(action) => sendCommand(roomRef.current, stand, commandNo, action)}
+        onHelp={() => setPanel("help")}
+        onSettings={() => setPanel("settings")}
       />
     );
   }
@@ -360,122 +383,18 @@ function Lobby({
   );
 }
 
-function Battle({
-  stand,
-  prefs,
-  gap,
-  moveMode,
-  onMoveMode,
-  onCell,
-  onCommand,
-  onHelp,
-  onSettings,
-}: {
-  stand: Stand;
-  prefs: UiPreferences;
-  gap: boolean;
-  moveMode: boolean;
-  onMoveMode: () => void;
-  onCell: (x: number, y: number) => void;
-  onCommand: (action: { kind: "interact"; targetId: "terminal" } | { kind: "extract" } | { kind: "ready" }) => void;
-  onHelp: () => void;
-  onSettings: () => void;
-}) {
-  const own = stand.units.find((unit) => unit.id === stand.ownRunnerId);
-  const occupied = new Map(stand.units.filter((unit) => unit.status !== "extracted").map((unit) => [key(unit.x, unit.y), unit]));
-  const seen = seenMap(stand);
-  const width = seen?.width ?? GHOST_WIDTH;
-  const height = seen?.height ?? GHOST_HEIGHT;
-  return (
-    <main
-      className="mission"
-      data-screen="einsatz"
-      data-room-phase="mission"
-      data-phase={stand.phase}
-      data-round={stand.round}
-      data-copies={stand.copies}
-      data-ack={stand.ack}
-      data-own-runner={stand.ownRunnerId}
-      data-move={moveMode ? "1" : "0"}
-      data-gap={gap ? "1" : "0"}
-      data-notice={stand.notice}
-      {...preferenceMarks(prefs)}
-    >
-      <div className="mission-map" role="grid" aria-label="Ghost Floor">
-        {rows(height).map((y) =>
-          columns(width).map((x) => {
-            const id = key(x, y);
-            const unit = occupied.get(id);
-            const kind = seen ? seenKind(seen, id, unit, stand.doorOpen) : cellKind(id, unit, stand.doorOpen);
-            return (
-              <button key={id} type="button" role="gridcell" data-cell={id} data-kind={kind} className={`cell kind-${kind}`} onClick={() => onCell(x, y)}>
-                {cellLabel(kind, unit)}
-              </button>
-            );
-          }),
-        )}
-      </div>
-      <aside className="mission-side">
-        <p className="kicker">Runde {stand.round}</p>
-        <h1>{phaseLabel(stand.phase)}</h1>
-        <p>Kopie {stand.copies}/2 · Tür {stand.doorOpen ? "offen" : "zu"}</p>
-        {own ? (
-          <p data-own-status={own.status}>
-            {own.name} · {own.weapon === "sidearm" ? "Pistole" : "Gewehr"} · HP {own.hp}/{own.maxHp} · AP {own.ap}/8 · Magazin {own.magazine}/{own.magazineSize} + {own.reserveMagazines}
-          </p>
-        ) : null}
-        <div className="mission-actions">
-          <button type="button" data-action="bewegen" aria-pressed={moveMode} onClick={onMoveMode} disabled={stand.phase !== "crew"}>
-            Bewegen
-          </button>
-          <button
-            type="button"
-            data-action="terminal"
-            onClick={() => onCommand({ kind: "interact", targetId: "terminal" })}
-            disabled={stand.phase !== "crew" || (seen !== null && stand.terminal == null)}
-          >
-            Terminal kopieren
-          </button>
-          <button type="button" data-action="extraktion" onClick={() => onCommand({ kind: "extract" })} disabled={stand.phase !== "crew"}>
-            Extrahieren
-          </button>
-          <button type="button" data-action="bereit" onClick={() => onCommand({ kind: "ready" })} disabled={stand.phase !== "crew"}>
-            Bereit
-          </button>
-          <button type="button" data-action="einstellungen" onClick={onSettings}>
-            Einstellungen
-          </button>
-          <button type="button" data-action="hilfe" onClick={onHelp}>
-            Hilfe
-          </button>
-        </div>
-        <p>Schritt 1 AP. Terminal 4 AP, orthogonal daneben. Extraktion 1 AP in der Zone am Westrand.</p>
-        <p data-notice={stand.notice}>{gap ? "Stand wird erneuert." : stand.notice || "Der Server bestätigt jede Aktion."}</p>
-        <ul className="mission-slots">
-          {stand.units
-            .filter((unit) => unit.team === "crew")
-            .map((unit) => (
-              <li key={unit.id}>
-                <span className="shape runner-mark">{mark(unit.id)}</span>
-                {unit.name} · {statusLabel(unit.status)} · HP {unit.hp} · AP {unit.ap}
-              </li>
-            ))}
-        </ul>
-      </aside>
-    </main>
-  );
-}
-
 function Result({
   stand,
   prefs,
   onHelp,
   onSettings,
+  onLeave,
 }: {
   stand: Stand;
   prefs: UiPreferences;
   onHelp: () => void;
   onSettings: () => void;
+  onLeave: () => void;
 }) {
   const success = stand.outcome === "sieg";
   return (
@@ -497,6 +416,9 @@ function Result({
             ))}
         </ul>
         <div className="mission-actions">
+          <button type="button" data-action="zur-lobby" onClick={onLeave}>
+            Zum Zugang
+          </button>
           <button type="button" data-action="einstellungen" onClick={onSettings}>
             Einstellungen
           </button>
@@ -507,26 +429,6 @@ function Result({
       </section>
     </main>
   );
-}
-
-function sendCommand(
-  room: JoinedRoom | null,
-  stand: Stand,
-  counter: { current: number },
-  action: { kind: "move"; x: number; y: number } | { kind: "interact"; targetId: "terminal" } | { kind: "extract" } | { kind: "ready" },
-): void {
-  if (!room || !stand.ownRunnerId) return;
-  counter.current += 1;
-  room.send("befehl", {
-    protocol: PROTOCOL_VERSION,
-    missionId: "ghost-floor",
-    commandId: `${stand.ownRunnerId}-${counter.current}`,
-    round: stand.round,
-    phase: "crew",
-    epoch: 1,
-    unitId: stand.ownRunnerId,
-    action,
-  });
 }
 
 function isStand(payload: unknown): payload is Stand {
@@ -564,27 +466,6 @@ function crewSeconds(stand: Stand): 60 | 90 | 120 {
   return 90;
 }
 
-function cellKind(id: string, unit: UnitStand | undefined, doorOpen: boolean): string {
-  if (unit?.team === "crew") return "runner";
-  if (unit?.team === "enemy") return "enemy";
-  if (id === key(GHOST_TERMINAL.x, GHOST_TERMINAL.y)) return "terminal";
-  if (id === key(GHOST_DOOR.x, GHOST_DOOR.y)) return doorOpen ? "door-open" : "door";
-  if (WALLS.has(id)) return "wall";
-  if (EXTRACTION.has(id)) return "extract";
-  if (COVER.has(id)) return "cover";
-  return "floor";
-}
-
-function cellLabel(kind: string, unit: UnitStand | undefined): string {
-  if (kind === "runner") return mark(unit?.id ?? "");
-  if (kind === "enemy") return "W";
-  if (kind === "terminal") return "T";
-  if (kind === "door" || kind === "door-open") return "D";
-  if (kind === "extract") return "X";
-  if (kind === "cover") return "C";
-  return "";
-}
-
 function mark(id: string): string {
   if (id === "kite") return "K";
   if (id === "voss") return "V";
@@ -599,46 +480,10 @@ function statusLabel(status: string): string {
   return "handlungsfähig";
 }
 
-function phaseLabel(phase: string): string {
-  if (phase === "enemy") return "Gegner";
-  if (phase === "ended") return "Beendet";
-  return "Crew";
-}
-
 function reasonText(reason: string): string {
   if (reason === "extraktion") return "Die Daten sind kopiert. Mindestens ein Runner ist draußen. Kein handlungsfähiger Runner bleibt auf der Karte.";
   if (reason === "rundenlimit") return "24 Runden sind vollständig beendet.";
   return "Kein handlungsfähiger Runner ist mehr im Einsatz, und der Auftrag ist offen.";
-}
-
-function key(x: number, y: number): string {
-  return `${x},${y}`;
-}
-
-function seenMap(stand: Stand): SeenMap | null {
-  if (!Array.isArray(stand.knownCells)) return null;
-  return {
-    known: new Set(stand.knownCells.map((cell) => key(cell.x, cell.y))),
-    walls: new Set((stand.walls ?? []).map((cell) => key(cell.x, cell.y))),
-    cover: new Set((stand.lowCover ?? []).map((cell) => key(cell.x, cell.y))),
-    extraction: new Set((stand.extraction ?? []).map((cell) => key(cell.x, cell.y))),
-    terminal: stand.terminal ? key(stand.terminal.x, stand.terminal.y) : "",
-    door: stand.door ? key(stand.door.x, stand.door.y) : "",
-    width: stand.width && stand.width > 0 ? stand.width : GHOST_WIDTH,
-    height: stand.height && stand.height > 0 ? stand.height : GHOST_HEIGHT,
-  };
-}
-
-function seenKind(seen: SeenMap, id: string, unit: UnitStand | undefined, doorOpen: boolean): string {
-  if (!seen.known.has(id)) return "fog";
-  if (unit?.team === "crew") return "runner";
-  if (unit?.team === "enemy") return "enemy";
-  if (id === seen.terminal) return "terminal";
-  if (id === seen.door) return doorOpen ? "door-open" : "door";
-  if (seen.walls.has(id)) return "wall";
-  if (seen.extraction.has(id)) return "extract";
-  if (seen.cover.has(id)) return "cover";
-  return "floor";
 }
 
 function isBatch(payload: unknown): payload is TeamBatch {
@@ -647,21 +492,3 @@ function isBatch(payload: unknown): payload is TeamBatch {
   return typeof value.fromId === "number" && typeof value.toId === "number" && typeof value.targetRevision === "number" && Array.isArray(value.events);
 }
 
-interface SeenMap {
-  readonly known: ReadonlySet<string>;
-  readonly walls: ReadonlySet<string>;
-  readonly cover: ReadonlySet<string>;
-  readonly extraction: ReadonlySet<string>;
-  readonly terminal: string;
-  readonly door: string;
-  readonly width: number;
-  readonly height: number;
-}
-
-function columns(length: number): number[] {
-  return Array.from({ length }, (_item, index) => index);
-}
-
-function rows(length: number): number[] {
-  return Array.from({ length }, (_item, index) => index);
-}

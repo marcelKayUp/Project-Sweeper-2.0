@@ -54,6 +54,9 @@ export interface IsoBoardView {
   sync(board: IsoBoard): void;
   clear(): void;
   turn(direction: -1 | 1): void;
+  zoomBy(factor: number): void;
+  focus(cell: Cell): void;
+  settle(): void;
   dispose(): void;
 }
 
@@ -393,6 +396,20 @@ export function mountIsoBoard(host: HTMLElement, onCell: (cell: Cell) => void): 
       if (alpha === undefined) return;
       camera.alpha = alpha;
       camera.beta = ISO_TILT;
+    },
+    zoomBy(factor) {
+      if (disposed || !Number.isFinite(factor) || factor <= 0) return;
+      zoom = Math.min(16, Math.max(3.5, zoom * factor));
+      applyZoom();
+    },
+    focus(cell) {
+      if (disposed) return;
+      camera.setTarget(new Vector3(cell.x + 0.5, 0, cell.y + 0.5), false, true, true);
+      camera.beta = ISO_TILT;
+    },
+    settle() {
+      if (disposed) return;
+      figures.settle();
     },
     dispose() {
       if (disposed) return;

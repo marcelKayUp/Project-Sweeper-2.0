@@ -8,7 +8,7 @@ export const helpSections: readonly HelpSection[] = [
   {
     id: "steuerung",
     title: "Steuerung",
-    body: "Die Ansicht sendet Bewegung, Terminal, Extraktion und Bereit. Der Server bestätigt oder lehnt ab. Eine Vorschau gibt es hier nicht.",
+    body: "Die Karte ist orthografisch und um 45 Grad geneigt. Drehen erfolgt in 90-Grad-Schritten und ändert Norden nicht. Die Ansicht sendet Bewegung, Zielen, Schuss, Nachladen, Overwatch, Medkit, Terminal, Tür, Extraktion und Bereit. Nur der Server verändert HP, AP und den Auftrag. Die Vorschau ist unverbindlich. Animation überspringen zeigt den bestätigten Stand.",
   },
   {
     id: "ziel",
@@ -23,12 +23,12 @@ export const helpSections: readonly HelpSection[] = [
   {
     id: "deckung",
     title: "Deckung",
-    body: "Die Karte zeigt nur bekannte Felder. Niedrige Deckung erscheint dort als Markierung, sobald das Feld erkundet ist.",
+    body: "Die Karte und die Übersicht zeigen nur bekannte Felder aus derselben Teamsicht. Niedrige Deckung erscheint dort als Markierung, sobald das Feld erkundet ist. Die Übersicht hält die Frist nicht an.",
   },
   {
     id: "overwatch",
     title: "Overwatch",
-    body: "Overwatch kostet 3 AP und eine Patrone und gilt für eine Himmelsrichtung. Diese Ansicht hat dafür noch keine eigene Schaltfläche.",
+    body: "Overwatch kostet 3 AP und eine Patrone und gilt für Nord, Ost, Süd oder West. Die Richtung ist eine eigene Schaltfläche. Die Kameradrehung ändert diese Richtung nicht.",
   },
   {
     id: "frist",

@@ -89,7 +89,7 @@ Arbeit:
 
 **Menschlicher Test:** Mindestens zwei Viererpartien, dabei Verständlichkeit und Wartezeit aufzeichnen. Wenn derzeit keine Gruppe verfügbar ist, technische Abnahme abschließen und die menschliche Prüfung ausdrücklich offenlassen. Kein Agent darf Spaß oder reale Spielzeit aus Botläufen als bestätigt ausgeben.
 
-**Stand 23.10.2026:** AP-11 bis AP-13 sind in der beschriebenen Vorbereitung umgesetzt. Die Ansicht sendet die Crewfrist 60/90/120 und zeigt nur die Teamsicht. Einstellungen bleiben lokal. Bot-Slots, Taktikansicht, Reconnect, die Vier-Browser-Prüfung und die menschliche Abnahme bleiben offen.
+**Stand 23.10.2026:** AP-11 bis AP-14 sind umgesetzt. Die Einsatzansicht zeichnet die bestätigte Teamsicht orthografisch und sendet die vorhandenen Aktionen. Vorbereitung, Frist und lokale Einstellungen bleiben wie in AP-13. Bot-Slots, Reconnect, die Vier-Browser-Prüfung mit Ausfall und die menschliche Abnahme bleiben offen.
 
 **Entscheidung danach:** Ist die Kernmission verständlich und erzeugen Deckung, AP und Extraktion Entscheidungen? Falls nein, diese Regeln überarbeiten, bevor weiterer Inhalt hinzukommt.
 

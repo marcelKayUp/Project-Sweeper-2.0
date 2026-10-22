@@ -138,6 +138,8 @@ Die zugehörigen Einträge in [MVP_MODULE.md](MVP_MODULE.md), [MVP_SCREENS.md](M
 
 **Abnahme:** eine vollständige Mission lässt sich ohne Debugbefehle spielen; aktueller Zustand bleibt nach übersprungener Animation korrekt.
 
+**Stand 23.10.2026:** `?stueck=mission` zeichnet den Einsatz auf der vorhandenen orthografischen Babylon-Karte. Auswahl, 90-Grad-Drehung, Zoom, Bewegungs- und Treffervorschau, Aktionsleiste, Teamstatus, Frist, Ergebnis und die kleine Übersicht lesen nur die bestätigte Teamsicht. Die Ansicht sendet Bewegung, Zielen, Schuss, Nachladen, Overwatch, Medkit, Terminal, Tür, Extraktion und Bereit; der Server entscheidet. Eine übersprungene Animation springt auf den bestätigten Stand. Das vorhandene Vier-Browser-Skript spielt diese Mission bis zum Sieg in Runde 2 und sieht die Karte. Die menschliche Abnahme bleibt offen. Regelversion 2, Protokollversion 1.
+
 ### AP-15 · Reconnect und defensive Übernahme
 
 **Größe:** M · **Nach:** AP-10/11/12/14 · **Screen:** S11.

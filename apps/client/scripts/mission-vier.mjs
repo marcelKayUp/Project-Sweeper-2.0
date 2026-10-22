@@ -70,7 +70,10 @@ try {
     }
 
     await first.page.locator("[data-action=start]:not([disabled])").click();
-    for (const entry of contexts) await entry.page.waitForSelector("[data-room-phase=mission]");
+    for (const entry of contexts) {
+      await entry.page.waitForSelector("[data-room-phase=mission]");
+      await entry.page.waitForSelector("[data-view=iso] canvas");
+    }
 
     const kite = contexts[0].page;
     const voss = contexts[1].page;
