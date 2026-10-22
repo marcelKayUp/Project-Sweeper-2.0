@@ -4,6 +4,7 @@ import { ghostCellOpen } from "./ghostFloorLayout.ts";
 import {
   applyCommand,
   battleMapOf,
+  closeTeamPhase,
   createMissionState,
   missionChecksum,
   projectTeam,
@@ -82,6 +83,34 @@ describe("Ghost Floor", () => {
     expect(state.result?.outcome).toBe("niederlage");
     expect(state.result?.reason).toBe("rundenlimit");
     expect(state.result?.round).toBe(24);
+  });
+
+  it("schließt die Crewphase als protokollierte Eingabe, ohne die vorherige Lage zu verändern", () => {
+    const start = createMissionState(floor, 1);
+    const before = missionChecksum(start);
+    const spent = apply(start, { kind: "move", unitId: "kite", x: 1, y: 8 }).state;
+    const spentHash = missionChecksum(spent);
+    const closed = closeTeamPhase(spent, floor);
+    expect(closed.rejection).toBeNull();
+    expect(closed.state.round).toBe(2);
+    expect(closed.state.phase).toBe("crew");
+    expect(closed.events[0]).toMatchObject({ type: "PhaseChanged", phase: "enemy", round: 1 });
+    expect(unit(closed.state, "kite")).toMatchObject({ x: 1, y: 8, ap: 8, ready: false });
+    expect(missionChecksum(spent)).toBe(spentHash);
+    expect(missionChecksum(start)).toBe(before);
+    expect(missionChecksum(closeTeamPhase(spent, floor).state)).toBe(missionChecksum(closed.state));
+
+    let state = closed.state;
+    for (let index = 0; index < 23; index += 1) {
+      const step = closeTeamPhase(state, floor);
+      expect(step.rejection).toBeNull();
+      state = step.state;
+    }
+    expect(state.result?.outcome).toBe("niederlage");
+    expect(state.result?.reason).toBe("rundenlimit");
+    const afterEnd = closeTeamPhase(state, floor);
+    expect(afterEnd.rejection).toBe("Die Mission ist beendet.");
+    expect(afterEnd.state).toBe(state);
   });
 
   it("lässt eine Wache mit denselben Schussregeln feuern, sobald ein Runner in Sicht ist", () => {

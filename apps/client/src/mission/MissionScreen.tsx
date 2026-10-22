@@ -55,6 +55,7 @@ interface Stand {
   reason: string;
   resultRound: number;
   notice: string;
+  phaseSeconds?: number;
   slots: SlotStand[];
   units: UnitStand[];
 }
@@ -227,7 +228,7 @@ function Lobby({
         <h1>Ghost Floor</h1>
         <p>Auftrag: das Terminal mit zwei Interaktionen zu je 4 AP kopieren. Danach extrahiert sich mindestens ein handlungsfähiger Runner für 1 AP, und kein handlungsfähiger Runner bleibt auf der Karte.</p>
         <p>Niederlage, wenn kein handlungsfähiger Runner mehr im Einsatz ist und der Auftrag offen bleibt, oder nach 24 vollständig beendeten Runden.</p>
-        <p>Teamzug: alle Runner handeln, danach die Gegner. In diesem Raum gibt es keine Frist. Bereit beendet die Phase.</p>
+        <p>Teamzug: alle Runner handeln, danach die Gegner. Die Crewfrist beträgt {crewSeconds(stand)} Sekunden. Bereit beendet die Phase früher.</p>
         <p>
           Einladung <strong data-invite-code={roomId}>{roomId}</strong>
         </p>
@@ -427,6 +428,11 @@ function safeText(value: string | undefined): string | null {
 
 function ownPreset(stand: Stand): string {
   return stand.slots.find((slot) => slot.runnerId === stand.ownRunnerId)?.preset ?? "";
+}
+
+function crewSeconds(stand: Stand): 60 | 90 | 120 {
+  if (stand.phaseSeconds === 60 || stand.phaseSeconds === 120) return stand.phaseSeconds;
+  return 90;
 }
 
 function cellKind(id: string, unit: UnitStand | undefined, doorOpen: boolean): string {

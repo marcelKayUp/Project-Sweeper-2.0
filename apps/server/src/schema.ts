@@ -13,6 +13,8 @@ export const MissionSync = schema(
     resultRound: t.number().default(0),
     notice: t.string().default(""),
     ack: t.number().default(0),
+    phaseSeconds: t.number().default(90),
+    configRevision: t.number().default(1),
   },
   "MissionSync",
 );

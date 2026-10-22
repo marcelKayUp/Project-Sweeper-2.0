@@ -36,6 +36,7 @@ export {
   SIGHT_RANGE,
   applyCommand,
   battleMapOf,
+  closeTeamPhase,
   createMissionState,
   missionChecksum,
   projectTeam,

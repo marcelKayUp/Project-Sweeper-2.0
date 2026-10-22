@@ -247,6 +247,14 @@ export function applyCommand(state: MissionState, spec: MissionSpec, command: Cr
   return { state: seen, events: step.events, rejection: null };
 }
 
+export function closeTeamPhase(state: MissionState, spec: MissionSpec): StepResult {
+  if (state.result || state.phase === "ended") {
+    return { state, events: [], rejection: "Die Mission ist beendet." };
+  }
+  if (state.phase !== "crew") return { state, events: [], rejection: "Die Crewphase ist vorbei." };
+  return finishCrewPhase(state, spec);
+}
+
 function applyCrewCommand(state: MissionState, spec: MissionSpec, command: CrewCommand): StepResult {
   if (state.result || state.phase === "ended") {
     return { state, events: [], rejection: "Die Mission ist beendet." };
