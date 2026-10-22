@@ -68,6 +68,8 @@ Arbeit:
 
 **Abnahme:** Headless-Szenarien erreichen nachvollziehbar Sieg und Niederlage. Feste Tests decken Schüsse um Ecken, Deckung aus beiden Richtungen, leere Magazine, ausgeschaltete Figuren während Bewegung und gleichzeitige Zieleingaben ab. Bots führen mindestens 100 vorgegebene Seeds ohne Ausnahme oder ungültigen Zustand bis zum regulären Ende/Rundenlimit aus.
 
+**Stand 22.10.2026:** Der Headless-Teil ist umgesetzt. Die Referenzkarte hat vier Wachen und zwei Flanker. Die Gegnerphase merkt sich gemeinsame letzte Sichtungen. `@neon/bots` spielt mit der Policy `mission-v1` nur auf der Teamsicht und schreibt ein versioniertes Replay. 100 Seeds der Referenzmission enden regulär. Lobby, Reconnect, Playwright und die menschliche Abnahme gehören zu M3 und bleiben offen. Regelversion 2 und die Grenzen der Policy: [0030](decisions/0030-gegnerpolicies-und-missionsbot.md).
+
 **Warum vor Grafik:** Die teuren taktischen Fehler sind zu diesem Zeitpunkt klein und reproduzierbar. UI-Fehler können später von Regelfehlern getrennt werden.
 
 ## 5. M3 · Vier Menschen können „Ghost Floor“ spielen — P0 / v0.1
@@ -217,4 +219,4 @@ Die konkret benannten Aufträge AP-01 bis AP-36 stehen in [ARBEITSPAKETE.md](ARB
 
 ## 12. Ergebnis dieser Planungsphase
 
-Das war der Ausgangsstand der Planung vom 20.10.2026. Inzwischen sind Toolchain, Regel-/Grafikstücke, Missionscode und der separat beauftragte Gebäude-Prototyp vorhanden. Daraus folgt keine automatische Abnahme der Meilensteine; konkrete Nachweise und offene menschliche Prüfungen bleiben maßgeblich.
+Das war der Ausgangsstand der Planung vom 20.10.2026. Inzwischen sind Toolchain, Regel-/Grafikstücke, Missionscode und der separat beauftragte Gebäude-Prototyp vorhanden. Der Headless-Nachweis für M2, einschließlich Gegnerrollen, Crewbot und Replay, steht seit dem 22.10.2026. Daraus folgt keine Abnahme von M3 oder eine menschliche Freigabe; konkrete Nachweise und offene menschliche Prüfungen bleiben maßgeblich.

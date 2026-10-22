@@ -1,4 +1,5 @@
 import { SIZE_DIMENSIONS } from "@neon/generator";
+import { RULES_VERSION } from "@neon/sim";
 import { Client } from "@colyseus/sdk";
 import { Server } from "@colyseus/core";
 import { WebSocketTransport } from "@colyseus/ws-transport";
@@ -45,7 +46,7 @@ function collect(room: WireRoom) {
               });
             });
       expect(value).toMatchObject({
-        rulesVersion: 1,
+        rulesVersion: RULES_VERSION,
         width: SIZE_DIMENSIONS.compact.width,
         height: SIZE_DIMENSIONS.compact.height,
         family: "office",

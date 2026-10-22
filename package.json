@@ -8,8 +8,8 @@
   },
   "scripts": {
     "dev": "node tools/dev-mission.mjs",
-    "test": "corepack pnpm --filter @neon/sim test && corepack pnpm --filter @neon/generator test && corepack pnpm --filter @neon/characters test && corepack pnpm --filter @neon/server test",
-    "typecheck": "corepack pnpm --filter @neon/sim typecheck && corepack pnpm --filter @neon/generator typecheck && corepack pnpm --filter @neon/characters typecheck && corepack pnpm --filter @neon/server typecheck && corepack pnpm --filter @neon/client typecheck",
+    "test": "corepack pnpm --filter @neon/sim test && corepack pnpm --filter @neon/bots test && corepack pnpm --filter @neon/generator test && corepack pnpm --filter @neon/characters test && corepack pnpm --filter @neon/server test",
+    "typecheck": "corepack pnpm --filter @neon/sim typecheck && corepack pnpm --filter @neon/bots typecheck && corepack pnpm --filter @neon/generator typecheck && corepack pnpm --filter @neon/characters typecheck && corepack pnpm --filter @neon/server typecheck && corepack pnpm --filter @neon/client typecheck",
     "dev:characters": "corepack pnpm --filter @neon/client dev:characters",
     "build:characters": "corepack pnpm --filter @neon/client build:characters",
     "check:characters": "corepack pnpm --filter @neon/client check:characters",

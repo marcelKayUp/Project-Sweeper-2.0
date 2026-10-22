@@ -3,13 +3,16 @@ import { ghostFloorSpec } from "./ghostFloor.ts";
 import { ghostCellOpen } from "./ghostFloorLayout.ts";
 import {
   applyCommand,
+  battleMapOf,
   createMissionState,
   missionChecksum,
   projectTeam,
+  SIGHT_RANGE,
   type CrewCommand,
   type MissionSpec,
   type MissionState,
 } from "./mission.ts";
+import { seesUnit } from "./sight.ts";
 
 const presets = { kite: "rifle", voss: "sidearm", nera: "rifle", sol: "sidearm" } as const;
 const floor = ghostFloorSpec(presets);
@@ -161,6 +164,35 @@ describe("Ghost Floor", () => {
     expect(floor.walls.some((wall) => wall.x === floor.door.x && wall.y === floor.door.y)).toBe(false);
     expect(floor.width).toBe(20);
     expect(floor.height).toBe(20);
+    const enemies = floor.spawns.filter((spawn) => spawn.team === "enemy");
+    expect(enemies.filter((spawn) => spawn.id.startsWith("wache"))).toHaveLength(4);
+    expect(enemies.filter((spawn) => spawn.id.startsWith("flanker"))).toHaveLength(2);
+    const map = battleMapOf(floor, false);
+    const crew = floor.spawns.filter((spawn) => spawn.team === "crew");
+    const patrols = new Set<string>();
+    for (const enemy of enemies) {
+      expect(enemy.patrol[0]).toEqual({ x: enemy.x, y: enemy.y });
+      const own = new Set<string>();
+      for (let index = 0; index < enemy.patrol.length; index += 1) {
+        const cell = enemy.patrol[index];
+        const next = enemy.patrol[(index + 1) % enemy.patrol.length];
+        if (!cell || !next) throw new Error(enemy.id);
+        expect(ghostCellOpen(cell.x, cell.y)).toBe(true);
+        expect(Math.abs(cell.x - next.x) + Math.abs(cell.y - next.y)).toBe(1);
+        const key = `${cell.x},${cell.y}`;
+        if (own.has(key)) continue;
+        expect(patrols.has(key)).toBe(false);
+        patrols.add(key);
+        own.add(key);
+      }
+      for (const runner of crew) {
+        expect(`${enemy.id}->${runner.id}:${seesUnit(map, enemy, runner, SIGHT_RANGE)}`).toBe(
+          `${enemy.id}->${runner.id}:false`,
+        );
+      }
+      const deep = seesUnit(map, enemy, { x: 7, y: 7 }, SIGHT_RANGE);
+      expect(`${enemy.id}@7,7:${deep}`).toBe(`${enemy.id}@7,7:${enemy.id === "wache-haupt"}`);
+    }
   });
 });
 
@@ -247,5 +279,203 @@ function rescueSpec(): MissionSpec {
         ],
       },
     ],
+  };
+}
+
+describe("Gegnerrollen und M2-Fälle", () => {
+  it("schießt nicht um eine Ecke und lässt AP und Zufall stehen", () => {
+    const spec = cornerSpec();
+    const start = createMissionState(spec, 1);
+    const before = missionChecksum(start);
+    const denied = applyCommand(start, spec, { kind: "shoot", unitId: "kite", targetId: "nahe" });
+    expect(denied.rejection).toBe("Kein Sichtkontakt.");
+    expect(denied.state).toBe(start);
+    expect(missionChecksum(start)).toBe(before);
+    expect(start.combatRng).toEqual(createMissionState(spec, 1).combatRng);
+  });
+
+  it("lehnt den Schuss aus einem leeren Magazin ab", () => {
+    const spec = laneSpec();
+    const start = createMissionState(spec, 1);
+    const emptied = {
+      ...start,
+      units: start.units.map((unit) => (unit.id === "kite" ? { ...unit, magazine: 1 } : unit)),
+    };
+    const once = applyCommand(emptied, spec, { kind: "shoot", unitId: "kite", targetId: "nahe" });
+    expect(once.rejection).toBeNull();
+    expect(once.state.units.find((unit) => unit.id === "kite")?.magazine).toBe(0);
+    const twice = applyCommand(once.state, spec, { kind: "shoot", unitId: "kite", targetId: "nahe" });
+    expect(twice.rejection).toBe("Magazin ist leer.");
+    expect(twice.state).toBe(once.state);
+  });
+
+  it("löst zwei Zieleingaben der Reihe nach auf und belegt ein Feld nur einmal", () => {
+    const spec = laneSpec();
+    const start = createMissionState(spec, 1);
+    const first = applyCommand(start, spec, { kind: "move", unitId: "kite", x: 2, y: 1 });
+    const second = applyCommand(first.state, spec, { kind: "move", unitId: "voss", x: 2, y: 1 });
+    expect(first.rejection).toBeNull();
+    expect(second.rejection).toBe("Feld ist blockiert.");
+    expect(second.state).toBe(first.state);
+    const aimed = applyCommand(start, spec, { kind: "aim", unitId: "kite" });
+    const both = applyCommand(aimed.state, spec, { kind: "aim", unitId: "voss" });
+    expect(both.rejection).toBeNull();
+    expect(both.state.units.filter((unit) => unit.aiming).map((unit) => unit.id).sort()).toEqual(["kite", "voss"]);
+  });
+
+  it("stellt eine Wache auf die schützende Kante und hält dort", () => {
+    const spec = coverSpec();
+    const done = ready(createMissionState(spec, 2), spec);
+    const guard = done.units.find((unit) => unit.id === "enemy-0");
+    expect(guard).toMatchObject({ x: 2, y: 1, overwatch: expect.any(String) });
+    expect(done.contacts).toEqual([{ id: "kite", x: 5, y: 1 }]);
+  });
+
+  it("geht mit einem Flanker auf die weniger gedeckte Seite", () => {
+    const spec = angleSpec();
+    const done = ready(createMissionState(spec, 2), spec);
+    const flanker = done.units.find((unit) => unit.id === "enemy-4");
+    expect(flanker).toMatchObject({ x: 4, y: 0, name: "Flanker 1" });
+    expect(flanker?.overwatch).not.toBeNull();
+  });
+
+  it("verfolgt die geteilte letzte Sichtung statt der eigenen Patrouille", () => {
+    const spec = pursuitSpec();
+    const start = createMissionState(spec, 4);
+    const map = battleMapOf(spec, false);
+    expect(seesUnit(map, { x: 6, y: 1 }, { x: 1, y: 1 }, SIGHT_RANGE)).toBe(false);
+    expect(seesUnit(map, { x: 2, y: 1 }, { x: 1, y: 1 }, SIGHT_RANGE)).toBe(true);
+    const done = ready(start, spec);
+    expect(done.units.find((unit) => unit.id === "wache-b")).toMatchObject({ x: 5, y: 1 });
+    expect(done.contacts.some((contact) => contact.id === "kite")).toBe(true);
+  });
+});
+
+function ready(state: MissionState, spec: MissionSpec): MissionState {
+  let next = state;
+  for (const unit of next.units) {
+    if (unit.team !== "crew" || unit.status !== "active") continue;
+    const step = applyCommand(next, spec, { kind: "ready", unitId: unit.id });
+    if (step.rejection !== null) throw new Error(step.rejection);
+    next = step.state;
+  }
+  return next;
+}
+
+function cornerSpec(): MissionSpec {
+  return room("corner-shot", 3, 3, ["0,0", "1,1"], [], { id: "terminal", x: 2, y: 2 }, [
+    crewAt("kite", 0, 0),
+    enemyAt("nahe", "Nahe", 1, 1, [
+      { x: 1, y: 1 },
+      { x: 1, y: 1 },
+    ]),
+  ]);
+}
+
+function laneSpec(): MissionSpec {
+  return room("lane-shot", 8, 3, ["1,1", "2,1", "3,1", "4,1", "5,1"], [], { id: "terminal", x: 0, y: 0 }, [
+    crewAt("kite", 1, 1),
+    crewAt("voss", 3, 1),
+    enemyAt("nahe", "Nahe", 5, 1, [
+      { x: 5, y: 1 },
+      { x: 5, y: 1 },
+    ]),
+  ]);
+}
+
+function coverSpec(): MissionSpec {
+  return room(
+    "cover-guard",
+    6,
+    3,
+    ["2,1", "3,1", "4,1", "5,1"],
+    [{ id: "kante", x: 2, y: 1, protects: "e" }],
+    { id: "terminal", x: 0, y: 0 },
+    [
+      crewAt("kite", 5, 1),
+      enemyAt("enemy-0", "Wache 1", 3, 1, [
+        { x: 3, y: 1 },
+        { x: 4, y: 1 },
+      ]),
+    ],
+  );
+}
+
+function angleSpec(): MissionSpec {
+  return room(
+    "angle-flank",
+    6,
+    3,
+    ["2,0", "3,0", "4,0", "2,1", "3,1", "4,1"],
+    [{ id: "kante", x: 4, y: 1, protects: "w" }],
+    { id: "terminal", x: 0, y: 0 },
+    [
+      crewAt("kite", 4, 1),
+      enemyAt("enemy-4", "Flanker 1", 3, 0, [
+        { x: 3, y: 0 },
+        { x: 2, y: 0 },
+      ]),
+    ],
+  );
+}
+
+function pursuitSpec(): MissionSpec {
+  return room("pursuit", 8, 3, ["1,1", "2,1", "1,0", "2,0", "3,0", "4,0", "5,0", "5,1", "6,1", "7,1"], [], { id: "terminal", x: 0, y: 2 }, [
+    crewAt("kite", 1, 1),
+    enemyAt("wache-a", "Wache A", 2, 1, [
+      { x: 2, y: 1 },
+      { x: 2, y: 1 },
+    ]),
+    enemyAt("wache-b", "Wache B", 6, 1, [
+      { x: 6, y: 1 },
+      { x: 7, y: 1 },
+    ]),
+  ]);
+}
+
+function crewAt(id: string, x: number, y: number): MissionSpec["spawns"][number] {
+  return { id, name: id, team: "crew", weapon: "rifle", x, y, patrol: [] };
+}
+
+function enemyAt(
+  id: string,
+  name: string,
+  x: number,
+  y: number,
+  patrol: readonly { x: number; y: number }[],
+): MissionSpec["spawns"][number] {
+  return { id, name, team: "enemy", weapon: "rifle", x, y, patrol };
+}
+
+function room(
+  id: string,
+  width: number,
+  height: number,
+  open: readonly string[],
+  lowCover: MissionSpec["lowCover"],
+  terminal: MissionSpec["terminal"],
+  spawns: MissionSpec["spawns"],
+): MissionSpec {
+  const passable = new Set(open);
+  const door = { id: "shortcut" as const, x: width - 1, y: 0 };
+  const walls: { x: number; y: number }[] = [];
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      if (x === door.x && y === door.y) continue;
+      if (passable.has(`${x},${y}`)) continue;
+      walls.push({ x, y });
+    }
+  }
+  return {
+    id,
+    hash: id,
+    width,
+    height,
+    walls,
+    lowCover,
+    terminal,
+    door,
+    extraction: [{ x: spawns[0]?.x ?? 0, y: spawns[0]?.y ?? 1 }],
+    spawns,
   };
 }

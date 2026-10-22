@@ -96,6 +96,8 @@ Die zugehörigen Einträge in [MVP_MODULE.md](MVP_MODULE.md), [MVP_SCREENS.md](M
 
 **Abnahme:** 100 feste Läufe bis regulärem Ende/Rundenlimit ohne ungültigen Zustand; tatsächlicher Sieg und Verlust zusätzlich durch gezielte Szenarien belegt.
 
+**Stand 22.10.2026:** Nachweis in `@neon/sim` und `@neon/bots`. Das Replay ist versioniertes JSON; der Test schreibt es nur in ein temporäres Verzeichnis. Die defensive Ausfallübernahme bleibt AP-15.
+
 ## 3. Vier Menschen spielen · M3 · P0
 
 ### AP-11 · Autoritativer Raum und Besitz

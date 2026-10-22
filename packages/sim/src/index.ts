@@ -50,6 +50,7 @@ export type { PlacedUnit } from "./deckungFixture.ts";
 export type { RngState, RngStream } from "./rng.ts";
 export type { Combatant, SchussView, ShotResolution, ShotStatus } from "./resolve.ts";
 export type {
+  Contact,
   CrewCommand,
   MissionEvent,
   MissionResult,

@@ -59,6 +59,8 @@ Kompatible Versionen von Server, SDK, Schema, React, Vite, Vitest und bei der An
 
 **Stand 21.10.2026:** Für den beauftragten Gebäude-Prototyp existiert `packages/generator`. Es erzeugt geprüfte `MissionSpec`-Daten und importiert keine Renderer-/Netzwerkimplementierung. Die separate Werkstatt nutzt Babylon.js zur Vorschau. Die Anbindung an den laufenden Server ist offen; siehe [0009](decisions/0009-semantischer-gebaeudegenerator.md).
 
+**Stand 22.10.2026:** `packages/bots` enthält die missionsorientierte Crew-Policy. Sie liest die Teamsicht und sendet normale Befehle. Die Simulation importiert dieses Paket nicht; siehe [0030](decisions/0030-gegnerpolicies-und-missionsbot.md).
+
 Die folgende Struktur ist das Zielbild; einzelne Bereiche sind bereits implementiert:
 
 ```text

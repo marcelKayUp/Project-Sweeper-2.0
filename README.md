@@ -26,12 +26,13 @@ GitHub zeigt Kontaktbögen und die Terminalvorschau ebenfalls als Bilder. Die da
 Node.js 24.14.0 und pnpm 12.14.0 über Corepack. Im Projektordner einmal `corepack pnpm install`.
 
 - [`@neon/sim`](packages/sim): deterministische Regeln. Keine Grafik und kein Netzwerk.
+- [`@neon/bots`](packages/bots): Crewbots auf der gefilterten Teamsicht. Keine eigene Regelautorität.
 - [`@neon/generator`](packages/generator): semantischer Gebäudegenerator.
 - [`@neon/characters`](packages/characters): Figurenrezepte und Prüfung, ohne Renderer.
 - [`@neon/server`](apps/server): Colyseus-Spielserver.
 - [`@neon/client`](apps/client): React-Oberfläche, Babylon-Taktikansicht und die älteren Phaser-Stücke.
 
-`corepack pnpm test` prüft Simulation, Generator, Figuren und Server. `corepack pnpm typecheck` prüft zusätzlich den Client. Blender wird nur für Figurenexport, Terminals und Assetprüfung gebraucht.
+`corepack pnpm test` prüft Simulation, Crewbots, Generator, Figuren und Server. `corepack pnpm typecheck` prüft zusätzlich den Client. Blender wird nur für Figurenexport, Terminals und Assetprüfung gebraucht.
 
 ## Einstieg für Agenten
 
@@ -51,6 +52,8 @@ powershell -NoProfile -File tools/rag/NeonRag.ps1 -Build
 
 `corepack pnpm rag` startet dasselbe Skript.
 
+
+**Projektstand, 22.10.2026:** Zusätzlich zum Stand vom 21.10. liegt der Headless-Nachweis der Kernmission in `@neon/sim` und `@neon/bots`: sechs Gegnerrollen, ein missionsorientierter Crewbot und versionierte Replays. Vier-Spieler-Lobby, Reconnect und die menschliche Abnahme sind offen. Siehe [0030](docs/decisions/0030-gegnerpolicies-und-missionsbot.md).
 
 **Projektstand, 21.10.2026:** Regel-/Grafikstücke und ein lokaler Missionsprototyp sind vorhanden. Neu ist ein semantischer Gebäudegenerator mit separater Werkstatt. Die übrigen Planungsdokumente bleiben Vorschläge; eine vollständige menschliche MVP-Abnahme ist damit nicht belegt.
 

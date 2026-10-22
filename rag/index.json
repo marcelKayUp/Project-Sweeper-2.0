@@ -1,12 +1,12 @@
 {
     "schema":  1,
-    "builtAt":  "2026-10-22T13:33:23Z",
+    "builtAt":  "2026-10-22T22:09:47Z",
     "usage":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Tag MOD-03",
     "rebuild":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Build",
     "note":  "Abruf der gekennzeichneten Planungsabschnitte. Bei Abweichungen gilt das Quelldokument.",
     "counts":  {
-                   "chunks":  170,
-                   "tags":  135,
+                   "chunks":  171,
+                   "tags":  136,
                    "subtags":  16
                },
     "sources":  [
@@ -36,11 +36,11 @@
                     },
                     {
                         "path":  "docs/ARBEITSPAKETE.md",
-                        "sha256":  "ea0991182e69aa50224b86eaa4630770377872ca9bc27446d604304f7efbde47"
+                        "sha256":  "5e2127e6aff4b6c2a2d0c10b556b70cd05c84c7cef562d65b6392f4691fa9ad6"
                     },
                     {
                         "path":  "docs/ENTWICKLUNGSPLAN.md",
-                        "sha256":  "d97c6bea7207c110d23b90f1949e60fc5f7b270a5699c3a7922571eca90cd3fc"
+                        "sha256":  "333e2587ea77a0037861154ea1e64ce306219edd70c5e5b7ce0c4dae4eb4826e"
                     },
                     {
                         "path":  "docs/decisions/0001-modulare-planung.md",
@@ -137,6 +137,10 @@
                     {
                         "path":  "docs/decisions/0024-ein-start-fuer-die-testmission.md",
                         "sha256":  "3722fed7ad953fd56cdb7bc1d540ea880d6d4c1ac934e1d0b7f4e4c2badb46a4"
+                    },
+                    {
+                        "path":  "docs/decisions/0030-gegnerpolicies-und-missionsbot.md",
+                        "sha256":  "7a3d75a53c71f2d5ffa625f006e1f06a40156e44042042544661e0c164adafa4"
                     }
                 ],
     "tags":  {
@@ -365,6 +369,7 @@
                                                "docs/ARBEITSPAKETE.md#AP-15"
                                            ],
                                "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-10",
                                                   "docs/ARBEITSPAKETE.md#AP-16",
                                                   "docs/ARBEITSPAKETE.md#AP-21",
                                                   "docs/MVP_MODULE.md#MOD-07",
@@ -744,7 +749,8 @@
                                               ],
                                   "references":  [
                                                      "docs/decisions/0007-babylon-taktikansicht.md#DEC-0007",
-                                                     "docs/decisions/0008-hierarchischer-missionsgenerator.md#DEC-0008"
+                                                     "docs/decisions/0008-hierarchischer-missionsgenerator.md#DEC-0008",
+                                                     "docs/decisions/0030-gegnerpolicies-und-missionsbot.md#DEC-0030"
                                                  ]
                               },
                  "DEC-0007":  {
@@ -996,6 +1002,17 @@
                                   "references":  [
                                                      "docs/decisions/0013-isometrische-fortsetzung.md#DEC-0013",
                                                      "docs/ENTWICKLUNGSPLAN.md#M7"
+                                                 ]
+                              },
+                 "DEC-0030":  {
+                                  "kind":  "DEC",
+                                  "title":  "Gegnerpolicies und missionsorientierter Crewbot",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0030-gegnerpolicies-und-missionsbot.md#DEC-0030"
+                                              ],
+                                  "references":  [
+                                                     "docs/ENTWICKLUNGSPLAN.md#M2"
                                                  ]
                               },
                  "GEN-00":  {
@@ -1400,6 +1417,7 @@
                                             "docs/ENTWICKLUNGSPLAN.md#M2"
                                         ],
                             "references":  [
+                                               "docs/decisions/0030-gegnerpolicies-und-missionsbot.md#DEC-0030",
                                                "docs/ENTWICKLUNGSPLAN.md#M3",
                                                "docs/GENERATOREN.md#GEN-00",
                                                "docs/GENERATOREN.md#GEN-11",
@@ -1418,6 +1436,8 @@
                                             "docs/ENTWICKLUNGSPLAN.md#M3"
                                         ],
                             "references":  [
+                                               "docs/decisions/0030-gegnerpolicies-und-missionsbot.md#DEC-0030",
+                                               "docs/ENTWICKLUNGSPLAN.md#M2",
                                                "docs/ENTWICKLUNGSPLAN.md#M4",
                                                "docs/MODULE.md#MOD-07",
                                                "docs/MODULE.md#MOD-08",

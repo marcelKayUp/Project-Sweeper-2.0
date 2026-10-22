@@ -156,7 +156,7 @@ describe("Regelkern", () => {
   it("importiert keine Ansicht, kein Netzwerk und keinen Zufall", () => {
     const dir = dirname(fileURLToPath(import.meta.url));
     const files = readdirSync(dir).filter((name) => name.endsWith(".ts") && !name.endsWith(".test.ts"));
-    const forbidden = /from ["'](?:@babylonjs|phaser|react|react-dom|@colyseus|colyseus)/;
+    const forbidden = /from ["'](?:@babylonjs|phaser|react|react-dom|@colyseus|colyseus|@neon\/bots)/;
     for (const name of files) {
       const source = readFileSync(join(dir, name), "utf8");
       expect(`${name}:${forbidden.test(source)}`).toBe(`${name}:false`);

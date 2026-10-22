@@ -1,11 +1,11 @@
-import { actionAp, CREW_AP } from "./ap.ts";
-import { inSector, manhattan, sectorFacing } from "./geometry.ts";
+import { actionAp, CREW_AP, pathTo } from "./ap.ts";
+import { coverPenalty, inSector, manhattan, sectorFacing } from "./geometry.ts";
 import { AIM_BONUS, CREW_HP, GUARD_HP, resolveShot, RIFLE_MAGAZINE, RIFLE_RANGE, type ShotStatus } from "./resolve.ts";
 import { createRng, type RngState } from "./rng.ts";
 import { seesUnit, teamVisibleCells, unionCells } from "./sight.ts";
 import { DIRECTIONS, type BattleMap, type Cell, type Direction, type LowCover } from "./types.ts";
 
-export const RULES_VERSION = 1;
+export const RULES_VERSION = 2;
 export const PROTOCOL_VERSION = 1;
 export const MISSION_ID = "ghost-floor";
 export const SIGHT_RANGE = 10;
@@ -81,6 +81,12 @@ export interface MissionResult {
   readonly downIds: readonly string[];
 }
 
+export interface Contact {
+  readonly id: string;
+  readonly x: number;
+  readonly y: number;
+}
+
 export interface MissionState {
   readonly missionId: string;
   readonly rulesVersion: number;
@@ -94,6 +100,7 @@ export interface MissionState {
   readonly botRng: RngState;
   readonly copies: number;
   readonly doorOpen: boolean;
+  readonly contacts: readonly Contact[];
   readonly knownCells: readonly Cell[];
   readonly units: readonly UnitState[];
   readonly result: MissionResult | null;
@@ -223,6 +230,7 @@ export function createMissionState(spec: MissionSpec, seed: number): MissionStat
       botRng: createRng(seed, "bot"),
       copies: 0,
       doorOpen: false,
+      contacts: [],
       knownCells: [],
       units,
       result: null,
@@ -441,11 +449,17 @@ function reload(state: MissionState, unit: UnitState): StepResult {
 function finishCrewPhase(state: MissionState, spec: MissionSpec): StepResult {
   const events: MissionEvent[] = [{ type: "PhaseChanged", phase: "enemy", round: state.round }];
   let current: MissionState = releaseTeam({ ...state, phase: "enemy", revision: state.revision + 1 }, "enemy");
-  const enemies = current.units.filter((unit) => unit.team === "enemy" && unit.status === "active");
-  for (const enemy of enemies) {
-    current = updateUnit(current, enemy.id, { ap: CREW_AP });
-    const turned = enemyTurn(current, spec, enemy.id);
-    current = turned.state;
+  const order = current.units
+    .filter((unit) => unit.team === "enemy" && unit.status === "active")
+    .map((unit) => unit.id)
+    .sort(compareId);
+  for (const enemyId of order) {
+    const enemy = findUnit(current, enemyId);
+    if (!enemy || enemy.status !== "active") continue;
+    current = updateUnit(current, enemyId, { ap: CREW_AP });
+    current = rememberContacts(current, spec);
+    const turned = enemyTurn(current, spec, enemyId);
+    current = rememberContacts(turned.state, spec);
     events.push(...turned.events);
     if (current.result) return { state: current, events, rejection: null };
   }
@@ -487,12 +501,187 @@ function enemyTurn(state: MissionState, spec: MissionSpec, unitId: string): Step
   if (!shooter || shooter.status !== "active") return { state, events: [], rejection: null };
   const fired = enemyShot(state, spec, shooter);
   if (fired.state.result) return fired;
-  const lived = findUnit(fired.state, unitId);
-  if (!lived || lived.status !== "active") return fired;
-  const held = holdContact(fired.state, spec, lived);
-  if (held) return { state: held.state, events: [...fired.events, ...held.events], rejection: null };
-  const walked = enemyStep(fired.state, spec, unitId);
-  return { state: walked.state, events: [...fired.events, ...walked.events], rejection: null };
+  let current = fired.state;
+  const events = [...fired.events];
+  const lived = findUnit(current, unitId);
+  if (!lived || lived.status !== "active") return { state: current, events, rejection: null };
+  if (visibleCrew(current, spec, lived).length > 0) {
+    const stepped = enemyRole(lived) === "flanker" ? flankStep(current, spec, lived) : guardCoverStep(current, spec, lived);
+    if (stepped.state !== current) {
+      current = stepped.state;
+      events.push(...stepped.events);
+      if (current.result) return { state: current, events, rejection: null };
+    }
+    const after = findUnit(current, unitId);
+    if (!after || after.status !== "active") return { state: current, events, rejection: null };
+    const held = holdContact(current, spec, after);
+    if (held) return { state: held.state, events: [...events, ...held.events], rejection: null };
+    return { state: current, events, rejection: null };
+  }
+  const chased = pursueStep(current, spec, lived);
+  if (chased.state !== current) return { state: chased.state, events: [...events, ...chased.events], rejection: null };
+  const walked = enemyStep(current, spec, unitId);
+  return { state: walked.state, events: [...events, ...walked.events], rejection: null };
+}
+
+const STEP_DELTA: Readonly<Record<Direction, Cell>> = {
+  n: { x: 0, y: -1 },
+  e: { x: 1, y: 0 },
+  s: { x: 0, y: 1 },
+  w: { x: -1, y: 0 },
+};
+
+function enemyRole(unit: UnitState): "guard" | "flanker" {
+  // Handbau kennzeichnet Flanker über die Id, der Generator über den Namen.
+  if (unit.id.startsWith("flanker") || unit.name.startsWith("Flanker")) return "flanker";
+  return "guard";
+}
+
+function guardCoverStep(state: MissionState, spec: MissionSpec, unit: UnitState): StepResult {
+  const idle = { state, events: [] as const, rejection: null };
+  if (unit.ap < actionAp("move")) return idle;
+  const target = visibleCrew(state, spec, unit)[0];
+  if (!target) return idle;
+  const map = battleMapOf(spec, state.doorOpen);
+  if (coverPenalty(map, target, unit) === 25) return idle;
+  for (const direction of DIRECTIONS) {
+    const delta = STEP_DELTA[direction];
+    const next = { x: unit.x + delta.x, y: unit.y + delta.y };
+    if (!cellFree(state, spec, next.x, next.y, unit.id)) continue;
+    if (coverPenalty(map, target, next) !== 25) continue;
+    if (!seesUnit(map, next, target, SIGHT_RANGE)) continue;
+    return stepOnto(state, spec, unit, next.x, next.y);
+  }
+  return idle;
+}
+
+function flankStep(state: MissionState, spec: MissionSpec, unit: UnitState): StepResult {
+  const idle = { state, events: [] as const, rejection: null };
+  if (unit.ap < actionAp("move")) return idle;
+  const target = visibleCrew(state, spec, unit)[0];
+  if (!target) return idle;
+  const map = battleMapOf(spec, state.doorOpen);
+  const currentPenalty = coverPenalty(map, unit, target);
+  let best: Cell | null = null;
+  for (const direction of DIRECTIONS) {
+    const delta = STEP_DELTA[direction];
+    const next = { x: unit.x + delta.x, y: unit.y + delta.y };
+    if (!cellFree(state, spec, next.x, next.y, unit.id)) continue;
+    if (!seesUnit(map, next, target, SIGHT_RANGE) || manhattan(next, target) > unit.range) continue;
+    if (coverPenalty(map, next, target) >= currentPenalty) continue;
+    best = next;
+    break;
+  }
+  if (!best) return idle;
+  return stepOnto(state, spec, unit, best.x, best.y);
+}
+
+function pursueStep(state: MissionState, spec: MissionSpec, unit: UnitState): StepResult {
+  const idle = { state, events: [] as const, rejection: null };
+  if (unit.ap < actionAp("move")) return idle;
+  const contact = nearestContact(state, unit);
+  if (!contact || (contact.x === unit.x && contact.y === unit.y)) return idle;
+  const map = battleMapOf(spec, state.doorOpen);
+  const blocks = occupied(state, spec, unit.id);
+  const horizon = spec.width * spec.height;
+  const goals: Cell[] = [{ x: contact.x, y: contact.y }];
+  for (const direction of DIRECTIONS) {
+    const delta = STEP_DELTA[direction];
+    goals.push({ x: contact.x + delta.x, y: contact.y + delta.y });
+  }
+  let best: readonly Cell[] | null = null;
+  for (const goal of goals) {
+    if (goal.x === unit.x && goal.y === unit.y) continue;
+    const path = pathTo(map, blocks, unit, goal, horizon);
+    if (!path || path.length === 0) continue;
+    if (!best || path.length < best.length) best = path;
+  }
+  const next = best?.[0];
+  if (!next || manhattan(next, contact) >= manhattan(unit, contact)) return idle;
+  return stepOnto(state, spec, unit, next.x, next.y);
+}
+
+function stepOnto(state: MissionState, spec: MissionSpec, unit: UnitState, x: number, y: number): StepResult {
+  if (!cellFree(state, spec, x, y, unit.id)) return { state, events: [], rejection: null };
+  const moved = updateUnit(state, unit.id, {
+    x,
+    y,
+    ap: unit.ap - actionAp("move"),
+    ...dropStance(unit),
+  });
+  return finishStep(moved, spec, unit.id, [{ type: "UnitMoved", unitId: unit.id, x, y }]);
+}
+
+function visibleCrew(state: MissionState, spec: MissionSpec, unit: UnitState): readonly UnitState[] {
+  const map = battleMapOf(spec, state.doorOpen);
+  return state.units
+    .filter((other) => other.team === "crew" && other.status === "active" && seesUnit(map, unit, other, SIGHT_RANGE))
+    .slice()
+    .sort((left, right) => manhattan(unit, left) - manhattan(unit, right) || compareId(left.id, right.id));
+}
+
+function nearestContact(state: MissionState, unit: UnitState): Contact | null {
+  let best: Contact | null = null;
+  let bestDistance = 0;
+  for (const contact of state.contacts) {
+    const distance = manhattan(unit, contact);
+    if (!best || distance < bestDistance || (distance === bestDistance && compareId(contact.id, best.id) < 0)) {
+      best = contact;
+      bestDistance = distance;
+    }
+  }
+  return best;
+}
+
+function rememberContacts(state: MissionState, spec: MissionSpec): MissionState {
+  const seen = new Map<string, Cell>();
+  for (const enemy of state.units) {
+    if (enemy.team !== "enemy" || enemy.status !== "active") continue;
+    for (const crew of state.units) {
+      if (crew.team !== "crew" || crew.status !== "active") continue;
+      if (!lineOfSight(spec, state.doorOpen, enemy, crew)) continue;
+      seen.set(crew.id, { x: crew.x, y: crew.y });
+    }
+  }
+  const activeCrew = new Set(
+    state.units.filter((unit) => unit.team === "crew" && unit.status === "active").map((unit) => unit.id),
+  );
+  const next: Contact[] = [];
+  for (const id of [...seen.keys()].sort(compareId)) {
+    const cell = seen.get(id);
+    if (!cell) continue;
+    next.push({ id, x: cell.x, y: cell.y });
+  }
+  for (const old of state.contacts) {
+    if (seen.has(old.id) || !activeCrew.has(old.id)) continue;
+    const stoodOn = state.units.some(
+      (unit) => unit.team === "enemy" && unit.status === "active" && unit.x === old.x && unit.y === old.y,
+    );
+    if (stoodOn) continue;
+    next.push({ id: old.id, x: old.x, y: old.y });
+  }
+  next.sort((left, right) => compareId(left.id, right.id));
+  if (sameContacts(state.contacts, next)) return state;
+  return { ...state, contacts: next, revision: state.revision + 1 };
+}
+
+function sameContacts(left: readonly Contact[], right: readonly Contact[]): boolean {
+  if (left.length !== right.length) return false;
+  for (let index = 0; index < left.length; index += 1) {
+    const a = left[index];
+    const b = right[index];
+    if (!a || !b || a.id !== b.id || a.x !== b.x || a.y !== b.y) return false;
+  }
+  return true;
+}
+
+function occupied(state: MissionState, spec: MissionSpec, selfId: string): Cell[] {
+  const cells: Cell[] = [{ x: spec.terminal.x, y: spec.terminal.y }];
+  for (const unit of state.units) {
+    if (unit.id === selfId || unit.status === "extracted") continue;
+    cells.push({ x: unit.x, y: unit.y });
+  }
+  return cells;
 }
 
 function holdContact(state: MissionState, spec: MissionSpec, unit: UnitState): StepResult | null {
