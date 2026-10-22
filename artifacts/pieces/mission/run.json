@@ -1,0 +1,11 @@
+{
+  "outcome": "sieg",
+  "round": 2,
+  "runnerIds": [
+    "kite",
+    "voss",
+    "nera",
+    "sol"
+  ],
+  "source": "playwright"
+}

@@ -1,0 +1,137 @@
+{
+  "path": "Weapons/modular Weapons/Grip_Sniper_1.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Grip_Sniper_1",
+      "vertices": 908,
+      "triangles": 1744,
+      "shapeHash": "20d70e25000526cd36397ddc44d62ef2a0501fdb5657890fa933857e89d935a8",
+      "materials": [
+        "Black",
+        "Grey"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.3233528435230255,
+          -0.02256402187049389,
+          -0.06037071719765663
+        ],
+        "max": [
+          0.2946254312992096,
+          0.02256401814520359,
+          0.12706489861011505
+        ],
+        "size": [
+          0.6179782748222351,
+          0.04512804001569748,
+          0.18743561580777168
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 1744,
+  "bounds": {
+    "min": [
+      -0.3233528435230255,
+      -0.02256402187049389,
+      -0.06037071719765663
+    ],
+    "max": [
+      0.2946254312992096,
+      0.02256401814520359,
+      0.12706489861011505
+    ],
+    "size": [
+      0.6179782748222351,
+      0.04512804001569748,
+      0.18743561580777168
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Grip_Sniper_1",
+      "file": "thumbs/c139aca149cb4fcc66b2c5e5ebab9226f0b0bac573ca63443e7733fc08c7b0e8-0.png",
+      "category": "components",
+      "parts": [
+        "Grip_Sniper_1"
+      ],
+      "triangles": 1744
+    }
+  ],
+  "fileSha256": "1d7eca54a1c1c03ba50c3877cc91bf7135a36761ad7237de38b7c8ffe6f777fe",
+  "bytes": 604460,
+  "inspectorKey": "cd7358ff160fbb070b5f8fc4e2ffd138955146420a9b39a6462eafc8c1fe5591"
+}

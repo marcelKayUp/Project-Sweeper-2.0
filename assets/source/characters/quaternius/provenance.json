@@ -1,0 +1,21 @@
+{
+  "author": "Quaternius",
+  "pack": "Ultimate Modular Characters / Men",
+  "license": "CC0-1.0",
+  "sourceUrl": "https://quaternius.com/packs/ultimatemodularcharacters.html",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "captured": "2026-10-22",
+  "source": "User-opened Blender master; current unsaved scene and all 24 actions copied with bpy.data.libraries.write into the project without replacing the interactive file.",
+  "file": "Humans_Master.blend",
+  "sha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+  "bytes": 1888266,
+  "library": "apps/client/public/assets/characters/quaternius/master.glb",
+  "catalog": "apps/client/public/assets/characters/quaternius/catalog.json",
+  "recipe": "tools/characters/export_modular_master.py",
+  "adaptations": [
+    "Use 44 humanoid clothing parts plus Pistol, Sword and Backpack; exclude Horse_Head.",
+    "Evaluate non-armature modifiers and export original weights, 62-joint rig, colors and 24 native animation clips.",
+    "Workshop selects parts, optionally recolors material roles and uniformly normalizes figure size; no decimation or rig reduction."
+  ],
+  "openItems": ["Crouch", "Reload", "human art and animation acceptance", "tactical game integration", "multi-character performance measurement"]
+}

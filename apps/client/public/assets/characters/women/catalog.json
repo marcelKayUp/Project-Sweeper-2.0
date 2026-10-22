@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "modular-women-v1",
+  "assetFile": "master.glb",
+  "assetSha256": "ccb6aeddff8d8523d892f56a105b0df8bae25dc4a095538e9fcbbbdaf1ebfb47",
+  "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+  "author": "Unverified (user-provided)",
+  "license": "LicenseRef-UserProvided-Unverified",
+  "sourceUrl": "",
+  "variants": [
+    "Adventurer",
+    "Casual",
+    "Formal",
+    "Medieval",
+    "Punk",
+    "SciFi",
+    "Soldier",
+    "Suit",
+    "Witch",
+    "Worker"
+  ],
+  "slots": {
+    "head": {
+      "Adventurer": "Adventurer_Head",
+      "Casual": "Casual_Head",
+      "Formal": "Formad_Head",
+      "Medieval": "Medieval_Head",
+      "Punk": "Punk_Head",
+      "SciFi": "SciFi_Head",
+      "Soldier": "Soldier_Head",
+      "Suit": "Suit_Head",
+      "Witch": "Witch_Head",
+      "Worker": "Worker_Head"
+    },
+    "body": {
+      "Adventurer": "Adventurer_Body",
+      "Casual": "Casual_Body",
+      "Formal": "Formal_Body",
+      "Medieval": "Medieval_Body",
+      "Punk": "Punk_Body",
+      "SciFi": "SciFi_Body",
+      "Soldier": "Soldier_Body",
+      "Suit": "Suit_Body",
+      "Witch": "Witch_Body",
+      "Worker": "Worker_Body"
+    },
+    "legs": {
+      "Adventurer": "Adventurer_Legs",
+      "Casual": "Casual_Legs",
+      "Formal": "Formal_Legs",
+      "Medieval": "Medieval_Legs",
+      "Punk": "Punk_Legs",
+      "SciFi": "SciFi_Legs",
+      "Soldier": "Soldier_Legs",
+      "Suit": "Suit_Legs",
+      "Witch": "Witch_Legs",
+      "Worker": "Worker_Legs"
+    },
+    "feet": {
+      "Adventurer": "Adventurer_Feet",
+      "Casual": "Casual_Feet",
+      "Formal": "Formal_Feet",
+      "Medieval": "Medieval_Feet",
+      "Punk": "Punk_Feet",
+      "SciFi": "SciFi_Feet",
+      "Soldier": "Soldier_Feet",
+      "Suit": "Suit_Feet",
+      "Witch": "Witch_Feet",
+      "Worker": "Worker_Feet"
+    }
+  },
+  "equipment": {
+    "none": null,
+    "pistol": "Pistol",
+    "sword": "Sword",
+    "backpack": null
+  },
+  "clips": [
+    "Death",
+    "Gun_Shoot",
+    "HitRecieve",
+    "HitRecieve_2",
+    "Idle",
+    "Idle_Gun",
+    "Idle_Gun_Pointing",
+    "Idle_Gun_Shoot",
+    "Idle_Neutral",
+    "Idle_Sword",
+    "Interact",
+    "Kick_Left",
+    "Kick_Right",
+    "Punch_Left",
+    "Punch_Right",
+    "Roll",
+    "Run",
+    "Run_Back",
+    "Run_Left",
+    "Run_Right",
+    "Run_Shoot",
+    "Sword_Slash",
+    "Walk",
+    "Wave"
+  ],
+  "rig": {
+    "name": "CharacterArmature",
+    "bones": 62
+  },
+  "height": 1.852041,
+  "provenance": {
+    "status": "unverified",
+    "sourceFile": "assets/source/characters/women/Humans_Master.blend"
+  }
+}

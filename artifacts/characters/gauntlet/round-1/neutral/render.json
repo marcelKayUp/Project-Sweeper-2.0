@@ -1,0 +1,29 @@
+{
+  "source": "artifacts\\characters\\gauntlet\\round-1\\candidate.glb",
+  "blender": "5.2.2 LTS",
+  "normalizedHeight": 1.05,
+  "originalHeight": 1.0320316553115916,
+  "meshes": 37,
+  "triangles": 1876,
+  "bones": [
+    19
+  ],
+  "actions": [
+    "crouch",
+    "death",
+    "hit",
+    "idle",
+    "reload",
+    "shoot",
+    "walk"
+  ],
+  "selectedAction": "idle",
+  "phase": 0.5,
+  "poseFloorBeforeReviewNormalization": 0.0,
+  "views": [
+    "front",
+    "iso",
+    "side"
+  ],
+  "normalization": "uniform 1.05 height from rest bounds; horizontal center and visible pose floor; no geometry, skin or material edits"
+}

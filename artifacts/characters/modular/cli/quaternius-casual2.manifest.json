@@ -1,0 +1,86 @@
+{
+  "assetId": "quaternius-casual2",
+  "generator": "NEON CONTRACT Character Creator",
+  "generatorVersion": "quaternius-modular-1.0.0",
+  "nodeVersion": "v24.14.0",
+  "babylonVersion": "9.31.2",
+  "specification": {
+    "schemaVersion": 2,
+    "source": "quaternius-modular-men-v1",
+    "id": "quaternius-casual2",
+    "seed": 42,
+    "stature": 1,
+    "parts": {
+      "head": "Casual2",
+      "body": "Casual2",
+      "legs": "Casual2",
+      "feet": "Casual2"
+    },
+    "equipment": "none",
+    "palette": {
+      "skin": null,
+      "hair": null,
+      "cloth": null,
+      "armor": null,
+      "accent": null
+    }
+  },
+  "stats": {
+    "triangles": 5776,
+    "vertices": 11656,
+    "materials": 9,
+    "bones": 62,
+    "height": 1.05
+  },
+  "clips": [
+    "Death",
+    "Gun_Shoot",
+    "HitRecieve",
+    "HitRecieve_2",
+    "Idle",
+    "Idle_Gun",
+    "Idle_Gun_Pointing",
+    "Idle_Gun_Shoot",
+    "Idle_Neutral",
+    "Idle_Sword",
+    "Interact",
+    "Kick_Left",
+    "Kick_Right",
+    "Punch_Left",
+    "Punch_Right",
+    "Roll",
+    "Run",
+    "Run_Back",
+    "Run_Left",
+    "Run_Right",
+    "Run_Shoot",
+    "Sword_Slash",
+    "Walk",
+    "Wave"
+  ],
+  "source": {
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "url": "https://quaternius.com/packs/ultimatemodularcharacters.html",
+    "sourceId": "quaternius-modular-men-v1",
+    "assetSha256": "24b97f51739924047948d846e1ed88dd103e2171ceef29d2c73fc8c2269a0ee7",
+    "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9"
+  },
+  "recipeHashes": {
+    "packages/characters/src/buildCharacter.ts": "c6b97c70efcf4b101d3480e85300a57b6fbf1e717f61f5670eab6e006be86343",
+    "packages/characters/src/index.ts": "f4cbbe83fbd9f1b88126048e37ccdcae27eb3a456ad43eb653779f16751e40fa",
+    "packages/characters/src/modularSpec.ts": "44789c2665ffd4ecb674fed9b42687856808e366717ec7c791c34ae85868aca5",
+    "packages/characters/src/spec.ts": "3182b5a85a3671b3513f7cee3fd466733f81c16c0944d15d0cf1b570ccd44ff5",
+    "packages/characters/src/types.ts": "0dec72ad7a9e0983882d2b1f2bdb9130163d46d2755be6f02727a485d7942b24",
+    "apps/client/src/characters/modularPreview.ts": "254196005c9991ddb49d2ac362cde5b2db8ce7ca9b944705fd3db5d4cf12f697",
+    "tools/characters/generate-character.mjs": "17481370d95e8cc92cefd1dcc82adb69c49766c278c54b0220d66459198097d3",
+    "pnpm-lock.yaml": "32bc7ed73977a5f6ff693b3bc3cfb7cc0e338b9c381495f00e01321b85ffaa7a",
+    "tools/characters/export_modular_master.py": "b7d8623e05d3da4f20570ab3542d377b6f2d181bba9980a6a65b38ef0e92d8ce",
+    "apps/client/public/assets/characters/quaternius/catalog.json": "69059d8461f25f38f3cee9b34f193f036876af69349ec5457b252d53c5e7f22c"
+  },
+  "files": {
+    "quaternius-casual2.glb": "11b5283a7860cae6cf42ce60695f15bee83c6e12a00b7a1c93443965ecd7995a",
+    "quaternius-casual2.json": "1aec96e9c6dc960d05428a07471ad64ffba4c91525e93f62e73409fab284b71e"
+  },
+  "humanArtAcceptance": "open"
+}

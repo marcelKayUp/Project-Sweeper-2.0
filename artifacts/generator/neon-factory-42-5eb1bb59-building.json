@@ -1,0 +1,2149 @@
+{
+  "formatVersion": 4,
+  "generatorVersion": "semantic-building/4",
+  "contentVersion": "building-catalog/3",
+  "stageVersions": {
+    "program": 4,
+    "floorplan": 4,
+    "topology": 4,
+    "tactics": 1,
+    "encounters": 1,
+    "dressing": 2
+  },
+  "config": {
+    "seed": 42,
+    "family": "factory",
+    "size": "compact",
+    "crewSize": 4,
+    "mission": "data-heist",
+    "instanceId": "preview",
+    "maxAttempts": 10,
+    "occupants": 8,
+    "workplaces": 2,
+    "processUnits": 4,
+    "storageUnits": 8,
+    "scope": "building",
+    "floorShare": 100,
+    "corporation": "neutral",
+    "siteRole": "branch",
+    "department": "mixed",
+    "statusTier": "staff",
+    "buildingHistory": "purpose-built",
+    "condition": "pristine"
+  },
+  "attempt": 1,
+  "seeds": {
+    "program": 311546527,
+    "floorplan": 3125768378,
+    "topology": 2554109584,
+    "tactics": 3551887679,
+    "encounters": 1869587934,
+    "dressing": 2531655001
+  },
+  "building": {
+    "identity": {
+      "model": "corporate-identity/1",
+      "corporation": "neutral",
+      "siteRole": "branch",
+      "department": "mixed",
+      "statusTier": "staff",
+      "buildingHistory": "purpose-built",
+      "condition": "pristine",
+      "name": "Unabhängiger Betrieb",
+      "origin": "Ohne Konzernzuordnung",
+      "history": "Referenzprogramm ohne Konzernhierarchie.",
+      "promise": "Funktion und Kapazität",
+      "tension": "Keine zusätzliche Konzernfiktion.",
+      "signature": "NC",
+      "accent": "#9bdcc8",
+      "wall": "#435367",
+      "pattern": "grid",
+      "officeCapacity": 4,
+      "meetingCapacity": 8,
+      "principles": [
+        "Neutrales Kapazitätsprogramm"
+      ]
+    },
+    "relationships": [],
+    "demand": {
+      "model": "business-capacity/1",
+      "building": {
+        "occupants": 8,
+        "workplaces": 2,
+        "processUnits": 4,
+        "storageUnits": 8
+      },
+      "local": {
+        "occupants": 8,
+        "workplaces": 2,
+        "processUnits": 4,
+        "storageUnits": 8
+      },
+      "outside": {
+        "occupants": 0,
+        "workplaces": 0,
+        "processUnits": 0,
+        "storageUnits": 0
+      },
+      "minimumArea": 166,
+      "minimumWallArea": 36,
+      "availableArea": 324,
+      "sanitaryFixtures": 1,
+      "outsideSanitaryFixtures": 0
+    },
+    "layout": {
+      "method": "bsp",
+      "templateId": null,
+      "candidate": 1,
+      "partitionSeed": 611846403,
+      "embeddingSeed": 2541361396,
+      "searchNodes": 15,
+      "backtracks": 2,
+      "partitions": [
+        {
+          "id": "bsp-",
+          "bounds": {
+            "x": 1,
+            "y": 1,
+            "width": 18,
+            "height": 18
+          },
+          "axis": "y",
+          "offset": 10
+        },
+        {
+          "id": "bsp-0",
+          "bounds": {
+            "x": 1,
+            "y": 1,
+            "width": 18,
+            "height": 10
+          },
+          "axis": "y",
+          "offset": 4
+        },
+        {
+          "id": "bsp-00",
+          "bounds": {
+            "x": 1,
+            "y": 1,
+            "width": 18,
+            "height": 4
+          },
+          "axis": "x",
+          "offset": 9
+        },
+        {
+          "id": "bsp-000",
+          "bounds": {
+            "x": 1,
+            "y": 1,
+            "width": 9,
+            "height": 4
+          },
+          "axis": "x",
+          "offset": 3
+        },
+        {
+          "id": "bsp-001",
+          "bounds": {
+            "x": 11,
+            "y": 1,
+            "width": 8,
+            "height": 4
+          },
+          "axis": "x",
+          "offset": 3
+        },
+        {
+          "id": "bsp-01",
+          "bounds": {
+            "x": 1,
+            "y": 6,
+            "width": 18,
+            "height": 5
+          },
+          "axis": "x",
+          "offset": 10
+        },
+        {
+          "id": "bsp-010",
+          "bounds": {
+            "x": 1,
+            "y": 6,
+            "width": 10,
+            "height": 5
+          },
+          "axis": "x",
+          "offset": 5
+        },
+        {
+          "id": "bsp-1",
+          "bounds": {
+            "x": 1,
+            "y": 12,
+            "width": 18,
+            "height": 7
+          },
+          "axis": "x",
+          "offset": 9
+        },
+        {
+          "id": "bsp-10",
+          "bounds": {
+            "x": 1,
+            "y": 12,
+            "width": 9,
+            "height": 7
+          },
+          "axis": "x",
+          "offset": 5
+        },
+        {
+          "id": "bsp-100",
+          "bounds": {
+            "x": 1,
+            "y": 12,
+            "width": 5,
+            "height": 7
+          },
+          "axis": "y",
+          "offset": 3
+        },
+        {
+          "id": "bsp-11",
+          "bounds": {
+            "x": 11,
+            "y": 12,
+            "width": 8,
+            "height": 7
+          },
+          "axis": "x",
+          "offset": 4
+        },
+        {
+          "id": "bsp-110",
+          "bounds": {
+            "x": 11,
+            "y": 12,
+            "width": 4,
+            "height": 7
+          },
+          "axis": "y",
+          "offset": 3
+        }
+      ],
+      "rejected": []
+    },
+    "rooms": [
+      {
+        "id": "room-reception-01",
+        "type": "reception",
+        "minArea": 12,
+        "assignedDemand": 1,
+        "capacity": 1,
+        "workplaceRole": "support",
+        "officeForm": "support",
+        "department": "mixed",
+        "access": "public",
+        "zone": "public",
+        "appearance": {
+          "surface": "carpet",
+          "color": "#6b8394",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "neutral",
+          "wear": "pristine"
+        },
+        "x": 11,
+        "y": 1,
+        "width": 3,
+        "height": 4
+      },
+      {
+        "id": "room-security-01",
+        "type": "security",
+        "minArea": 12,
+        "assignedDemand": 8,
+        "capacity": 32,
+        "workplaceRole": "support",
+        "officeForm": "support",
+        "department": "mixed",
+        "access": "staff",
+        "zone": "staff",
+        "appearance": {
+          "surface": "carpet",
+          "color": "#6b8394",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "neutral",
+          "wear": "pristine"
+        },
+        "x": 16,
+        "y": 12,
+        "width": 3,
+        "height": 7
+      },
+      {
+        "id": "room-office-01",
+        "type": "office",
+        "minArea": 12,
+        "assignedDemand": 2,
+        "capacity": 4,
+        "workplaceRole": "team",
+        "officeForm": "group",
+        "department": "mixed",
+        "access": "staff",
+        "zone": "staff",
+        "appearance": {
+          "surface": "carpet",
+          "color": "#6b8394",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "neutral",
+          "wear": "pristine"
+        },
+        "x": 1,
+        "y": 16,
+        "width": 5,
+        "height": 3
+      },
+      {
+        "id": "room-restroom-01",
+        "type": "restroom",
+        "minArea": 12,
+        "assignedDemand": 8,
+        "capacity": 24,
+        "workplaceRole": "support",
+        "officeForm": "support",
+        "department": "mixed",
+        "access": "staff",
+        "zone": "staff",
+        "appearance": {
+          "surface": "carpet",
+          "color": "#6b8394",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "neutral",
+          "wear": "pristine"
+        },
+        "x": 15,
+        "y": 1,
+        "width": 4,
+        "height": 4
+      },
+      {
+        "id": "room-breakroom-01",
+        "type": "breakroom",
+        "minArea": 12,
+        "assignedDemand": 4,
+        "capacity": 8,
+        "workplaceRole": "support",
+        "officeForm": "support",
+        "department": "mixed",
+        "access": "staff",
+        "zone": "staff",
+        "appearance": {
+          "surface": "carpet",
+          "color": "#6b8394",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "neutral",
+          "wear": "pristine"
+        },
+        "x": 11,
+        "y": 16,
+        "width": 4,
+        "height": 3
+      },
+      {
+        "id": "room-mechanical-01",
+        "type": "mechanical",
+        "minArea": 12,
+        "assignedDemand": 16,
+        "capacity": 48,
+        "workplaceRole": "support",
+        "officeForm": "support",
+        "department": "mixed",
+        "access": "staff",
+        "zone": "technical",
+        "appearance": {
+          "surface": "steel",
+          "color": "#657583",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "cool",
+          "wear": "pristine"
+        },
+        "x": 11,
+        "y": 12,
+        "width": 4,
+        "height": 3
+      },
+      {
+        "id": "room-server-01",
+        "type": "server",
+        "minArea": 12,
+        "assignedDemand": 1,
+        "capacity": 1,
+        "workplaceRole": "support",
+        "officeForm": "support",
+        "department": "mixed",
+        "access": "restricted",
+        "zone": "secure",
+        "appearance": {
+          "surface": "carpet",
+          "color": "#6b8394",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "neutral",
+          "wear": "pristine"
+        },
+        "x": 7,
+        "y": 12,
+        "width": 3,
+        "height": 7
+      },
+      {
+        "id": "room-loading-01",
+        "type": "loading",
+        "minArea": 12,
+        "assignedDemand": 8,
+        "capacity": 16,
+        "workplaceRole": "support",
+        "officeForm": "support",
+        "department": "mixed",
+        "access": "staff",
+        "zone": "logistics",
+        "appearance": {
+          "surface": "steel",
+          "color": "#657583",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "cool",
+          "wear": "pristine"
+        },
+        "x": 1,
+        "y": 12,
+        "width": 5,
+        "height": 3
+      },
+      {
+        "id": "room-storage-01",
+        "type": "storage",
+        "minArea": 14,
+        "assignedDemand": 8,
+        "capacity": 8,
+        "workplaceRole": "support",
+        "officeForm": "support",
+        "department": "mixed",
+        "access": "staff",
+        "zone": "logistics",
+        "appearance": {
+          "surface": "steel",
+          "color": "#657583",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "cool",
+          "wear": "pristine"
+        },
+        "x": 5,
+        "y": 1,
+        "width": 5,
+        "height": 4
+      },
+      {
+        "id": "room-production-01",
+        "type": "production",
+        "minArea": 20,
+        "assignedDemand": 4,
+        "capacity": 4,
+        "workplaceRole": "support",
+        "officeForm": "support",
+        "department": "mixed",
+        "access": "staff",
+        "zone": "logistics",
+        "appearance": {
+          "surface": "steel",
+          "color": "#657583",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "cool",
+          "wear": "pristine"
+        },
+        "x": 1,
+        "y": 6,
+        "width": 5,
+        "height": 5
+      },
+      {
+        "id": "room-workshop-01",
+        "type": "workshop",
+        "minArea": 12,
+        "assignedDemand": 4,
+        "capacity": 8,
+        "workplaceRole": "support",
+        "officeForm": "support",
+        "department": "mixed",
+        "access": "staff",
+        "zone": "logistics",
+        "appearance": {
+          "surface": "steel",
+          "color": "#657583",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "cool",
+          "wear": "pristine"
+        },
+        "x": 1,
+        "y": 1,
+        "width": 3,
+        "height": 4
+      },
+      {
+        "id": "room-dispatch-01",
+        "type": "dispatch",
+        "minArea": 12,
+        "assignedDemand": 8,
+        "capacity": 16,
+        "workplaceRole": "support",
+        "officeForm": "support",
+        "department": "mixed",
+        "access": "staff",
+        "zone": "logistics",
+        "appearance": {
+          "surface": "carpet",
+          "color": "#6b8394",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "neutral",
+          "wear": "pristine"
+        },
+        "x": 12,
+        "y": 6,
+        "width": 7,
+        "height": 5
+      },
+      {
+        "id": "room-corridor-01",
+        "type": "corridor",
+        "minArea": 12,
+        "assignedDemand": 1,
+        "capacity": 1,
+        "workplaceRole": "support",
+        "officeForm": "support",
+        "department": "mixed",
+        "access": "staff",
+        "zone": "staff",
+        "appearance": {
+          "surface": "carpet",
+          "color": "#6b8394",
+          "accent": "#9bdcc8",
+          "pattern": "grid",
+          "lighting": "neutral",
+          "wear": "pristine"
+        },
+        "x": 7,
+        "y": 6,
+        "width": 4,
+        "height": 5
+      }
+    ],
+    "program": [
+      {
+        "type": "reception",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 1,
+        "outsideRequired": 0,
+        "capacityPerRoom": 1,
+        "capacity": 1,
+        "unit": "Empfang",
+        "minArea": 12,
+        "minimumArea": 12,
+        "reason": "Ein zentraler Empfang; beim Missionsgeschoss außerhalb des Ausschnitts."
+      },
+      {
+        "type": "security",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 8,
+        "outsideRequired": 0,
+        "capacityPerRoom": 32,
+        "capacity": 32,
+        "unit": "Beschäftigte",
+        "minArea": 12,
+        "minimumArea": 12,
+        "reason": "Ein Sicherheitsposten je angefangenen 32 gleichzeitig Anwesenden pro Bereich."
+      },
+      {
+        "type": "office",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 2,
+        "outsideRequired": 0,
+        "capacityPerRoom": 4,
+        "capacity": 4,
+        "unit": "Arbeitsplätze",
+        "minArea": 12,
+        "minimumArea": 12,
+        "reason": "4 Teamarbeitsplätze pro Gruppenbüro; Leitungs-/Assistenzplätze sind bereits abgezogen."
+      },
+      {
+        "type": "restroom",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 8,
+        "outsideRequired": 0,
+        "capacityPerRoom": 24,
+        "capacity": 24,
+        "unit": "Beschäftigte",
+        "minArea": 12,
+        "minimumArea": 12,
+        "reason": "Eine Sanitärgruppe je 24 Anwesende; vereinfacht eine Kabine je zwölf. Keine ASR-Bemessung."
+      },
+      {
+        "type": "breakroom",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 4,
+        "outsideRequired": 0,
+        "capacityPerRoom": 8,
+        "capacity": 8,
+        "unit": "Pausenplätze",
+        "minArea": 12,
+        "minimumArea": 12,
+        "reason": "Gleichzeitige Pause für die Hälfte der Belegung; acht Plätze je Personalraum."
+      },
+      {
+        "type": "mechanical",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 16,
+        "outsideRequired": 0,
+        "capacityPerRoom": 48,
+        "capacity": 48,
+        "unit": "Lastpunkte",
+        "minArea": 12,
+        "minimumArea": 12,
+        "reason": "Lokale Technik/Verteilung je 48 Lastpunkte: eine Person oder ein halber Prozessplatz."
+      },
+      {
+        "type": "server",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 1,
+        "outsideRequired": 0,
+        "capacityPerRoom": 1,
+        "capacity": 1,
+        "unit": "Datenziel",
+        "minArea": 12,
+        "minimumArea": 12,
+        "reason": "Ein lokaler Serverraum als Datenraubziel; die übrige IT des Gebäudes ist nicht modelliert."
+      },
+      {
+        "type": "loading",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 8,
+        "outsideRequired": 0,
+        "capacityPerRoom": 16,
+        "capacity": 16,
+        "unit": "Logistikeinheiten",
+        "minArea": 12,
+        "minimumArea": 12,
+        "reason": "Zentrale Anlieferung je 16 Lagereinheiten; außerhalb des Missionsgeschosses."
+      },
+      {
+        "type": "storage",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 8,
+        "outsideRequired": 0,
+        "capacityPerRoom": 8,
+        "capacity": 8,
+        "unit": "Lagereinheiten",
+        "minArea": 12,
+        "minimumArea": 14,
+        "reason": "Acht abstrakte Lagereinheiten je Lager, abgeleitet aus Bestand/Versorgung."
+      },
+      {
+        "type": "production",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 4,
+        "outsideRequired": 0,
+        "capacityPerRoom": 4,
+        "capacity": 4,
+        "unit": "Produktionsplätze",
+        "minArea": 12,
+        "minimumArea": 20,
+        "reason": "Vier Produktionsplätze je Halle; zusätzlicher Bewegungsraum für Anlagen."
+      },
+      {
+        "type": "workshop",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 4,
+        "outsideRequired": 0,
+        "capacityPerRoom": 8,
+        "capacity": 8,
+        "unit": "Prozessplätze",
+        "minArea": 12,
+        "minimumArea": 12,
+        "reason": "Eine Wartungswerkstatt je acht Prozessplätze."
+      },
+      {
+        "type": "dispatch",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 8,
+        "outsideRequired": 0,
+        "capacityPerRoom": 16,
+        "capacity": 16,
+        "unit": "Lagereinheiten",
+        "minArea": 12,
+        "minimumArea": 12,
+        "reason": "Ein Versandbereich je 16 Lagereinheiten."
+      },
+      {
+        "type": "corridor",
+        "count": 1,
+        "outsideCount": 0,
+        "totalCount": 1,
+        "required": 1,
+        "outsideRequired": 0,
+        "capacityPerRoom": 1,
+        "capacity": 1,
+        "unit": "Verteiler",
+        "minArea": 12,
+        "minimumArea": 12,
+        "reason": "Ein lokaler Verkehrsverteiler."
+      }
+    ],
+    "connections": [
+      {
+        "id": "link-0-8",
+        "from": "room-reception-01",
+        "to": "room-storage-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 10,
+          "y": 1
+        }
+      },
+      {
+        "id": "link-0-11",
+        "from": "room-reception-01",
+        "to": "room-dispatch-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 13,
+          "y": 5
+        }
+      },
+      {
+        "id": "link-1-4",
+        "from": "room-security-01",
+        "to": "room-breakroom-01",
+        "kind": "open",
+        "portal": {
+          "x": 15,
+          "y": 18
+        }
+      },
+      {
+        "id": "link-1-5",
+        "from": "room-security-01",
+        "to": "room-mechanical-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 15,
+          "y": 13
+        }
+      },
+      {
+        "id": "link-1-11",
+        "from": "room-security-01",
+        "to": "room-dispatch-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 17,
+          "y": 11
+        }
+      },
+      {
+        "id": "link-2-6",
+        "from": "room-office-01",
+        "to": "room-server-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 6,
+          "y": 18
+        }
+      },
+      {
+        "id": "link-2-7",
+        "from": "room-office-01",
+        "to": "room-loading-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 2,
+          "y": 15
+        }
+      },
+      {
+        "id": "link-3-11",
+        "from": "room-restroom-01",
+        "to": "room-dispatch-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 18,
+          "y": 5
+        }
+      },
+      {
+        "id": "link-4-5",
+        "from": "room-breakroom-01",
+        "to": "room-mechanical-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 12,
+          "y": 15
+        }
+      },
+      {
+        "id": "link-4-6",
+        "from": "room-breakroom-01",
+        "to": "room-server-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 10,
+          "y": 16
+        }
+      },
+      {
+        "id": "link-5-6",
+        "from": "room-mechanical-01",
+        "to": "room-server-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 10,
+          "y": 14
+        }
+      },
+      {
+        "id": "link-5-11",
+        "from": "room-mechanical-01",
+        "to": "room-dispatch-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 13,
+          "y": 11
+        }
+      },
+      {
+        "id": "link-6-7",
+        "from": "room-server-01",
+        "to": "room-loading-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 6,
+          "y": 12
+        }
+      },
+      {
+        "id": "link-6-12",
+        "from": "room-server-01",
+        "to": "room-corridor-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 9,
+          "y": 11
+        }
+      },
+      {
+        "id": "link-7-9",
+        "from": "room-loading-01",
+        "to": "room-production-01",
+        "kind": "open",
+        "portal": {
+          "x": 3,
+          "y": 11
+        }
+      },
+      {
+        "id": "link-8-9",
+        "from": "room-storage-01",
+        "to": "room-production-01",
+        "kind": "open",
+        "portal": {
+          "x": 5,
+          "y": 5
+        }
+      },
+      {
+        "id": "link-8-10",
+        "from": "room-storage-01",
+        "to": "room-workshop-01",
+        "kind": "open",
+        "portal": {
+          "x": 4,
+          "y": 3
+        }
+      },
+      {
+        "id": "link-8-12",
+        "from": "room-storage-01",
+        "to": "room-corridor-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 8,
+          "y": 5
+        }
+      },
+      {
+        "id": "link-9-10",
+        "from": "room-production-01",
+        "to": "room-workshop-01",
+        "kind": "open",
+        "portal": {
+          "x": 3,
+          "y": 5
+        }
+      },
+      {
+        "id": "link-9-12",
+        "from": "room-production-01",
+        "to": "room-corridor-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 6,
+          "y": 7
+        }
+      },
+      {
+        "id": "link-11-12",
+        "from": "room-dispatch-01",
+        "to": "room-corridor-01",
+        "kind": "shortcut",
+        "portal": {
+          "x": 11,
+          "y": 9
+        }
+      }
+    ],
+    "entries": [
+      {
+        "roomId": "room-reception-01",
+        "cell": {
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "roomId": "room-loading-01",
+        "cell": {
+          "x": 0,
+          "y": 13
+        }
+      }
+    ],
+    "infrastructure": [
+      {
+        "kind": "power",
+        "source": "room-mechanical-01",
+        "nodes": [
+          "room-breakroom-01",
+          "room-corridor-01",
+          "room-dispatch-01",
+          "room-loading-01",
+          "room-mechanical-01",
+          "room-office-01",
+          "room-production-01",
+          "room-reception-01",
+          "room-restroom-01",
+          "room-security-01",
+          "room-server-01",
+          "room-storage-01",
+          "room-workshop-01"
+        ],
+        "edges": [
+          {
+            "from": "room-mechanical-01",
+            "to": "room-dispatch-01"
+          },
+          {
+            "from": "room-dispatch-01",
+            "to": "room-reception-01"
+          },
+          {
+            "from": "room-mechanical-01",
+            "to": "room-security-01"
+          },
+          {
+            "from": "room-mechanical-01",
+            "to": "room-server-01"
+          },
+          {
+            "from": "room-server-01",
+            "to": "room-office-01"
+          },
+          {
+            "from": "room-dispatch-01",
+            "to": "room-restroom-01"
+          },
+          {
+            "from": "room-mechanical-01",
+            "to": "room-breakroom-01"
+          },
+          {
+            "from": "room-server-01",
+            "to": "room-loading-01"
+          },
+          {
+            "from": "room-server-01",
+            "to": "room-corridor-01"
+          },
+          {
+            "from": "room-corridor-01",
+            "to": "room-storage-01"
+          },
+          {
+            "from": "room-loading-01",
+            "to": "room-production-01"
+          },
+          {
+            "from": "room-production-01",
+            "to": "room-workshop-01"
+          }
+        ]
+      },
+      {
+        "kind": "ventilation",
+        "source": "room-mechanical-01",
+        "nodes": [
+          "room-breakroom-01",
+          "room-corridor-01",
+          "room-dispatch-01",
+          "room-loading-01",
+          "room-mechanical-01",
+          "room-production-01",
+          "room-restroom-01",
+          "room-server-01",
+          "room-storage-01",
+          "room-workshop-01"
+        ],
+        "edges": [
+          {
+            "from": "room-mechanical-01",
+            "to": "room-dispatch-01"
+          },
+          {
+            "from": "room-dispatch-01",
+            "to": "room-restroom-01"
+          },
+          {
+            "from": "room-mechanical-01",
+            "to": "room-breakroom-01"
+          },
+          {
+            "from": "room-mechanical-01",
+            "to": "room-server-01"
+          },
+          {
+            "from": "room-server-01",
+            "to": "room-corridor-01"
+          },
+          {
+            "from": "room-corridor-01",
+            "to": "room-storage-01"
+          },
+          {
+            "from": "room-server-01",
+            "to": "room-loading-01"
+          },
+          {
+            "from": "room-loading-01",
+            "to": "room-production-01"
+          },
+          {
+            "from": "room-production-01",
+            "to": "room-workshop-01"
+          }
+        ]
+      },
+      {
+        "kind": "network",
+        "source": "room-server-01",
+        "nodes": [
+          "room-breakroom-01",
+          "room-dispatch-01",
+          "room-mechanical-01",
+          "room-office-01",
+          "room-reception-01",
+          "room-security-01",
+          "room-server-01"
+        ],
+        "edges": [
+          {
+            "from": "room-server-01",
+            "to": "room-mechanical-01"
+          },
+          {
+            "from": "room-mechanical-01",
+            "to": "room-dispatch-01"
+          },
+          {
+            "from": "room-dispatch-01",
+            "to": "room-reception-01"
+          },
+          {
+            "from": "room-server-01",
+            "to": "room-breakroom-01"
+          },
+          {
+            "from": "room-breakroom-01",
+            "to": "room-security-01"
+          },
+          {
+            "from": "room-server-01",
+            "to": "room-office-01"
+          }
+        ]
+      },
+      {
+        "kind": "security",
+        "source": "room-security-01",
+        "nodes": [
+          "room-breakroom-01",
+          "room-dispatch-01",
+          "room-loading-01",
+          "room-reception-01",
+          "room-security-01",
+          "room-server-01"
+        ],
+        "edges": [
+          {
+            "from": "room-security-01",
+            "to": "room-dispatch-01"
+          },
+          {
+            "from": "room-dispatch-01",
+            "to": "room-reception-01"
+          },
+          {
+            "from": "room-security-01",
+            "to": "room-breakroom-01"
+          },
+          {
+            "from": "room-breakroom-01",
+            "to": "room-server-01"
+          },
+          {
+            "from": "room-server-01",
+            "to": "room-loading-01"
+          }
+        ]
+      }
+    ],
+    "missionGraph": {
+      "entryRoom": "room-reception-01",
+      "secondaryEntryRoom": "room-loading-01",
+      "targetRoom": "room-server-01",
+      "objectives": [
+        {
+          "id": "infiltrate",
+          "roomId": "room-reception-01",
+          "action": "enter",
+          "requires": []
+        },
+        {
+          "id": "copy",
+          "roomId": "room-server-01",
+          "action": "copy-twice",
+          "requires": [
+            "infiltrate"
+          ]
+        },
+        {
+          "id": "extract",
+          "roomId": "room-reception-01",
+          "action": "extract",
+          "requires": [
+            "copy"
+          ]
+        }
+      ],
+      "routes": [
+        [
+          "room-reception-01",
+          "room-storage-01",
+          "room-corridor-01",
+          "room-server-01"
+        ],
+        [
+          "room-reception-01",
+          "room-dispatch-01",
+          "room-mechanical-01",
+          "room-server-01"
+        ]
+      ]
+    },
+    "dressing": [
+      {
+        "id": "decoration-room-reception-01",
+        "roomId": "room-reception-01",
+        "x": 11,
+        "y": 3,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-security-01",
+        "roomId": "room-security-01",
+        "x": 17,
+        "y": 17,
+        "module": "cabinet"
+      },
+      {
+        "id": "desk-room-office-01-0",
+        "roomId": "room-office-01",
+        "x": 2,
+        "y": 16,
+        "module": "desk"
+      },
+      {
+        "id": "desk-room-office-01-1",
+        "roomId": "room-office-01",
+        "x": 4,
+        "y": 16,
+        "module": "desk"
+      },
+      {
+        "id": "decoration-room-restroom-01",
+        "roomId": "room-restroom-01",
+        "x": 18,
+        "y": 3,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-breakroom-01",
+        "roomId": "room-breakroom-01",
+        "x": 13,
+        "y": 18,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-mechanical-01",
+        "roomId": "room-mechanical-01",
+        "x": 14,
+        "y": 13,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-server-01",
+        "roomId": "room-server-01",
+        "x": 8,
+        "y": 17,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-loading-01",
+        "roomId": "room-loading-01",
+        "x": 1,
+        "y": 13,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-storage-01",
+        "roomId": "room-storage-01",
+        "x": 6,
+        "y": 1,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-production-01",
+        "roomId": "room-production-01",
+        "x": 2,
+        "y": 10,
+        "module": "machine"
+      },
+      {
+        "id": "decoration-room-workshop-01",
+        "roomId": "room-workshop-01",
+        "x": 1,
+        "y": 3,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-dispatch-01",
+        "roomId": "room-dispatch-01",
+        "x": 16,
+        "y": 9,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-corridor-01",
+        "roomId": "room-corridor-01",
+        "x": 8,
+        "y": 7,
+        "module": "cabinet"
+      }
+    ]
+  },
+  "mission": {
+    "id": "generated-preview",
+    "width": 20,
+    "height": 20,
+    "walls": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 2,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 0
+      },
+      {
+        "x": 4,
+        "y": 0
+      },
+      {
+        "x": 5,
+        "y": 0
+      },
+      {
+        "x": 6,
+        "y": 0
+      },
+      {
+        "x": 7,
+        "y": 0
+      },
+      {
+        "x": 8,
+        "y": 0
+      },
+      {
+        "x": 9,
+        "y": 0
+      },
+      {
+        "x": 10,
+        "y": 0
+      },
+      {
+        "x": 11,
+        "y": 0
+      },
+      {
+        "x": 13,
+        "y": 0
+      },
+      {
+        "x": 14,
+        "y": 0
+      },
+      {
+        "x": 15,
+        "y": 0
+      },
+      {
+        "x": 16,
+        "y": 0
+      },
+      {
+        "x": 17,
+        "y": 0
+      },
+      {
+        "x": 18,
+        "y": 0
+      },
+      {
+        "x": 19,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 1
+      },
+      {
+        "x": 4,
+        "y": 1
+      },
+      {
+        "x": 14,
+        "y": 1
+      },
+      {
+        "x": 19,
+        "y": 1
+      },
+      {
+        "x": 0,
+        "y": 2
+      },
+      {
+        "x": 4,
+        "y": 2
+      },
+      {
+        "x": 10,
+        "y": 2
+      },
+      {
+        "x": 14,
+        "y": 2
+      },
+      {
+        "x": 19,
+        "y": 2
+      },
+      {
+        "x": 0,
+        "y": 3
+      },
+      {
+        "x": 10,
+        "y": 3
+      },
+      {
+        "x": 14,
+        "y": 3
+      },
+      {
+        "x": 19,
+        "y": 3
+      },
+      {
+        "x": 0,
+        "y": 4
+      },
+      {
+        "x": 4,
+        "y": 4
+      },
+      {
+        "x": 10,
+        "y": 4
+      },
+      {
+        "x": 14,
+        "y": 4
+      },
+      {
+        "x": 19,
+        "y": 4
+      },
+      {
+        "x": 0,
+        "y": 5
+      },
+      {
+        "x": 1,
+        "y": 5
+      },
+      {
+        "x": 2,
+        "y": 5
+      },
+      {
+        "x": 4,
+        "y": 5
+      },
+      {
+        "x": 6,
+        "y": 5
+      },
+      {
+        "x": 7,
+        "y": 5
+      },
+      {
+        "x": 9,
+        "y": 5
+      },
+      {
+        "x": 10,
+        "y": 5
+      },
+      {
+        "x": 11,
+        "y": 5
+      },
+      {
+        "x": 12,
+        "y": 5
+      },
+      {
+        "x": 14,
+        "y": 5
+      },
+      {
+        "x": 15,
+        "y": 5
+      },
+      {
+        "x": 16,
+        "y": 5
+      },
+      {
+        "x": 17,
+        "y": 5
+      },
+      {
+        "x": 19,
+        "y": 5
+      },
+      {
+        "x": 0,
+        "y": 6
+      },
+      {
+        "x": 6,
+        "y": 6
+      },
+      {
+        "x": 11,
+        "y": 6
+      },
+      {
+        "x": 19,
+        "y": 6
+      },
+      {
+        "x": 0,
+        "y": 7
+      },
+      {
+        "x": 11,
+        "y": 7
+      },
+      {
+        "x": 19,
+        "y": 7
+      },
+      {
+        "x": 0,
+        "y": 8
+      },
+      {
+        "x": 6,
+        "y": 8
+      },
+      {
+        "x": 11,
+        "y": 8
+      },
+      {
+        "x": 19,
+        "y": 8
+      },
+      {
+        "x": 0,
+        "y": 9
+      },
+      {
+        "x": 6,
+        "y": 9
+      },
+      {
+        "x": 19,
+        "y": 9
+      },
+      {
+        "x": 0,
+        "y": 10
+      },
+      {
+        "x": 6,
+        "y": 10
+      },
+      {
+        "x": 11,
+        "y": 10
+      },
+      {
+        "x": 19,
+        "y": 10
+      },
+      {
+        "x": 0,
+        "y": 11
+      },
+      {
+        "x": 1,
+        "y": 11
+      },
+      {
+        "x": 2,
+        "y": 11
+      },
+      {
+        "x": 4,
+        "y": 11
+      },
+      {
+        "x": 5,
+        "y": 11
+      },
+      {
+        "x": 6,
+        "y": 11
+      },
+      {
+        "x": 7,
+        "y": 11
+      },
+      {
+        "x": 8,
+        "y": 11
+      },
+      {
+        "x": 10,
+        "y": 11
+      },
+      {
+        "x": 11,
+        "y": 11
+      },
+      {
+        "x": 12,
+        "y": 11
+      },
+      {
+        "x": 14,
+        "y": 11
+      },
+      {
+        "x": 15,
+        "y": 11
+      },
+      {
+        "x": 16,
+        "y": 11
+      },
+      {
+        "x": 18,
+        "y": 11
+      },
+      {
+        "x": 19,
+        "y": 11
+      },
+      {
+        "x": 0,
+        "y": 12
+      },
+      {
+        "x": 10,
+        "y": 12
+      },
+      {
+        "x": 15,
+        "y": 12
+      },
+      {
+        "x": 19,
+        "y": 12
+      },
+      {
+        "x": 6,
+        "y": 13
+      },
+      {
+        "x": 10,
+        "y": 13
+      },
+      {
+        "x": 19,
+        "y": 13
+      },
+      {
+        "x": 0,
+        "y": 14
+      },
+      {
+        "x": 6,
+        "y": 14
+      },
+      {
+        "x": 15,
+        "y": 14
+      },
+      {
+        "x": 19,
+        "y": 14
+      },
+      {
+        "x": 0,
+        "y": 15
+      },
+      {
+        "x": 1,
+        "y": 15
+      },
+      {
+        "x": 3,
+        "y": 15
+      },
+      {
+        "x": 4,
+        "y": 15
+      },
+      {
+        "x": 5,
+        "y": 15
+      },
+      {
+        "x": 6,
+        "y": 15
+      },
+      {
+        "x": 10,
+        "y": 15
+      },
+      {
+        "x": 11,
+        "y": 15
+      },
+      {
+        "x": 13,
+        "y": 15
+      },
+      {
+        "x": 14,
+        "y": 15
+      },
+      {
+        "x": 15,
+        "y": 15
+      },
+      {
+        "x": 19,
+        "y": 15
+      },
+      {
+        "x": 0,
+        "y": 16
+      },
+      {
+        "x": 6,
+        "y": 16
+      },
+      {
+        "x": 15,
+        "y": 16
+      },
+      {
+        "x": 19,
+        "y": 16
+      },
+      {
+        "x": 0,
+        "y": 17
+      },
+      {
+        "x": 6,
+        "y": 17
+      },
+      {
+        "x": 10,
+        "y": 17
+      },
+      {
+        "x": 15,
+        "y": 17
+      },
+      {
+        "x": 19,
+        "y": 17
+      },
+      {
+        "x": 0,
+        "y": 18
+      },
+      {
+        "x": 10,
+        "y": 18
+      },
+      {
+        "x": 19,
+        "y": 18
+      },
+      {
+        "x": 0,
+        "y": 19
+      },
+      {
+        "x": 1,
+        "y": 19
+      },
+      {
+        "x": 2,
+        "y": 19
+      },
+      {
+        "x": 3,
+        "y": 19
+      },
+      {
+        "x": 4,
+        "y": 19
+      },
+      {
+        "x": 5,
+        "y": 19
+      },
+      {
+        "x": 6,
+        "y": 19
+      },
+      {
+        "x": 7,
+        "y": 19
+      },
+      {
+        "x": 8,
+        "y": 19
+      },
+      {
+        "x": 9,
+        "y": 19
+      },
+      {
+        "x": 10,
+        "y": 19
+      },
+      {
+        "x": 11,
+        "y": 19
+      },
+      {
+        "x": 12,
+        "y": 19
+      },
+      {
+        "x": 13,
+        "y": 19
+      },
+      {
+        "x": 14,
+        "y": 19
+      },
+      {
+        "x": 15,
+        "y": 19
+      },
+      {
+        "x": 16,
+        "y": 19
+      },
+      {
+        "x": 17,
+        "y": 19
+      },
+      {
+        "x": 18,
+        "y": 19
+      },
+      {
+        "x": 19,
+        "y": 19
+      }
+    ],
+    "lowCover": [
+      {
+        "id": "cover-room-security-01",
+        "x": 17,
+        "y": 13,
+        "protects": "e"
+      },
+      {
+        "id": "cover-room-office-01",
+        "x": 2,
+        "y": 17,
+        "protects": "w"
+      },
+      {
+        "id": "cover-room-breakroom-01",
+        "x": 12,
+        "y": 17,
+        "protects": "w"
+      },
+      {
+        "id": "cover-room-mechanical-01",
+        "x": 12,
+        "y": 13,
+        "protects": "w"
+      },
+      {
+        "id": "cover-room-server-01",
+        "x": 8,
+        "y": 13,
+        "protects": "w"
+      },
+      {
+        "id": "cover-room-loading-01",
+        "x": 2,
+        "y": 13,
+        "protects": "w"
+      },
+      {
+        "id": "cover-room-storage-01",
+        "x": 6,
+        "y": 2,
+        "protects": "w"
+      },
+      {
+        "id": "cover-room-production-01",
+        "x": 2,
+        "y": 7,
+        "protects": "w"
+      },
+      {
+        "id": "cover-room-workshop-01",
+        "x": 2,
+        "y": 2,
+        "protects": "e"
+      },
+      {
+        "id": "cover-room-dispatch-01",
+        "x": 13,
+        "y": 7,
+        "protects": "e"
+      }
+    ],
+    "terminal": {
+      "id": "terminal",
+      "x": 8,
+      "y": 15
+    },
+    "door": {
+      "id": "shortcut",
+      "x": 11,
+      "y": 9
+    },
+    "extraction": [
+      {
+        "x": 11,
+        "y": 1
+      },
+      {
+        "x": 12,
+        "y": 1
+      },
+      {
+        "x": 11,
+        "y": 2
+      },
+      {
+        "x": 12,
+        "y": 2
+      }
+    ],
+    "spawns": [
+      {
+        "id": "kite",
+        "name": "Kite",
+        "team": "crew",
+        "weapon": "rifle",
+        "x": 11,
+        "y": 1,
+        "patrol": []
+      },
+      {
+        "id": "voss",
+        "name": "Voss",
+        "team": "crew",
+        "weapon": "sidearm",
+        "x": 12,
+        "y": 1,
+        "patrol": []
+      },
+      {
+        "id": "nera",
+        "name": "Nera",
+        "team": "crew",
+        "weapon": "rifle",
+        "x": 11,
+        "y": 2,
+        "patrol": []
+      },
+      {
+        "id": "sol",
+        "name": "Sol",
+        "team": "crew",
+        "weapon": "sidearm",
+        "x": 12,
+        "y": 2,
+        "patrol": []
+      },
+      {
+        "id": "enemy-0",
+        "name": "Wache 1",
+        "team": "enemy",
+        "weapon": "rifle",
+        "x": 3,
+        "y": 4,
+        "patrol": [
+          {
+            "x": 3,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 4
+          }
+        ]
+      },
+      {
+        "id": "enemy-1",
+        "name": "Wache 2",
+        "team": "enemy",
+        "weapon": "rifle",
+        "x": 5,
+        "y": 10,
+        "patrol": [
+          {
+            "x": 5,
+            "y": 10
+          },
+          {
+            "x": 4,
+            "y": 10
+          }
+        ]
+      },
+      {
+        "id": "enemy-2",
+        "name": "Wache 3",
+        "team": "enemy",
+        "weapon": "rifle",
+        "x": 9,
+        "y": 18,
+        "patrol": [
+          {
+            "x": 9,
+            "y": 18
+          },
+          {
+            "x": 8,
+            "y": 18
+          }
+        ]
+      },
+      {
+        "id": "enemy-3",
+        "name": "Wache 4",
+        "team": "enemy",
+        "weapon": "rifle",
+        "x": 9,
+        "y": 4,
+        "patrol": [
+          {
+            "x": 9,
+            "y": 4
+          },
+          {
+            "x": 8,
+            "y": 4
+          }
+        ]
+      },
+      {
+        "id": "enemy-4",
+        "name": "Flanker 5",
+        "team": "enemy",
+        "weapon": "rifle",
+        "x": 18,
+        "y": 18,
+        "patrol": [
+          {
+            "x": 18,
+            "y": 18
+          },
+          {
+            "x": 17,
+            "y": 18
+          }
+        ]
+      },
+      {
+        "id": "enemy-5",
+        "name": "Flanker 6",
+        "team": "enemy",
+        "weapon": "rifle",
+        "x": 18,
+        "y": 10,
+        "patrol": [
+          {
+            "x": 18,
+            "y": 10
+          },
+          {
+            "x": 17,
+            "y": 10
+          }
+        ]
+      }
+    ],
+    "hash": "e7b592200ddc4cd7c134daad7859fd8b3d4d0ff379e2737a114d32877eb27b0e"
+  },
+  "report": {
+    "errors": [],
+    "warnings": [
+      {
+        "code": "playtest-open",
+        "message": "Geometrie und Semantik geprüft; taktische Fairness, Botlauf und menschliche Spielabnahme offen.",
+        "ids": []
+      },
+      {
+        "code": "infrastructure-abstract",
+        "message": "Versorgung folgt Raumverbindungen; physische Leitungen und Sabotageaktionen sind noch nicht implementiert.",
+        "ids": []
+      },
+      {
+        "code": "demand-game-model",
+        "message": "Kapazitäten und Rasterflächen sind versionierte Spielannahmen, keine baurechtliche oder ASR-konforme Planung. Außenfunktionen sind Kontext, keine begehbaren Räume.",
+        "ids": []
+      }
+    ],
+    "metrics": {
+      "roomCount": 13,
+      "walkableCells": 259,
+      "targetDistance": 18,
+      "independentRoutes": 2,
+      "coverCount": 10,
+      "preferenceScore": 80
+    }
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "errors": []
+    }
+  ],
+  "hash": "5eb1bb59b01f089d7c7fa37f867c76c62ee3f52a098cd1facd3039349749a8e6"
+}

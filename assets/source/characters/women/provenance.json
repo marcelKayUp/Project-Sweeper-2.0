@@ -1,0 +1,25 @@
+{
+  "author": "Unverified (user-provided)",
+  "license": "LicenseRef-UserProvided-Unverified",
+  "sourceUrl": "",
+  "status": "unverified; no license grant or author identity was established",
+  "file": "Humans_Master.blend",
+  "sha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+  "bytes": 10966012,
+  "userProvidedSource": "C:/Users/kaup/Desktop/Zeitalter Probierbereich/Models&Animations/All together.blend",
+  "copyMethod": "byte-for-byte copy; verified against the user-provided SHA-256",
+  "library": "apps/client/public/assets/characters/women/master.glb",
+  "catalog": "apps/client/public/assets/characters/women/catalog.json",
+  "recipe": "tools/characters/export_female_master.py",
+  "adaptations": [
+    "Export 40 original outfit meshes plus the native Pistol and Sword bone attachments.",
+    "Keep an independent copy of the original CharacterArmature and its 24 source actions.",
+    "Translate local diffuse swatches to PBR material copies; preserve the source blend bytes.",
+    "Evaluate modifiers and let the glTF exporter reduce/normalize skin weights to four influences."
+  ],
+  "openItems": [
+    "author and license verification",
+    "human art and animation acceptance",
+    "tactical game integration"
+  ]
+}

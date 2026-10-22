@@ -1,0 +1,153 @@
+{
+  "path": "Weapons/modular Weapons/Cylinder_Pistol_1.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Accessory_Pistol_1",
+      "vertices": 375,
+      "triangles": 746,
+      "shapeHash": "2ba94df58200e0751c685c9a9e4e663e80f3933259b35bec794d0d16e859bb68",
+      "materials": [
+        "White",
+        "Main",
+        "Black"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.12499367445707321,
+          -0.08911246061325073,
+          -0.12524081766605377
+        ],
+        "max": [
+          0.12499367445707321,
+          0.08911246061325073,
+          0.12425325065851212
+        ],
+        "size": [
+          0.24998734891414642,
+          0.17822492122650146,
+          0.2494940683245659
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 746,
+  "bounds": {
+    "min": [
+      -0.12499367445707321,
+      -0.08911246061325073,
+      -0.12524081766605377
+    ],
+    "max": [
+      0.12499367445707321,
+      0.08911246061325073,
+      0.12425325065851212
+    ],
+    "size": [
+      0.24998734891414642,
+      0.17822492122650146,
+      0.2494940683245659
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Cylinder_Pistol_1",
+      "file": "thumbs/50872bfc3ffdeb6cb896ccae1ea58da2b211d5e44ac8426a8305ed65c0f9e9be-0.png",
+      "category": "components",
+      "parts": [
+        "Accessory_Pistol_1"
+      ],
+      "triangles": 746
+    }
+  ],
+  "fileSha256": "625062511a2abee89a09251f047695039108f3c1b9e1039a4577e87fa9a18b62",
+  "bytes": 576080,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

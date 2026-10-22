@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "source": "quaternius-modular-men-v1",
+  "id": "quaternius-casual2",
+  "seed": 42,
+  "stature": 1,
+  "parts": {
+    "head": "Casual2",
+    "body": "Casual2",
+    "legs": "Casual2",
+    "feet": "Casual2"
+  },
+  "equipment": "none",
+  "palette": {
+    "skin": null,
+    "hair": null,
+    "cloth": null,
+    "armor": null,
+    "accent": null
+  }
+}

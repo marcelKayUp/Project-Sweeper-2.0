@@ -1,0 +1,237 @@
+00:04.281  blend            | Read blend: "C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\assets\source\characters\quaternius\Humans_Master.blend"
+00:04.343  reports          | WARNING Bibliotheksdatei, lädt leere Szene
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\tools\characters\export_modular_master.py:218: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  material.use_nodes = True
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+09:50:51 | INFO: Starting glTF 2.0 export
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+09:50:51 | WARNING: Mesh Cube.050 is not valid, and may be exported wrongly
+09:50:51 | INFO: Extracting primitive: Cube.050
+09:50:51 | INFO: Primitives created: 3
+09:50:51 | WARNING: There are more than 4 joint vertex influences.The 4 with highest weight will be used (and normalized).
+09:50:51 | INFO: Extracting primitive: Cube.076
+09:50:51 | INFO: Primitives created: 2
+09:50:51 | INFO: Extracting primitive: Cube.013
+09:50:51 | INFO: Primitives created: 4
+09:50:51 | INFO: Extracting primitive: Cube.064
+09:50:51 | INFO: Primitives created: 2
+09:50:51 | INFO: Extracting primitive: Plane.001
+09:50:51 | INFO: Primitives created: 4
+09:50:51 | WARNING: Mesh Cube.053 is not valid, and may be exported wrongly
+09:50:51 | INFO: Extracting primitive: Cube.053
+09:50:51 | INFO: Primitives created: 2
+09:50:51 | WARNING: Mesh Cube.077 is not valid, and may be exported wrongly
+09:50:51 | INFO: Extracting primitive: Cube.077
+09:50:51 | INFO: Primitives created: 2
+09:50:51 | INFO: Extracting primitive: Cube.021
+09:50:51 | INFO: Primitives created: 5
+09:50:51 | WARNING: Mesh Cube.065 is not valid, and may be exported wrongly
+09:50:51 | INFO: Extracting primitive: Cube.065
+09:50:51 | INFO: Primitives created: 3
+09:50:51 | WARNING: Mesh Cube.055 is not valid, and may be exported wrongly
+09:50:51 | INFO: Extracting primitive: Cube.055
+09:50:51 | INFO: Primitives created: 2
+09:50:51 | INFO: Extracting primitive: Cube.079
+09:50:51 | INFO: Primitives created: 2
+09:50:51 | INFO: Extracting primitive: Cube.033
+09:50:51 | INFO: Primitives created: 5
+09:50:51 | INFO: Extracting primitive: Cube.067
+09:50:51 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+09:50:51 | INFO: Primitives created: 1
+09:50:51 | WARNING: Mesh Cube.054 is not valid, and may be exported wrongly
+09:50:51 | INFO: Extracting primitive: Cube.054
+09:50:51 | INFO: Primitives created: 2
+09:50:51 | INFO: Extracting primitive: Cube.078
+09:50:51 | INFO: Primitives created: 2
+09:50:51 | INFO: Extracting primitive: Cube.030
+09:50:51 | INFO: Primitives created: 4
+09:50:51 | WARNING: Mesh Cube.066 is not valid, and may be exported wrongly
+09:50:51 | INFO: Extracting primitive: Cube.066
+09:50:51 | INFO: Primitives created: 2
+09:50:51 | WARNING: Mesh Cube.056 is not valid, and may be exported wrongly
+09:50:51 | INFO: Extracting primitive: Cube.056
+09:50:51 | INFO: Primitives created: 4
+09:50:51 | INFO: Extracting primitive: Cube.080
+09:50:51 | INFO: Primitives created: 2
+09:50:51 | INFO: Extracting primitive: Cube.038
+09:50:51 | INFO: Primitives created: 5
+09:50:51 | INFO: Extracting primitive: Cube.068
+09:50:51 | INFO: Primitives created: 1
+09:50:51 | WARNING: Mesh Cube.057 is not valid, and may be exported wrongly
+09:50:51 | INFO: Extracting primitive: Cube.057
+09:50:51 | INFO: Primitives created: 5
+09:50:51 | WARNING: Mesh Cube.081 is not valid, and may be exported wrongly
+09:50:51 | INFO: Extracting primitive: Cube.081
+09:50:51 | INFO: Primitives created: 1
+09:50:51 | INFO: Extracting primitive: Cube.040
+09:50:52 | INFO: Primitives created: 4
+09:50:52 | INFO: Extracting primitive: Cube.069
+09:50:52 | INFO: Primitives created: 3
+09:50:52 | INFO: Extracting primitive: Cube.087
+09:50:52 | INFO: Primitives created: 3
+09:50:52 | WARNING: Mesh Cube.058 is not valid, and may be exported wrongly
+09:50:52 | INFO: Extracting primitive: Cube.058
+09:50:52 | INFO: Primitives created: 3
+09:50:52 | INFO: Extracting primitive: Cube.082
+09:50:52 | INFO: Primitives created: 2
+09:50:52 | INFO: Extracting primitive: Cube.041
+09:50:52 | INFO: Primitives created: 6
+09:50:52 | INFO: Extracting primitive: Cube.071
+09:50:52 | INFO: Primitives created: 2
+09:50:52 | WARNING: Mesh Cube.059 is not valid, and may be exported wrongly
+09:50:52 | INFO: Extracting primitive: Cube.059
+09:50:52 | INFO: Primitives created: 4
+09:50:52 | INFO: Extracting primitive: Cube.083
+09:50:52 | INFO: Primitives created: 2
+09:50:52 | INFO: Extracting primitive: Cube.042
+09:50:52 | INFO: Primitives created: 3
+09:50:52 | INFO: Extracting primitive: Cube.072
+09:50:52 | INFO: Primitives created: 4
+09:50:52 | WARNING: Mesh Cube.060 is not valid, and may be exported wrongly
+09:50:52 | INFO: Extracting primitive: Cube.060
+09:50:52 | INFO: Primitives created: 4
+09:50:52 | INFO: Extracting primitive: Cube.084
+09:50:52 | INFO: Primitives created: 1
+09:50:52 | INFO: Extracting primitive: Cube.044
+09:50:52 | INFO: Primitives created: 4
+09:50:52 | INFO: Extracting primitive: Cube.073
+09:50:52 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+09:50:52 | INFO: Primitives created: 1
+09:50:52 | WARNING: Mesh Cube.061 is not valid, and may be exported wrongly
+09:50:52 | INFO: Extracting primitive: Cube.061
+09:50:52 | INFO: Primitives created: 3
+09:50:52 | INFO: Extracting primitive: Cube.085
+09:50:52 | INFO: Primitives created: 1
+09:50:52 | INFO: Extracting primitive: Cube.045
+09:50:52 | INFO: Primitives created: 3
+09:50:52 | INFO: Extracting primitive: Cube.074
+09:50:52 | INFO: Primitives created: 2
+09:50:52 | INFO: Extracting primitive: Cylinder.001
+09:50:52 | INFO: Primitives created: 3
+09:50:52 | WARNING: Mesh Cube.062 is not valid, and may be exported wrongly
+09:50:52 | INFO: Extracting primitive: Cube.062
+09:50:52 | INFO: Primitives created: 4
+09:50:52 | INFO: Extracting primitive: Cube.086
+09:50:52 | INFO: Primitives created: 2
+09:50:52 | INFO: Extracting primitive: Cube.048
+09:50:52 | INFO: Primitives created: 5
+09:50:52 | INFO: Extracting primitive: Cube.075
+09:50:52 | INFO: Primitives created: 2
+09:51:01 | WARNING: Baking animation because of unsupported constraints acting on the bone
+09:51:01 | WARNING: Baking animation because of unsupported constraints acting on the bone
+09:51:01 | WARNING: Baking animation because of unsupported constraints acting on the bone
+09:51:01 | WARNING: Baking animation because of unsupported constraints acting on the bone
+09:51:02 | WARNING: Baking animation because of unsupported constraints acting on the bone
+09:51:02 | WARNING: Baking animation because of unsupported constraints acting on the bone
+09:51:02 | WARNING: Baking animation because of unsupported constraints acting on the bone
+09:51:02 | WARNING: Baking animation because of unsupported constraints acting on the bone
+09:51:03 | WARNING: Baking animation because the number of keyframes is not equal for all channel tracks
+09:51:03 | WARNING: Baking animation because the number of keyframes is not equal for all channel tracks
+09:51:03 | WARNING: Baking animation because the number of keyframes is not equal for all channel tracks
+09:51:04 | WARNING: Baking animation because the number of keyframes is not equal for all channel tracks
+09:51:04 | WARNING: Baking animation because the number of keyframes is not equal for all channel tracks
+09:51:04 | WARNING: Baking animation because the number of keyframes is not equal for all channel tracks
+09:51:07 | INFO: Finished glTF 2.0 export in 15.750977277755737 s
+
+09:51:07 | INFO: Data are loaded, start creating Blender stuff
+09:51:07 | INFO: Blender create Mesh node Cube.050
+09:51:07 | INFO: Blender create Mesh node Cube.076
+09:51:07 | INFO: Blender create Mesh node Cube.013
+09:51:07 | INFO: Blender create Mesh node Cube.064
+09:51:07 | INFO: Blender create Mesh node Plane.001
+09:51:07 | INFO: Blender create Mesh node Cube.053
+09:51:07 | INFO: Blender create Mesh node Cube.077
+09:51:07 | INFO: Blender create Mesh node Cube.021
+09:51:08 | INFO: Blender create Mesh node Cube.065
+09:51:08 | INFO: Blender create Mesh node Cube.055
+09:51:08 | INFO: Blender create Mesh node Cube.079
+09:51:08 | INFO: Blender create Mesh node Cube.033
+09:51:08 | INFO: Blender create Mesh node Cube.067
+09:51:08 | INFO: Blender create Mesh node Cube.054
+09:51:08 | INFO: Blender create Mesh node Cube.078
+09:51:08 | INFO: Blender create Mesh node Cube.030
+09:51:08 | INFO: Blender create Mesh node Cube.066
+09:51:08 | INFO: Blender create Mesh node Cube.056
+09:51:08 | INFO: Blender create Mesh node Cube.080
+09:51:08 | INFO: Blender create Mesh node Cube.038
+09:51:08 | INFO: Blender create Mesh node Cube.068
+09:51:08 | INFO: Blender create Mesh node Cube.057
+09:51:08 | INFO: Blender create Mesh node Cube.081
+09:51:08 | INFO: Blender create Mesh node Cube.040
+09:51:08 | INFO: Blender create Mesh node Cube.069
+09:51:08 | INFO: Blender create Mesh node Cube.087
+09:51:08 | INFO: Blender create Mesh node Cube.058
+09:51:08 | INFO: Blender create Mesh node Cube.082
+09:51:08 | INFO: Blender create Mesh node Cube.041
+09:51:08 | INFO: Blender create Mesh node Cube.071
+09:51:08 | INFO: Blender create Mesh node Cube.059
+09:51:08 | INFO: Blender create Mesh node Cube.083
+09:51:08 | INFO: Blender create Mesh node Cube.042
+09:51:08 | INFO: Blender create Mesh node Cube.072
+09:51:08 | INFO: Blender create Mesh node Cube.060
+09:51:08 | INFO: Blender create Mesh node Cube.084
+09:51:08 | INFO: Blender create Mesh node Cube.044
+09:51:08 | INFO: Blender create Mesh node Cube.073
+09:51:08 | INFO: Blender create Mesh node Cube.061
+09:51:08 | INFO: Blender create Mesh node Cube.085
+09:51:08 | INFO: Blender create Mesh node Cube.045
+09:51:09 | INFO: Blender create Mesh node Cube.074
+09:51:09 | INFO: Blender create Mesh node Cylinder.001
+09:51:09 | INFO: Blender create Mesh node Cube.062
+09:51:09 | INFO: Blender create Mesh node Cube.086
+09:51:09 | INFO: Blender create Mesh node Cube.048
+09:51:09 | INFO: Blender create Mesh node Cube.075
+09:51:10 | INFO: glTF import finished in 2.64s
+EXPORT_OK bytes=11739728 sha256=24b97f51739924047948d846e1ed88dd103e2171ceef29d2c73fc8c2269a0ee7
+QA parts=47 rigBones=62 clips=24 triangles=82946 height=1.857976
+FILES glb=C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\apps\client\public\assets\characters\quaternius\master.glb catalog=C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\apps\client\public\assets\characters\quaternius\catalog.json audit=C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\artifacts\characters\modular\master-export-audit.json
+
+Blender quit

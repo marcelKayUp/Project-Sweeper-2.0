@@ -1,0 +1,9 @@
+00:03.031  blend            | Read blend: "C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\assets\source\characters\quaternius\Humans_Master.blend"
+00:03.109  reports          | WARNING Bibliotheksdatei, lädt leere Szene
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+GEAR_GROUPS
+Pistol [('Middle1.R', 580.0)]
+Sword [('Middle1.R', 438.0)]
+Backpack [('Group', 264.0), ('Chest', 963.0)]
+
+Blender quit

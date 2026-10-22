@@ -1,0 +1,135 @@
+{
+  "path": "Weapons/Accessories/Tripod.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Tripod",
+      "vertices": 340,
+      "triangles": 648,
+      "shapeHash": "6a6f010899b7d62518d3c8115d66ef9023612d250eb0d61d3ce5c1fddf67fe85",
+      "materials": [
+        "DarkMetal",
+        "Black"
+      ],
+      "modifiers": [],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.503124475479126,
+          -0.6098909378051758,
+          -1.1529000997543335
+        ],
+        "max": [
+          0.807435154914856,
+          0.6063305735588074,
+          0.02799389325082302
+        ],
+        "size": [
+          1.310559630393982,
+          1.2162215113639832,
+          1.1808939930051565
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 648,
+  "bounds": {
+    "min": [
+      -0.503124475479126,
+      -0.6098909378051758,
+      -1.1529000997543335
+    ],
+    "max": [
+      0.807435154914856,
+      0.6063305735588074,
+      0.02799389325082302
+    ],
+    "size": [
+      1.310559630393982,
+      1.2162215113639832,
+      1.1808939930051565
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkMetal",
+      "diffuseColor": [
+        0.04699999839067459,
+        0.04695870354771614,
+        0.045788172632455826,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\Accessories\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\Accessories\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Tripod",
+      "file": "thumbs/99ea2744e8794af425663cbb69386fa442f87eb66b09699d2076ea326451cdfa-0.png",
+      "category": "components",
+      "parts": [
+        "Tripod"
+      ],
+      "triangles": 648
+    }
+  ],
+  "fileSha256": "12233255c39dee770610a1e5c7f1eaa26e223af55b3a72cab9703050c2325742",
+  "bytes": 531376,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

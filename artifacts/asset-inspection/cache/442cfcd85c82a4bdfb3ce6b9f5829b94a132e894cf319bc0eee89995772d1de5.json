@@ -1,0 +1,137 @@
+{
+  "path": "Weapons/modular Weapons/Grip_Grenade_3.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Grip_Grenade_3",
+      "vertices": 844,
+      "triangles": 1584,
+      "shapeHash": "5a8be78d663b94d47874afb49f7e7d7f3b352edb2c243973d948ac39a163dc28",
+      "materials": [
+        "Black",
+        "Grey"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.9194591045379639,
+          -0.03656250610947609,
+          -0.07965512573719025
+        ],
+        "max": [
+          0.34598326683044434,
+          0.036562517285346985,
+          0.2346041351556778
+        ],
+        "size": [
+          1.2654423713684082,
+          0.07312502339482307,
+          0.31425926089286804
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 1584,
+  "bounds": {
+    "min": [
+      -0.9194591045379639,
+      -0.03656250610947609,
+      -0.07965512573719025
+    ],
+    "max": [
+      0.34598326683044434,
+      0.036562517285346985,
+      0.2346041351556778
+    ],
+    "size": [
+      1.2654423713684082,
+      0.07312502339482307,
+      0.31425926089286804
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Grip_Grenade_3",
+      "file": "thumbs/442cfcd85c82a4bdfb3ce6b9f5829b94a132e894cf319bc0eee89995772d1de5-0.png",
+      "category": "components",
+      "parts": [
+        "Grip_Grenade_3"
+      ],
+      "triangles": 1584
+    }
+  ],
+  "fileSha256": "6bca0a16be5dde8e762676ca7f9722ef89ee7053c384dad48dbd412d48ac0b07",
+  "bytes": 597480,
+  "inspectorKey": "cd7358ff160fbb070b5f8fc4e2ffd138955146420a9b39a6462eafc8c1fe5591"
+}

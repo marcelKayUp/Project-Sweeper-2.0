@@ -1,0 +1,654 @@
+{
+  "check": "characters-browser-and-glb",
+  "passed": true,
+  "url": "http://127.0.0.1:4175/characters.html?quelle=prozedural",
+  "assertions": [
+    {
+      "name": "no horizontal overflow at 1366x768",
+      "passed": true,
+      "detail": {
+        "viewport": 1366,
+        "document": 1366,
+        "body": 1366
+      }
+    },
+    {
+      "name": "3D canvas mounted at 1366x768",
+      "passed": true,
+      "detail": {
+        "width": 770,
+        "height": 559.78125,
+        "drawingWidth": 770,
+        "drawingHeight": 560,
+        "hasContext": true,
+        "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+      }
+    },
+    {
+      "name": "presets and all editor controls",
+      "passed": true,
+      "detail": {
+        "bodyOptions": 3,
+        "hairOptions": 4,
+        "outfitOptions": 3,
+        "accessoryOptions": 4,
+        "colorRoles": 5,
+        "cameraViews": 4,
+        "playback": true
+      }
+    },
+    {
+      "name": "all seven preview clips can be selected",
+      "passed": true,
+      "detail": [
+        "idle",
+        "walk",
+        "crouch",
+        "shoot",
+        "reload",
+        "hit",
+        "death"
+      ]
+    },
+    {
+      "name": "no horizontal overflow at 1920x1080",
+      "passed": true,
+      "detail": {
+        "viewport": 1920,
+        "document": 1920,
+        "body": 1920
+      }
+    },
+    {
+      "name": "3D canvas mounted at 1920x1080",
+      "passed": true,
+      "detail": {
+        "width": 912,
+        "height": 709,
+        "drawingWidth": 912,
+        "drawingHeight": 709,
+        "hasContext": true,
+        "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+      }
+    },
+    {
+      "name": "two browser contexts maintain independent editor state",
+      "passed": true,
+      "detail": {
+        "changedContext": "runner",
+        "untouchedContext": "guard"
+      }
+    },
+    {
+      "name": "JSON download/import roundtrip preserves canonical spec",
+      "passed": true
+    },
+    {
+      "name": "invalid JSON imports preserve last valid spec",
+      "passed": true,
+      "detail": [
+        "unknown-field.json",
+        "wrong-type.json",
+        "oversize.json",
+        "invalid-id.json",
+        "invalid-seed.json"
+      ]
+    },
+    {
+      "name": "invalid ID and seed controls preserve last valid spec",
+      "passed": true
+    },
+    {
+      "name": "GLB runner.glb",
+      "passed": true,
+      "detail": {
+        "triangles": 1900,
+        "outwardWinding": 1900,
+        "sourceWinding": {
+          "triangles": 1900,
+          "positive": 1900,
+          "negative": 0,
+          "degenerate": 0,
+          "minimumDot": 0.000004221955728766352
+        },
+        "materials": 5,
+        "joints": 19,
+        "skinnedVertices": 4964,
+        "blendedVertices": 1824,
+        "clipCounts": {
+          "idle": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "walk": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "crouch": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "shoot": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "reload": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "hit": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "death": {
+            "channels": 38,
+            "samplers": 38
+          }
+        },
+        "babylonLoad": {
+          "skeletons": 1,
+          "bones": 19,
+          "clips": [
+            "crouch",
+            "death",
+            "hit",
+            "idle",
+            "reload",
+            "shoot",
+            "walk"
+          ],
+          "meshes": 34,
+          "vertices": 4964
+        },
+        "gltfErrors": 0,
+        "gltfWarnings": 0
+      }
+    },
+    {
+      "name": "GLB guard.glb",
+      "passed": true,
+      "detail": {
+        "triangles": 1768,
+        "outwardWinding": 1768,
+        "sourceWinding": {
+          "triangles": 1768,
+          "positive": 1768,
+          "negative": 0,
+          "degenerate": 0,
+          "minimumDot": 0.0000046441513016429876
+        },
+        "materials": 5,
+        "joints": 19,
+        "skinnedVertices": 4752,
+        "blendedVertices": 1784,
+        "clipCounts": {
+          "idle": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "walk": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "crouch": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "shoot": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "reload": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "hit": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "death": {
+            "channels": 38,
+            "samplers": 38
+          }
+        },
+        "babylonLoad": {
+          "skeletons": 1,
+          "bones": 19,
+          "clips": [
+            "crouch",
+            "death",
+            "hit",
+            "idle",
+            "reload",
+            "shoot",
+            "walk"
+          ],
+          "meshes": 33,
+          "vertices": 4752
+        },
+        "gltfErrors": 0,
+        "gltfWarnings": 0
+      }
+    },
+    {
+      "name": "GLB tech.glb",
+      "passed": true,
+      "detail": {
+        "triangles": 1900,
+        "outwardWinding": 1900,
+        "sourceWinding": {
+          "triangles": 1900,
+          "positive": 1900,
+          "negative": 0,
+          "degenerate": 0,
+          "minimumDot": 0.000004221955728766352
+        },
+        "materials": 5,
+        "joints": 19,
+        "skinnedVertices": 4964,
+        "blendedVertices": 1824,
+        "clipCounts": {
+          "idle": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "walk": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "crouch": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "shoot": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "reload": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "hit": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "death": {
+            "channels": 38,
+            "samplers": 38
+          }
+        },
+        "babylonLoad": {
+          "skeletons": 1,
+          "bones": 19,
+          "clips": [
+            "crouch",
+            "death",
+            "hit",
+            "idle",
+            "reload",
+            "shoot",
+            "walk"
+          ],
+          "meshes": 34,
+          "vertices": 4964
+        },
+        "gltfErrors": 0,
+        "gltfWarnings": 0
+      }
+    },
+    {
+      "name": "runner, guard, and tech GLBs downloaded and validated",
+      "passed": true,
+      "detail": [
+        "runner",
+        "guard",
+        "tech"
+      ]
+    },
+    {
+      "name": "GLB walk-playing.glb",
+      "passed": true,
+      "detail": {
+        "triangles": 1900,
+        "outwardWinding": 1900,
+        "sourceWinding": {
+          "triangles": 1900,
+          "positive": 1900,
+          "negative": 0,
+          "degenerate": 0,
+          "minimumDot": 0.000004221955728766352
+        },
+        "materials": 5,
+        "joints": 19,
+        "skinnedVertices": 4964,
+        "blendedVertices": 1824,
+        "clipCounts": {
+          "idle": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "walk": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "crouch": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "shoot": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "reload": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "hit": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "death": {
+            "channels": 38,
+            "samplers": 38
+          }
+        },
+        "babylonLoad": {
+          "skeletons": 1,
+          "bones": 19,
+          "clips": [
+            "crouch",
+            "death",
+            "hit",
+            "idle",
+            "reload",
+            "shoot",
+            "walk"
+          ],
+          "meshes": 34,
+          "vertices": 4964
+        },
+        "gltfErrors": 0,
+        "gltfWarnings": 0
+      }
+    },
+    {
+      "name": "GLB walk-stopped.glb",
+      "passed": true,
+      "detail": {
+        "triangles": 1900,
+        "outwardWinding": 1900,
+        "sourceWinding": {
+          "triangles": 1900,
+          "positive": 1900,
+          "negative": 0,
+          "degenerate": 0,
+          "minimumDot": 0.000004221955728766352
+        },
+        "materials": 5,
+        "joints": 19,
+        "skinnedVertices": 4964,
+        "blendedVertices": 1824,
+        "clipCounts": {
+          "idle": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "walk": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "crouch": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "shoot": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "reload": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "hit": {
+            "channels": 38,
+            "samplers": 38
+          },
+          "death": {
+            "channels": 38,
+            "samplers": 38
+          }
+        },
+        "babylonLoad": {
+          "skeletons": 1,
+          "bones": 19,
+          "clips": [
+            "crouch",
+            "death",
+            "hit",
+            "idle",
+            "reload",
+            "shoot",
+            "walk"
+          ],
+          "meshes": 34,
+          "vertices": 4964
+        },
+        "gltfErrors": 0,
+        "gltfWarnings": 0
+      }
+    },
+    {
+      "name": "walk-playing and walk-stopped exports retain identical bind matrices and source positions",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow at final 1366x768",
+      "passed": true,
+      "detail": {
+        "viewport": 1366,
+        "document": 1366,
+        "body": 1366
+      }
+    },
+    {
+      "name": "no browser runtime, console, request, or second-context errors",
+      "passed": true
+    }
+  ],
+  "versions": {
+    "node": "v24.14.0",
+    "client": "0.0.1",
+    "characters": "0.1.0",
+    "babylon": "9.31.2",
+    "gltfValidator": "2.0.0-dev.3.10"
+  },
+  "browser": {
+    "version": "155.0.8059.85",
+    "channel": "chrome"
+  },
+  "screenshots": [
+    "workshop-1366.png",
+    "runner-front.png",
+    "guard-iso.png",
+    "tech-iso.png",
+    "workshop-1920.png"
+  ],
+  "exports": {
+    "runner": {
+      "file": "runner.glb",
+      "sha256": "7bd27a489d3fd58851b3add6a97d02a8d9e7bdfa21f05afd3f94e31bea3f4cae",
+      "bytes": 467820,
+      "triangles": 1900,
+      "materials": 5,
+      "joints": 19,
+      "skinnedVertices": 4964,
+      "blendedVertices": 1824,
+      "clips": {
+        "idle": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "walk": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "crouch": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "shoot": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "reload": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "hit": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "death": {
+          "channels": 38,
+          "samplers": 38
+        }
+      },
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "guard": {
+      "file": "guard.glb",
+      "sha256": "f81dd8f8b4aa82ee187716f94e8ee52bcc519b4182f5ecbcb5eb4f6a86630400",
+      "bytes": 453116,
+      "triangles": 1768,
+      "materials": 5,
+      "joints": 19,
+      "skinnedVertices": 4752,
+      "blendedVertices": 1784,
+      "clips": {
+        "idle": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "walk": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "crouch": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "shoot": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "reload": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "hit": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "death": {
+          "channels": 38,
+          "samplers": 38
+        }
+      },
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "tech": {
+      "file": "tech.glb",
+      "sha256": "a59f025b463c6a6150cdd9623e190e147d825a59b215e4179bbba6a00a4e1c0f",
+      "bytes": 467852,
+      "triangles": 1900,
+      "materials": 5,
+      "joints": 19,
+      "skinnedVertices": 4964,
+      "blendedVertices": 1824,
+      "clips": {
+        "idle": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "walk": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "crouch": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "shoot": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "reload": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "hit": {
+          "channels": 38,
+          "samplers": 38
+        },
+        "death": {
+          "channels": 38,
+          "samplers": 38
+        }
+      },
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "walkPlaying": {
+      "file": "walk-playing.glb",
+      "sha256": "7bd27a489d3fd58851b3add6a97d02a8d9e7bdfa21f05afd3f94e31bea3f4cae",
+      "bytes": 467820
+    },
+    "walkStopped": {
+      "file": "walk-stopped.glb",
+      "sha256": "7bd27a489d3fd58851b3add6a97d02a8d9e7bdfa21f05afd3f94e31bea3f4cae",
+      "bytes": 467820
+    }
+  },
+  "warnings": [],
+  "pageErrors": [],
+  "deliveryValidation": {
+    "status": "passed",
+    "files": [
+      {
+        "name": "runner",
+        "file": "assets\\generated\\characters\\neon-runner.glb",
+        "bytes": 200020,
+        "sha256": "577ba5386a9042e3e79d055f5087c5d57ae62bc972d68139311915ac00ec8e16",
+        "errors": 0,
+        "warnings": 0,
+        "warningSummary": {}
+      },
+      {
+        "name": "guard",
+        "file": "assets\\generated\\characters\\neon-guard.glb",
+        "bytes": 206228,
+        "sha256": "7786276918647b930a5c14d9d265045499a1c25b7c9334b69bb4c7501b747e76",
+        "errors": 0,
+        "warnings": 0,
+        "warningSummary": {}
+      },
+      {
+        "name": "tech",
+        "file": "assets\\generated\\characters\\neon-tech.glb",
+        "bytes": 206444,
+        "sha256": "585cf157328221da3c507784520adda108b45430f66834fd848efd8740336d5e",
+        "errors": 0,
+        "warnings": 0,
+        "warningSummary": {}
+      }
+    ]
+  }
+}

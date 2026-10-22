@@ -1,0 +1,2222 @@
+{
+    "schema":  1,
+    "builtAt":  "2026-10-22T13:33:23Z",
+    "usage":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Tag MOD-03",
+    "rebuild":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Build",
+    "note":  "Abruf der gekennzeichneten Planungsabschnitte. Bei Abweichungen gilt das Quelldokument.",
+    "counts":  {
+                   "chunks":  170,
+                   "tags":  135,
+                   "subtags":  16
+               },
+    "sources":  [
+                    {
+                        "path":  "docs/MODULE.md",
+                        "sha256":  "818734fcf0da9e1638fed5f2618fb9c20a06b3f67491e8faff6fdb323e58d2ea"
+                    },
+                    {
+                        "path":  "docs/MVP_MODULE.md",
+                        "sha256":  "e8ce45ac494754476a50c1630567380b334a7662c5e59240a6cad41d4cade117"
+                    },
+                    {
+                        "path":  "docs/SCREENS.md",
+                        "sha256":  "207ccb57b0338ae3b6b5e9ac5a31448ff3fd88617a8a724aab2b98516a47ce4d"
+                    },
+                    {
+                        "path":  "docs/MVP_SCREENS.md",
+                        "sha256":  "6396792e9a63c83b2015a90d07583a1f1d00cc93ed7c5a975502df82566b6973"
+                    },
+                    {
+                        "path":  "docs/GENERATOREN.md",
+                        "sha256":  "83c86052a0868d9ffab42e1b89a0c62c1e92c0d92e7b49ce52b513e3f8853d3b"
+                    },
+                    {
+                        "path":  "docs/MVP_GENERATOREN.md",
+                        "sha256":  "e942de5cb3cec2189167d820f7713f3e8d251368684b77f7acdf88b6303454d2"
+                    },
+                    {
+                        "path":  "docs/ARBEITSPAKETE.md",
+                        "sha256":  "ea0991182e69aa50224b86eaa4630770377872ca9bc27446d604304f7efbde47"
+                    },
+                    {
+                        "path":  "docs/ENTWICKLUNGSPLAN.md",
+                        "sha256":  "d97c6bea7207c110d23b90f1949e60fc5f7b270a5699c3a7922571eca90cd3fc"
+                    },
+                    {
+                        "path":  "docs/decisions/0001-modulare-planung.md",
+                        "sha256":  "2ecf6adce4e1b787c8e2dc4f5ab9d24aa682b073ed2fe777e79c353eb652d42d"
+                    },
+                    {
+                        "path":  "docs/decisions/0002-gestufte-charakterentwicklung.md",
+                        "sha256":  "dadb6c46a654573d2ab88964499c909e80d71947c982cee4e9da0e8e40895ac2"
+                    },
+                    {
+                        "path":  "docs/decisions/0003-mvp-mindestumfang.md",
+                        "sha256":  "5a1b3d43fd6913083fb912ae04c0a8ef0e9d550a01483838b223362fdcef7c4a"
+                    },
+                    {
+                        "path":  "docs/decisions/0004-gerichtete-deckungskante.md",
+                        "sha256":  "06a5837f77821bc85959deb97ff71d9e024cfb2145530134e1653ec46e9ee76d"
+                    },
+                    {
+                        "path":  "docs/decisions/0005-kampf-rng-und-schussaufloesung.md",
+                        "sha256":  "1db8d46106b0ee42d0e24bde1247fa09486edd5805e1faa6597fd3da83a1eaf2"
+                    },
+                    {
+                        "path":  "docs/decisions/0006-vier-spieler-mission.md",
+                        "sha256":  "d0e1d142f1094f96c9b12393644225afccb8105599bdeb0d0f2bd6f71730a3cd"
+                    },
+                    {
+                        "path":  "docs/decisions/0007-babylon-taktikansicht.md",
+                        "sha256":  "16ffd149543bb574689b178c75135ede33f90a994e83797dc7bd03accb78dfc7"
+                    },
+                    {
+                        "path":  "docs/decisions/0008-hierarchischer-missionsgenerator.md",
+                        "sha256":  "ed871c2fc4f579ba96af1016f066ed738e6da361200cea616c88e563012ec663"
+                    },
+                    {
+                        "path":  "docs/decisions/0009-semantischer-gebaeudegenerator.md",
+                        "sha256":  "4451e644992fa0346727466d9d865971a7c809de363cf45e162d1fc993971321"
+                    },
+                    {
+                        "path":  "docs/decisions/0010-bsp-und-graph-grundrisse.md",
+                        "sha256":  "38f0374f04634c52a7cae169da1572acd9d3d56ff93c5c9386cefa23c51c261e"
+                    },
+                    {
+                        "path":  "docs/decisions/0011-bedarfsbasiertes-raumprogramm.md",
+                        "sha256":  "4b4bf1080393e230413e3b75db75e8dbc0c06d47daed213661d44d548fbf37dc"
+                    },
+                    {
+                        "path":  "docs/decisions/0012-konzernidentitaet-und-bueroorganisation.md",
+                        "sha256":  "c575eedd64636d2c65fa87d975ddc2ec69bc613fa996ef5378a3c2c82ec0a9fd"
+                    },
+                    {
+                        "path":  "docs/decisions/0013-isometrische-fortsetzung.md",
+                        "sha256":  "34d7b619adcf26b11f735b05fdcf7d30331018a580e1198fe75ac66250217434"
+                    },
+                    {
+                        "path":  "docs/decisions/0014-flurerschliessung-und-sanitaerwege.md",
+                        "sha256":  "2bf244a17f15e039dd53828038a629cf72fa4057aaca3c9a541d679f1efe1d87"
+                    },
+                    {
+                        "path":  "docs/decisions/0015-agentengesteuerte-asset-pipeline.md",
+                        "sha256":  "4b6d91ec0030143cf2f751437bc7c79f5dc563dd8068f444b7fc686e498aee17"
+                    },
+                    {
+                        "path":  "docs/decisions/0016-typescript-character-creator.md",
+                        "sha256":  "72ceacfcfc6a0d47ac5ae5c415f6c309c654a5d907baec67dff3afcee68387fd"
+                    },
+                    {
+                        "path":  "docs/decisions/0017-quaternius-figurenbibliothek.md",
+                        "sha256":  "6fba2ac16a12868cb2a3a5753ba4efca63d811a65e6683a54221195f54d92ce6"
+                    },
+                    {
+                        "path":  "docs/decisions/0018-getrennte-figurenbibliotheken.md",
+                        "sha256":  "a717fff1cafae8fc8726abcd593274e4baa375440ed6433873a83199aa78449e"
+                    },
+                    {
+                        "path":  "docs/decisions/0019-bisherige-konzernentwuerfe-verworfen.md",
+                        "sha256":  "ce79676eb4586e786e5c0ac62b10192af4700d08f47ddb4449b4b44c8410913c"
+                    },
+                    {
+                        "path":  "docs/decisions/0020-organisationslandschaft-und-lokale-konflikte.md",
+                        "sha256":  "6cb14aed7925011e9fe861e5b9731f8527e0e896975e5d0d22192d43b7218dda"
+                    },
+                    {
+                        "path":  "docs/decisions/0021-cc0-figuren-in-der-testmission.md",
+                        "sha256":  "090a112736df91020971adbd8bf3f0589c575865753088969d3f68b805787131"
+                    },
+                    {
+                        "path":  "docs/decisions/0022-parametrische-terminal-familie.md",
+                        "sha256":  "af76a098834139f02f5320748608929111ba72e3868fbcae4ea43e7c2816657b"
+                    },
+                    {
+                        "path":  "docs/decisions/0023-wiederverwendbare-assetfamilien.md",
+                        "sha256":  "f638b3f538b94c1d34a25f2c6ced7f1da2a8bf738e658b33a197355b1ef7b18d"
+                    },
+                    {
+                        "path":  "docs/decisions/0024-ein-start-fuer-die-testmission.md",
+                        "sha256":  "3722fed7ad953fd56cdb7bc1d540ea880d6d4c1ac934e1d0b7f4e4c2badb46a4"
+                    }
+                ],
+    "tags":  {
+                 "AP-01":  {
+                               "kind":  "AP",
+                               "title":  "Lokale Toolchain und Integrationsnachweis",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-01"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-02",
+                                                  "docs/decisions/0001-modulare-planung.md#DEC-0001"
+                                              ]
+                           },
+                 "AP-02":  {
+                               "kind":  "AP",
+                               "title":  "Domain-Verträge, Zustand und RNG",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-02"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-03",
+                                                  "docs/ARBEITSPAKETE.md#AP-04",
+                                                  "docs/ARBEITSPAKETE.md#AP-11",
+                                                  "docs/MVP_GENERATOREN.md#GEN-00",
+                                                  "docs/MVP_GENERATOREN.md#GEN-12",
+                                                  "docs/MVP_MODULE.md#MOD-01",
+                                                  "docs/MVP_MODULE.md#MOD-02",
+                                                  "docs/MVP_MODULE.md#MOD-12"
+                                              ]
+                           },
+                 "AP-03":  {
+                               "kind":  "AP",
+                               "title":  "Rasterbewegung und AP",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-03"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-05",
+                                                  "docs/MVP_MODULE.md#MOD-03",
+                                                  "docs/MVP_MODULE.md#MOD-04"
+                                              ]
+                           },
+                 "AP-04":  {
+                               "kind":  "AP",
+                               "title":  "Handgebauter Content und Loader",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-04"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-05",
+                                                  "docs/ARBEITSPAKETE.md#AP-09",
+                                                  "docs/MVP_GENERATOREN.md#GEN-02",
+                                                  "docs/MVP_GENERATOREN.md#GEN-04",
+                                                  "docs/MVP_GENERATOREN.md#GEN-05",
+                                                  "docs/MVP_GENERATOREN.md#GEN-06",
+                                                  "docs/MVP_GENERATOREN.md#GEN-09",
+                                                  "docs/MVP_GENERATOREN.md#GEN-10",
+                                                  "docs/MVP_GENERATOREN.md#GEN-11",
+                                                  "docs/MVP_MODULE.md#MOD-01",
+                                                  "docs/MVP_MODULE.md#MOD-15"
+                                              ]
+                           },
+                 "AP-05":  {
+                               "kind":  "AP",
+                               "title":  "Sicht und gerichtete Deckung",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-05"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-06",
+                                                  "docs/ARBEITSPAKETE.md#AP-08",
+                                                  "docs/ARBEITSPAKETE.md#AP-12",
+                                                  "docs/MVP_MODULE.md#MOD-03"
+                                              ]
+                           },
+                 "AP-06":  {
+                               "kind":  "AP",
+                               "title":  "Schuss, Munition und Versorgung",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-06"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-07",
+                                                  "docs/ARBEITSPAKETE.md#AP-08",
+                                                  "docs/MVP_MODULE.md#MOD-04"
+                                              ]
+                           },
+                 "AP-07":  {
+                               "kind":  "AP",
+                               "title":  "Gemeinsame Teamphase",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-07"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-08",
+                                                  "docs/ARBEITSPAKETE.md#AP-09",
+                                                  "docs/ARBEITSPAKETE.md#AP-11",
+                                                  "docs/MVP_MODULE.md#MOD-05"
+                                              ]
+                           },
+                 "AP-08":  {
+                               "kind":  "AP",
+                               "title":  "Overwatch und Bewegungsunterbrechung",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-08"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-09",
+                                                  "docs/MVP_MODULE.md#MOD-04"
+                                              ]
+                           },
+                 "AP-09":  {
+                               "kind":  "AP",
+                               "title":  "Mission vollständig abschließbar",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-09"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-10",
+                                                  "docs/ARBEITSPAKETE.md#AP-11",
+                                                  "docs/ARBEITSPAKETE.md#AP-14",
+                                                  "docs/MVP_GENERATOREN.md#GEN-01",
+                                                  "docs/MVP_GENERATOREN.md#GEN-03",
+                                                  "docs/MVP_MODULE.md#MOD-06"
+                                              ]
+                           },
+                 "AP-10":  {
+                               "kind":  "AP",
+                               "title":  "Bots und Headless-Durchlauf",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-10"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-15",
+                                                  "docs/ARBEITSPAKETE.md#AP-16",
+                                                  "docs/MVP_GENERATOREN.md#GEN-04",
+                                                  "docs/MVP_GENERATOREN.md#GEN-05",
+                                                  "docs/MVP_MODULE.md#MOD-11"
+                                              ]
+                           },
+                 "AP-11":  {
+                               "kind":  "AP",
+                               "title":  "Autoritativer Raum und Besitz",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-11"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-12",
+                                                  "docs/ARBEITSPAKETE.md#AP-13",
+                                                  "docs/ARBEITSPAKETE.md#AP-15",
+                                                  "docs/MVP_MODULE.md#MOD-07",
+                                                  "docs/MVP_SCREENS.md#S02"
+                                              ]
+                           },
+                 "AP-12":  {
+                               "kind":  "AP",
+                               "title":  "TeamView und Synchronisierung",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-12"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-13",
+                                                  "docs/ARBEITSPAKETE.md#AP-14",
+                                                  "docs/ARBEITSPAKETE.md#AP-15",
+                                                  "docs/MVP_MODULE.md#MOD-08"
+                                              ]
+                           },
+                 "AP-13":  {
+                               "kind":  "AP",
+                               "title":  "Zugang und Vorbereitung",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-13"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-14",
+                                                  "docs/ARBEITSPAKETE.md#AP-16",
+                                                  "docs/MVP_GENERATOREN.md#GEN-09",
+                                                  "docs/MVP_MODULE.md#MOD-09",
+                                                  "docs/MVP_SCREENS.md#S01",
+                                                  "docs/MVP_SCREENS.md#S02",
+                                                  "docs/MVP_SCREENS.md#S03",
+                                                  "docs/MVP_SCREENS.md#S04",
+                                                  "docs/MVP_SCREENS.md#S07",
+                                                  "docs/MVP_SCREENS.md#S08",
+                                                  "docs/MVP_SCREENS.md#S21",
+                                                  "docs/MVP_SCREENS.md#S22"
+                                              ]
+                           },
+                 "AP-14":  {
+                               "kind":  "AP",
+                               "title":  "Spielansicht und taktische Übersicht",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-14"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-15",
+                                                  "docs/ARBEITSPAKETE.md#AP-16",
+                                                  "docs/MVP_GENERATOREN.md#GEN-10",
+                                                  "docs/MVP_MODULE.md#MOD-10",
+                                                  "docs/MVP_SCREENS.md#S06",
+                                                  "docs/MVP_SCREENS.md#S09",
+                                                  "docs/MVP_SCREENS.md#S10",
+                                                  "docs/MVP_SCREENS.md#S12"
+                                              ]
+                           },
+                 "AP-15":  {
+                               "kind":  "AP",
+                               "title":  "Reconnect und defensive Übernahme",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-15"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-16",
+                                                  "docs/ARBEITSPAKETE.md#AP-21",
+                                                  "docs/MVP_MODULE.md#MOD-07",
+                                                  "docs/MVP_MODULE.md#MOD-09",
+                                                  "docs/MVP_MODULE.md#MOD-11",
+                                                  "docs/MVP_SCREENS.md#S11"
+                                              ]
+                           },
+                 "AP-16":  {
+                               "kind":  "AP",
+                               "title":  "Vier-Client-Abnahme",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-16"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-17",
+                                                  "docs/ARBEITSPAKETE.md#AP-18",
+                                                  "docs/ARBEITSPAKETE.md#AP-19",
+                                                  "docs/ARBEITSPAKETE.md#AP-20",
+                                                  "docs/MVP_GENERATOREN.md#GEN-12",
+                                                  "docs/MVP_MODULE.md#MOD-12"
+                                              ]
+                           },
+                 "AP-17":  {
+                               "kind":  "AP",
+                               "title":  "Simultane Planung",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-17"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-22",
+                                                  "docs/MVP_MODULE.md#MOD-05"
+                                              ]
+                           },
+                 "AP-18":  {
+                               "kind":  "AP",
+                               "title":  "Eine Scout-Drohne",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-18"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-21",
+                                                  "docs/ARBEITSPAKETE.md#AP-22",
+                                                  "docs/MVP_MODULE.md#MOD-11"
+                                              ]
+                           },
+                 "AP-19":  {
+                               "kind":  "AP",
+                               "title":  "Alarm und Verstärkung",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-19"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-20",
+                                                  "docs/ARBEITSPAKETE.md#AP-21",
+                                                  "docs/ARBEITSPAKETE.md#AP-22",
+                                                  "docs/MVP_MODULE.md#MOD-06"
+                                              ]
+                           },
+                 "AP-20":  {
+                               "kind":  "AP",
+                               "title":  "Dritter Gegnertyp, Präzisionswaffe und einfache Verletzung",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-20"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-21",
+                                                  "docs/ARBEITSPAKETE.md#AP-22",
+                                                  "docs/MVP_GENERATOREN.md#GEN-05"
+                                              ]
+                           },
+                 "AP-21":  {
+                               "kind":  "AP",
+                               "title":  "Acht Slots und Hotjoin",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-21"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-22",
+                                                  "docs/MVP_GENERATOREN.md#GEN-04",
+                                                  "docs/MVP_MODULE.md#MOD-07"
+                                              ]
+                           },
+                 "AP-22":  {
+                               "kind":  "AP",
+                               "title":  "Vergleich und Modusentscheidung",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-22"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-23",
+                                                  "docs/ARBEITSPAKETE.md#AP-32",
+                                                  "docs/MVP_MODULE.md#MOD-11"
+                                              ]
+                           },
+                 "AP-23":  {
+                               "kind":  "AP",
+                               "title":  "Save-Verträge und Resultatbuchung",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-23"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-24",
+                                                  "docs/ARBEITSPAKETE.md#AP-27",
+                                                  "docs/MVP_GENERATOREN.md#GEN-07",
+                                                  "docs/MVP_MODULE.md#MOD-14"
+                                              ]
+                           },
+                 "AP-24":  {
+                               "kind":  "AP",
+                               "title":  "Runner erstellen, auswählen und speichern",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-24"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-25",
+                                                  "docs/ARBEITSPAKETE.md#AP-26",
+                                                  "docs/ARBEITSPAKETE.md#AP-27",
+                                                  "docs/decisions/0002-gestufte-charakterentwicklung.md#DEC-0002",
+                                                  "docs/ENTWICKLUNGSPLAN.md#M6",
+                                                  "docs/MVP_MODULE.md#MOD-13",
+                                                  "docs/MVP_SCREENS.md#S04",
+                                                  "docs/MVP_SCREENS.md#S05",
+                                                  "docs/MVP_SCREENS.md#S06"
+                                              ]
+                           },
+                 "AP-25":  {
+                               "kind":  "AP",
+                               "title":  "Skills und Levelaufstieg",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-25"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-27",
+                                                  "docs/ARBEITSPAKETE.md#AP-30",
+                                                  "docs/ENTWICKLUNGSPLAN.md#M6",
+                                                  "docs/MVP_MODULE.md#MOD-13",
+                                                  "docs/MVP_SCREENS.md#S13",
+                                                  "docs/MVP_SCREENS.md#S14"
+                                              ]
+                           },
+                 "AP-26":  {
+                               "kind":  "AP",
+                               "title":  "Persistente Ausrüstung und Lager",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-26"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-27",
+                                                  "docs/ARBEITSPAKETE.md#AP-29",
+                                                  "docs/ARBEITSPAKETE.md#AP-30",
+                                                  "docs/decisions/0002-gestufte-charakterentwicklung.md#DEC-0002",
+                                                  "docs/MVP_GENERATOREN.md#GEN-06",
+                                                  "docs/MVP_MODULE.md#MOD-13",
+                                                  "docs/MVP_SCREENS.md#S07",
+                                                  "docs/MVP_SCREENS.md#S18"
+                                              ]
+                           },
+                 "AP-27":  {
+                               "kind":  "AP",
+                               "title":  "Einfacher Hub und zweiter Auftrag",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-27"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-28",
+                                                  "docs/ARBEITSPAKETE.md#AP-29",
+                                                  "docs/ARBEITSPAKETE.md#AP-30",
+                                                  "docs/ARBEITSPAKETE.md#AP-31",
+                                                  "docs/MVP_GENERATOREN.md#GEN-07",
+                                                  "docs/MVP_MODULE.md#MOD-14",
+                                                  "docs/MVP_SCREENS.md#S15",
+                                                  "docs/MVP_SCREENS.md#S17"
+                                              ]
+                           },
+                 "AP-28":  {
+                               "kind":  "AP",
+                               "title":  "Strategische Stadtkarte",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-28"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-31",
+                                                  "docs/ENTWICKLUNGSPLAN.md#M6",
+                                                  "docs/MVP_GENERATOREN.md#GEN-08",
+                                                  "docs/MVP_MODULE.md#MOD-14",
+                                                  "docs/MVP_SCREENS.md#S16"
+                                              ]
+                           },
+                 "AP-29":  {
+                               "kind":  "AP",
+                               "title":  "Händler und gemeinsame Ökonomie",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-29"
+                                           ],
+                               "references":  [
+                                                  "docs/MVP_SCREENS.md#S18"
+                                              ]
+                           },
+                 "AP-30":  {
+                               "kind":  "AP",
+                               "title":  "Klinik und erste Cyberware",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-30"
+                                           ],
+                               "references":  [
+                                                  "docs/MVP_SCREENS.md#S19"
+                                              ]
+                           },
+                 "AP-31":  {
+                               "kind":  "AP",
+                               "title":  "Fraktionsruf und Journal",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-31"
+                                           ],
+                               "references":  [
+                                                  "docs/ENTWICKLUNGSPLAN.md#M6",
+                                                  "docs/MVP_GENERATOREN.md#GEN-08",
+                                                  "docs/MVP_MODULE.md#MOD-14",
+                                                  "docs/MVP_SCREENS.md#S20"
+                                              ]
+                           },
+                 "AP-32":  {
+                               "kind":  "AP",
+                               "title":  "Generatorvertrag und Berichte",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-32"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-33",
+                                                  "docs/ENTWICKLUNGSPLAN.md#M7",
+                                                  "docs/MVP_GENERATOREN.md#GEN-00",
+                                                  "docs/MVP_GENERATOREN.md#GEN-11",
+                                                  "docs/MVP_MODULE.md#MOD-15"
+                                              ]
+                           },
+                 "AP-33":  {
+                               "kind":  "AP",
+                               "title":  "Raumgraph und Rastereinbettung",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-33"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-34",
+                                                  "docs/MVP_GENERATOREN.md#GEN-02"
+                                              ]
+                           },
+                 "AP-34":  {
+                               "kind":  "AP",
+                               "title":  "Ziele, Reservierungen und Deckung",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-34"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-35",
+                                                  "docs/MVP_GENERATOREN.md#GEN-02",
+                                                  "docs/MVP_GENERATOREN.md#GEN-03",
+                                                  "docs/MVP_GENERATOREN.md#GEN-11"
+                                              ]
+                           },
+                 "AP-35":  {
+                               "kind":  "AP",
+                               "title":  "Encounter, NPCs und Loadouts",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-35"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-36",
+                                                  "docs/MVP_GENERATOREN.md#GEN-04",
+                                                  "docs/MVP_GENERATOREN.md#GEN-05",
+                                                  "docs/MVP_GENERATOREN.md#GEN-06"
+                                              ]
+                           },
+                 "AP-36":  {
+                               "kind":  "AP",
+                               "title":  "Generatorvorschau und spielbare Varianten",
+                               "parent":  "",
+                               "primary":  [
+                                               "docs/ARBEITSPAKETE.md#AP-36"
+                                           ],
+                               "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-33",
+                                                  "docs/decisions/0001-modulare-planung.md#DEC-0001",
+                                                  "docs/decisions/0008-hierarchischer-missionsgenerator.md#DEC-0008",
+                                                  "docs/decisions/0009-semantischer-gebaeudegenerator.md#DEC-0009",
+                                                  "docs/decisions/0011-bedarfsbasiertes-raumprogramm.md#DEC-0011",
+                                                  "docs/ENTWICKLUNGSPLAN.md#M7",
+                                                  "docs/MVP_GENERATOREN.md#GEN-11",
+                                                  "docs/MVP_MODULE.md#MOD-15",
+                                                  "docs/MVP_SCREENS.md#S23"
+                                              ]
+                           },
+                 "DEC-0001":  {
+                                  "kind":  "DEC",
+                                  "title":  "Modulare Planung von Systemen, Screens und Generatoren",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0001-modulare-planung.md#DEC-0001"
+                                              ],
+                                  "references":  [
+
+                                                 ]
+                              },
+                 "DEC-0002":  {
+                                  "kind":  "DEC",
+                                  "title":  "Gestufte Charakterentwicklung und Aktionsquellen",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0002-gestufte-charakterentwicklung.md#DEC-0002"
+                                              ],
+                                  "references":  [
+                                                     "docs/ARBEITSPAKETE.md#AP-25"
+                                                 ]
+                              },
+                 "DEC-0003":  {
+                                  "kind":  "DEC",
+                                  "title":  "Konkrete MVP-Mindestverträge",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0003-mvp-mindestumfang.md#DEC-0003"
+                                              ],
+                                  "references":  [
+
+                                                 ]
+                              },
+                 "DEC-0004":  {
+                                  "kind":  "DEC",
+                                  "title":  "Gerichtete Deckungskante und blockierende Wand",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0004-gerichtete-deckungskante.md#DEC-0004"
+                                              ],
+                                  "references":  [
+                                                     "docs/decisions/0005-kampf-rng-und-schussaufloesung.md#DEC-0005",
+                                                     "docs/decisions/0007-babylon-taktikansicht.md#DEC-0007",
+                                                     "docs/decisions/0008-hierarchischer-missionsgenerator.md#DEC-0008"
+                                                 ]
+                              },
+                 "DEC-0005":  {
+                                  "kind":  "DEC",
+                                  "title":  "Kampf-RNG und Schussauflösung",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0005-kampf-rng-und-schussaufloesung.md#DEC-0005"
+                                              ],
+                                  "references":  [
+                                                     "docs/decisions/0007-babylon-taktikansicht.md#DEC-0007",
+                                                     "docs/decisions/0008-hierarchischer-missionsgenerator.md#DEC-0008"
+                                                 ]
+                              },
+                 "DEC-0006":  {
+                                  "kind":  "DEC",
+                                  "title":  "Vier Spieler, eine Mission",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0006-vier-spieler-mission.md#DEC-0006"
+                                              ],
+                                  "references":  [
+                                                     "docs/decisions/0007-babylon-taktikansicht.md#DEC-0007",
+                                                     "docs/decisions/0008-hierarchischer-missionsgenerator.md#DEC-0008"
+                                                 ]
+                              },
+                 "DEC-0007":  {
+                                  "kind":  "DEC",
+                                  "title":  "Orthografische 3D-Taktikansicht mit Babylon.js",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0007-babylon-taktikansicht.md#DEC-0007"
+                                              ],
+                                  "references":  [
+                                                     "docs/ARBEITSPAKETE.md#AP-01",
+                                                     "docs/ARBEITSPAKETE.md#AP-14",
+                                                     "docs/decisions/0004-gerichtete-deckungskante.md#DEC-0004",
+                                                     "docs/decisions/0006-vier-spieler-mission.md#DEC-0006",
+                                                     "docs/decisions/0008-hierarchischer-missionsgenerator.md#DEC-0008",
+                                                     "docs/decisions/0013-isometrische-fortsetzung.md#DEC-0013",
+                                                     "docs/decisions/0015-agentengesteuerte-asset-pipeline.md#DEC-0015",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M1",
+                                                     "docs/GENERATOREN.md#GEN-10",
+                                                     "docs/MODULE.md#MOD-03",
+                                                     "docs/MODULE.md#MOD-10",
+                                                     "docs/MVP_MODULE.md#MOD-03",
+                                                     "docs/MVP_SCREENS.md#S09",
+                                                     "docs/SCREENS.md#S09"
+                                                 ]
+                              },
+                 "DEC-0008":  {
+                                  "kind":  "DEC",
+                                  "title":  "Hierarchischer Missionsgenerator",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0008-hierarchischer-missionsgenerator.md#DEC-0008"
+                                              ],
+                                  "references":  [
+                                                     "docs/decisions/0009-semantischer-gebaeudegenerator.md#DEC-0009",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7",
+                                                     "docs/GENERATOREN.md#GEN-01",
+                                                     "docs/GENERATOREN.md#GEN-02",
+                                                     "docs/MODULE.md#MOD-15"
+                                                 ]
+                              },
+                 "DEC-0009":  {
+                                  "kind":  "DEC",
+                                  "title":  "Semantischer Gebäudegenerator als lokales Werkzeug",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0009-semantischer-gebaeudegenerator.md#DEC-0009"
+                                              ],
+                                  "references":  [
+                                                     "docs/decisions/0010-bsp-und-graph-grundrisse.md#DEC-0010",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7",
+                                                     "docs/GENERATOREN.md#GEN-02",
+                                                     "docs/MODULE.md#MOD-15"
+                                                 ]
+                              },
+                 "DEC-0010":  {
+                                  "kind":  "DEC",
+                                  "title":  "Variable BSP-Grundrisse und Einbettung vorgegebener Raumgraphen",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0010-bsp-und-graph-grundrisse.md#DEC-0010"
+                                              ],
+                                  "references":  [
+                                                     "docs/ARBEITSPAKETE.md#AP-33",
+                                                     "docs/decisions/0009-semantischer-gebaeudegenerator.md#DEC-0009",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7",
+                                                     "docs/GENERATOREN.md#GEN-02"
+                                                 ]
+                              },
+                 "DEC-0011":  {
+                                  "kind":  "DEC",
+                                  "title":  "Bedarfsbasiertes Raumprogramm und Missionsausschnitte",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0011-bedarfsbasiertes-raumprogramm.md#DEC-0011"
+                                              ],
+                                  "references":  [
+                                                     "docs/ARBEITSPAKETE.md#AP-33",
+                                                     "docs/decisions/0010-bsp-und-graph-grundrisse.md#DEC-0010",
+                                                     "docs/decisions/0012-konzernidentitaet-und-bueroorganisation.md#DEC-0012",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7",
+                                                     "docs/GENERATOREN.md#GEN-02",
+                                                     "docs/MODULE.md#MOD-15",
+                                                     "docs/SCREENS.md#S23"
+                                                 ]
+                              },
+                 "DEC-0012":  {
+                                  "kind":  "DEC",
+                                  "title":  "Konzernidentität und Büroorganisation im Gebäudegenerator",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0012-konzernidentitaet-und-bueroorganisation.md#DEC-0012"
+                                              ],
+                                  "references":  [
+                                                     "docs/ARBEITSPAKETE.md#AP-33",
+                                                     "docs/decisions/0011-bedarfsbasiertes-raumprogramm.md#DEC-0011",
+                                                     "docs/decisions/0019-bisherige-konzernentwuerfe-verworfen.md#DEC-0019",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7",
+                                                     "docs/GENERATOREN.md#GEN-02",
+                                                     "docs/MODULE.md#MOD-15",
+                                                     "docs/SCREENS.md#S23"
+                                                 ]
+                              },
+                 "DEC-0013":  {
+                                  "kind":  "DEC",
+                                  "title":  "Isometrische Fortsetzung der Taktikansicht",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0013-isometrische-fortsetzung.md#DEC-0013"
+                                              ],
+                                  "references":  [
+                                                     "docs/ARBEITSPAKETE.md#AP-01",
+                                                     "docs/decisions/0007-babylon-taktikansicht.md#DEC-0007",
+                                                     "docs/decisions/0024-ein-start-fuer-die-testmission.md#DEC-0024",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M1"
+                                                 ]
+                              },
+                 "DEC-0014":  {
+                                  "kind":  "DEC",
+                                  "title":  "Eigene Flurerschließung und kurze Sanitärwege",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0014-flurerschliessung-und-sanitaerwege.md#DEC-0014"
+                                              ],
+                                  "references":  [
+                                                     "docs/ARBEITSPAKETE.md#AP-33",
+                                                     "docs/GENERATOREN.md#GEN-02",
+                                                     "docs/MODULE.md#MOD-15",
+                                                     "docs/SCREENS.md#S23"
+                                                 ]
+                              },
+                 "DEC-0015":  {
+                                  "kind":  "DEC",
+                                  "title":  "Vorschlag für eine agentengesteuerte Low-Poly-Asset-Pipeline",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0015-agentengesteuerte-asset-pipeline.md#DEC-0015"
+                                              ],
+                                  "references":  [
+                                                     "docs/decisions/0022-parametrische-terminal-familie.md#DEC-0022",
+                                                     "docs/GENERATOREN.md#GEN-10",
+                                                     "docs/MVP_GENERATOREN.md#GEN-10"
+                                                 ]
+                              },
+                 "DEC-0016":  {
+                                  "kind":  "DEC",
+                                  "title":  "Lokaler TypeScript-Character-Creator mit gemeinsamer Rigstruktur",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0016-typescript-character-creator.md#DEC-0016"
+                                              ],
+                                  "references":  [
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7",
+                                                     "docs/GENERATOREN.md#GEN-10",
+                                                     "docs/MVP_GENERATOREN.md#GEN-10"
+                                                 ]
+                              },
+                 "DEC-0017":  {
+                                  "kind":  "DEC",
+                                  "title":  "Quaternius-Master als modulare Figurenquelle",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0017-quaternius-figurenbibliothek.md#DEC-0017"
+                                              ],
+                                  "references":  [
+                                                     "docs/decisions/0016-typescript-character-creator.md#DEC-0016",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7"
+                                                 ]
+                              },
+                 "DEC-0018":  {
+                                  "kind":  "DEC",
+                                  "title":  "Männliche und weibliche Figuren als getrennte Bibliotheken",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0018-getrennte-figurenbibliotheken.md#DEC-0018"
+                                              ],
+                                  "references":  [
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7"
+                                                 ]
+                              },
+                 "DEC-0019":  {
+                                  "kind":  "DEC",
+                                  "title":  "Bisherige Konzernentwürfe verworfen",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0019-bisherige-konzernentwuerfe-verworfen.md#DEC-0019"
+                                              ],
+                                  "references":  [
+                                                     "docs/decisions/0012-konzernidentitaet-und-bueroorganisation.md#DEC-0012",
+                                                     "docs/decisions/0020-organisationslandschaft-und-lokale-konflikte.md#DEC-0020",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7"
+                                                 ]
+                              },
+                 "DEC-0020":  {
+                                  "kind":  "DEC",
+                                  "title":  "Konkurrenzstrukturen für eine HTN-getriebene Geschichte",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0020-organisationslandschaft-und-lokale-konflikte.md#DEC-0020"
+                                              ],
+                                  "references":  [
+                                                     "docs/decisions/0019-bisherige-konzernentwuerfe-verworfen.md#DEC-0019",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7",
+                                                     "docs/GENERATOREN.md#GEN-01",
+                                                     "docs/GENERATOREN.md#GEN-09"
+                                                 ]
+                              },
+                 "DEC-0021":  {
+                                  "kind":  "DEC",
+                                  "title":  "CC0-Figuren in der Testmission",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0021-cc0-figuren-in-der-testmission.md#DEC-0021"
+                                              ],
+                                  "references":  [
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7"
+                                                 ]
+                              },
+                 "DEC-0022":  {
+                                  "kind":  "DEC",
+                                  "title":  "Parametrische Terminal-Familie als Assetpilot",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0022-parametrische-terminal-familie.md#DEC-0022"
+                                              ],
+                                  "references":  [
+                                                     "docs/decisions/0023-wiederverwendbare-assetfamilien.md#DEC-0023",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7"
+                                                 ]
+                              },
+                 "DEC-0023":  {
+                                  "kind":  "DEC",
+                                  "title":  "Wiederverwendbare Assetfamilien und gemeinsamer Agenten-Skill",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0023-wiederverwendbare-assetfamilien.md#DEC-0023"
+                                              ],
+                                  "references":  [
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7"
+                                                 ]
+                              },
+                 "DEC-0024":  {
+                                  "kind":  "DEC",
+                                  "title":  "Ein Start für die Testmission",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0024-ein-start-fuer-die-testmission.md#DEC-0024"
+                                              ],
+                                  "references":  [
+                                                     "docs/decisions/0013-isometrische-fortsetzung.md#DEC-0013",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M7"
+                                                 ]
+                              },
+                 "GEN-00":  {
+                                "kind":  "GEN",
+                                "title":  "Seedverwaltung und Pipeline-Steuerung",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-00",
+                                                "docs/MVP_GENERATOREN.md#GEN-00"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-32",
+                                                   "docs/decisions/0001-modulare-planung.md#DEC-0001"
+                                               ]
+                            },
+                 "GEN-01":  {
+                                "kind":  "GEN",
+                                "title":  "Missions- und Auftragsgenerator",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-01",
+                                                "docs/MVP_GENERATOREN.md#GEN-01"
+                                            ],
+                                "references":  [
+                                                   "docs/decisions/0020-organisationslandschaft-und-lokale-konflikte.md#DEC-0020",
+                                                   "docs/GENERATOREN.md#GEN-08"
+                                               ]
+                            },
+                 "GEN-02":  {
+                                "kind":  "GEN",
+                                "title":  "Levelgenerator",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-02",
+                                                "docs/MVP_GENERATOREN.md#GEN-02"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-33",
+                                                   "docs/ARBEITSPAKETE.md#AP-34"
+                                               ]
+                            },
+                 "GEN-02A":  {
+                                 "kind":  "GEN",
+                                 "title":  "Raumprogramm",
+                                 "parent":  "GEN-02",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-02",
+                                                 "docs/MVP_GENERATOREN.md#GEN-02"
+                                             ],
+                                 "references":  [
+                                                    "docs/ARBEITSPAKETE.md#AP-33"
+                                                ]
+                             },
+                 "GEN-02B":  {
+                                 "kind":  "GEN",
+                                 "title":  "Topologie",
+                                 "parent":  "GEN-02",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-02",
+                                                 "docs/MVP_GENERATOREN.md#GEN-02"
+                                             ],
+                                 "references":  [
+
+                                                ]
+                             },
+                 "GEN-02C":  {
+                                 "kind":  "GEN",
+                                 "title":  "Rastereinbettung",
+                                 "parent":  "GEN-02",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-02",
+                                                 "docs/MVP_GENERATOREN.md#GEN-02"
+                                             ],
+                                 "references":  [
+
+                                                ]
+                             },
+                 "GEN-02D":  {
+                                 "kind":  "GEN",
+                                 "title":  "Wände und Durchgänge",
+                                 "parent":  "GEN-02",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-02",
+                                                 "docs/MVP_GENERATOREN.md#GEN-02"
+                                             ],
+                                 "references":  [
+                                                    "docs/ARBEITSPAKETE.md#AP-33"
+                                                ]
+                             },
+                 "GEN-02E":  {
+                                 "kind":  "GEN",
+                                 "title":  "Zonen und Reservierungen",
+                                 "parent":  "GEN-02",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-02",
+                                                 "docs/MVP_GENERATOREN.md#GEN-02"
+                                             ],
+                                 "references":  [
+                                                    "docs/ARBEITSPAKETE.md#AP-34"
+                                                ]
+                             },
+                 "GEN-02F":  {
+                                 "kind":  "GEN",
+                                 "title":  "Deckung und taktische Wege",
+                                 "parent":  "GEN-02",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-02",
+                                                 "docs/MVP_GENERATOREN.md#GEN-02"
+                                             ],
+                                 "references":  [
+
+                                                ]
+                             },
+                 "GEN-02G":  {
+                                 "kind":  "GEN",
+                                 "title":  "Darstellung",
+                                 "parent":  "GEN-02",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-02",
+                                                 "docs/MVP_GENERATOREN.md#GEN-02"
+                                             ],
+                                 "references":  [
+
+                                                ]
+                             },
+                 "GEN-02H":  {
+                                 "kind":  "GEN",
+                                 "title":  "Geometriebericht",
+                                 "parent":  "GEN-02",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-02",
+                                                 "docs/MVP_GENERATOREN.md#GEN-02"
+                                             ],
+                                 "references":  [
+                                                    "docs/ARBEITSPAKETE.md#AP-34"
+                                                ]
+                             },
+                 "GEN-03":  {
+                                "kind":  "GEN",
+                                "title":  "Interaktionen und Sicherheitsnetz",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-03",
+                                                "docs/MVP_GENERATOREN.md#GEN-03"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-34",
+                                                   "docs/GENERATOREN.md#GEN-02"
+                                               ]
+                            },
+                 "GEN-04":  {
+                                "kind":  "GEN",
+                                "title":  "Encounter- und Spawn-Generator",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-04",
+                                                "docs/MVP_GENERATOREN.md#GEN-04"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-35"
+                                               ]
+                            },
+                 "GEN-05":  {
+                                "kind":  "GEN",
+                                "title":  "NPC-Generator",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-05",
+                                                "docs/MVP_GENERATOREN.md#GEN-05"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-35",
+                                                   "docs/GENERATOREN.md#GEN-04"
+                                               ]
+                            },
+                 "GEN-05A":  {
+                                 "kind":  "GEN",
+                                 "title":  "Archetyp",
+                                 "parent":  "GEN-05",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-05",
+                                                 "docs/MVP_GENERATOREN.md#GEN-05"
+                                             ],
+                                 "references":  [
+
+                                                ]
+                             },
+                 "GEN-05B":  {
+                                 "kind":  "GEN",
+                                 "title":  "Wertebudget",
+                                 "parent":  "GEN-05",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-05",
+                                                 "docs/MVP_GENERATOREN.md#GEN-05"
+                                             ],
+                                 "references":  [
+
+                                                ]
+                             },
+                 "GEN-05C":  {
+                                 "kind":  "GEN",
+                                 "title":  "Fähigkeiten",
+                                 "parent":  "GEN-05",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-05",
+                                                 "docs/MVP_GENERATOREN.md#GEN-05"
+                                             ],
+                                 "references":  [
+
+                                                ]
+                             },
+                 "GEN-05D":  {
+                                 "kind":  "GEN",
+                                 "title":  "Ausrüstung",
+                                 "parent":  "GEN-05",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-05",
+                                                 "docs/MVP_GENERATOREN.md#GEN-05"
+                                             ],
+                                 "references":  [
+
+                                                ]
+                             },
+                 "GEN-05E":  {
+                                 "kind":  "GEN",
+                                 "title":  "Verhaltensprofil",
+                                 "parent":  "GEN-05",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-05",
+                                                 "docs/MVP_GENERATOREN.md#GEN-05"
+                                             ],
+                                 "references":  [
+
+                                                ]
+                             },
+                 "GEN-05F":  {
+                                 "kind":  "GEN",
+                                 "title":  "Identität",
+                                 "parent":  "GEN-05",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-05",
+                                                 "docs/MVP_GENERATOREN.md#GEN-05"
+                                             ],
+                                 "references":  [
+
+                                                ]
+                             },
+                 "GEN-05G":  {
+                                 "kind":  "GEN",
+                                 "title":  "Darstellung",
+                                 "parent":  "GEN-05",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-05",
+                                                 "docs/MVP_GENERATOREN.md#GEN-05"
+                                             ],
+                                 "references":  [
+
+                                                ]
+                             },
+                 "GEN-05H":  {
+                                 "kind":  "GEN",
+                                 "title":  "Konsistenz",
+                                 "parent":  "GEN-05",
+                                 "primary":  [
+                                                 "docs/GENERATOREN.md#GEN-05",
+                                                 "docs/MVP_GENERATOREN.md#GEN-05"
+                                             ],
+                                 "references":  [
+
+                                                ]
+                             },
+                 "GEN-06":  {
+                                "kind":  "GEN",
+                                "title":  "Gegenstände und Loadouts",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-06",
+                                                "docs/MVP_GENERATOREN.md#GEN-06"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-35",
+                                                   "docs/GENERATOREN.md#GEN-05",
+                                                   "docs/GENERATOREN.md#GEN-07",
+                                                   "docs/MVP_GENERATOREN.md#GEN-05"
+                                               ]
+                            },
+                 "GEN-07":  {
+                                "kind":  "GEN",
+                                "title":  "Beute und Belohnungen",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-07",
+                                                "docs/MVP_GENERATOREN.md#GEN-07"
+                                            ],
+                                "references":  [
+
+                                               ]
+                            },
+                 "GEN-08":  {
+                                "kind":  "GEN",
+                                "title":  "Stadt-, Fraktions- und Auftragsangebot",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-08",
+                                                "docs/MVP_GENERATOREN.md#GEN-08"
+                                            ],
+                                "references":  [
+                                                   "docs/decisions/0020-organisationslandschaft-und-lokale-konflikte.md#DEC-0020",
+                                                   "docs/SCREENS.md#S16"
+                                               ]
+                            },
+                 "GEN-09":  {
+                                "kind":  "GEN",
+                                "title":  "Namen, Beschreibungen und Flavour",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-09",
+                                                "docs/MVP_GENERATOREN.md#GEN-09"
+                                            ],
+                                "references":  [
+                                                   "docs/decisions/0020-organisationslandschaft-und-lokale-konflikte.md#DEC-0020"
+                                               ]
+                            },
+                 "GEN-10":  {
+                                "kind":  "GEN",
+                                "title":  "Assets und visuelle Varianten",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-10",
+                                                "docs/MVP_GENERATOREN.md#GEN-10"
+                                            ],
+                                "references":  [
+                                                   "docs/decisions/0015-agentengesteuerte-asset-pipeline.md#DEC-0015",
+                                                   "docs/decisions/0016-typescript-character-creator.md#DEC-0016",
+                                                   "docs/ENTWICKLUNGSPLAN.md#M7"
+                                               ]
+                            },
+                 "GEN-11":  {
+                                "kind":  "GEN",
+                                "title":  "Validatoren und Qualitätsbericht",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-11",
+                                                "docs/MVP_GENERATOREN.md#GEN-11"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-04",
+                                                   "docs/ARBEITSPAKETE.md#AP-32",
+                                                   "docs/ARBEITSPAKETE.md#AP-34"
+                                               ]
+                            },
+                 "GEN-12":  {
+                                "kind":  "GEN",
+                                "title":  "Testszenarien und Stresstests",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/GENERATOREN.md#GEN-12",
+                                                "docs/MVP_GENERATOREN.md#GEN-12"
+                                            ],
+                                "references":  [
+                                                   "docs/decisions/0001-modulare-planung.md#DEC-0001"
+                                               ]
+                            },
+                 "M0":  {
+                            "kind":  "M",
+                            "title":  "Planung gemeinsam prüfen — P0",
+                            "parent":  "",
+                            "primary":  [
+                                            "docs/ENTWICKLUNGSPLAN.md#M0"
+                                        ],
+                            "references":  [
+                                               "docs/ARBEITSPAKETE.md#AP-01",
+                                               "docs/ENTWICKLUNGSPLAN.md#M1"
+                                           ]
+                        },
+                 "M1":  {
+                            "kind":  "M",
+                            "title":  "Technisches Fundament und kleinster Regeldurchstich — P0",
+                            "parent":  "",
+                            "primary":  [
+                                            "docs/ENTWICKLUNGSPLAN.md#M1"
+                                        ],
+                            "references":  [
+                                               "docs/decisions/0021-cc0-figuren-in-der-testmission.md#DEC-0021",
+                                               "docs/ENTWICKLUNGSPLAN.md#M2",
+                                               "docs/ENTWICKLUNGSPLAN.md#M3",
+                                               "docs/GENERATOREN.md#GEN-00",
+                                               "docs/GENERATOREN.md#GEN-11",
+                                               "docs/GENERATOREN.md#GEN-12",
+                                               "docs/MODULE.md#MOD-01",
+                                               "docs/MODULE.md#MOD-02",
+                                               "docs/MODULE.md#MOD-03",
+                                               "docs/MODULE.md#MOD-07",
+                                               "docs/MODULE.md#MOD-12"
+                                           ]
+                        },
+                 "M2":  {
+                            "kind":  "M",
+                            "title":  "Vollständige Mission ohne Grafik — P0",
+                            "parent":  "",
+                            "primary":  [
+                                            "docs/ENTWICKLUNGSPLAN.md#M2"
+                                        ],
+                            "references":  [
+                                               "docs/ENTWICKLUNGSPLAN.md#M3",
+                                               "docs/GENERATOREN.md#GEN-00",
+                                               "docs/GENERATOREN.md#GEN-11",
+                                               "docs/MODULE.md#MOD-03",
+                                               "docs/MODULE.md#MOD-04",
+                                               "docs/MODULE.md#MOD-05",
+                                               "docs/MODULE.md#MOD-06",
+                                               "docs/MODULE.md#MOD-11"
+                                           ]
+                        },
+                 "M3":  {
+                            "kind":  "M",
+                            "title":  "Vier Menschen können „Ghost Floor“ spielen — P0 / v0.1",
+                            "parent":  "",
+                            "primary":  [
+                                            "docs/ENTWICKLUNGSPLAN.md#M3"
+                                        ],
+                            "references":  [
+                                               "docs/ENTWICKLUNGSPLAN.md#M4",
+                                               "docs/MODULE.md#MOD-07",
+                                               "docs/MODULE.md#MOD-08",
+                                               "docs/MODULE.md#MOD-09",
+                                               "docs/MODULE.md#MOD-10",
+                                               "docs/MODULE.md#MOD-11"
+                                           ]
+                        },
+                 "M4":  {
+                            "kind":  "M",
+                            "title":  "Vergleichbarer Modus A und Konzeptmechaniken — P1",
+                            "parent":  "",
+                            "primary":  [
+                                            "docs/ENTWICKLUNGSPLAN.md#M4"
+                                        ],
+                            "references":  [
+                                               "docs/ENTWICKLUNGSPLAN.md#M5",
+                                               "docs/MODULE.md#MOD-04",
+                                               "docs/MODULE.md#MOD-05",
+                                               "docs/MODULE.md#MOD-06",
+                                               "docs/MODULE.md#MOD-10",
+                                               "docs/MODULE.md#MOD-11"
+                                           ]
+                        },
+                 "M5":  {
+                            "kind":  "M",
+                            "title":  "Acht-Spieler- und Hotjoin-Validierung — P1 / v0.2",
+                            "parent":  "",
+                            "primary":  [
+                                            "docs/ENTWICKLUNGSPLAN.md#M5"
+                                        ],
+                            "references":  [
+                                               "docs/ARBEITSPAKETE.md#AP-22",
+                                               "docs/decisions/0001-modulare-planung.md#DEC-0001",
+                                               "docs/decisions/0009-semantischer-gebaeudegenerator.md#DEC-0009",
+                                               "docs/ENTWICKLUNGSPLAN.md#M6",
+                                               "docs/ENTWICKLUNGSPLAN.md#M7",
+                                               "docs/MODULE.md#MOD-07"
+                                           ]
+                        },
+                 "M6":  {
+                            "kind":  "M",
+                            "title":  "Fortschritt außerhalb einer Mission — P2",
+                            "parent":  "",
+                            "primary":  [
+                                            "docs/ENTWICKLUNGSPLAN.md#M6"
+                                        ],
+                            "references":  [
+                                               "docs/decisions/0002-gestufte-charakterentwicklung.md#DEC-0002",
+                                               "docs/decisions/0003-mvp-mindestumfang.md#DEC-0003",
+                                               "docs/decisions/0016-typescript-character-creator.md#DEC-0016",
+                                               "docs/decisions/0020-organisationslandschaft-und-lokale-konflikte.md#DEC-0020",
+                                               "docs/ENTWICKLUNGSPLAN.md#M7",
+                                               "docs/GENERATOREN.md#GEN-07",
+                                               "docs/GENERATOREN.md#GEN-08",
+                                               "docs/MODULE.md#MOD-09",
+                                               "docs/MODULE.md#MOD-13",
+                                               "docs/MODULE.md#MOD-14",
+                                               "docs/MVP_GENERATOREN.md#GEN-07",
+                                               "docs/MVP_MODULE.md#MOD-13",
+                                               "docs/MVP_SCREENS.md#S04",
+                                               "docs/MVP_SCREENS.md#S05",
+                                               "docs/MVP_SCREENS.md#S06",
+                                               "docs/MVP_SCREENS.md#S07",
+                                               "docs/MVP_SCREENS.md#S12",
+                                               "docs/MVP_SCREENS.md#S13",
+                                               "docs/MVP_SCREENS.md#S14",
+                                               "docs/MVP_SCREENS.md#S15",
+                                               "docs/MVP_SCREENS.md#S16",
+                                               "docs/MVP_SCREENS.md#S17",
+                                               "docs/MVP_SCREENS.md#S18",
+                                               "docs/MVP_SCREENS.md#S19",
+                                               "docs/MVP_SCREENS.md#S20",
+                                               "docs/SCREENS.md#S01",
+                                               "docs/SCREENS.md#S04",
+                                               "docs/SCREENS.md#S05",
+                                               "docs/SCREENS.md#S06",
+                                               "docs/SCREENS.md#S07",
+                                               "docs/SCREENS.md#S12",
+                                               "docs/SCREENS.md#S13",
+                                               "docs/SCREENS.md#S14",
+                                               "docs/SCREENS.md#S15",
+                                               "docs/SCREENS.md#S17",
+                                               "docs/SCREENS.md#S18",
+                                               "docs/SCREENS.md#S19"
+                                           ]
+                        },
+                 "M7":  {
+                            "kind":  "M",
+                            "title":  "Begrenzte prozedurale Inhaltsvarianten — optionaler Ausbau",
+                            "parent":  "",
+                            "primary":  [
+                                            "docs/ENTWICKLUNGSPLAN.md#M7"
+                                        ],
+                            "references":  [
+                                               "docs/ARBEITSPAKETE.md#AP-33",
+                                               "docs/decisions/0001-modulare-planung.md#DEC-0001",
+                                               "docs/decisions/0008-hierarchischer-missionsgenerator.md#DEC-0008",
+                                               "docs/decisions/0009-semantischer-gebaeudegenerator.md#DEC-0009",
+                                               "docs/decisions/0011-bedarfsbasiertes-raumprogramm.md#DEC-0011",
+                                               "docs/decisions/0012-konzernidentitaet-und-bueroorganisation.md#DEC-0012",
+                                               "docs/decisions/0014-flurerschliessung-und-sanitaerwege.md#DEC-0014",
+                                               "docs/decisions/0015-agentengesteuerte-asset-pipeline.md#DEC-0015",
+                                               "docs/decisions/0016-typescript-character-creator.md#DEC-0016",
+                                               "docs/decisions/0020-organisationslandschaft-und-lokale-konflikte.md#DEC-0020",
+                                               "docs/decisions/0023-wiederverwendbare-assetfamilien.md#DEC-0023",
+                                               "docs/GENERATOREN.md#GEN-00",
+                                               "docs/GENERATOREN.md#GEN-02",
+                                               "docs/GENERATOREN.md#GEN-03",
+                                               "docs/GENERATOREN.md#GEN-04",
+                                               "docs/GENERATOREN.md#GEN-05",
+                                               "docs/GENERATOREN.md#GEN-06",
+                                               "docs/GENERATOREN.md#GEN-11",
+                                               "docs/MODULE.md#MOD-15",
+                                               "docs/MVP_GENERATOREN.md#GEN-00",
+                                               "docs/MVP_GENERATOREN.md#GEN-02",
+                                               "docs/MVP_GENERATOREN.md#GEN-03",
+                                               "docs/MVP_GENERATOREN.md#GEN-11",
+                                               "docs/MVP_SCREENS.md#S23",
+                                               "docs/SCREENS.md#S23"
+                                           ]
+                        },
+                 "MOD-01":  {
+                                "kind":  "MOD",
+                                "title":  "Content-Verträge und Versionsverwaltung",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-01",
+                                                "docs/MVP_MODULE.md#MOD-01"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-01",
+                                                   "docs/ARBEITSPAKETE.md#AP-02",
+                                                   "docs/ARBEITSPAKETE.md#AP-04",
+                                                   "docs/ARBEITSPAKETE.md#AP-20",
+                                                   "docs/ARBEITSPAKETE.md#AP-23",
+                                                   "docs/decisions/0001-modulare-planung.md#DEC-0001",
+                                                   "docs/MODULE.md#MOD-02",
+                                                   "docs/MODULE.md#MOD-03",
+                                                   "docs/MODULE.md#MOD-04",
+                                                   "docs/MODULE.md#MOD-06",
+                                                   "docs/MODULE.md#MOD-07",
+                                                   "docs/MODULE.md#MOD-10",
+                                                   "docs/MODULE.md#MOD-11",
+                                                   "docs/MODULE.md#MOD-13",
+                                                   "docs/MODULE.md#MOD-14",
+                                                   "docs/MODULE.md#MOD-15",
+                                                   "docs/MVP_GENERATOREN.md#GEN-00",
+                                                   "docs/MVP_GENERATOREN.md#GEN-05",
+                                                   "docs/MVP_GENERATOREN.md#GEN-06",
+                                                   "docs/MVP_GENERATOREN.md#GEN-09",
+                                                   "docs/MVP_GENERATOREN.md#GEN-10",
+                                                   "docs/MVP_GENERATOREN.md#GEN-11",
+                                                   "docs/MVP_SCREENS.md#S07",
+                                                   "docs/MVP_SCREENS.md#S13",
+                                                   "docs/SCREENS.md#S07",
+                                                   "docs/SCREENS.md#S13"
+                                               ]
+                            },
+                 "MOD-02":  {
+                                "kind":  "MOD",
+                                "title":  "Simulationszustand und deterministische Ausführung",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-02",
+                                                "docs/MVP_MODULE.md#MOD-02"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-02",
+                                                   "docs/MODULE.md#MOD-04",
+                                                   "docs/MODULE.md#MOD-05",
+                                                   "docs/MODULE.md#MOD-06",
+                                                   "docs/MODULE.md#MOD-07",
+                                                   "docs/MODULE.md#MOD-08",
+                                                   "docs/MVP_GENERATOREN.md#GEN-00"
+                                               ]
+                            },
+                 "MOD-03":  {
+                                "kind":  "MOD",
+                                "title":  "Raster, Wege, Sicht und Deckung",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-03",
+                                                "docs/MVP_MODULE.md#MOD-03"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-03",
+                                                   "docs/ARBEITSPAKETE.md#AP-05",
+                                                   "docs/MODULE.md#MOD-02",
+                                                   "docs/MODULE.md#MOD-04",
+                                                   "docs/MODULE.md#MOD-06",
+                                                   "docs/MODULE.md#MOD-08",
+                                                   "docs/MODULE.md#MOD-15",
+                                                   "docs/MVP_GENERATOREN.md#GEN-02",
+                                                   "docs/MVP_SCREENS.md#S10",
+                                                   "docs/SCREENS.md#S10"
+                                               ]
+                            },
+                 "MOD-04":  {
+                                "kind":  "MOD",
+                                "title":  "Aktionen und taktische Ressourcen",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-04",
+                                                "docs/MVP_MODULE.md#MOD-04"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-03",
+                                                   "docs/ARBEITSPAKETE.md#AP-06",
+                                                   "docs/ARBEITSPAKETE.md#AP-08",
+                                                   "docs/ARBEITSPAKETE.md#AP-18",
+                                                   "docs/ARBEITSPAKETE.md#AP-20",
+                                                   "docs/MODULE.md#MOD-05",
+                                                   "docs/MODULE.md#MOD-06",
+                                                   "docs/MODULE.md#MOD-11",
+                                                   "docs/MODULE.md#MOD-13",
+                                                   "docs/MVP_SCREENS.md#S09",
+                                                   "docs/SCREENS.md#S09"
+                                               ]
+                            },
+                 "MOD-05":  {
+                                "kind":  "MOD",
+                                "title":  "Zugablauf und Planauflösung",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-05",
+                                                "docs/MVP_MODULE.md#MOD-05"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-07",
+                                                   "docs/ARBEITSPAKETE.md#AP-08",
+                                                   "docs/ARBEITSPAKETE.md#AP-17",
+                                                   "docs/MODULE.md#MOD-04",
+                                                   "docs/MVP_SCREENS.md#S09",
+                                                   "docs/SCREENS.md#S09"
+                                               ]
+                            },
+                 "MOD-06":  {
+                                "kind":  "MOD",
+                                "title":  "Missionsziele und Weltinteraktionen",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-06",
+                                                "docs/MVP_MODULE.md#MOD-06"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-09",
+                                                   "docs/ARBEITSPAKETE.md#AP-19",
+                                                   "docs/MODULE.md#MOD-02",
+                                                   "docs/MVP_GENERATOREN.md#GEN-01",
+                                                   "docs/MVP_GENERATOREN.md#GEN-03",
+                                                   "docs/MVP_SCREENS.md#S08",
+                                                   "docs/MVP_SCREENS.md#S09",
+                                                   "docs/MVP_SCREENS.md#S12",
+                                                   "docs/MVP_SCREENS.md#S17",
+                                                   "docs/SCREENS.md#S08",
+                                                   "docs/SCREENS.md#S09",
+                                                   "docs/SCREENS.md#S12",
+                                                   "docs/SCREENS.md#S17"
+                                               ]
+                            },
+                 "MOD-07":  {
+                                "kind":  "MOD",
+                                "title":  "Session, Lobby und Runner-Besitz",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-07",
+                                                "docs/MVP_MODULE.md#MOD-07"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-01",
+                                                   "docs/ARBEITSPAKETE.md#AP-11",
+                                                   "docs/ARBEITSPAKETE.md#AP-21",
+                                                   "docs/MODULE.md#MOD-08",
+                                                   "docs/MODULE.md#MOD-09",
+                                                   "docs/MVP_MODULE.md#MOD-09",
+                                                   "docs/MVP_SCREENS.md#S01",
+                                                   "docs/MVP_SCREENS.md#S02",
+                                                   "docs/MVP_SCREENS.md#S03",
+                                                   "docs/MVP_SCREENS.md#S04",
+                                                   "docs/MVP_SCREENS.md#S07",
+                                                   "docs/MVP_SCREENS.md#S11",
+                                                   "docs/SCREENS.md#S01",
+                                                   "docs/SCREENS.md#S02",
+                                                   "docs/SCREENS.md#S03",
+                                                   "docs/SCREENS.md#S04",
+                                                   "docs/SCREENS.md#S07",
+                                                   "docs/SCREENS.md#S11"
+                                               ]
+                            },
+                 "MOD-08":  {
+                                "kind":  "MOD",
+                                "title":  "Sichtprojektion und Client-Synchronisierung",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-08",
+                                                "docs/MVP_MODULE.md#MOD-08"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-12",
+                                                   "docs/ARBEITSPAKETE.md#AP-21",
+                                                   "docs/MODULE.md#MOD-09",
+                                                   "docs/MODULE.md#MOD-10",
+                                                   "docs/MVP_MODULE.md#MOD-09",
+                                                   "docs/MVP_SCREENS.md#S06",
+                                                   "docs/MVP_SCREENS.md#S09",
+                                                   "docs/MVP_SCREENS.md#S10",
+                                                   "docs/MVP_SCREENS.md#S11",
+                                                   "docs/SCREENS.md#S06",
+                                                   "docs/SCREENS.md#S09",
+                                                   "docs/SCREENS.md#S10",
+                                                   "docs/SCREENS.md#S11"
+                                               ]
+                            },
+                 "MOD-09":  {
+                                "kind":  "MOD",
+                                "title":  "Anwendung, Navigation und Einstellungen",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-09",
+                                                "docs/MVP_MODULE.md#MOD-09"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-01",
+                                                   "docs/MODULE.md#MOD-10",
+                                                   "docs/MVP_SCREENS.md#S01",
+                                                   "docs/MVP_SCREENS.md#S02",
+                                                   "docs/MVP_SCREENS.md#S03",
+                                                   "docs/MVP_SCREENS.md#S08",
+                                                   "docs/MVP_SCREENS.md#S11",
+                                                   "docs/MVP_SCREENS.md#S21",
+                                                   "docs/MVP_SCREENS.md#S22",
+                                                   "docs/SCREENS.md#S01",
+                                                   "docs/SCREENS.md#S02",
+                                                   "docs/SCREENS.md#S03",
+                                                   "docs/SCREENS.md#S08",
+                                                   "docs/SCREENS.md#S11",
+                                                   "docs/SCREENS.md#S21",
+                                                   "docs/SCREENS.md#S22"
+                                               ]
+                            },
+                 "MOD-10":  {
+                                "kind":  "MOD",
+                                "title":  "Taktikkarte und Gefechtsoberfläche",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-10",
+                                                "docs/MVP_MODULE.md#MOD-10"
+                                            ],
+                                "references":  [
+                                                   "docs/MVP_GENERATOREN.md#GEN-10",
+                                                   "docs/MVP_SCREENS.md#S06",
+                                                   "docs/MVP_SCREENS.md#S09",
+                                                   "docs/MVP_SCREENS.md#S10",
+                                                   "docs/MVP_SCREENS.md#S22",
+                                                   "docs/SCREENS.md#S09",
+                                                   "docs/SCREENS.md#S10",
+                                                   "docs/SCREENS.md#S22"
+                                               ]
+                            },
+                 "MOD-11":  {
+                                "kind":  "MOD",
+                                "title":  "Bots und Begleitersteuerung",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-11",
+                                                "docs/MVP_MODULE.md#MOD-11"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-10",
+                                                   "docs/ARBEITSPAKETE.md#AP-18",
+                                                   "docs/ARBEITSPAKETE.md#AP-20",
+                                                   "docs/ARBEITSPAKETE.md#AP-22",
+                                                   "docs/GENERATOREN.md#GEN-05",
+                                                   "docs/MVP_GENERATOREN.md#GEN-04",
+                                                   "docs/MVP_GENERATOREN.md#GEN-05"
+                                               ]
+                            },
+                 "MOD-12":  {
+                                "kind":  "MOD",
+                                "title":  "Tests, Replays und Auswertung",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-12",
+                                                "docs/MVP_MODULE.md#MOD-12"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-02",
+                                                   "docs/ARBEITSPAKETE.md#AP-10",
+                                                   "docs/ARBEITSPAKETE.md#AP-16",
+                                                   "docs/ARBEITSPAKETE.md#AP-22",
+                                                   "docs/ARBEITSPAKETE.md#AP-36",
+                                                   "docs/MODULE.md#MOD-15",
+                                                   "docs/MVP_GENERATOREN.md#GEN-11",
+                                                   "docs/MVP_GENERATOREN.md#GEN-12",
+                                                   "docs/MVP_SCREENS.md#S12",
+                                                   "docs/MVP_SCREENS.md#S23",
+                                                   "docs/SCREENS.md#S12",
+                                                   "docs/SCREENS.md#S23"
+                                               ]
+                            },
+                 "MOD-13":  {
+                                "kind":  "MOD",
+                                "title":  "Charaktere, Skills und Ausrüstung",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-13",
+                                                "docs/MVP_MODULE.md#MOD-13"
+                                            ],
+                                "references":  [
+                                                   "docs/decisions/0002-gestufte-charakterentwicklung.md#DEC-0002",
+                                                   "docs/MODULE.md#MOD-14",
+                                                   "docs/MVP_GENERATOREN.md#GEN-06",
+                                                   "docs/MVP_GENERATOREN.md#GEN-07",
+                                                   "docs/MVP_SCREENS.md#S04",
+                                                   "docs/MVP_SCREENS.md#S05",
+                                                   "docs/MVP_SCREENS.md#S06",
+                                                   "docs/MVP_SCREENS.md#S07",
+                                                   "docs/MVP_SCREENS.md#S13",
+                                                   "docs/MVP_SCREENS.md#S14",
+                                                   "docs/MVP_SCREENS.md#S18",
+                                                   "docs/MVP_SCREENS.md#S19",
+                                                   "docs/SCREENS.md#S04",
+                                                   "docs/SCREENS.md#S05",
+                                                   "docs/SCREENS.md#S06",
+                                                   "docs/SCREENS.md#S07",
+                                                   "docs/SCREENS.md#S12",
+                                                   "docs/SCREENS.md#S13",
+                                                   "docs/SCREENS.md#S14",
+                                                   "docs/SCREENS.md#S18",
+                                                   "docs/SCREENS.md#S19"
+                                               ]
+                            },
+                 "MOD-14":  {
+                                "kind":  "MOD",
+                                "title":  "Kampagne, Persistenz und gemeinsame Ressourcen",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-14",
+                                                "docs/MVP_MODULE.md#MOD-14"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-23",
+                                                   "docs/GENERATOREN.md#GEN-07",
+                                                   "docs/MODULE.md#MOD-13",
+                                                   "docs/MVP_GENERATOREN.md#GEN-07",
+                                                   "docs/MVP_GENERATOREN.md#GEN-08",
+                                                   "docs/MVP_SCREENS.md#S05",
+                                                   "docs/MVP_SCREENS.md#S12",
+                                                   "docs/MVP_SCREENS.md#S14",
+                                                   "docs/MVP_SCREENS.md#S15",
+                                                   "docs/MVP_SCREENS.md#S16",
+                                                   "docs/MVP_SCREENS.md#S17",
+                                                   "docs/MVP_SCREENS.md#S18",
+                                                   "docs/MVP_SCREENS.md#S19",
+                                                   "docs/MVP_SCREENS.md#S20",
+                                                   "docs/SCREENS.md#S04",
+                                                   "docs/SCREENS.md#S05",
+                                                   "docs/SCREENS.md#S07",
+                                                   "docs/SCREENS.md#S12",
+                                                   "docs/SCREENS.md#S14",
+                                                   "docs/SCREENS.md#S15",
+                                                   "docs/SCREENS.md#S16",
+                                                   "docs/SCREENS.md#S17",
+                                                   "docs/SCREENS.md#S18",
+                                                   "docs/SCREENS.md#S19",
+                                                   "docs/SCREENS.md#S20"
+                                               ]
+                            },
+                 "MOD-15":  {
+                                "kind":  "MOD",
+                                "title":  "Inhaltserstellung und Generator-Pipeline",
+                                "parent":  "",
+                                "primary":  [
+                                                "docs/MODULE.md#MOD-15",
+                                                "docs/MVP_MODULE.md#MOD-15"
+                                            ],
+                                "references":  [
+                                                   "docs/ARBEITSPAKETE.md#AP-36",
+                                                   "docs/decisions/0001-modulare-planung.md#DEC-0001",
+                                                   "docs/MVP_GENERATOREN.md#GEN-00",
+                                                   "docs/MVP_GENERATOREN.md#GEN-01",
+                                                   "docs/MVP_GENERATOREN.md#GEN-02",
+                                                   "docs/MVP_GENERATOREN.md#GEN-03",
+                                                   "docs/MVP_GENERATOREN.md#GEN-04",
+                                                   "docs/MVP_GENERATOREN.md#GEN-05",
+                                                   "docs/MVP_GENERATOREN.md#GEN-06",
+                                                   "docs/MVP_GENERATOREN.md#GEN-07",
+                                                   "docs/MVP_GENERATOREN.md#GEN-08",
+                                                   "docs/MVP_GENERATOREN.md#GEN-09",
+                                                   "docs/MVP_GENERATOREN.md#GEN-10",
+                                                   "docs/MVP_GENERATOREN.md#GEN-11",
+                                                   "docs/MVP_SCREENS.md#S16",
+                                                   "docs/MVP_SCREENS.md#S23",
+                                                   "docs/SCREENS.md#S16",
+                                                   "docs/SCREENS.md#S23"
+                                               ]
+                            },
+                 "S01":  {
+                             "kind":  "S",
+                             "title":  "Hauptmenü",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S01",
+                                             "docs/MVP_SCREENS.md#S01"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-13",
+                                                "docs/decisions/0001-modulare-planung.md#DEC-0001"
+                                            ]
+                         },
+                 "S02":  {
+                             "kind":  "S",
+                             "title":  "Raum erstellen / Beitreten",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S02",
+                                             "docs/MVP_SCREENS.md#S02"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-13"
+                                            ]
+                         },
+                 "S03":  {
+                             "kind":  "S",
+                             "title":  "Lobby und Crew",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S03",
+                                             "docs/MVP_SCREENS.md#S03"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-13",
+                                                "docs/ARBEITSPAKETE.md#AP-21"
+                                            ]
+                         },
+                 "S04":  {
+                             "kind":  "S",
+                             "title":  "Charakterauswahl",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S04",
+                                             "docs/MVP_SCREENS.md#S04"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-13",
+                                                "docs/ARBEITSPAKETE.md#AP-24",
+                                                "docs/MVP_SCREENS.md#S05",
+                                                "docs/MVP_SCREENS.md#S07",
+                                                "docs/SCREENS.md#S05"
+                                            ]
+                         },
+                 "S05":  {
+                             "kind":  "S",
+                             "title":  "Charaktererstellung",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S05",
+                                             "docs/MVP_SCREENS.md#S05"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-24"
+                                            ]
+                         },
+                 "S06":  {
+                             "kind":  "S",
+                             "title":  "Charakterbogen",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S06",
+                                             "docs/MVP_SCREENS.md#S06"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-14",
+                                                "docs/ARBEITSPAKETE.md#AP-24",
+                                                "docs/SCREENS.md#S14"
+                                            ]
+                         },
+                 "S07":  {
+                             "kind":  "S",
+                             "title":  "Ausrüstung und Einsatz-Loadout",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S07",
+                                             "docs/MVP_SCREENS.md#S07"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-13",
+                                                "docs/ARBEITSPAKETE.md#AP-18",
+                                                "docs/ARBEITSPAKETE.md#AP-26",
+                                                "docs/MVP_SCREENS.md#S04",
+                                                "docs/SCREENS.md#S06"
+                                            ]
+                         },
+                 "S08":  {
+                             "kind":  "S",
+                             "title":  "Briefing",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S08",
+                                             "docs/MVP_SCREENS.md#S08"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-13",
+                                                "docs/ARBEITSPAKETE.md#AP-19"
+                                            ]
+                         },
+                 "S09":  {
+                             "kind":  "S",
+                             "title":  "Spielansicht",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S09",
+                                             "docs/MVP_SCREENS.md#S09"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-14",
+                                                "docs/ARBEITSPAKETE.md#AP-17",
+                                                "docs/ARBEITSPAKETE.md#AP-18",
+                                                "docs/ARBEITSPAKETE.md#AP-19",
+                                                "docs/MVP_SCREENS.md#S10",
+                                                "docs/SCREENS.md#S10"
+                                            ]
+                         },
+                 "S10":  {
+                             "kind":  "S",
+                             "title":  "Taktische Übersichtskarte",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S10",
+                                             "docs/MVP_SCREENS.md#S10"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-14"
+                                            ]
+                         },
+                 "S11":  {
+                             "kind":  "S",
+                             "title":  "Reconnect und Hotjoin",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S11",
+                                             "docs/MVP_SCREENS.md#S11"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-15",
+                                                "docs/ARBEITSPAKETE.md#AP-21"
+                                            ]
+                         },
+                 "S12":  {
+                             "kind":  "S",
+                             "title":  "Ergebnis und Nachbereitung",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S12",
+                                             "docs/MVP_SCREENS.md#S12"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-14",
+                                                "docs/ARBEITSPAKETE.md#AP-27"
+                                            ]
+                         },
+                 "S13":  {
+                             "kind":  "S",
+                             "title":  "Skillliste und Skilldetails",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S13",
+                                             "docs/MVP_SCREENS.md#S13"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-25",
+                                                "docs/SCREENS.md#S06",
+                                                "docs/SCREENS.md#S14"
+                                            ]
+                         },
+                 "S14":  {
+                             "kind":  "S",
+                             "title":  "Levelaufstieg / Punkte verteilen",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S14",
+                                             "docs/MVP_SCREENS.md#S14"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-25",
+                                                "docs/MVP_SCREENS.md#S13"
+                                            ]
+                         },
+                 "S15":  {
+                             "kind":  "S",
+                             "title":  "Safehouse / Kampagnenhub",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S15",
+                                             "docs/MVP_SCREENS.md#S15"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-27"
+                                            ]
+                         },
+                 "S16":  {
+                             "kind":  "S",
+                             "title":  "Strategische Stadtübersicht",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S16",
+                                             "docs/MVP_SCREENS.md#S16"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-28"
+                                            ]
+                         },
+                 "S17":  {
+                             "kind":  "S",
+                             "title":  "Auftragsboard und Auftragsdetails",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S17",
+                                             "docs/MVP_SCREENS.md#S17"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-27"
+                                            ]
+                         },
+                 "S18":  {
+                             "kind":  "S",
+                             "title":  "Lager und Händler",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S18",
+                                             "docs/MVP_SCREENS.md#S18"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-26",
+                                                "docs/ARBEITSPAKETE.md#AP-29"
+                                            ]
+                         },
+                 "S19":  {
+                             "kind":  "S",
+                             "title":  "Klinik, Cyberware und Begleiter",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S19",
+                                             "docs/MVP_SCREENS.md#S19"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-30",
+                                                "docs/SCREENS.md#S06"
+                                            ]
+                         },
+                 "S20":  {
+                             "kind":  "S",
+                             "title":  "Fraktionen und Kampagnenjournal",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S20",
+                                             "docs/MVP_SCREENS.md#S20"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-31"
+                                            ]
+                         },
+                 "S21":  {
+                             "kind":  "S",
+                             "title":  "Settings",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S21",
+                                             "docs/MVP_SCREENS.md#S21"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-13"
+                                            ]
+                         },
+                 "S22":  {
+                             "kind":  "S",
+                             "title":  "Hilfe und Einführung",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S22",
+                                             "docs/MVP_SCREENS.md#S22"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-13"
+                                            ]
+                         },
+                 "S23":  {
+                             "kind":  "S",
+                             "title":  "Entwickleransicht für Inhalte und Tests",
+                             "parent":  "",
+                             "primary":  [
+                                             "docs/SCREENS.md#S23",
+                                             "docs/MVP_SCREENS.md#S23"
+                                         ],
+                             "references":  [
+                                                "docs/ARBEITSPAKETE.md#AP-36",
+                                                "docs/decisions/0001-modulare-planung.md#DEC-0001"
+                                            ]
+                         }
+             }
+}

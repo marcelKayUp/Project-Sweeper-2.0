@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "generator": "reference-truck/2",
+  "referenceSha256": "8778355ba7a7d5c55a502c20bbd90184e2fa21034096e2a28bed72796e6bf0c7",
+  "generatorSha256": "d3e1c8445a952ea0263fac68389b83c82896fb16fe6e6485c0042c9059dd875c",
+  "analysisSha256": "7634277247334d23d6dfeae24b00825727c13ce5cae5dd4f0ee94dd5f506489b",
+  "blenderVersion": "5.2.2 LTS",
+  "triangles": 2021,
+  "materials": 5,
+  "meshObjects": 23,
+  "glbBytes": 71440,
+  "glbSha256": "b60c3cd0dc6ffe83fac5f236d9725fd42db5faf649028e4379693a7d5ee94d28",
+  "blenderDimensionsMetersXYZ": [
+    14.475776195526123,
+    2.8289999961853027,
+    4.80973482131958
+  ],
+  "sourceScale": "assumed, not measured",
+  "cameraProjectionMaxDifferencePixels": 4.627192881838412e-05,
+  "reimport": "passed",
+  "referenceImageNotEmbedded": true,
+  "sharedTireGeometry": true,
+  "fit": {
+    "landmarks": 13,
+    "rmsPixels": 7.424030971769015,
+    "maxPixels": 12.477606698001843,
+    "initialRmsPixels": 77.43853592694055,
+    "atFocalSearchBoundary": true,
+    "warning": "Focal length is weakly constrained; this is one compatible modeling camera, not recovered lens metadata.",
+    "status": "Fit to manually annotated landmarks with assumed world coordinates; not camera ground truth"
+  },
+  "provenance": {
+    "referenceOrigin": "User-supplied image, 2026-10-22; original creator and usage rights not supplied.",
+    "purpose": "Local reconstruction experiment; not a cleared production asset.",
+    "geometry": "Project-authored parametric approximation; no reference pixels used as model textures."
+  },
+  "surfaceRefinement": {
+    "reportSha256": "6adcfe293b3c2e0bb2e8113b49fff6e3314fc33e252b446d86f3fd3d3c4af7c0",
+    "analysisCacheKey": "f23322d633c4ec8d7d1b267eb2a6a7af0e73a260a51ea4ed157fe6c573ab51cc",
+    "symmetryPlan": [
+      {
+        "scope": "main-body",
+        "type": "bilateral",
+        "plane": "XZ",
+        "status": "assumed",
+        "origin": "class-prior",
+        "useForGeometry": true,
+        "exceptions": [
+          "markings",
+          "attachments",
+          "sideInset"
+        ],
+        "reason": "Opposite side is hidden; symmetric body is an explicit modeling assumption.",
+        "activeForGeometry": true
+      },
+      {
+        "scope": "wheels",
+        "type": "repetition",
+        "status": "assumed",
+        "origin": "agent-image-assessment",
+        "useForGeometry": true,
+        "exceptions": [],
+        "reason": "Repeated wheel parts; radii remain separately parameterized.",
+        "activeForGeometry": true
+      }
+    ],
+    "profileMirroring": {
+      "cargo": true,
+      "sideInset": false,
+      "sideBlackBand": true,
+      "lowerSkirt": true
+    },
+    "appliedProfiles": {
+      "sideInset": {
+        "movedVertices": 8,
+        "maxShiftPixels": 7.5077
+      }
+    }
+  }
+}

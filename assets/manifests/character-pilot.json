@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "pilot": "NEON CONTRACT TypeScript Character Creator",
+  "date": "2026-10-21",
+  "status": "technical-pilot-verified-human-art-acceptance-open",
+  "implementationAgents": {
+    "reasoning": "high",
+    "model": "gpt-6-luna",
+    "roles": [
+      "geometry-and-validation",
+      "preview-rig-animation-export",
+      "react-workshop"
+    ],
+    "count": 3
+  },
+  "toolchain": {
+    "blender": "5.2.2 LTS",
+    "babylon": "9.31.2",
+    "node": "24.14.0"
+  },
+  "provenance": {
+    "thirdPartyFigureModels": [],
+    "textures": [],
+    "subscriptionsRequired": [],
+    "parameterSources": "assets/specs/characters",
+    "recipeHashes": "Per-figure manifests under assets/generated/characters",
+    "geometry": "Project-authored TypeScript recipes"
+  },
+  "checks": {
+    "floorTolerance": 0.005,
+    "slotCombinations": 144,
+    "bonesPerFigure": 19,
+    "testFiles": 16,
+    "tests": 119,
+    "blenderFigures": 3,
+    "seededCliByteEquality": true,
+    "invalidCliInputsRejected": true,
+    "maximumFloorDeviation": 0.001232,
+    "clipsPerFigure": 7,
+    "gltfErrors": 0,
+    "gltfWarnings": 0
+  },
+  "open": [
+    "Human art and animation acceptance",
+    "Game-camera readability at mission zoom",
+    "Mission/profile integration",
+    "Separate execution in Claude Code and Cursor"
+  ],
+  "files": [
+    {
+      "path": "assets/specs/characters/runner.json",
+      "bytes": 319,
+      "sha256": "db7ad2146ce18828034b14fa33344c17e050c0cb9a8bbea184a701213f101c7b"
+    },
+    {
+      "path": "assets/generated/characters/neon-runner.glb",
+      "bytes": 200020,
+      "sha256": "577ba5386a9042e3e79d055f5087c5d57ae62bc972d68139311915ac00ec8e16"
+    },
+    {
+      "path": "assets/generated/characters/neon-runner.json",
+      "bytes": 302,
+      "sha256": "ea932f9bc4691749e897a73093df66cd48cc67c1be1a3a742b9371fd3d1a5961"
+    },
+    {
+      "path": "assets/generated/characters/neon-runner.manifest.json",
+      "bytes": 1869,
+      "sha256": "bc43ad900fc1c84d09ac377d294cda7e47e8f92df1262964d71eeee0f9133c56"
+    },
+    {
+      "path": "assets/source/characters/neon-runner.blend",
+      "bytes": 174762,
+      "sha256": "34d486ad805b3f85331e32d4eaf16793e8fb6be31e0111ad28cadc231aa18de4"
+    },
+    {
+      "path": "artifacts/characters/blender-runner/report.json",
+      "bytes": 4757,
+      "sha256": "516951cd25169a28b632442f6dea75b5f61b5cd851fa0bfd9298df2d35df9950"
+    },
+    {
+      "path": "artifacts/characters/blender-runner/iso.png",
+      "bytes": 414556,
+      "sha256": "0e475e6e91363992891619dd7ab93ef0b3d3d86fe54f10d30f9726d6345d81c1"
+    },
+    {
+      "path": "artifacts/characters/blender-runner/front.png",
+      "bytes": 404673,
+      "sha256": "69fa6a091fb9ec14c95ea87ef493cbbefd3abac8de9235a30aae2f19c75cdaf1"
+    },
+    {
+      "path": "artifacts/characters/blender-runner/back.png",
+      "bytes": 403174,
+      "sha256": "ac33a2dbfcda4bb9a435902ab6cdf0d285587f6f1387667e69a397c59b94b3fc"
+    },
+    {
+      "path": "artifacts/characters/blender-runner/walk.png",
+      "bytes": 419098,
+      "sha256": "32352465a3406bd03a1a3b84bcb0613e5fc6b4bef0ad6c9f80eb09bea867cb75"
+    },
+    {
+      "path": "assets/specs/characters/guard.json",
+      "bytes": 320,
+      "sha256": "c0f245c334a3704b566f276f25bbd63d34635e8038239a96db5d3bed2304a755"
+    },
+    {
+      "path": "assets/generated/characters/neon-guard.glb",
+      "bytes": 206228,
+      "sha256": "7786276918647b930a5c14d9d265045499a1c25b7c9334b69bb4c7501b747e76"
+    },
+    {
+      "path": "assets/generated/characters/neon-guard.json",
+      "bytes": 303,
+      "sha256": "eccbdffcc448bdbd44ec0d2466e6ebbe1e7f78f6db26b1db70dfd4b782c8da2c"
+    },
+    {
+      "path": "assets/generated/characters/neon-guard.manifest.json",
+      "bytes": 1867,
+      "sha256": "bc90fd3d91458b5652056f275fa27d1a1ff622813aa0306c8f07d71098c95218"
+    },
+    {
+      "path": "assets/source/characters/neon-guard.blend",
+      "bytes": 176541,
+      "sha256": "2e3c62ab536e30a51433c3aa117e0eaa0fe3f53295df0eb50709c67f80817902"
+    },
+    {
+      "path": "artifacts/characters/blender-guard/report.json",
+      "bytes": 4752,
+      "sha256": "015c68d20f28cea52a667231cb09cc2ae6406b94a8170c10bf2fa014be2bcb57"
+    },
+    {
+      "path": "artifacts/characters/blender-guard/iso.png",
+      "bytes": 418438,
+      "sha256": "1f3ec916dfaad07f40d2e0080b7e6ec0953919982849774bbee9c03a34d935c5"
+    },
+    {
+      "path": "artifacts/characters/blender-guard/front.png",
+      "bytes": 408510,
+      "sha256": "5c420acfe47c901f122b9d61d5c95189df3593cfecd6b41c0b466482de79b1c9"
+    },
+    {
+      "path": "artifacts/characters/blender-guard/back.png",
+      "bytes": 406811,
+      "sha256": "6bf8a5550f81008a55d55c6c3491bd95ec7f8293c58a978a86672d1fc4f364e9"
+    },
+    {
+      "path": "artifacts/characters/blender-guard/walk.png",
+      "bytes": 421161,
+      "sha256": "14f0d47815630a70d85253b465c18d6713cec8d68cff6b56c43d05a6ff818c40"
+    },
+    {
+      "path": "assets/specs/characters/tech.json",
+      "bytes": 320,
+      "sha256": "be28e10f08d1d728d9d63c522edafa00ad6d52d1ef7d294600fd1c87555b7d56"
+    },
+    {
+      "path": "assets/generated/characters/neon-tech.glb",
+      "bytes": 206444,
+      "sha256": "585cf157328221da3c507784520adda108b45430f66834fd848efd8740336d5e"
+    },
+    {
+      "path": "assets/generated/characters/neon-tech.json",
+      "bytes": 303,
+      "sha256": "52bf14004b56ba05e3c4b7c484a346b38a54f91926963f69a0d5083eb8960778"
+    },
+    {
+      "path": "assets/generated/characters/neon-tech.manifest.json",
+      "bytes": 1864,
+      "sha256": "de4c3ac9393ef3b55e3721bdc3067e41d41ae1198bf23c8ee45a6c0ac4ac209d"
+    },
+    {
+      "path": "assets/source/characters/neon-tech.blend",
+      "bytes": 176113,
+      "sha256": "6c9a926aa9d2fbbd6b0d140400dcb64803a0a80db8ebae4b44509dca6d331e34"
+    },
+    {
+      "path": "artifacts/characters/blender-tech/report.json",
+      "bytes": 4748,
+      "sha256": "f4d5db76868f9b471629870c89b9ed7ec6e043caad9ad49e50ddba048ab2552c"
+    },
+    {
+      "path": "artifacts/characters/blender-tech/iso.png",
+      "bytes": 415416,
+      "sha256": "b97146333dacb07846055a7c00e480631499ef8c3f95d8a0b2e13a4e86b96905"
+    },
+    {
+      "path": "artifacts/characters/blender-tech/front.png",
+      "bytes": 407147,
+      "sha256": "134bbac06d31bfa28ab4902b4cedff98e0434a50f2670ff9f42561ca15dfc1d2"
+    },
+    {
+      "path": "artifacts/characters/blender-tech/back.png",
+      "bytes": 406579,
+      "sha256": "d3b1f4b0e607242951e9d0cc9891b81ee47e1f049cc8c4f75278c21e3fad7961"
+    },
+    {
+      "path": "artifacts/characters/blender-tech/walk.png",
+      "bytes": 418896,
+      "sha256": "65a879d7801c324eca69c66c2ab965966fa2e27ad6bcc84d6e89e65e34721c42"
+    },
+    {
+      "path": "artifacts/characters/check.json",
+      "bytes": 14882,
+      "sha256": "cc30aaee42224ea39297edecd793722e8086583016696222b424dd816ee57be3"
+    },
+    {
+      "path": "artifacts/characters/delivery-validation.json",
+      "bytes": 861,
+      "sha256": "f2ce5304d9b0ca87cfef8a152840f5728fc86429d567c1d9aea376eba456f895"
+    },
+    {
+      "path": "artifacts/characters/typecheck.log",
+      "bytes": 329,
+      "sha256": "d4b88202b5d3628c8064e2dc923924f12b712d0f1b744eab19ffba2f38496a1a"
+    },
+    {
+      "path": "artifacts/characters/tests.log",
+      "bytes": 1216,
+      "sha256": "e8a47b23afd7ddeb8798f8fb4b134715687d7e4dc9d1890d252db6eac10e6446"
+    },
+    {
+      "path": "artifacts/characters/build.log",
+      "bytes": 11815,
+      "sha256": "29adc8a5c6b4fce81f644696060d669f14f36e674ed59abf2897e7fa74a7f8ed"
+    },
+    {
+      "path": "tools/characters/verify_blender.py",
+      "bytes": 10000,
+      "sha256": "2e1642465f357f87631be5fd55242ee6398df43fef82763e19497e696b2f772c"
+    },
+    {
+      "path": "apps/client/scripts/check-characters.mjs",
+      "bytes": 37001,
+      "sha256": "42dbcee8a5435f2d73799a85ff9e5c2d988f2e5d636bab57c2ae177d9d04abf4"
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "path": "Weapons/AssaultRifle2_3.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "AssaultRifle2_3",
+      "vertices": 858,
+      "triangles": 1614,
+      "shapeHash": "25039cfffc30d48a1b7d3fccd4b2611a959ac56816a58c2bc07ad9c0e876c89f",
+      "materials": [
+        "Main",
+        "MainDark",
+        "Metal",
+        "MainLight",
+        "DarkWood",
+        "DarkMetal"
+      ],
+      "modifiers": [],
+      "bounds": {
+        "min": [
+          -0.2849860191345215,
+          -0.17486572265625,
+          -0.4155873656272888
+        ],
+        "max": [
+          3.467663526535034,
+          0.17153936624526978,
+          1.0420312881469727
+        ],
+        "size": [
+          3.7526495456695557,
+          0.3464050889015198,
+          1.4576186537742615
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 1614,
+  "bounds": {
+    "min": [
+      -0.2849860191345215,
+      -0.17486572265625,
+      -0.4155873656272888
+    ],
+    "max": [
+      3.467663526535034,
+      0.17153936624526978,
+      1.0420312881469727
+    ],
+    "size": [
+      3.7526495456695557,
+      0.3464050889015198,
+      1.4576186537742615
+    ]
+  },
+  "materials": [
+    {
+      "name": "DarkMetal",
+      "diffuseColor": [
+        0.04699999839067459,
+        0.04695870354771614,
+        0.045788172632455826,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkWood",
+      "diffuseColor": [
+        0.10246890038251877,
+        0.07204850763082504,
+        0.055191364139318466,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.020288560539484024,
+        0.02518685907125473,
+        0.029556844383478165,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "MainDark",
+      "diffuseColor": [
+        0.011938209645450115,
+        0.016988111659884453,
+        0.025391679257154465,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "MainLight",
+      "diffuseColor": [
+        0.028379689902067184,
+        0.03557529300451279,
+        0.04202481731772423,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Metal",
+      "diffuseColor": [
+        0.0666259378194809,
+        0.06847818195819855,
+        0.06700000166893005,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "AssaultRifle2_3",
+      "file": "thumbs/dc982fcafa0529b2d5ad620736c8f967f28adf9f57a3a8609061c23a36575dee-0.png",
+      "category": "weapons",
+      "parts": [
+        "AssaultRifle2_3"
+      ],
+      "triangles": 1614
+    }
+  ],
+  "fileSha256": "2d87b84fa7773d5c521782c9850563717d1f2f8260595e1bf21aa7daf0ba5af9",
+  "bytes": 649452,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

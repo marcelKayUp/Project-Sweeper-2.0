@@ -1,0 +1,40 @@
+{
+  "name": "neon-contract",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.14.0",
+  "engines": {
+    "node": "24.14.0"
+  },
+  "scripts": {
+    "dev": "node tools/dev-mission.mjs",
+    "test": "corepack pnpm --filter @neon/sim test && corepack pnpm --filter @neon/generator test && corepack pnpm --filter @neon/characters test && corepack pnpm --filter @neon/server test",
+    "typecheck": "corepack pnpm --filter @neon/sim typecheck && corepack pnpm --filter @neon/generator typecheck && corepack pnpm --filter @neon/characters typecheck && corepack pnpm --filter @neon/server typecheck && corepack pnpm --filter @neon/client typecheck",
+    "dev:characters": "corepack pnpm --filter @neon/client dev:characters",
+    "build:characters": "corepack pnpm --filter @neon/client build:characters",
+    "check:characters": "corepack pnpm --filter @neon/client check:characters",
+    "check:characters:procedural": "corepack pnpm --filter @neon/client check:characters:procedural",
+    "generate:character": "node tools/characters/generate-character.mjs",
+    "generate:terminals": "node tools/terminals/generate-terminals.mjs",
+    "generate:reference-vehicle": "node tools/vehicles/run-reference-pilot.mjs",
+    "setup:reference-analysis": "node tools/reference-analysis/run.mjs setup",
+    "analyze:reference": "node tools/reference-analysis/run.mjs analyze",
+    "check:reference-analysis": "node tools/reference-analysis/run.mjs check",
+    "dev:terminals": "corepack pnpm --filter @neon/client dev:terminals",
+    "build:terminals": "corepack pnpm --filter @neon/client build:terminals",
+    "check:terminals": "corepack pnpm --filter @neon/client check:terminals",
+    "inspect:assets": "node tools/assets/inspect-assets.mjs --source \"../Models&Animations\"",
+    "check:asset-inspection": "node tools/assets/check-inspection.mjs",
+    "dev:generator": "corepack pnpm --filter @neon/client dev:generator",
+    "build:generator": "corepack pnpm --filter @neon/client build:generator",
+    "generate:building": "node tools/generate-building.mjs",
+    "check:buildings": "node tools/check-buildings.mjs",
+    "check:corporations": "node tools/check-corporations.mjs",
+    "check:generator-ui": "corepack pnpm --filter @neon/client check:generator-ui",
+    "capture:deckung": "corepack pnpm --filter @neon/client capture",
+    "capture:aktionspunkte": "corepack pnpm --filter @neon/client capture:aktionspunkte",
+    "capture:schuss": "corepack pnpm --filter @neon/client capture:schuss",
+    "mission:vier": "corepack pnpm --filter @neon/client mission:vier",
+    "rag": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/rag/NeonRag.ps1"
+  }
+}

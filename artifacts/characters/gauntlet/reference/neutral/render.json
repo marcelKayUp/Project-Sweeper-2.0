@@ -1,0 +1,47 @@
+{
+  "source": "artifacts\\characters\\gauntlet\\reference\\quaternius-casual.glb",
+  "blender": "5.2.2 LTS",
+  "normalizedHeight": 1.05,
+  "originalHeight": 1.8579766493057832,
+  "meshes": 4,
+  "triangles": 5776,
+  "bones": [
+    62
+  ],
+  "actions": [
+    "CharacterArmature|Death",
+    "CharacterArmature|Gun_Shoot",
+    "CharacterArmature|HitRecieve",
+    "CharacterArmature|HitRecieve_2",
+    "CharacterArmature|Idle",
+    "CharacterArmature|Idle_Gun",
+    "CharacterArmature|Idle_Gun_Pointing",
+    "CharacterArmature|Idle_Gun_Shoot",
+    "CharacterArmature|Idle_Neutral",
+    "CharacterArmature|Idle_Sword",
+    "CharacterArmature|Interact",
+    "CharacterArmature|Kick_Left",
+    "CharacterArmature|Kick_Right",
+    "CharacterArmature|Punch_Left",
+    "CharacterArmature|Punch_Right",
+    "CharacterArmature|Roll",
+    "CharacterArmature|Run",
+    "CharacterArmature|Run_Back",
+    "CharacterArmature|Run_Left",
+    "CharacterArmature|Run_Right",
+    "CharacterArmature|Run_Shoot",
+    "CharacterArmature|Sword_Slash",
+    "CharacterArmature|Walk",
+    "CharacterArmature|Wave"
+  ],
+  "selectedAction": "CharacterArmature|Idle",
+  "phase": 0.5,
+  "poseFloorBeforeReviewNormalization": -0.001338638481684029,
+  "views": [
+    "front",
+    "iso",
+    "side",
+    "back"
+  ],
+  "normalization": "uniform 1.05 height from rest bounds; horizontal center and visible pose floor; no geometry, skin or material edits"
+}

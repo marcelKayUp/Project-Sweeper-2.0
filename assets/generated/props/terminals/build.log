@@ -1,0 +1,22 @@
+NC_TERMINAL {"id": "terminal-pedestal-compact-daeyang", "cache": true}
+NC_TERMINAL {"id": "terminal-pedestal-compact-falkenfeld-kessler", "cache": true}
+NC_TERMINAL {"id": "terminal-pedestal-compact-nakamura-lindahl", "cache": true}
+NC_TERMINAL {"id": "terminal-pedestal-standard-daeyang", "cache": true}
+NC_TERMINAL {"id": "terminal-pedestal-standard-falkenfeld-kessler", "cache": true}
+NC_TERMINAL {"id": "terminal-pedestal-standard-nakamura-lindahl", "cache": true}
+NC_TERMINAL {"id": "terminal-console-compact-daeyang", "cache": true}
+NC_TERMINAL {"id": "terminal-console-compact-falkenfeld-kessler", "cache": true}
+NC_TERMINAL {"id": "terminal-console-compact-nakamura-lindahl", "cache": true}
+NC_TERMINAL {"id": "terminal-console-standard-daeyang", "cache": true}
+NC_TERMINAL {"id": "terminal-console-standard-falkenfeld-kessler", "cache": true}
+NC_TERMINAL {"id": "terminal-console-standard-nakamura-lindahl", "cache": true}
+NC_TERMINAL {"id": "terminal-wall-compact-daeyang", "cache": true}
+NC_TERMINAL {"id": "terminal-wall-compact-falkenfeld-kessler", "cache": true}
+NC_TERMINAL {"id": "terminal-wall-compact-nakamura-lindahl", "cache": true}
+NC_TERMINAL {"id": "terminal-wall-standard-daeyang", "cache": true}
+NC_TERMINAL {"id": "terminal-wall-standard-falkenfeld-kessler", "cache": true}
+NC_TERMINAL {"id": "terminal-wall-standard-nakamura-lindahl", "cache": true}
+NC_TERMINAL_RESULT {"assets": 18, "built": 0, "cacheHits": 18, "output": "assets\\generated\\props\\terminals"}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit

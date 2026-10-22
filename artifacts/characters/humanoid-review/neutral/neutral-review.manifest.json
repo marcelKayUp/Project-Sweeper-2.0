@@ -1,0 +1,55 @@
+{
+  "assetId": "neutral-review",
+  "generator": "NEON CONTRACT Character Creator",
+  "generatorVersion": "1.1.0",
+  "nodeVersion": "v24.14.0",
+  "babylonVersion": "9.31.2",
+  "specification": {
+    "schemaVersion": 1,
+    "id": "neutral-review",
+    "seed": 42,
+    "body": "lean",
+    "stature": 0.982,
+    "hair": "crop",
+    "outfit": "runner",
+    "accessory": "none",
+    "palette": {
+      "skin": "#D9A27F",
+      "hair": "#1C2531",
+      "cloth": "#1C3444",
+      "armor": "#314B59",
+      "accent": "#FF4F9A"
+    }
+  },
+  "stats": {
+    "triangles": 1780,
+    "vertices": 3882,
+    "materials": 5,
+    "bones": 19,
+    "height": 1.0320317887688506
+  },
+  "clips": [
+    "idle",
+    "walk",
+    "crouch",
+    "shoot",
+    "reload",
+    "hit",
+    "death"
+  ],
+  "source": "Project-authored TypeScript geometry; no external figure models or textures.",
+  "recipeHashes": {
+    "packages/characters/src/buildCharacter.ts": "eb40c9f3f101d066ebef53559d8a9f211186ab37cfabebc5d04abddd9016ca0c",
+    "packages/characters/src/index.ts": "f28a25765d9dd2b20e47bd7c08ad5a3549f8d726653e105a0ade920a0fa55603",
+    "packages/characters/src/spec.ts": "3182b5a85a3671b3513f7cee3fd466733f81c16c0944d15d0cf1b570ccd44ff5",
+    "packages/characters/src/types.ts": "6d4f2203eaab2c2a2dfb7f41fe232bb9e7a4ea17e5f17b3e3d9ed89c7dab5ba1",
+    "apps/client/src/characters/preview.ts": "579c2a4ec3926c48fb71814bd9eef1cdb2b07c2e4caf43c3af4ec339b3c707ed",
+    "tools/characters/generate-character.mjs": "4e368458d7f4a98dbb84de1ca9ca2b417496522bd57f71da0e67fe10a181ff92",
+    "pnpm-lock.yaml": "32bc7ed73977a5f6ff693b3bc3cfb7cc0e338b9c381495f00e01321b85ffaa7a"
+  },
+  "files": {
+    "neutral-review.glb": "e714afc276067c61e3831c120084175b4e5fa902dffa0b908d1e9133e86c8a4d",
+    "neutral-review.json": "3f797f300b0e51e0ed5a1fb1ed6c497806dd76c59030cb81b01cde4492414a99"
+  },
+  "humanArtAcceptance": "open"
+}

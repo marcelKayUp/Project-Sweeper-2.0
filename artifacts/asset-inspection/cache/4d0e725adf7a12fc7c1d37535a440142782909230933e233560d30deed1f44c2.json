@@ -1,0 +1,137 @@
+{
+  "path": "Weapons/modular Weapons/Barrel_Single.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Barrel_Single",
+      "vertices": 144,
+      "triangles": 270,
+      "shapeHash": "8f60af4e0617963a83967aa61bf698303b49a16697844180890ee96716f0684d",
+      "materials": [
+        "Grey",
+        "Black"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -3.2984623032916716e-08,
+          -0.032385148108005524,
+          -0.03238502889871597
+        ],
+        "max": [
+          0.16717974841594696,
+          0.032385144382715225,
+          0.03238522633910179
+        ],
+        "size": [
+          0.16717978140057,
+          0.06477029249072075,
+          0.06477025523781776
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 270,
+  "bounds": {
+    "min": [
+      -3.2984623032916716e-08,
+      -0.032385148108005524,
+      -0.03238502889871597
+    ],
+    "max": [
+      0.16717974841594696,
+      0.032385144382715225,
+      0.03238522633910179
+    ],
+    "size": [
+      0.16717978140057,
+      0.06477029249072075,
+      0.06477025523781776
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Barrel_Single",
+      "file": "thumbs/4d0e725adf7a12fc7c1d37535a440142782909230933e233560d30deed1f44c2-0.png",
+      "category": "components",
+      "parts": [
+        "Barrel_Single"
+      ],
+      "triangles": 270
+    }
+  ],
+  "fileSha256": "181f26974c9bb8fb8ad1f521442d7ac39505635fb48f4bde755226e081824e03",
+  "bytes": 538444,
+  "inspectorKey": "cd7358ff160fbb070b5f8fc4e2ffd138955146420a9b39a6462eafc8c1fe5591"
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "family": "neon-terminal",
+  "id": "terminal-wall-compact-daeyang",
+  "form": "wall",
+  "size": "compact",
+  "scale": 0.8,
+  "organization": "daeyang",
+  "palette": {
+    "label": "Daeyang",
+    "body": "#0B2A5B",
+    "trim": "#C9CED6",
+    "accent": "#38D39F"
+  },
+  "seed": 42
+}

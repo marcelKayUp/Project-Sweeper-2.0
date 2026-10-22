@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "source": "modular-women-v1",
+  "id": "woman-16",
+  "seed": 42,
+  "stature": 1,
+  "parts": {
+    "head": "Formal",
+    "body": "Casual",
+    "legs": "Casual",
+    "feet": "Casual"
+  },
+  "equipment": "pistol",
+  "palette": {
+    "skin": null,
+    "hair": null,
+    "cloth": null,
+    "armor": null,
+    "accent": null
+  }
+}

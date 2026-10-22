@@ -1,0 +1,835 @@
+{
+  "schemaVersion": 1,
+  "family": "neon-terminal",
+  "generator": "terminal-family/1",
+  "assets": [
+    {
+      "id": "terminal-pedestal-compact-daeyang",
+      "label": "Standterminal · Kompakt · Daeyang",
+      "file": "terminal-pedestal-compact-daeyang.glb",
+      "sha256": "91fcf0386d738cc3e0771353fba0918161719605bb10aaad3a1b17e7a72b05a6",
+      "bytes": 32376,
+      "stats": {
+        "triangles": 444,
+        "vertices": 248,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.19600000977516174,
+            -0.18903790414333344,
+            0.0
+          ],
+          "max": [
+            0.19600000977516174,
+            0.1679999977350235,
+            0.8319999575614929
+          ]
+        },
+        "dimensions": [
+          0.3920000195503235,
+          0.35703790187835693,
+          0.8319999575614929
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-pedestal-compact-daeyang",
+        "form": "pedestal",
+        "size": "compact",
+        "scale": 0.8,
+        "organization": "daeyang",
+        "palette": {
+          "label": "Daeyang",
+          "body": "#0B2A5B",
+          "trim": "#C9CED6",
+          "accent": "#38D39F"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-pedestal-compact-falkenfeld-kessler",
+      "label": "Standterminal · Kompakt · Falkenfeld-Kessler",
+      "file": "terminal-pedestal-compact-falkenfeld-kessler.glb",
+      "sha256": "61640df57a103fbdd4bbc93dd77301e3f0f8e8c8e2e62e7c8101d269f2ef53c0",
+      "bytes": 32432,
+      "stats": {
+        "triangles": 444,
+        "vertices": 248,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.19600000977516174,
+            -0.18903790414333344,
+            0.0
+          ],
+          "max": [
+            0.19600000977516174,
+            0.1679999977350235,
+            0.8319999575614929
+          ]
+        },
+        "dimensions": [
+          0.3920000195503235,
+          0.35703790187835693,
+          0.8319999575614929
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-pedestal-compact-falkenfeld-kessler",
+        "form": "pedestal",
+        "size": "compact",
+        "scale": 0.8,
+        "organization": "falkenfeld-kessler",
+        "palette": {
+          "label": "Falkenfeld-Kessler",
+          "body": "#2B2D31",
+          "trim": "#8A9097",
+          "accent": "#E06A1B"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-pedestal-compact-nakamura-lindahl",
+      "label": "Standterminal · Kompakt · Nakamura-Lindahl",
+      "file": "terminal-pedestal-compact-nakamura-lindahl.glb",
+      "sha256": "90126c5f816a0e1c15d67f6368b14fa792070f10529e69b44cc5a53e457ce04f",
+      "bytes": 32404,
+      "stats": {
+        "triangles": 444,
+        "vertices": 248,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.19600000977516174,
+            -0.18903790414333344,
+            0.0
+          ],
+          "max": [
+            0.19600000977516174,
+            0.1679999977350235,
+            0.8319999575614929
+          ]
+        },
+        "dimensions": [
+          0.3920000195503235,
+          0.35703790187835693,
+          0.8319999575614929
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-pedestal-compact-nakamura-lindahl",
+        "form": "pedestal",
+        "size": "compact",
+        "scale": 0.8,
+        "organization": "nakamura-lindahl",
+        "palette": {
+          "label": "Nakamura-Lindahl",
+          "body": "#F4F1EA",
+          "trim": "#1F3A4D",
+          "accent": "#B3263A"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-pedestal-standard-daeyang",
+      "label": "Standterminal · Standard · Daeyang",
+      "file": "terminal-pedestal-standard-daeyang.glb",
+      "sha256": "2a799acfbf4513564a6867a41358df0340c32daab28ef69bf6b13f3339df156f",
+      "bytes": 32316,
+      "stats": {
+        "triangles": 444,
+        "vertices": 248,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.24500000476837158,
+            -0.2362973690032959,
+            0.0
+          ],
+          "max": [
+            0.24500000476837158,
+            0.20999999344348907,
+            1.0399999618530273
+          ]
+        },
+        "dimensions": [
+          0.49000000953674316,
+          0.446297362446785,
+          1.0399999618530273
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-pedestal-standard-daeyang",
+        "form": "pedestal",
+        "size": "standard",
+        "scale": 1,
+        "organization": "daeyang",
+        "palette": {
+          "label": "Daeyang",
+          "body": "#0B2A5B",
+          "trim": "#C9CED6",
+          "accent": "#38D39F"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-pedestal-standard-falkenfeld-kessler",
+      "label": "Standterminal · Standard · Falkenfeld-Kessler",
+      "file": "terminal-pedestal-standard-falkenfeld-kessler.glb",
+      "sha256": "2563db6a099d28e0d3c5ccf46d9f43ef73861dba33a219de23eab003a6497442",
+      "bytes": 32368,
+      "stats": {
+        "triangles": 444,
+        "vertices": 248,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.24500000476837158,
+            -0.2362973690032959,
+            0.0
+          ],
+          "max": [
+            0.24500000476837158,
+            0.20999999344348907,
+            1.0399999618530273
+          ]
+        },
+        "dimensions": [
+          0.49000000953674316,
+          0.446297362446785,
+          1.0399999618530273
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-pedestal-standard-falkenfeld-kessler",
+        "form": "pedestal",
+        "size": "standard",
+        "scale": 1,
+        "organization": "falkenfeld-kessler",
+        "palette": {
+          "label": "Falkenfeld-Kessler",
+          "body": "#2B2D31",
+          "trim": "#8A9097",
+          "accent": "#E06A1B"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-pedestal-standard-nakamura-lindahl",
+      "label": "Standterminal · Standard · Nakamura-Lindahl",
+      "file": "terminal-pedestal-standard-nakamura-lindahl.glb",
+      "sha256": "1b8d95af556e2b75b7747a3a4c63de89b347d3703ecd9d3cbaa9c331d1f02cde",
+      "bytes": 32340,
+      "stats": {
+        "triangles": 444,
+        "vertices": 248,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.24500000476837158,
+            -0.2362973690032959,
+            0.0
+          ],
+          "max": [
+            0.24500000476837158,
+            0.20999999344348907,
+            1.0399999618530273
+          ]
+        },
+        "dimensions": [
+          0.49000000953674316,
+          0.446297362446785,
+          1.0399999618530273
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-pedestal-standard-nakamura-lindahl",
+        "form": "pedestal",
+        "size": "standard",
+        "scale": 1,
+        "organization": "nakamura-lindahl",
+        "palette": {
+          "label": "Nakamura-Lindahl",
+          "body": "#F4F1EA",
+          "trim": "#1F3A4D",
+          "accent": "#B3263A"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-console-compact-daeyang",
+      "label": "Pult · Kompakt · Daeyang",
+      "file": "terminal-console-compact-daeyang.glb",
+      "sha256": "9605bfdc71c8f8a8e54d3ff93bbecab5c2004dba5951cf0132d75011a60bddda",
+      "bytes": 27540,
+      "stats": {
+        "triangles": 366,
+        "vertices": 204,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.2880000174045563,
+            -0.19969366490840912,
+            0.0
+          ],
+          "max": [
+            0.2880000174045563,
+            0.20399999618530273,
+            0.5437600612640381
+          ]
+        },
+        "dimensions": [
+          0.5760000348091125,
+          0.40369366109371185,
+          0.5437600612640381
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-console-compact-daeyang",
+        "form": "console",
+        "size": "compact",
+        "scale": 0.8,
+        "organization": "daeyang",
+        "palette": {
+          "label": "Daeyang",
+          "body": "#0B2A5B",
+          "trim": "#C9CED6",
+          "accent": "#38D39F"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-console-compact-falkenfeld-kessler",
+      "label": "Pult · Kompakt · Falkenfeld-Kessler",
+      "file": "terminal-console-compact-falkenfeld-kessler.glb",
+      "sha256": "49a7e03423aa81a0d2c448d89729c121b9e3976d0f8eb42712d21ea57533c408",
+      "bytes": 27592,
+      "stats": {
+        "triangles": 366,
+        "vertices": 204,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.2880000174045563,
+            -0.19969366490840912,
+            0.0
+          ],
+          "max": [
+            0.2880000174045563,
+            0.20399999618530273,
+            0.5437600612640381
+          ]
+        },
+        "dimensions": [
+          0.5760000348091125,
+          0.40369366109371185,
+          0.5437600612640381
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-console-compact-falkenfeld-kessler",
+        "form": "console",
+        "size": "compact",
+        "scale": 0.8,
+        "organization": "falkenfeld-kessler",
+        "palette": {
+          "label": "Falkenfeld-Kessler",
+          "body": "#2B2D31",
+          "trim": "#8A9097",
+          "accent": "#E06A1B"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-console-compact-nakamura-lindahl",
+      "label": "Pult · Kompakt · Nakamura-Lindahl",
+      "file": "terminal-console-compact-nakamura-lindahl.glb",
+      "sha256": "8f54cd9e03b3036702a46e38bb759d80a0f6c9eeb58eb682f1352dd3ab58576e",
+      "bytes": 27568,
+      "stats": {
+        "triangles": 366,
+        "vertices": 204,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.2880000174045563,
+            -0.19969366490840912,
+            0.0
+          ],
+          "max": [
+            0.2880000174045563,
+            0.20399999618530273,
+            0.5437600612640381
+          ]
+        },
+        "dimensions": [
+          0.5760000348091125,
+          0.40369366109371185,
+          0.5437600612640381
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-console-compact-nakamura-lindahl",
+        "form": "console",
+        "size": "compact",
+        "scale": 0.8,
+        "organization": "nakamura-lindahl",
+        "palette": {
+          "label": "Nakamura-Lindahl",
+          "body": "#F4F1EA",
+          "trim": "#1F3A4D",
+          "accent": "#B3263A"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-console-standard-daeyang",
+      "label": "Pult · Standard · Daeyang",
+      "file": "terminal-console-standard-daeyang.glb",
+      "sha256": "c3f1552ed655441aab8c0bc10bbea2068463a2ae3039518a7bd6ba86cd302aa2",
+      "bytes": 27476,
+      "stats": {
+        "triangles": 366,
+        "vertices": 204,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.36000001430511475,
+            -0.2496170699596405,
+            0.0
+          ],
+          "max": [
+            0.36000001430511475,
+            0.2549999952316284,
+            0.6797000765800476
+          ]
+        },
+        "dimensions": [
+          0.7200000286102295,
+          0.5046170651912689,
+          0.6797000765800476
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-console-standard-daeyang",
+        "form": "console",
+        "size": "standard",
+        "scale": 1,
+        "organization": "daeyang",
+        "palette": {
+          "label": "Daeyang",
+          "body": "#0B2A5B",
+          "trim": "#C9CED6",
+          "accent": "#38D39F"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-console-standard-falkenfeld-kessler",
+      "label": "Pult · Standard · Falkenfeld-Kessler",
+      "file": "terminal-console-standard-falkenfeld-kessler.glb",
+      "sha256": "811fb1b4d3627d5336b3b0d946801d17243b2d4d446b0d6e50635a0896cb1f26",
+      "bytes": 27532,
+      "stats": {
+        "triangles": 366,
+        "vertices": 204,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.36000001430511475,
+            -0.2496170699596405,
+            0.0
+          ],
+          "max": [
+            0.36000001430511475,
+            0.2549999952316284,
+            0.6797000765800476
+          ]
+        },
+        "dimensions": [
+          0.7200000286102295,
+          0.5046170651912689,
+          0.6797000765800476
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-console-standard-falkenfeld-kessler",
+        "form": "console",
+        "size": "standard",
+        "scale": 1,
+        "organization": "falkenfeld-kessler",
+        "palette": {
+          "label": "Falkenfeld-Kessler",
+          "body": "#2B2D31",
+          "trim": "#8A9097",
+          "accent": "#E06A1B"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-console-standard-nakamura-lindahl",
+      "label": "Pult · Standard · Nakamura-Lindahl",
+      "file": "terminal-console-standard-nakamura-lindahl.glb",
+      "sha256": "a454a851b17ed77197e0c3de5c40df80b7f1ff31098484e36fe8c7a081b7a4ef",
+      "bytes": 27504,
+      "stats": {
+        "triangles": 366,
+        "vertices": 204,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.36000001430511475,
+            -0.2496170699596405,
+            0.0
+          ],
+          "max": [
+            0.36000001430511475,
+            0.2549999952316284,
+            0.6797000765800476
+          ]
+        },
+        "dimensions": [
+          0.7200000286102295,
+          0.5046170651912689,
+          0.6797000765800476
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-console-standard-nakamura-lindahl",
+        "form": "console",
+        "size": "standard",
+        "scale": 1,
+        "organization": "nakamura-lindahl",
+        "palette": {
+          "label": "Nakamura-Lindahl",
+          "body": "#F4F1EA",
+          "trim": "#1F3A4D",
+          "accent": "#B3263A"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-wall-compact-daeyang",
+      "label": "Wandterminal · Kompakt · Daeyang",
+      "file": "terminal-wall-compact-daeyang.glb",
+      "sha256": "8c1cae803241a128914befe9436513385babb0c481d52d65d17cdff7f43e2941",
+      "bytes": 18476,
+      "stats": {
+        "triangles": 206,
+        "vertices": 116,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.17599999904632568,
+            -0.10480000078678131,
+            0.0
+          ],
+          "max": [
+            0.17599999904632568,
+            0.12400000542402267,
+            0.3920000195503235
+          ]
+        },
+        "dimensions": [
+          0.35199999809265137,
+          0.22880000621080399,
+          0.3920000195503235
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-wall-compact-daeyang",
+        "form": "wall",
+        "size": "compact",
+        "scale": 0.8,
+        "organization": "daeyang",
+        "palette": {
+          "label": "Daeyang",
+          "body": "#0B2A5B",
+          "trim": "#C9CED6",
+          "accent": "#38D39F"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-wall-compact-falkenfeld-kessler",
+      "label": "Wandterminal · Kompakt · Falkenfeld-Kessler",
+      "file": "terminal-wall-compact-falkenfeld-kessler.glb",
+      "sha256": "ffb809860b74a93e0f041054afd65472ab2300a0798a0ba66f1ee2b762c6df42",
+      "bytes": 18528,
+      "stats": {
+        "triangles": 206,
+        "vertices": 116,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.17599999904632568,
+            -0.10480000078678131,
+            0.0
+          ],
+          "max": [
+            0.17599999904632568,
+            0.12400000542402267,
+            0.3920000195503235
+          ]
+        },
+        "dimensions": [
+          0.35199999809265137,
+          0.22880000621080399,
+          0.3920000195503235
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-wall-compact-falkenfeld-kessler",
+        "form": "wall",
+        "size": "compact",
+        "scale": 0.8,
+        "organization": "falkenfeld-kessler",
+        "palette": {
+          "label": "Falkenfeld-Kessler",
+          "body": "#2B2D31",
+          "trim": "#8A9097",
+          "accent": "#E06A1B"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-wall-compact-nakamura-lindahl",
+      "label": "Wandterminal · Kompakt · Nakamura-Lindahl",
+      "file": "terminal-wall-compact-nakamura-lindahl.glb",
+      "sha256": "4ef824c66b0e2f5c958a8abc1c09b0f358f8e2bff6caca01badd3fa4bc5e9a7d",
+      "bytes": 18504,
+      "stats": {
+        "triangles": 206,
+        "vertices": 116,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.17599999904632568,
+            -0.10480000078678131,
+            0.0
+          ],
+          "max": [
+            0.17599999904632568,
+            0.12400000542402267,
+            0.3920000195503235
+          ]
+        },
+        "dimensions": [
+          0.35199999809265137,
+          0.22880000621080399,
+          0.3920000195503235
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-wall-compact-nakamura-lindahl",
+        "form": "wall",
+        "size": "compact",
+        "scale": 0.8,
+        "organization": "nakamura-lindahl",
+        "palette": {
+          "label": "Nakamura-Lindahl",
+          "body": "#F4F1EA",
+          "trim": "#1F3A4D",
+          "accent": "#B3263A"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-wall-standard-daeyang",
+      "label": "Wandterminal · Standard · Daeyang",
+      "file": "terminal-wall-standard-daeyang.glb",
+      "sha256": "acdd2442272eb5d4b2bffee242816c6b2706a1257a2d0a34b1f912eb56723ccd",
+      "bytes": 18412,
+      "stats": {
+        "triangles": 206,
+        "vertices": 116,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.2199999988079071,
+            -0.13099999725818634,
+            0.0
+          ],
+          "max": [
+            0.2199999988079071,
+            0.1550000011920929,
+            0.49000000953674316
+          ]
+        },
+        "dimensions": [
+          0.4399999976158142,
+          0.28599999845027924,
+          0.49000000953674316
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-wall-standard-daeyang",
+        "form": "wall",
+        "size": "standard",
+        "scale": 1,
+        "organization": "daeyang",
+        "palette": {
+          "label": "Daeyang",
+          "body": "#0B2A5B",
+          "trim": "#C9CED6",
+          "accent": "#38D39F"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-wall-standard-falkenfeld-kessler",
+      "label": "Wandterminal · Standard · Falkenfeld-Kessler",
+      "file": "terminal-wall-standard-falkenfeld-kessler.glb",
+      "sha256": "f05717a2e5e5a5ddec52b4ef18c46fcbbf8e6ed0d97f8f16bd670f6bc261a543",
+      "bytes": 18468,
+      "stats": {
+        "triangles": 206,
+        "vertices": 116,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.2199999988079071,
+            -0.13099999725818634,
+            0.0
+          ],
+          "max": [
+            0.2199999988079071,
+            0.1550000011920929,
+            0.49000000953674316
+          ]
+        },
+        "dimensions": [
+          0.4399999976158142,
+          0.28599999845027924,
+          0.49000000953674316
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-wall-standard-falkenfeld-kessler",
+        "form": "wall",
+        "size": "standard",
+        "scale": 1,
+        "organization": "falkenfeld-kessler",
+        "palette": {
+          "label": "Falkenfeld-Kessler",
+          "body": "#2B2D31",
+          "trim": "#8A9097",
+          "accent": "#E06A1B"
+        },
+        "seed": 42
+      }
+    },
+    {
+      "id": "terminal-wall-standard-nakamura-lindahl",
+      "label": "Wandterminal · Standard · Nakamura-Lindahl",
+      "file": "terminal-wall-standard-nakamura-lindahl.glb",
+      "sha256": "b408dc9118e124a212d5bf778c35af0fd07418c76fae857da064708d74c68bb3",
+      "bytes": 18440,
+      "stats": {
+        "triangles": 206,
+        "vertices": 116,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.2199999988079071,
+            -0.13099999725818634,
+            0.0
+          ],
+          "max": [
+            0.2199999988079071,
+            0.1550000011920929,
+            0.49000000953674316
+          ]
+        },
+        "dimensions": [
+          0.4399999976158142,
+          0.28599999845027924,
+          0.49000000953674316
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-wall-standard-nakamura-lindahl",
+        "form": "wall",
+        "size": "standard",
+        "scale": 1,
+        "organization": "nakamura-lindahl",
+        "palette": {
+          "label": "Nakamura-Lindahl",
+          "body": "#F4F1EA",
+          "trim": "#1F3A4D",
+          "accent": "#B3263A"
+        },
+        "seed": 42
+      }
+    }
+  ]
+}

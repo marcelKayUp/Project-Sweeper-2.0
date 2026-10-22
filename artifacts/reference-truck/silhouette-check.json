@@ -1,0 +1,6 @@
+{
+  "iou": 0.9221024415826583,
+  "referenceMask": "manual annotation",
+  "modelMask": "actual Blender render alpha",
+  "status": "Diagnostic score against a single annotated view; no 3D accuracy claim"
+}

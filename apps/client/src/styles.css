@@ -1,0 +1,408 @@
+html,
+body,
+#root {
+  margin: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: #090c11;
+}
+
+.frame {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+}
+
+#battle-root,
+#battle-root canvas {
+  display: block;
+  width: 1920px;
+  height: 1080px;
+}
+
+.bar {
+  position: absolute;
+  z-index: 2;
+  left: 24px;
+  right: 24px;
+  bottom: 20px;
+  height: 92px;
+  display: grid;
+  grid-template-columns: 280px 1fr 1fr;
+  align-items: center;
+  gap: 18px;
+  padding: 0 22px;
+  color: #f6f3ec;
+  background: rgba(7, 9, 13, 0.9);
+  border: 1px solid #314056;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.unit,
+.shot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.shot {
+  padding-left: 18px;
+  border-left: 1px solid #2c384c;
+}
+
+.who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.who strong,
+.shot-copy strong {
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #d5deea;
+  font-size: 15px;
+}
+
+.pct {
+  font-family: Consolas, "Cascadia Mono", monospace;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 92px;
+}
+
+.shot-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.formula {
+  font-family: Consolas, "Cascadia Mono", monospace;
+  font-size: 15px;
+  color: #c9d3e2;
+}
+
+.kicker {
+  color: #9eabbd;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.shape {
+  width: 28px;
+  height: 28px;
+  flex: none;
+}
+
+.mission {
+  box-sizing: border-box;
+  width: 1920px;
+  height: 1080px;
+  display: grid;
+  grid-template-columns: 620px 1fr;
+  gap: 28px;
+  padding: 32px 36px;
+  color: #f6f3ec;
+  background: #090c11;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.mission-gate {
+  grid-template-columns: minmax(420px, 760px);
+  align-content: center;
+  justify-content: center;
+}
+
+.mission-card,
+.mission-side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.mission h1 {
+  margin: 0;
+  font-size: 42px;
+  line-height: 1.1;
+}
+
+.mission h2,
+.mission p {
+  margin: 0;
+}
+
+.mission label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+}
+
+.mission input,
+.mission button {
+  font: inherit;
+  color: #f6f3ec;
+}
+
+.mission input {
+  height: 42px;
+  padding: 0 12px;
+  background: #121820;
+  border: 1px solid #314056;
+}
+
+.mission button {
+  min-height: 42px;
+  padding: 0 14px;
+  background: #1a2433;
+  border: 1px solid #3d4e68;
+  cursor: pointer;
+}
+
+.mission button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.mission button:focus-visible,
+.mission input:focus-visible,
+.cell:focus-visible {
+  outline: 2px solid #f2c14e;
+  outline-offset: 2px;
+}
+
+.mission-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.mission-map {
+  display: grid;
+  grid-template-columns: repeat(20, 28px);
+  grid-template-rows: repeat(20, 28px);
+  width: 560px;
+  height: 560px;
+  align-self: center;
+}
+
+.cell {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #1c2633;
+  background: #121820;
+  color: #f6f3ec;
+  font-size: 11px;
+  line-height: 26px;
+}
+
+.kind-wall {
+  background: #2a3140;
+}
+
+.kind-extract {
+  background: #123028;
+  box-shadow: inset 0 0 0 2px #8fd0b0;
+}
+
+.kind-terminal {
+  background: #3a2a12;
+  font-weight: 700;
+}
+
+.kind-door,
+.kind-door-open {
+  background: #2a2438;
+  font-weight: 700;
+}
+
+.kind-cover {
+  background: #1d2830;
+  box-shadow: inset 4px 0 0 #8fb4d8;
+}
+
+.kind-runner {
+  border-radius: 50%;
+  background: #204060;
+  font-weight: 700;
+}
+
+.kind-enemy {
+  background: #5a2430;
+  clip-path: polygon(50% 8%, 92% 50%, 50% 92%, 8% 50%);
+  font-weight: 700;
+}
+
+.mission-slots {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mission-slots li {
+  display: grid;
+  grid-template-columns: 28px 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.runner-mark {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #204060;
+  border: 1px solid #8fb4d8;
+  font-size: 13px;
+}
+
+.mission-slots small {
+  display: block;
+  color: #9eabbd;
+}
+
+#iso-root,
+#iso-root canvas {
+  display: block;
+  width: 1920px;
+  height: 1080px;
+  outline: none;
+}
+
+.iso-panel {
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  left: 20px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px 18px;
+  color: #f6f3ec;
+  background: rgba(7, 9, 13, 0.9);
+  border: 1px solid #314056;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.iso-panel p,
+.iso-panel strong {
+  margin: 0;
+}
+
+.iso-panel strong {
+  font-size: 18px;
+  letter-spacing: 0.02em;
+}
+
+.iso-notice {
+  min-height: 1.2em;
+  color: #ffb4a8;
+}
+
+.iso-hint {
+  color: #9eabbd;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.iso-steps,
+.iso-camera {
+  display: grid;
+  gap: 8px;
+}
+
+.iso-steps {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.iso-north {
+  grid-column: 2;
+}
+
+.iso-west {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.iso-east {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.iso-south {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.iso-camera {
+  grid-template-columns: 1fr 1fr;
+}
+
+.iso-panel button {
+  height: 36px;
+  color: #f6f3ec;
+  background: #1a2433;
+  border: 1px solid #3d516c;
+  font: inherit;
+  cursor: pointer;
+}
+
+.iso-panel button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.iso-panel button[aria-pressed="true"] {
+  border-color: #f2c14e;
+}
+
+.sight-panel {
+  width: 320px;
+  max-height: 1040px;
+  overflow: auto;
+}
+
+.iso-panel input,
+.iso-panel select {
+  height: 36px;
+  padding: 0 8px;
+  color: #f6f3ec;
+  background: #121820;
+  border: 1px solid #314056;
+  font: inherit;
+}
+
+.iso-form {
+  display: flex;
+  gap: 8px;
+}
+
+.iso-form input {
+  width: 88px;
+}
+
+.iso-shot {
+  min-height: 2.6em;
+  color: #d5deea;
+}

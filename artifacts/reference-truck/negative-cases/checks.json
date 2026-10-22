@@ -1,0 +1,18 @@
+[
+  {
+    "case": "unsupported-version",
+    "rejected": "Unsupported pilot recipe"
+  },
+  {
+    "case": "nonfinite-landmark",
+    "rejected": "Landmarks must be finite"
+  },
+  {
+    "case": "width-count-mismatch",
+    "rejected": "Profile/width annotation mismatch: cargo"
+  },
+  {
+    "case": "negative-width",
+    "rejected": "Invalid profile values: cargo"
+  }
+]

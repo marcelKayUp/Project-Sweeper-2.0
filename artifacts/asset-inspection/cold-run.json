@@ -1,0 +1,30 @@
+{
+  "files": 131,
+  "bytes": 88036620,
+  "cacheHits": 0,
+  "inspected": 132,
+  "errors": 0,
+  "categories": {
+    "characters": 1,
+    "weapons": 57,
+    "components": 73
+  },
+  "renderErrors": 0,
+  "sourceUnchanged": true,
+  "sourceChanges": [],
+  "licenseFiles": [],
+  "duplicateFileGroups": [],
+  "duplicateGeometryGroups": 3,
+  "triangles": {
+    "weapons": {
+      "min": 668,
+      "max": 4901
+    },
+    "components": {
+      "min": 156,
+      "max": 2537
+    }
+  },
+  "thumbnails": 140,
+  "elapsedSeconds": 17.99
+}

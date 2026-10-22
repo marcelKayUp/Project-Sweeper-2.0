@@ -1,0 +1,350 @@
+{
+  "passed": true,
+  "source": "artifacts\\characters\\modular\\female-casual.glb",
+  "catalog": "apps\\client\\public\\assets\\characters\\women\\catalog.json",
+  "sourceId": "modular-women-v1",
+  "blender": "5.2.2 LTS",
+  "bones": 62,
+  "skinnedMeshObjects": 9,
+  "gearObjects": 0,
+  "nativeUnskinnedGearObjects": 0,
+  "gearAttachments": {},
+  "weightValidation": {
+    "verticesChecked": 12968,
+    "maxInfluences": 4,
+    "sumRange": [
+      0.9999998956918716,
+      1.0000000856816769
+    ]
+  },
+  "triangles": 6424,
+  "restBounds": {
+    "min": [
+      -0.46775972843170166,
+      -0.1535351425409317,
+      0.0
+    ],
+    "max": [
+      0.4677596688270569,
+      0.0563897043466568,
+      1.0500001907348633
+    ]
+  },
+  "height": 1.0500001907348633,
+  "animations": {
+    "Death": {
+      "action": "Death",
+      "frames": [
+        0.0,
+        25.60000228881836
+      ],
+      "maxRestVertexDisplacement": 1.3449931866678952,
+      "maxTemporalVertexVariation": 1.3584509377716085,
+      "sampledFloorRange": [
+        -0.04011610150337219,
+        -3.890134394168854e-06
+      ]
+    },
+    "Gun_Shoot": {
+      "action": "Gun_Shoot",
+      "frames": [
+        0.0,
+        14.40000057220459
+      ],
+      "maxRestVertexDisplacement": 0.5605940898589296,
+      "maxTemporalVertexVariation": 0.19957432194028651,
+      "sampledFloorRange": [
+        -3.890134394168854e-06,
+        -3.890134394168854e-06
+      ]
+    },
+    "HitRecieve": {
+      "action": "HitRecieve",
+      "frames": [
+        0.0,
+        13.600000381469727
+      ],
+      "maxRestVertexDisplacement": 0.5611487883559142,
+      "maxTemporalVertexVariation": 0.17959421087315278,
+      "sampledFloorRange": [
+        -3.890134394168854e-06,
+        -3.890134394168854e-06
+      ]
+    },
+    "HitRecieve_2": {
+      "action": "HitRecieve_2",
+      "frames": [
+        0.0,
+        13.600000381469727
+      ],
+      "maxRestVertexDisplacement": 0.546077567197227,
+      "maxTemporalVertexVariation": 0.12966590314826654,
+      "sampledFloorRange": [
+        -3.890134394168854e-06,
+        -3.890134394168854e-06
+      ]
+    },
+    "Idle": {
+      "action": "Idle",
+      "frames": [
+        0.0,
+        40.0
+      ],
+      "maxRestVertexDisplacement": 0.5444715616005006,
+      "maxTemporalVertexVariation": 0.01781117744686619,
+      "sampledFloorRange": [
+        -3.890134394168854e-06,
+        -3.890134394168854e-06
+      ]
+    },
+    "Idle_Gun": {
+      "action": "Idle_Gun",
+      "frames": [
+        0.0,
+        40.0
+      ],
+      "maxRestVertexDisplacement": 0.5444715616005006,
+      "maxTemporalVertexVariation": 0.01781117744686619,
+      "sampledFloorRange": [
+        -3.890134394168854e-06,
+        -3.890134394168854e-06
+      ]
+    },
+    "Idle_Gun_Pointing": {
+      "action": "Idle_Gun_Pointing",
+      "frames": [
+        0.0,
+        40.0
+      ],
+      "maxRestVertexDisplacement": 0.5605940898589296,
+      "maxTemporalVertexVariation": 0.027825075394511734,
+      "sampledFloorRange": [
+        -3.890134394168854e-06,
+        -3.890134394168854e-06
+      ]
+    },
+    "Idle_Gun_Shoot": {
+      "action": "Idle_Gun_Shoot",
+      "frames": [
+        0.0,
+        16.0
+      ],
+      "maxRestVertexDisplacement": 0.5605940898589296,
+      "maxTemporalVertexVariation": 0.0779355743980516,
+      "sampledFloorRange": [
+        -3.890134394168854e-06,
+        -3.890134394168854e-06
+      ]
+    },
+    "Idle_Neutral": {
+      "action": "Idle_Neutral",
+      "frames": [
+        0.0,
+        40.0
+      ],
+      "maxRestVertexDisplacement": 0.5224896567056624,
+      "maxTemporalVertexVariation": 0.01343557778268699,
+      "sampledFloorRange": [
+        -1.30385160446167e-08,
+        -1.30385160446167e-08
+      ]
+    },
+    "Idle_Sword": {
+      "action": "Idle_Sword",
+      "frames": [
+        0.0,
+        40.0
+      ],
+      "maxRestVertexDisplacement": 0.5444715616005006,
+      "maxTemporalVertexVariation": 0.01781117744686619,
+      "sampledFloorRange": [
+        -3.890134394168854e-06,
+        -3.890134394168854e-06
+      ]
+    },
+    "Interact": {
+      "action": "Interact",
+      "frames": [
+        0.0,
+        30.399999618530273
+      ],
+      "maxRestVertexDisplacement": 0.5425227135468351,
+      "maxTemporalVertexVariation": 0.5041920772560139,
+      "sampledFloorRange": [
+        -3.890134394168854e-06,
+        -3.890134394168854e-06
+      ]
+    },
+    "Kick_Left": {
+      "action": "Kick_Left",
+      "frames": [
+        0.0,
+        22.399999618530273
+      ],
+      "maxRestVertexDisplacement": 0.8329814722616323,
+      "maxTemporalVertexVariation": 0.9722206682456981,
+      "sampledFloorRange": [
+        -3.896653652191162e-06,
+        0.0045487661845982075
+      ]
+    },
+    "Kick_Right": {
+      "action": "Kick_Right",
+      "frames": [
+        0.0,
+        22.399999618530273
+      ],
+      "maxRestVertexDisplacement": 0.8329814722627893,
+      "maxTemporalVertexVariation": 0.9722206672877648,
+      "sampledFloorRange": [
+        -3.896653652191162e-06,
+        0.004548761993646622
+      ]
+    },
+    "Punch_Left": {
+      "action": "Punch_Left",
+      "frames": [
+        0.0,
+        20.0
+      ],
+      "maxRestVertexDisplacement": 0.5894732969838036,
+      "maxTemporalVertexVariation": 0.29279235834531764,
+      "sampledFloorRange": [
+        -3.896653652191162e-06,
+        2.1099112927913666e-06
+      ]
+    },
+    "Punch_Right": {
+      "action": "Punch_Right",
+      "frames": [
+        0.0,
+        20.0
+      ],
+      "maxRestVertexDisplacement": 0.5891783447341373,
+      "maxTemporalVertexVariation": 0.29286223809898665,
+      "sampledFloorRange": [
+        -3.896653652191162e-06,
+        2.1099112927913666e-06
+      ]
+    },
+    "Roll": {
+      "action": "Roll",
+      "frames": [
+        0.0,
+        32.0
+      ],
+      "maxRestVertexDisplacement": 0.9403843957921757,
+      "maxTemporalVertexVariation": 0.8976220203143167,
+      "sampledFloorRange": [
+        -0.00011457782238721848,
+        0.024396875873208046
+      ]
+    },
+    "Run": {
+      "action": "Run",
+      "frames": [
+        0.0,
+        19.200000762939453
+      ],
+      "maxRestVertexDisplacement": 0.5576186975042008,
+      "maxTemporalVertexVariation": 0.6242225067150357,
+      "sampledFloorRange": [
+        2.1131709218025208e-06,
+        0.015637164935469627
+      ]
+    },
+    "Run_Back": {
+      "action": "Run_Back",
+      "frames": [
+        0.0,
+        20.0
+      ],
+      "maxRestVertexDisplacement": 0.5197129559232064,
+      "maxTemporalVertexVariation": 0.4919343821243944,
+      "sampledFloorRange": [
+        -0.00014278339222073555,
+        0.022089194506406784
+      ]
+    },
+    "Run_Left": {
+      "action": "Run_Left",
+      "frames": [
+        0.0,
+        19.200000762939453
+      ],
+      "maxRestVertexDisplacement": 0.5508783234618698,
+      "maxTemporalVertexVariation": 0.6242225707765852,
+      "sampledFloorRange": [
+        -7.041729986667633e-06,
+        0.015531463548541069
+      ]
+    },
+    "Run_Right": {
+      "action": "Run_Right",
+      "frames": [
+        0.0,
+        19.200000762939453
+      ],
+      "maxRestVertexDisplacement": 0.5508783099369581,
+      "maxTemporalVertexVariation": 0.6242225191170538,
+      "sampledFloorRange": [
+        -7.041729986667633e-06,
+        0.015531463548541069
+      ]
+    },
+    "Run_Shoot": {
+      "action": "Run_Shoot",
+      "frames": [
+        0.0,
+        20.0
+      ],
+      "maxRestVertexDisplacement": 0.5576186975042008,
+      "maxTemporalVertexVariation": 0.6134220223928265,
+      "sampledFloorRange": [
+        -0.00014278339222073555,
+        0.01834658719599247
+      ]
+    },
+    "Sword_Slash": {
+      "action": "Sword_Slash",
+      "frames": [
+        0.0,
+        24.799999237060547
+      ],
+      "maxRestVertexDisplacement": 0.6309542168528058,
+      "maxTemporalVertexVariation": 0.5116096555010452,
+      "sampledFloorRange": [
+        -3.890134394168854e-06,
+        2.1257437765598297e-06
+      ]
+    },
+    "Walk": {
+      "action": "Walk",
+      "frames": [
+        0.0,
+        32.0
+      ],
+      "maxRestVertexDisplacement": 0.6013537019789161,
+      "maxTemporalVertexVariation": 0.5431981882907794,
+      "sampledFloorRange": [
+        0.0015156152658164501,
+        0.008523489348590374
+      ]
+    },
+    "Wave": {
+      "action": "Wave",
+      "frames": [
+        0.0,
+        40.0
+      ],
+      "maxRestVertexDisplacement": 0.5444423078258713,
+      "maxTemporalVertexVariation": 0.6749303889750433,
+      "sampledFloorRange": [
+        -3.890134394168854e-06,
+        -3.890134394168854e-06
+      ]
+    }
+  },
+  "blend": "assets\\source\\characters\\women\\casual-workshop.blend",
+  "note": "Five samples per native clip; each clip must change skinned vertex positions over time. Gear must remain a stable Middle1.R bone child and move with the hand. Human movement/art acceptance remains open."
+}

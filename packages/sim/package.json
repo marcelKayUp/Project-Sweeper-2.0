@@ -1,0 +1,28 @@
+{
+  "name": "@neon/sim",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./layout": {
+      "types": "./src/ghostFloorLayout.ts",
+      "default": "./src/ghostFloorLayout.ts"
+    },
+    "./ghost-floor": {
+      "types": "./src/ghostFloor.ts",
+      "default": "./src/ghostFloor.ts"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}

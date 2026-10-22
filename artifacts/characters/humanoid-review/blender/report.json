@@ -1,0 +1,205 @@
+{
+  "blenderVersion": "5.2.2 LTS",
+  "source": "artifacts\\characters\\humanoid-review\\neon-runner.glb",
+  "blend": "assets\\source\\characters\\neon-runner-humanoid-review.blend",
+  "meshCount": 37,
+  "importerHelperCount": 1,
+  "boneCount": 19,
+  "triangles": 1780,
+  "restBounds": {
+    "min": [
+      -0.23778599500656128,
+      -0.1495094895362854,
+      -4.9737990656174066e-15
+    ],
+    "max": [
+      0.23778599500656128,
+      0.08413815498352051,
+      1.0320316553115845
+    ]
+  },
+  "clips": {
+    "idle": {
+      "action": "idle",
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "bounds": {
+        "min": [
+          -0.25637125968933105,
+          -0.15869185328483582,
+          -4.9737990656174066e-15
+        ],
+        "max": [
+          0.2558774948120117,
+          0.08107884228229523,
+          1.032516598701477
+        ]
+      },
+      "maxVertexDisplacement": 0.037102957436477665,
+      "floorSamples": 31,
+      "floorRange": [
+        -4.9737990656174066e-15,
+        -4.9737990656174066e-15
+      ]
+    },
+    "walk": {
+      "action": "walk",
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "bounds": {
+        "min": [
+          -0.29612910747528076,
+          -0.280233234167099,
+          3.262888640165329e-05
+        ],
+        "max": [
+          0.2536008954048157,
+          0.2027123123407364,
+          1.0371055603027344
+        ]
+      },
+      "maxVertexDisplacement": 0.2643809686903195,
+      "floorSamples": 31,
+      "floorRange": [
+        -2.2094696760177612e-05,
+        3.289594314992428e-05
+      ]
+    },
+    "crouch": {
+      "action": "crouch",
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "bounds": {
+        "min": [
+          -0.3830029368400574,
+          -0.32037970423698425,
+          -4.6566128730773926e-08
+        ],
+        "max": [
+          0.2611617147922516,
+          0.08107884228229523,
+          0.973180890083313
+        ]
+      },
+      "maxVertexDisplacement": 0.29687466109642335,
+      "floorSamples": 31,
+      "floorRange": [
+        -6.612390279769897e-08,
+        4.6566128730773926e-08
+      ]
+    },
+    "shoot": {
+      "action": "shoot",
+      "frames": [
+        0.0,
+        14.40000057220459
+      ],
+      "bounds": {
+        "min": [
+          -0.23024313151836395,
+          -0.35741305351257324,
+          -4.9737990656174066e-15
+        ],
+        "max": [
+          0.23776775598526,
+          0.08610677719116211,
+          1.032545804977417
+        ]
+      },
+      "maxVertexDisplacement": 0.5611615217109626,
+      "floorSamples": 20,
+      "floorRange": [
+        -4.9737990656174066e-15,
+        -4.9737990656174066e-15
+      ]
+    },
+    "reload": {
+      "action": "reload",
+      "frames": [
+        0.0,
+        16.799999237060547
+      ],
+      "bounds": {
+        "min": [
+          -0.23301850259304047,
+          -0.3061625361442566,
+          -4.9737990656174066e-15
+        ],
+        "max": [
+          0.23777617514133453,
+          0.08107884228229523,
+          1.0300891399383545
+        ]
+      },
+      "maxVertexDisplacement": 0.4459059842875023,
+      "floorSamples": 22,
+      "floorRange": [
+        -4.9737990656174066e-15,
+        -4.9737990656174066e-15
+      ]
+    },
+    "hit": {
+      "action": "hit",
+      "frames": [
+        0.0,
+        12.0
+      ],
+      "bounds": {
+        "min": [
+          -0.4405132532119751,
+          -0.2597554624080658,
+          -3.70966263290029e-05
+        ],
+        "max": [
+          0.310217022895813,
+          0.10296936333179474,
+          1.0444414615631104
+        ]
+      },
+      "maxVertexDisplacement": 0.3761381594679658,
+      "floorSamples": 16,
+      "floorRange": [
+        -3.5006553389393957e-06,
+        7.63232856115792e-06
+      ]
+    },
+    "death": {
+      "action": "death",
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "bounds": {
+        "min": [
+          -0.3716614246368408,
+          -0.2700865864753723,
+          -6.461748853325844e-05
+        ],
+        "max": [
+          0.4478251338005066,
+          0.10120062530040741,
+          0.975877583026886
+        ]
+      },
+      "maxVertexDisplacement": 0.4541594765761865,
+      "floorSamples": 31,
+      "floorRange": [
+        -0.00019368529319763184,
+        0.00036475807428359985
+      ]
+    }
+  },
+  "renders": [
+    "artifacts\\characters\\humanoid-review\\blender\\iso.png",
+    "artifacts\\characters\\humanoid-review\\blender\\front.png",
+    "artifacts\\characters\\humanoid-review\\blender\\back.png",
+    "artifacts\\characters\\humanoid-review\\blender\\walk.png"
+  ],
+  "humanArtAcceptance": "open"
+}

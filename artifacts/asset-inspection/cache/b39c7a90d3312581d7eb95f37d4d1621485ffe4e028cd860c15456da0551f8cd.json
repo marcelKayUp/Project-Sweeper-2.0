@@ -1,0 +1,167 @@
+{
+  "path": "Weapons/SubmachineGun_3.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "SubmachineGun_3",
+      "vertices": 893,
+      "triangles": 1566,
+      "shapeHash": "6151fb8d4f62e1af30252154c992d525a31e84de3e7317382bd8b6e741e21612",
+      "materials": [
+        "DarkMetal",
+        "Metal",
+        "Black",
+        "Grey"
+      ],
+      "modifiers": [],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -1.8753817081451416,
+          -0.15927273035049438,
+          -0.7510135173797607
+        ],
+        "max": [
+          2.122203826904297,
+          0.15927261114120483,
+          0.7716272473335266
+        ],
+        "size": [
+          3.9975855350494385,
+          0.3185453414916992,
+          1.5226407647132874
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 1566,
+  "bounds": {
+    "min": [
+      -1.8753817081451416,
+      -0.15927273035049438,
+      -0.7510135173797607
+    ],
+    "max": [
+      2.122203826904297,
+      0.15927261114120483,
+      0.7716272473335266
+    ],
+    "size": [
+      3.9975855350494385,
+      0.3185453414916992,
+      1.5226407647132874
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkMetal",
+      "diffuseColor": [
+        0.04699999839067459,
+        0.04695870354771614,
+        0.045788172632455826,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.04111980274319649,
+        0.042213838547468185,
+        0.04445183649659157,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Metal",
+      "diffuseColor": [
+        0.0666259378194809,
+        0.06847818195819855,
+        0.06700000166893005,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "SubmachineGun_3",
+      "file": "thumbs/b39c7a90d3312581d7eb95f37d4d1621485ffe4e028cd860c15456da0551f8cd-0.png",
+      "category": "weapons",
+      "parts": [
+        "SubmachineGun_3"
+      ],
+      "triangles": 1566
+    }
+  ],
+  "fileSha256": "caf601b35d109eb7f6a726fcc50b920cc21f348ebd80840d16ee8162886c8eac",
+  "bytes": 584572,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

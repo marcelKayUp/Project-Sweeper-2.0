@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "categories": {
+    "vehicle": {"symmetryCandidates": ["bilateral-body", "repeated-wheels"], "primitives": ["profile", "box", "cylinder"]},
+    "furniture": {"symmetryCandidates": ["bilateral-body", "repeated-supports", "rotational-body"], "primitives": ["box", "profile", "cylinder"]},
+    "plant": {"symmetryCandidates": ["branching", "statistical-repetition"], "primitives": ["branch", "leaf"]},
+    "weapon": {"symmetryCandidates": ["rotational-barrel", "bilateral-body"], "primitives": ["profile", "box", "cylinder"]},
+    "device": {"symmetryCandidates": ["bilateral-body", "repeated-controls"], "primitives": ["box", "profile", "cylinder"]},
+    "unknown": {"symmetryCandidates": [], "primitives": []}
+  },
+  "constructions": ["manufactured-planar", "manufactured-curved", "manufactured-mixed", "organic", "mixed", "unknown"],
+  "boundaryKinds": ["silhouette", "crease", "part-seam", "appearance", "lighting", "occlusion", "unknown"],
+  "geometryBoundaryKinds": ["silhouette", "crease"],
+  "symmetryStatuses": ["candidate", "supported", "assumed", "rejected", "unknown"]
+}

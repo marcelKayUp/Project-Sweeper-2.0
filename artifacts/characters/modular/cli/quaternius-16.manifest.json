@@ -1,0 +1,86 @@
+{
+  "assetId": "quaternius-16",
+  "generator": "NEON CONTRACT Character Creator",
+  "generatorVersion": "quaternius-modular-1.0.0",
+  "nodeVersion": "v24.14.0",
+  "babylonVersion": "9.31.2",
+  "specification": {
+    "schemaVersion": 2,
+    "source": "quaternius-modular-men-v1",
+    "id": "quaternius-16",
+    "seed": 42,
+    "stature": 1,
+    "parts": {
+      "head": "Punk",
+      "body": "Farmer",
+      "legs": "Swat",
+      "feet": "SpaceSuit"
+    },
+    "equipment": "none",
+    "palette": {
+      "skin": null,
+      "hair": null,
+      "cloth": null,
+      "armor": null,
+      "accent": null
+    }
+  },
+  "stats": {
+    "triangles": 6958,
+    "vertices": 13831,
+    "materials": 13,
+    "bones": 62,
+    "height": 1.05
+  },
+  "clips": [
+    "Death",
+    "Gun_Shoot",
+    "HitRecieve",
+    "HitRecieve_2",
+    "Idle",
+    "Idle_Gun",
+    "Idle_Gun_Pointing",
+    "Idle_Gun_Shoot",
+    "Idle_Neutral",
+    "Idle_Sword",
+    "Interact",
+    "Kick_Left",
+    "Kick_Right",
+    "Punch_Left",
+    "Punch_Right",
+    "Roll",
+    "Run",
+    "Run_Back",
+    "Run_Left",
+    "Run_Right",
+    "Run_Shoot",
+    "Sword_Slash",
+    "Walk",
+    "Wave"
+  ],
+  "source": {
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "url": "https://quaternius.com/packs/ultimatemodularcharacters.html",
+    "sourceId": "quaternius-modular-men-v1",
+    "assetSha256": "aa1758971ffad9e15e2aab5ed87f5a7125d090f07119cfaff2ed2b57ba64aeb7",
+    "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9"
+  },
+  "recipeHashes": {
+    "packages/characters/src/buildCharacter.ts": "c6b97c70efcf4b101d3480e85300a57b6fbf1e717f61f5670eab6e006be86343",
+    "packages/characters/src/index.ts": "f4cbbe83fbd9f1b88126048e37ccdcae27eb3a456ad43eb653779f16751e40fa",
+    "packages/characters/src/modularSpec.ts": "44789c2665ffd4ecb674fed9b42687856808e366717ec7c791c34ae85868aca5",
+    "packages/characters/src/spec.ts": "3182b5a85a3671b3513f7cee3fd466733f81c16c0944d15d0cf1b570ccd44ff5",
+    "packages/characters/src/types.ts": "0dec72ad7a9e0983882d2b1f2bdb9130163d46d2755be6f02727a485d7942b24",
+    "apps/client/src/characters/modularPreview.ts": "38b982adc3a3611a2195362830c0b636ed04bd949a48d0b2c04dfb8d69e9faa4",
+    "tools/characters/generate-character.mjs": "17481370d95e8cc92cefd1dcc82adb69c49766c278c54b0220d66459198097d3",
+    "pnpm-lock.yaml": "32bc7ed73977a5f6ff693b3bc3cfb7cc0e338b9c381495f00e01321b85ffaa7a",
+    "tools/characters/export_modular_master.py": "e94906dbdc0610a84239e4c94ade71c6dc19de9af4a9a7f2a85c9eb2786ea483",
+    "apps/client/public/assets/characters/quaternius/catalog.json": "e07952e81e31c3514a399a8163e8f04803f14df5bd31cdc52590f2a2b8600534"
+  },
+  "files": {
+    "quaternius-16.glb": "b7505af3656c19f41b53582354f47daecd8dada9986d7ac888904edaee20ed6b",
+    "quaternius-16.json": "a1b29edf2490d1ea3b8a53e26865ee7dcf6fd409ab806361475ea0c574c20750"
+  },
+  "humanArtAcceptance": "open"
+}

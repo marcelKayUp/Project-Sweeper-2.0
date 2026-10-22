@@ -1,0 +1,169 @@
+{
+  "path": "Weapons/modular Weapons/Grip_Pistol_1.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Grip_Pistol_1",
+      "vertices": 526,
+      "triangles": 1014,
+      "shapeHash": "a44329a99f873a5b5d3e5a93b6f16d3aa0a879e0f5701a57263249041f0a3086",
+      "materials": [
+        "Black",
+        "Grey",
+        "White",
+        "Main"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.1888427734375,
+          -0.04871993511915207,
+          -0.15639013051986694
+        ],
+        "max": [
+          0.4664932191371918,
+          0.04871988669037819,
+          0.20147769153118134
+        ],
+        "size": [
+          0.6553359925746918,
+          0.09743982180953026,
+          0.3578678220510483
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 1014,
+  "bounds": {
+    "min": [
+      -0.1888427734375,
+      -0.04871993511915207,
+      -0.15639013051986694
+    ],
+    "max": [
+      0.4664932191371918,
+      0.04871988669037819,
+      0.20147769153118134
+    ],
+    "size": [
+      0.6553359925746918,
+      0.09743982180953026,
+      0.3578678220510483
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Grip_Pistol_1",
+      "file": "thumbs/76ebbcf9e5c63a285c6c9a66637d297861b37009bd50007192a4cbb01b69738e-0.png",
+      "category": "components",
+      "parts": [
+        "Grip_Pistol_1"
+      ],
+      "triangles": 1014
+    }
+  ],
+  "fileSha256": "1892351f8599b8ebcf86fbd1cd8aa0e2369b833e77669b126d401e27742f8e12",
+  "bytes": 606088,
+  "inspectorKey": "cd7358ff160fbb070b5f8fc4e2ffd138955146420a9b39a6462eafc8c1fe5591"
+}

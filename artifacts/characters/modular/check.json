@@ -1,0 +1,485 @@
+{
+  "passed": true,
+  "check": "modular-character-workshop",
+  "assertions": [
+    {
+      "name": "source library validates",
+      "detail": {
+        "meshes": 47,
+        "joints": 62,
+        "clips": 24,
+        "sha256": "24b97f51739924047948d846e1ed88dd103e2171ceef29d2c73fc8c2269a0ee7"
+      }
+    },
+    {
+      "name": "all eleven native sets export through the shared rig",
+      "detail": {
+        "Adventurer": 8450,
+        "Beach": 6578,
+        "Casual": 6206,
+        "Casual2": 5776,
+        "Farmer": 5476,
+        "King": 11110,
+        "Punk": 5500,
+        "SpaceSuit": 10558,
+        "Suit": 6634,
+        "Swat": 7754,
+        "Worker": 5240
+      }
+    },
+    {
+      "name": "mixed source parts, palette overrides, stature and all three equipment meshes export"
+    },
+    {
+      "name": "all ten female sets and both native bone-attached weapons preserve the female rig"
+    },
+    {
+      "name": "browser presets, source validation, seed determinism, cameras and all 24 clips",
+      "detail": {
+        "width": 748,
+        "height": 505,
+        "context": true
+      }
+    },
+    {
+      "name": "download contains selected parts only and is identical during playback/pause"
+    },
+    {
+      "name": "female selector, ten sets, native bind rig, paused export, JSON source roundtrip and independent drafts"
+    },
+    {
+      "name": "independent editors and desktop layout"
+    },
+    {
+      "name": "asset load failure is explained and retry recovers"
+    },
+    {
+      "name": "female load failure blocks export, male remains usable and female reload recovers"
+    }
+  ],
+  "exports": {
+    "Adventurer": {
+      "sha256": "d8069e40fefc5ded14d01cdf5fb3993733a0baa5e04926d1d54adda76f59c702",
+      "bytes": 5259596,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 10,
+      "triangles": 8450,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "Beach": {
+      "sha256": "3da0450547b08bae539777a3342f478973a9a7fe939ab72b4b06c65c2f3c6540",
+      "bytes": 5057920,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 8,
+      "triangles": 6578,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "Casual": {
+      "sha256": "4f7578127140677e62b0ca301c8746a724b3d4239ea75d0ddf6eabfe365da306",
+      "bytes": 5013544,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 7,
+      "triangles": 6206,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "Casual2": {
+      "sha256": "cf892724b61ce7028afba25bcfb1978f1ee88d852310f43a8334b1c3aa15dfbd",
+      "bytes": 4973092,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 9,
+      "triangles": 5776,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "Farmer": {
+      "sha256": "36d9be154fa71d3e8be7ae2021b41e66354804a6843452dba874d7fa772ec316",
+      "bytes": 4932380,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 8,
+      "triangles": 5476,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "King": {
+      "sha256": "4d12ba5c70fac79fc797c74e38f56cd0064253ff53fa4c2d1c7d1d8085858952",
+      "bytes": 5516296,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 9,
+      "triangles": 11110,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "Punk": {
+      "sha256": "19810ae48bf95538aeee877c643bb3afc6ab26f40e836ba1f92aa2aa4f245bec",
+      "bytes": 4935180,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 9,
+      "triangles": 5500,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "SpaceSuit": {
+      "sha256": "61858388212e9778e08c76e1b370530baa67246ea7b10bed3edfc427628242c5",
+      "bytes": 5449072,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 5,
+      "triangles": 10558,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "Suit": {
+      "sha256": "7c8ebcbae0e8998266e1d61327cc4e126c351a71f6de99a199770f9e0263a458",
+      "bytes": 5063408,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 8,
+      "triangles": 6634,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "Swat": {
+      "sha256": "f4b1d4cec02ae6d8852d6cba480e56f2247079d1711ec427f5aa63a16ccc0014",
+      "bytes": 5103824,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 4,
+      "triangles": 7754,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "Worker": {
+      "sha256": "d679a328ee7851efad6917c0a85a8b72de11d22a878bfc1459fd7eaf3e375373",
+      "bytes": 4907756,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 11,
+      "triangles": 5240,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "pistol": {
+      "sha256": "ab70f04cefd11af48282405e933584f795c1ae777845efdcb89dad2c94c6c127",
+      "bytes": 5055064,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 14,
+      "triangles": 6772,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "sword": {
+      "sha256": "2121247073eb7e91c76b8650932b67fbb95ce873cdfd038069af5b9ebbaff200",
+      "bytes": 5029224,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 14,
+      "triangles": 6604,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "backpack": {
+      "sha256": "545d4643c807ef7f3c75344c4d79f6bf2a53c4594e6bc0a134fbca6123aa0494",
+      "bytes": 5128652,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 15,
+      "triangles": 7484,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "female-Adventurer": {
+      "sha256": "0b0364abf4e75e5dda7f97252de16130aede008554909e3ff86a640015a9249a",
+      "bytes": 5086156,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 9,
+      "triangles": 6812,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "female-Casual": {
+      "sha256": "a995f6875911757eb3a77067a8d2120594a9b838e71fc71b6f6ed5118e4351fc",
+      "bytes": 5036980,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 7,
+      "triangles": 6424,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "female-Formal": {
+      "sha256": "4a37b16913a49a4a37499133f52dd9c3074d62095d9e18e0cb3f1f56870af72f",
+      "bytes": 4999332,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 5,
+      "triangles": 6108,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "female-Medieval": {
+      "sha256": "54d86dcdbb6bcbabbc2d04b6abfcb6c513c68fb8b22f8b5f99534a22c917c2af",
+      "bytes": 5039720,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 8,
+      "triangles": 6404,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "female-Punk": {
+      "sha256": "b6424c9236e4f687b17b5dacf862df042694130c5b551fbe5ee4cc59df29efae",
+      "bytes": 4975972,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 6,
+      "triangles": 5956,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "female-SciFi": {
+      "sha256": "eea324cf9c92da1dea13492e178e925f6a3fe79d126eea5dee5761d6555b36be",
+      "bytes": 5107752,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 7,
+      "triangles": 6998,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "female-Soldier": {
+      "sha256": "3260c0b7f4973ff810f5d467592ddea0ea2c3de1ddf05e84b46e2bc6102ed11d",
+      "bytes": 5199196,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 6,
+      "triangles": 7900,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "female-Suit": {
+      "sha256": "51498d74eaf1b524e14ff0dc9a827bbb3bd2989c70b6e4cb80fe5d07eb08f715",
+      "bytes": 5041752,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 6,
+      "triangles": 6482,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "female-Witch": {
+      "sha256": "cbf8fe0d7b9215ad9ca582543aac88eb82e38b9d608c027af8b756062d62fa64",
+      "bytes": 5091104,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 6,
+      "triangles": 6872,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "female-Worker": {
+      "sha256": "4e7e11ceeae609c0ed9e3359410521aeaa02f7a879639db459f63852a4b66e98",
+      "bytes": 5006952,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 9,
+      "triangles": 6112,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "female-pistol": {
+      "sha256": "40cefdee106a539837a830fcde811e3a6135abea71af62439bb86efa5d7aef02",
+      "bytes": 5255168,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 7,
+      "triangles": 8940,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "female-sword": {
+      "sha256": "ebf803d63b628fb14367c22187e2643c77b7b29305e0db76183037ecdce8248c",
+      "bytes": 5241000,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 9,
+      "triangles": 8772,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "browser": {
+      "sha256": "cf892724b61ce7028afba25bcfb1978f1ee88d852310f43a8334b1c3aa15dfbd",
+      "bytes": 4973092,
+      "source": "quaternius-modular-men-v1",
+      "sourceBlendSha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9",
+      "bindHash": "3e834d02c3729c4b24c3886877377d86e176678df33da95f3d7e1c9a42e641f7",
+      "joints": 62,
+      "clips": 24,
+      "materials": 9,
+      "triangles": 5776,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "browserFemale": {
+      "sha256": "af30cf3dede681c4b15c622680bf324baa149437133b64c9585f617412fff64f",
+      "bytes": 5090496,
+      "source": "modular-women-v1",
+      "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+      "bindHash": "bfd670c48a22c23bed92bcfd9ecd7d6a420ac0c4039c49045f18acb5f37e8bf4",
+      "joints": 62,
+      "clips": 24,
+      "materials": 8,
+      "triangles": 7480,
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    }
+  },
+  "pageErrors": [],
+  "warnings": [],
+  "browser": "155.0.8059.85"
+}

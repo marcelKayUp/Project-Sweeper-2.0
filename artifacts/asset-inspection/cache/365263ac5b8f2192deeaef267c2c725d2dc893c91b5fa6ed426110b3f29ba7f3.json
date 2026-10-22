@@ -1,0 +1,115 @@
+{
+  "path": "Weapons/modular Weapons/Magazine_Sniper_1.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Magazine_Sniper_1",
+      "vertices": 120,
+      "triangles": 232,
+      "shapeHash": "c57d34e082b72f1a6b81cc5097a20a3e4cad0ec748f62b4736321a539cbf85b2",
+      "materials": [
+        "Black"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "bounds": {
+        "min": [
+          -0.06333997845649719,
+          -0.01979335956275463,
+          -0.22526459395885468
+        ],
+        "max": [
+          0.1116071417927742,
+          0.019765704870224,
+          4.535385471626796e-07
+        ],
+        "size": [
+          0.1749471202492714,
+          0.03955906443297863,
+          0.22526504749740184
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 232,
+  "bounds": {
+    "min": [
+      -0.06333997845649719,
+      -0.01979335956275463,
+      -0.22526459395885468
+    ],
+    "max": [
+      0.1116071417927742,
+      0.019765704870224,
+      4.535385471626796e-07
+    ],
+    "size": [
+      0.1749471202492714,
+      0.03955906443297863,
+      0.22526504749740184
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Magazine_Sniper_1",
+      "file": "thumbs/365263ac5b8f2192deeaef267c2c725d2dc893c91b5fa6ed426110b3f29ba7f3-0.png",
+      "category": "components",
+      "parts": [
+        "Magazine_Sniper_1"
+      ],
+      "triangles": 232
+    }
+  ],
+  "fileSha256": "dffdcc3f4d21c92e9fba868abb42f4bc005f981d425c4e5131607a9d9c0db432",
+  "bytes": 518968,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

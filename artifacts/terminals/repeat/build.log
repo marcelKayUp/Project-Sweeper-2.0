@@ -1,0 +1,25 @@
+C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\tools\terminals\build_terminal_family.py:89: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+Warning: No mesh data to join
+Warning: No mesh data to join
+Info: Saved as "terminal-pedestal-standard-daeyang.blend"
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+14:43:47 | INFO: Starting glTF 2.0 export
+14:43:47 | INFO: Extracting primitive: Main screen
+14:43:47 | INFO: Primitives created: 1
+14:43:47 | INFO: Extracting primitive: Column
+14:43:47 | INFO: Primitives created: 1
+14:43:47 | INFO: Extracting primitive: Cube.002
+14:43:47 | INFO: Primitives created: 1
+14:43:47 | INFO: Extracting primitive: Foundation
+14:43:47 | INFO: Primitives created: 1
+14:43:47 | INFO: Extracting primitive: Cube
+14:43:47 | INFO: Primitives created: 1
+14:43:47 | INFO: Finished glTF 2.0 export in 0.11267924308776855 s
+
+NC_TERMINAL {"id": "terminal-pedestal-standard-daeyang", "cache": false, "triangles": 444}
+NC_TERMINAL_RESULT {"assets": 1, "built": 1, "cacheHits": 0, "output": "artifacts\\terminals\\repeat"}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit

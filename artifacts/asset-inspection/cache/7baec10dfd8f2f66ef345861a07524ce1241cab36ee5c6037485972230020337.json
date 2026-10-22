@@ -1,0 +1,151 @@
+{
+  "path": "Weapons/Revolver_4.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Revolver_4",
+      "vertices": 508,
+      "triangles": 966,
+      "shapeHash": "4b66633bc33db80fbeb75ba25339c605168b6f5bb34c931e95092dc316ce1ccb",
+      "materials": [
+        "Metal",
+        "LightMetal",
+        "DarkWood"
+      ],
+      "modifiers": [],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.2222432643175125,
+          -0.14716152846813202,
+          -0.31489813327789307
+        ],
+        "max": [
+          1.2504186630249023,
+          0.14719481766223907,
+          0.6002196073532104
+        ],
+        "size": [
+          1.4726619273424149,
+          0.2943563461303711,
+          0.9151177406311035
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 966,
+  "bounds": {
+    "min": [
+      -0.2222432643175125,
+      -0.14716152846813202,
+      -0.31489813327789307
+    ],
+    "max": [
+      1.2504186630249023,
+      0.14719481766223907,
+      0.6002196073532104
+    ],
+    "size": [
+      1.4726619273424149,
+      0.2943563461303711,
+      0.9151177406311035
+    ]
+  },
+  "materials": [
+    {
+      "name": "DarkWood",
+      "diffuseColor": [
+        0.10246890038251877,
+        0.07204850763082504,
+        0.055191364139318466,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "LightMetal",
+      "diffuseColor": [
+        0.11443537473678589,
+        0.11697068810462952,
+        0.1247718334197998,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Metal",
+      "diffuseColor": [
+        0.0666259378194809,
+        0.06847818195819855,
+        0.06700000166893005,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Revolver_4",
+      "file": "thumbs/7baec10dfd8f2f66ef345861a07524ce1241cab36ee5c6037485972230020337-0.png",
+      "category": "weapons",
+      "parts": [
+        "Revolver_4"
+      ],
+      "triangles": 966
+    }
+  ],
+  "fileSha256": "0dd203b109edc9b5177bcac4bf987af22db3f9a394ca51f12383edbefb3546b5",
+  "bytes": 552892,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

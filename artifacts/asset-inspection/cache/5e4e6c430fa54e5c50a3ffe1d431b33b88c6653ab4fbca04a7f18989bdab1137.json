@@ -1,0 +1,115 @@
+{
+  "path": "Weapons/modular Weapons/Magazine_SMG_1.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Magazine_SMG_1",
+      "vertices": 120,
+      "triangles": 232,
+      "shapeHash": "032b76e72374b6c6d5f4443fe20e985285f5436a34bc2bed344380d527143452",
+      "materials": [
+        "Black"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "bounds": {
+        "min": [
+          -0.08454908430576324,
+          -0.018727095797657967,
+          -0.49563366174697876
+        ],
+        "max": [
+          0.07051578164100647,
+          0.04634873569011688,
+          0.0
+        ],
+        "size": [
+          0.15506486594676971,
+          0.06507583148777485,
+          0.49563366174697876
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 232,
+  "bounds": {
+    "min": [
+      -0.08454908430576324,
+      -0.018727095797657967,
+      -0.49563366174697876
+    ],
+    "max": [
+      0.07051578164100647,
+      0.04634873569011688,
+      0.0
+    ],
+    "size": [
+      0.15506486594676971,
+      0.06507583148777485,
+      0.49563366174697876
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Magazine_SMG_1",
+      "file": "thumbs/5e4e6c430fa54e5c50a3ffe1d431b33b88c6653ab4fbca04a7f18989bdab1137-0.png",
+      "category": "components",
+      "parts": [
+        "Magazine_SMG_1"
+      ],
+      "triangles": 232
+    }
+  ],
+  "fileSha256": "3df372ccfb4c13cf1d51ab9b6c7106134b98ab0266f489e0971ab23edb5dc3ba",
+  "bytes": 519320,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

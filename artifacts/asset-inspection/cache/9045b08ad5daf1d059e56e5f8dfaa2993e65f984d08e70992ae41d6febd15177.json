@@ -1,0 +1,183 @@
+{
+  "path": "Weapons/Shotgun_ShortStock.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Shotgun_ShortStock",
+      "vertices": 839,
+      "triangles": 1612,
+      "shapeHash": "9e52cccc22190e5cef11a7dd2623544542916a14d522d0922d7538b69a9340fc",
+      "materials": [
+        "Wood",
+        "Metal",
+        "DarkWood",
+        "DarkMetal",
+        "Black"
+      ],
+      "modifiers": [],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.4222685694694519,
+          -0.12326683104038239,
+          -0.42690446972846985
+        ],
+        "max": [
+          4.04899787902832,
+          0.12326675653457642,
+          0.5399954319000244
+        ],
+        "size": [
+          4.471266448497772,
+          0.2465335875749588,
+          0.9668999016284943
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 1612,
+  "bounds": {
+    "min": [
+      -0.4222685694694519,
+      -0.12326683104038239,
+      -0.42690446972846985
+    ],
+    "max": [
+      4.04899787902832,
+      0.12326675653457642,
+      0.5399954319000244
+    ],
+    "size": [
+      4.471266448497772,
+      0.2465335875749588,
+      0.9668999016284943
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkMetal",
+      "diffuseColor": [
+        0.04699999839067459,
+        0.04695870354771614,
+        0.045788172632455826,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkWood",
+      "diffuseColor": [
+        0.10246890038251877,
+        0.07204850763082504,
+        0.055191364139318466,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Metal",
+      "diffuseColor": [
+        0.0666259378194809,
+        0.06847818195819855,
+        0.06700000166893005,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Wood",
+      "diffuseColor": [
+        0.13285954296588898,
+        0.09002935886383057,
+        0.06840453296899796,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Shotgun_ShortStock",
+      "file": "thumbs/9045b08ad5daf1d059e56e5f8dfaa2993e65f984d08e70992ae41d6febd15177-0.png",
+      "category": "weapons",
+      "parts": [
+        "Shotgun_ShortStock"
+      ],
+      "triangles": 1612
+    }
+  ],
+  "fileSha256": "1f3469c8d07d4fe38e8abcfa73ba27f7b293485bd8cad956d43a562de56025c8",
+  "bytes": 591216,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

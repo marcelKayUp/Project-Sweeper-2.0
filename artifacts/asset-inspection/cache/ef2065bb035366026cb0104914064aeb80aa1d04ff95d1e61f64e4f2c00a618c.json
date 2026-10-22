@@ -1,0 +1,193 @@
+{
+  "path": "Weapons/SniperRifle_5.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "SniperRifle_5",
+      "vertices": 884,
+      "triangles": 1690,
+      "shapeHash": "fd3aa0e39d9932b8b2e61c471298c224f3bd79e84226733e20c8e074c4f2b556",
+      "materials": [
+        "DarkMetal",
+        "LightMetal",
+        "Metal",
+        "Black",
+        "Grey",
+        "Glass"
+      ],
+      "modifiers": [],
+      "bounds": {
+        "min": [
+          -2.3579320907592773,
+          -0.627782940864563,
+          -0.9127030968666077
+        ],
+        "max": [
+          3.9776759147644043,
+          0.6200675964355469,
+          0.9865773320198059
+        ],
+        "size": [
+          6.335608005523682,
+          1.2478505373001099,
+          1.8992804288864136
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 1690,
+  "bounds": {
+    "min": [
+      -2.3579320907592773,
+      -0.627782940864563,
+      -0.9127030968666077
+    ],
+    "max": [
+      3.9776759147644043,
+      0.6200675964355469,
+      0.9865773320198059
+    ],
+    "size": [
+      6.335608005523682,
+      1.2478505373001099,
+      1.8992804288864136
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkMetal",
+      "diffuseColor": [
+        0.04699999839067459,
+        0.04695870354771614,
+        0.045788172632455826,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Glass",
+      "diffuseColor": [
+        0.0026341548655182123,
+        0.005688419099897146,
+        0.01463334821164608,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.04111980274319649,
+        0.042213838547468185,
+        0.04445183649659157,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "LightMetal",
+      "diffuseColor": [
+        0.11443537473678589,
+        0.11697068810462952,
+        0.1247718334197998,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Metal",
+      "diffuseColor": [
+        0.0666259378194809,
+        0.06847818195819855,
+        0.06700000166893005,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "SniperRifle_5",
+      "file": "thumbs/ef2065bb035366026cb0104914064aeb80aa1d04ff95d1e61f64e4f2c00a618c-0.png",
+      "category": "weapons",
+      "parts": [
+        "SniperRifle_5"
+      ],
+      "triangles": 1690
+    }
+  ],
+  "fileSha256": "434a5dda7f0ee2ec53e5d71e5fc429ec6c1c3f21f3c7a1d9b1b59de48344ba41",
+  "bytes": 601380,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

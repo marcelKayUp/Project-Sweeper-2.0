@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "pilot-runner",
+  "seed": 42,
+  "body": "standard",
+  "stature": 0.982,
+  "hair": "bob",
+  "outfit": "tech",
+  "accessory": "headset",
+  "palette": {
+    "skin": "#E0B28E",
+    "hair": "#7E577C",
+    "cloth": "#253344",
+    "armor": "#516B70",
+    "accent": "#B7F06D"
+  }
+}

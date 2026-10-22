@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "images": 140,
+  "categories": [
+    "characters",
+    "weapons",
+    "components"
+  ],
+  "search": true,
+  "pageErrors": []
+}

@@ -1,0 +1,163 @@
+{
+  "path": "Weapons/Crossbow_1.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Crossbow_1",
+      "vertices": 1550,
+      "triangles": 2922,
+      "shapeHash": "1808be7a5957a24bb9e2ae4facfa7d466ef070ef71ee0067582162a76b6bf83b",
+      "materials": [
+        "Black",
+        "Grey",
+        "White",
+        "Main"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "bounds": {
+        "min": [
+          -0.9072355628013611,
+          -0.9601701498031616,
+          -0.45695632696151733
+        ],
+        "max": [
+          0.9545806646347046,
+          0.9601701498031616,
+          0.4241967797279358
+        ],
+        "size": [
+          1.8618162274360657,
+          1.9203402996063232,
+          0.8811531066894531
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 2922,
+  "bounds": {
+    "min": [
+      -0.9072355628013611,
+      -0.9601701498031616,
+      -0.45695632696151733
+    ],
+    "max": [
+      0.9545806646347046,
+      0.9601701498031616,
+      0.4241967797279358
+    ],
+    "size": [
+      1.8618162274360657,
+      1.9203402996063232,
+      0.8811531066894531
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Crossbow_1",
+      "file": "thumbs/5754ecc2b993df912f7bac6f5d8f11adcf02a6d333d4e7ff0a58e77a5a9b4168-0.png",
+      "category": "weapons",
+      "parts": [
+        "Crossbow_1"
+      ],
+      "triangles": 2922
+    }
+  ],
+  "fileSha256": "8c940ad55a702e8f6b660a8d9684f674ce4f08fab4e2197eae6036531e105112",
+  "bytes": 689216,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

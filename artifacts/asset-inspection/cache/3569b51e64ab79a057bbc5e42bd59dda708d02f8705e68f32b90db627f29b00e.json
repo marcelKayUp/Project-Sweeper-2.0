@@ -1,0 +1,195 @@
+{
+  "path": "Weapons/Sniper_1.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 2,
+  "meshes": [
+    {
+      "name": "Magazine_Sniper",
+      "vertices": 120,
+      "triangles": 232,
+      "shapeHash": "c57d34e082b72f1a6b81cc5097a20a3e4cad0ec748f62b4736321a539cbf85b2",
+      "materials": [
+        "Black"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "bounds": {
+        "min": [
+          0.14761069416999817,
+          -0.01979336515069008,
+          -0.18148237466812134
+        ],
+        "max": [
+          0.32255780696868896,
+          0.01976569928228855,
+          0.04378266632556915
+        ],
+        "size": [
+          0.1749471127986908,
+          0.03955906443297863,
+          0.2252650409936905
+        ]
+      },
+      "finite": true,
+      "skin": null
+    },
+    {
+      "name": "Sniper_1",
+      "vertices": 2136,
+      "triangles": 4028,
+      "shapeHash": "b62fc28a9b046da2e9e56b8444e5134ea5674d5ad29f2858e3edce653b70d7d8",
+      "materials": [
+        "Black",
+        "Grey",
+        "White",
+        "Main"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "bounds": {
+        "min": [
+          -0.6924453377723694,
+          -0.05144283175468445,
+          -0.06037071719765663
+        ],
+        "max": [
+          1.5312421321868896,
+          0.051405128091573715,
+          0.34068042039871216
+        ],
+        "size": [
+          2.223687469959259,
+          0.10284795984625816,
+          0.4010511375963688
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 4260,
+  "bounds": {
+    "min": [
+      -0.6924453377723694,
+      -0.05144283175468445,
+      -0.18148237466812134
+    ],
+    "max": [
+      1.5312421321868896,
+      0.051405128091573715,
+      0.34068042039871216
+    ],
+    "size": [
+      2.223687469959259,
+      0.10284795984625816,
+      0.5221627950668335
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Sniper_1",
+      "file": "thumbs/3569b51e64ab79a057bbc5e42bd59dda708d02f8705e68f32b90db627f29b00e-0.png",
+      "category": "weapons",
+      "parts": [
+        "Magazine_Sniper",
+        "Sniper_1"
+      ],
+      "triangles": 4260
+    }
+  ],
+  "fileSha256": "f4c0c36a175874ce4d71032b6df1ebb8dd2734b64713b961940465d78300b8d5",
+  "bytes": 754952,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

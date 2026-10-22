@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "neon-guard",
+  "seed": 42,
+  "body": "heavy",
+  "stature": 0.982,
+  "hair": "none",
+  "outfit": "guard",
+  "accessory": "goggles",
+  "palette": {
+    "skin": "#BD8968",
+    "hair": "#222329",
+    "cloth": "#292E34",
+    "armor": "#53636C",
+    "accent": "#63D9C5"
+  }
+}

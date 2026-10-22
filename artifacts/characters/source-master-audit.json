@@ -1,0 +1,1352 @@
+{
+  "date": "2026-10-22",
+  "purpose": "Read-only suitability inspection of the user-opened CC0 master through Blender MCP",
+  "sourceFile": "C:\\Users\\kaup\\AppData\\Local\\Temp\\0f98794a-44c6-4875-b67f-f1b68945c11d_All together-20261022T070100Z-1-001.zip.11d\\All together\\Blends\\Humans_Master.blend",
+  "sourceHasUnsavedChanges": true,
+  "blender": "5.2.2 LTS",
+  "rig": {
+    "name": "CharacterArmature",
+    "bones": 62,
+    "deform_bones": 62,
+    "bone_names": [
+      "Root",
+      "Body",
+      "Hips",
+      "Abdomen",
+      "Torso",
+      "Chest",
+      "Neck",
+      "Head",
+      "Shoulder.L",
+      "UpperArm.L",
+      "LowerArm.L",
+      "Wrist.L",
+      "Index1.L",
+      "Index2.L",
+      "Index3.L",
+      "Index4.L",
+      "Middle1.L",
+      "Middle2.L",
+      "Middle3.L",
+      "Middle4.L",
+      "Ring1.L",
+      "Ring2.L",
+      "Ring3.L",
+      "Ring4.L",
+      "Pinky1.L",
+      "Pinky2.L",
+      "Pinky3.L",
+      "Pinky4.L",
+      "Thumb1.L",
+      "Thumb2.L",
+      "Thumb3.L",
+      "Shoulder.R",
+      "UpperArm.R",
+      "LowerArm.R",
+      "Wrist.R",
+      "Index1.R",
+      "Index2.R",
+      "Index3.R",
+      "Index4.R",
+      "Middle1.R",
+      "Middle2.R",
+      "Middle3.R",
+      "Middle4.R",
+      "Ring1.R",
+      "Ring2.R",
+      "Ring3.R",
+      "Ring4.R",
+      "Pinky1.R",
+      "Pinky2.R",
+      "Pinky3.R",
+      "Pinky4.R",
+      "Thumb1.R",
+      "Thumb2.R",
+      "Thumb3.R",
+      "UpperLeg.L",
+      "LowerLeg.L",
+      "UpperLeg.R",
+      "LowerLeg.R",
+      "Foot.L",
+      "PT.L",
+      "Foot.R",
+      "PT.R"
+    ]
+  },
+  "actions": [
+    {
+      "name": "Death",
+      "frames": [
+        0,
+        32
+      ]
+    },
+    {
+      "name": "Gun_Shoot",
+      "frames": [
+        0,
+        18
+      ]
+    },
+    {
+      "name": "HitRecieve",
+      "frames": [
+        0,
+        17
+      ]
+    },
+    {
+      "name": "HitRecieve_2",
+      "frames": [
+        0,
+        17
+      ]
+    },
+    {
+      "name": "Idle",
+      "frames": [
+        0,
+        50
+      ]
+    },
+    {
+      "name": "Idle_Gun",
+      "frames": [
+        0,
+        50
+      ]
+    },
+    {
+      "name": "Idle_Gun_Pointing",
+      "frames": [
+        0,
+        50
+      ]
+    },
+    {
+      "name": "Idle_Gun_Shoot",
+      "frames": [
+        0,
+        20
+      ]
+    },
+    {
+      "name": "Idle_Neutral",
+      "frames": [
+        0,
+        50
+      ]
+    },
+    {
+      "name": "Idle_Sword",
+      "frames": [
+        0,
+        50
+      ]
+    },
+    {
+      "name": "Interact",
+      "frames": [
+        0,
+        38
+      ]
+    },
+    {
+      "name": "Kick_Left",
+      "frames": [
+        0,
+        28
+      ]
+    },
+    {
+      "name": "Kick_Right",
+      "frames": [
+        0,
+        28
+      ]
+    },
+    {
+      "name": "Punch_Left",
+      "frames": [
+        0,
+        25
+      ]
+    },
+    {
+      "name": "Punch_Right",
+      "frames": [
+        0,
+        25
+      ]
+    },
+    {
+      "name": "Roll",
+      "frames": [
+        0,
+        40
+      ]
+    },
+    {
+      "name": "Run",
+      "frames": [
+        0,
+        24
+      ]
+    },
+    {
+      "name": "Run_Back",
+      "frames": [
+        0,
+        25
+      ]
+    },
+    {
+      "name": "Run_Left",
+      "frames": [
+        0,
+        24
+      ]
+    },
+    {
+      "name": "Run_Right",
+      "frames": [
+        0,
+        24
+      ]
+    },
+    {
+      "name": "Run_Shoot",
+      "frames": [
+        0,
+        25
+      ]
+    },
+    {
+      "name": "Sword_Slash",
+      "frames": [
+        0,
+        31
+      ]
+    },
+    {
+      "name": "Walk",
+      "frames": [
+        0,
+        40
+      ]
+    },
+    {
+      "name": "Wave",
+      "frames": [
+        0,
+        50
+      ]
+    }
+  ],
+  "variants": {
+    "Swat": {
+      "parts": [
+        "Swat_Legs",
+        "Swat_Feet",
+        "Swat_Body",
+        "Swat_Head"
+      ],
+      "triangles": 7754,
+      "materials": [
+        "Swat",
+        "Swat_Black",
+        "Skin",
+        "Visor"
+      ]
+    },
+    "Adventurer": {
+      "parts": [
+        "Adventurer_Feet",
+        "Adventurer_Legs",
+        "Adventurer_Body",
+        "Adventurer_Head"
+      ],
+      "triangles": 8450,
+      "materials": [
+        "Grey",
+        "Black",
+        "Brown",
+        "Brown2",
+        "Skin",
+        "Green",
+        "LightGreen",
+        "Eyebrows",
+        "Hair",
+        "Eye"
+      ]
+    },
+    "Horse": {
+      "parts": [
+        "Horse_Head"
+      ],
+      "triangles": 752,
+      "materials": [
+        "Brown",
+        "Brown2",
+        "Eyebrows",
+        "Black",
+        "Muzzle",
+        "White",
+        "Eye"
+      ]
+    },
+    "Farmer": {
+      "parts": [
+        "Farmer_Feet",
+        "Farmer_Pants",
+        "Farmer_Body",
+        "Farmer_Head"
+      ],
+      "triangles": 5476,
+      "materials": [
+        "Brown",
+        "Brown2",
+        "LightBlue",
+        "Skin",
+        "Beige",
+        "Eyebrows",
+        "Red",
+        "Eye"
+      ]
+    },
+    "Worker": {
+      "parts": [
+        "Worker_Feet",
+        "Worker_Legs",
+        "Worker_Body",
+        "Worker_Head"
+      ],
+      "triangles": 5240,
+      "materials": [
+        "Grey",
+        "Black",
+        "Brown",
+        "Brown2",
+        "Skin",
+        "Worker_Yellow",
+        "Worker_Vest",
+        "LightBrown",
+        "Eyebrows",
+        "Moustache",
+        "Eye"
+      ]
+    },
+    "Punk": {
+      "parts": [
+        "Punk_Feet",
+        "Punk_Legs",
+        "Punk_Body",
+        "Punk_Head"
+      ],
+      "triangles": 5500,
+      "materials": [
+        "Skin",
+        "Black",
+        "LightBlue",
+        "White",
+        "Eye",
+        "Eyebrows",
+        "Red_Dark",
+        "Red",
+        "Earrings"
+      ]
+    },
+    "SpaceSuit": {
+      "parts": [
+        "SpaceSuit_Feet",
+        "SpaceSuit_Legs",
+        "SpaceSuit_Body",
+        "SpaceSuit_Head"
+      ],
+      "triangles": 10558,
+      "materials": [
+        "SciFi_Light_Accent",
+        "SciFi_Light",
+        "SciFi_Main",
+        "SciFi_MainDark",
+        "Grey"
+      ]
+    },
+    "King": {
+      "parts": [
+        "King_Feet",
+        "King_Legs",
+        "King_Body",
+        "King_Head"
+      ],
+      "triangles": 11110,
+      "materials": [
+        "Metal",
+        "DarkBrown",
+        "Metal_Dark",
+        "Skin",
+        "Blue",
+        "Beige",
+        "Hair_White",
+        "Gold",
+        "Eye"
+      ]
+    },
+    "Beach": {
+      "parts": [
+        "Beach_Feet",
+        "Beach_Legs",
+        "Beach_Body",
+        "Beach_Head"
+      ],
+      "triangles": 6578,
+      "materials": [
+        "Skin",
+        "Red_Dark",
+        "White",
+        "LightBrown",
+        "Eyebrows",
+        "Eye",
+        "Hair",
+        "Earrings"
+      ]
+    },
+    "Casual2": {
+      "parts": [
+        "Casual2_Feet",
+        "Casual2_Body",
+        "Casual2_Head",
+        "Casual2_Legs"
+      ],
+      "triangles": 5776,
+      "materials": [
+        "Red_Dark",
+        "White",
+        "Skin",
+        "LightBrown",
+        "Skin_Darker",
+        "Eyebrows",
+        "Hair",
+        "Eye",
+        "LightBlue"
+      ]
+    },
+    "Casual": {
+      "parts": [
+        "Casual_Feet",
+        "Casual_Legs",
+        "Casual_Head",
+        "Casual_Body"
+      ],
+      "triangles": 6206,
+      "materials": [
+        "Purple",
+        "White",
+        "Skin",
+        "LightBlue",
+        "Eyebrows",
+        "Eye",
+        "Hair"
+      ]
+    },
+    "Suit": {
+      "parts": [
+        "Suit_Legs",
+        "Suit_Feet",
+        "Suit_Body",
+        "Suit_Head"
+      ],
+      "triangles": 6634,
+      "materials": [
+        "Suit",
+        "Black",
+        "Skin",
+        "Tie",
+        "White",
+        "Eyebrows",
+        "Hair",
+        "Eye"
+      ]
+    }
+  },
+  "meshes": [
+    {
+      "name": "Swat_Legs",
+      "vertices": 899,
+      "triangles": 1780,
+      "materials": [
+        "Swat",
+        "Swat_Black"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Adventurer_Feet",
+      "vertices": 244,
+      "triangles": 480,
+      "materials": [
+        "Grey",
+        "Black"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Adventurer_Legs",
+      "vertices": 413,
+      "triangles": 822,
+      "materials": [
+        "Brown",
+        "Brown2"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Adventurer_Body",
+      "vertices": 1766,
+      "triangles": 3528,
+      "materials": [
+        "Skin",
+        "Green",
+        "LightGreen"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Adventurer_Head",
+      "vertices": 1944,
+      "triangles": 3620,
+      "materials": [
+        "Skin",
+        "Eyebrows",
+        "Hair",
+        "Eye"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Swat_Feet",
+      "vertices": 284,
+      "triangles": 560,
+      "materials": [
+        "Swat_Black"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Swat_Body",
+      "vertices": 1555,
+      "triangles": 3106,
+      "materials": [
+        "Skin",
+        "Swat",
+        "Swat_Black"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Swat_Head",
+      "vertices": 1211,
+      "triangles": 2308,
+      "materials": [
+        "Swat_Black",
+        "Swat",
+        "Visor"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Horse_Head",
+      "vertices": 385,
+      "triangles": 752,
+      "materials": [
+        "Brown",
+        "Brown2",
+        "Eyebrows",
+        "Black",
+        "Muzzle",
+        "White",
+        "Eye"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 109,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Farmer_Feet",
+      "vertices": 204,
+      "triangles": 384,
+      "materials": [
+        "Brown",
+        "Brown2"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Farmer_Pants",
+      "vertices": 461,
+      "triangles": 918,
+      "materials": [
+        "LightBlue"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Farmer_Body",
+      "vertices": 1681,
+      "triangles": 3358,
+      "materials": [
+        "Skin",
+        "LightBlue",
+        "Brown",
+        "Beige"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Farmer_Head",
+      "vertices": 440,
+      "triangles": 816,
+      "materials": [
+        "Skin",
+        "Eyebrows",
+        "Beige",
+        "Red",
+        "Eye"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Worker_Feet",
+      "vertices": 244,
+      "triangles": 464,
+      "materials": [
+        "Grey",
+        "Black"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Worker_Legs",
+      "vertices": 413,
+      "triangles": 822,
+      "materials": [
+        "Brown",
+        "Brown2"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Worker_Body",
+      "vertices": 1511,
+      "triangles": 3018,
+      "materials": [
+        "Skin",
+        "Worker_Yellow",
+        "Worker_Vest",
+        "LightBrown"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Worker_Head",
+      "vertices": 508,
+      "triangles": 936,
+      "materials": [
+        "Skin",
+        "Eyebrows",
+        "Worker_Yellow",
+        "Moustache",
+        "Eye"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Punk_Feet",
+      "vertices": 280,
+      "triangles": 552,
+      "materials": [
+        "Skin",
+        "Black"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Punk_Legs",
+      "vertices": 375,
+      "triangles": 746,
+      "materials": [
+        "Skin",
+        "LightBlue"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Punk_Body",
+      "vertices": 1481,
+      "triangles": 2958,
+      "materials": [
+        "Skin",
+        "White",
+        "Black"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Punk_Head",
+      "vertices": 666,
+      "triangles": 1244,
+      "materials": [
+        "Skin",
+        "Eye",
+        "Eyebrows",
+        "Red_Dark",
+        "Red",
+        "Earrings"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "SpaceSuit_Feet",
+      "vertices": 292,
+      "triangles": 576,
+      "materials": [
+        "SciFi_Light_Accent",
+        "SciFi_Light"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "SpaceSuit_Legs",
+      "vertices": 555,
+      "triangles": 1106,
+      "materials": [
+        "SciFi_Main",
+        "SciFi_Light",
+        "SciFi_Light_Accent",
+        "SciFi_MainDark"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "SpaceSuit_Body",
+      "vertices": 2041,
+      "triangles": 4022,
+      "materials": [
+        "SciFi_Light",
+        "SciFi_Light_Accent",
+        "SciFi_Main",
+        "SciFi_MainDark"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "SpaceSuit_Head",
+      "vertices": 2582,
+      "triangles": 4854,
+      "materials": [
+        "SciFi_Light",
+        "SciFi_Light_Accent",
+        "SciFi_Main",
+        "Grey"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "King_Feet",
+      "vertices": 318,
+      "triangles": 624,
+      "materials": [
+        "Metal"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "King_Legs",
+      "vertices": 917,
+      "triangles": 1822,
+      "materials": [
+        "DarkBrown",
+        "Metal",
+        "Metal_Dark"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "King_Body",
+      "vertices": 2413,
+      "triangles": 4772,
+      "materials": [
+        "Skin",
+        "Blue",
+        "Metal",
+        "Beige",
+        "Metal_Dark"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "King_Head",
+      "vertices": 2055,
+      "triangles": 3892,
+      "materials": [
+        "Skin",
+        "Hair_White",
+        "Gold",
+        "Eye"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Beach_Feet",
+      "vertices": 352,
+      "triangles": 682,
+      "materials": [
+        "Skin",
+        "Red_Dark",
+        "White"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "Beach_Legs",
+      "vertices": 435,
+      "triangles": 830,
+      "materials": [
+        "Skin",
+        "Red_Dark",
+        "White"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "Beach_Body",
+      "vertices": 1391,
+      "triangles": 2778,
+      "materials": [
+        "Skin",
+        "LightBrown"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Beach_Head",
+      "vertices": 1221,
+      "triangles": 2288,
+      "materials": [
+        "Skin",
+        "Eyebrows",
+        "Eye",
+        "Hair",
+        "Earrings"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Casual2_Feet",
+      "vertices": 280,
+      "triangles": 552,
+      "materials": [
+        "Red_Dark",
+        "White"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Casual2_Body",
+      "vertices": 1405,
+      "triangles": 2806,
+      "materials": [
+        "Skin",
+        "LightBrown"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Casual2_Head",
+      "vertices": 910,
+      "triangles": 1684,
+      "materials": [
+        "Skin",
+        "Skin_Darker",
+        "Eyebrows",
+        "Hair",
+        "Eye"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Casual_Feet",
+      "vertices": 260,
+      "triangles": 512,
+      "materials": [
+        "Purple",
+        "White"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Casual_Legs",
+      "vertices": 399,
+      "triangles": 758,
+      "materials": [
+        "Skin",
+        "LightBlue"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Casual_Head",
+      "vertices": 1014,
+      "triangles": 1888,
+      "materials": [
+        "Skin",
+        "Eyebrows",
+        "Eye",
+        "Hair"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Casual2_Legs",
+      "vertices": 369,
+      "triangles": 734,
+      "materials": [
+        "LightBlue"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Casual_Body",
+      "vertices": 1526,
+      "triangles": 3048,
+      "materials": [
+        "Skin",
+        "Purple"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Suit_Legs",
+      "vertices": 369,
+      "triangles": 734,
+      "materials": [
+        "Suit"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Suit_Feet",
+      "vertices": 276,
+      "triangles": 528,
+      "materials": [
+        "Black"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Suit_Body",
+      "vertices": 1460,
+      "triangles": 2916,
+      "materials": [
+        "Skin",
+        "Tie",
+        "Suit",
+        "White"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Suit_Head",
+      "vertices": 1327,
+      "triangles": 2456,
+      "materials": [
+        "Skin",
+        "Eyebrows",
+        "Hair",
+        "Eye"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE",
+        "NODES"
+      ]
+    },
+    {
+      "name": "Backpack",
+      "vertices": 963,
+      "triangles": 1752,
+      "materials": [
+        "Brown",
+        "LightGreen",
+        "Gold",
+        "Green"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 63,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "Sword",
+      "vertices": 438,
+      "triangles": 872,
+      "materials": [
+        "Metal_Dark",
+        "Gold",
+        "Brown",
+        "Metal"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    },
+    {
+      "name": "Pistol",
+      "vertices": 580,
+      "triangles": 1040,
+      "materials": [
+        "DarkBrown",
+        "Grey",
+        "Metal",
+        "Black"
+      ],
+      "armature": "CharacterArmature",
+      "vertex_groups": 62,
+      "hidden": true,
+      "modifiers": [
+        "ARMATURE"
+      ]
+    }
+  ],
+  "externalImages": [
+    {
+      "name": "Texture.png",
+      "users": 1,
+      "material_users": [],
+      "packed": false,
+      "filepath": "//..\\..\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png"
+    }
+  ],
+  "license": {
+    "reportedByUser": "CC0 1.0",
+    "matchingAuthorPack": "https://quaternius.com/packs/ultimatemodularcharacters.html",
+    "terms": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "fit": {
+    "modularSets": 11,
+    "sharedRig": true,
+    "requiredClipsMissingByName": [
+      "crouch",
+      "reload"
+    ],
+    "originalRigBoneCount": 62,
+    "currentProceduralRigBoneCount": 19,
+    "casual2Triangles": 5776,
+    "swatTriangles": 7754,
+    "currentPilotTriangleBudget": 5000
+  },
+  "notes": [
+    "All 48 mesh objects are currently locally hidden in the open file; the armature is visible.",
+    "The source is opened from a temporary extracted ZIP directory and has unsaved changes.",
+    "Texture.png is reported missing, but no material image node references it; it does not currently block the inspected solid-color materials.",
+    "No GLB export or runtime import was performed in this suitability inspection.",
+    "The current Blender scene was not edited."
+  ]
+}

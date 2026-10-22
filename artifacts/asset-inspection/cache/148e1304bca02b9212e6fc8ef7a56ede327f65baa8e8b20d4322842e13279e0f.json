@@ -1,0 +1,121 @@
+{
+  "path": "Weapons/modular Weapons/Barrel_Sniper_2.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Barrel_Sniper_2",
+      "vertices": 208,
+      "triangles": 412,
+      "shapeHash": "c02766b328af18ff8c6a4eeb2a40ac75dc3ec0a34f79a3c8070b3a4b697706ca",
+      "materials": [
+        "Black"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          0.0,
+          -0.042635392397642136,
+          -0.0426349975168705
+        ],
+        "max": [
+          0.62679523229599,
+          0.04263540729880333,
+          0.04263582453131676
+        ],
+        "size": [
+          0.62679523229599,
+          0.08527079969644547,
+          0.08527082204818726
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 412,
+  "bounds": {
+    "min": [
+      0.0,
+      -0.042635392397642136,
+      -0.0426349975168705
+    ],
+    "max": [
+      0.62679523229599,
+      0.04263540729880333,
+      0.04263582453131676
+    ],
+    "size": [
+      0.62679523229599,
+      0.08527079969644547,
+      0.08527082204818726
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Barrel_Sniper_2",
+      "file": "thumbs/148e1304bca02b9212e6fc8ef7a56ede327f65baa8e8b20d4322842e13279e0f-0.png",
+      "category": "components",
+      "parts": [
+        "Barrel_Sniper_2"
+      ],
+      "triangles": 412
+    }
+  ],
+  "fileSha256": "ba871ec7ec13d5c2337e9f44fbc23975273deeb73a03d1af8bc39dfaf412b7e5",
+  "bytes": 526688,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

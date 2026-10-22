@@ -1,0 +1,139 @@
+ANIM0 {
+  "channels": [
+    {
+      "sampler": 0,
+      "target": {
+        "node": 61,
+        "path": "translation"
+      }
+    },
+    {
+      "sampler": 1,
+      "target": {
+        "node": 61,
+        "path": "rotation"
+      }
+    },
+    {
+      "sampler": 2,
+      "target": {
+        "node": 61,
+        "path": "scale"
+      }
+    },
+    {
+      "sampler": 3,
+      "target": {
+        "node": 56,
+        "path": "translation"
+      }
+    },
+    {
+      "sampler": 4,
+      "target": {
+        "node": 56,
+        "path": "rotation"
+      }
+    },
+    {
+      "sampler": 5,
+      "target": {
+        "node": 56,
+        "path": "scale"
+      }
+    },
+    {
+      "sampler": 6,
+      "target": {
+        "node": 51,
+        "path": "translation"
+      }
+    },
+    {
+      "sampler": 7,
+      "target": {
+        "node": 51,
+        "path": "rotation"
+      }
+    },
+    {
+      "sampler": 8,
+      "target": {
+        "node": 51,
+        "path": "scale"
+      }
+    },
+    {
+      "sampler": 9,
+      "target": {
+        "node": 50,
+        "path": "translation"
+      }
+    },
+    {
+      "sampler": 10,
+      "target": {
+        "node": 50,
+        "path": "rotation"
+      }
+    },
+    {
+      "sampler": 11,
+      "target": {
+        "node": 50,
+        "path": "scale"
+      }
+    },
+    {
+      "sampler": 12,
+      "target": {
+        "node": 49,
+        "path": "translation"
+      }
+    },
+    {
+      "sampler": 13,
+      "target": {
+        "node": 49,
+        "path": "rotation"
+      }
+    },
+    {
+      "sampler": 14,
+      "target": {
+        "node": 49,
+        "path": "scale"
+      }
+    },
+    {
+      "sampler": 15,
+      "target": {
+        "node": 48,
+        "path": "translation"
+      }
+    },
+    {
+      "sampler": 16,
+      "target": {
+        "node": 48,
+        "path": "rotation"
+      }
+    },
+    {
+      "sampler": 17,
+      "target": {
+        "node": 48,
+        "path": "scale"
+      }
+    },
+    {
+      "sampler": 18,
+      "target": {
+        "node": 1,
+  
+ACC0 {'bufferView': 0, 'componentType': 5126, 'count': 4198, 'max': [0.8377335071563721, 1.5316003561019897, 0.19356605410575867], 'min': [-0.8377335071563721, 1.382393717765808, 0.009898008778691292], 'type': 'VEC3'}
+BV0 {'buffer': 0, 'byteLength': 50376, 'byteOffset': 0, 'target': 34962}
+BINHEAD (9663584, 5130562)
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit

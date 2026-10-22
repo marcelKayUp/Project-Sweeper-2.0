@@ -1,0 +1,183 @@
+{
+  "path": "Weapons/SniperRifle_6.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "SniperRifle_6",
+      "vertices": 738,
+      "triangles": 1370,
+      "shapeHash": "c09093353e15f71b8ac2543079d618390c4dda9170e0dea68511f6483d696dd6",
+      "materials": [
+        "DarkWood",
+        "Black",
+        "DarkMetal",
+        "Grey",
+        "Glass"
+      ],
+      "modifiers": [],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -1.9593915939331055,
+          -0.3043522238731384,
+          -0.758577823638916
+        ],
+        "max": [
+          5.246612548828125,
+          0.18924351036548615,
+          0.7596818804740906
+        ],
+        "size": [
+          7.2060041427612305,
+          0.4935957342386246,
+          1.5182597041130066
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 1370,
+  "bounds": {
+    "min": [
+      -1.9593915939331055,
+      -0.3043522238731384,
+      -0.758577823638916
+    ],
+    "max": [
+      5.246612548828125,
+      0.18924351036548615,
+      0.7596818804740906
+    ],
+    "size": [
+      7.2060041427612305,
+      0.4935957342386246,
+      1.5182597041130066
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkMetal",
+      "diffuseColor": [
+        0.04699999839067459,
+        0.04695870354771614,
+        0.045788172632455826,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkWood",
+      "diffuseColor": [
+        0.10246890038251877,
+        0.07204850763082504,
+        0.055191364139318466,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Glass",
+      "diffuseColor": [
+        0.0026341548655182123,
+        0.005688419099897146,
+        0.01463334821164608,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.04111980274319649,
+        0.042213838547468185,
+        0.04445183649659157,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "SniperRifle_6",
+      "file": "thumbs/faabdfcc9947e43b377c23905c8f3be57b5ab3557debbaccb1468d3d721810c5-0.png",
+      "category": "weapons",
+      "parts": [
+        "SniperRifle_6"
+      ],
+      "triangles": 1370
+    }
+  ],
+  "fileSha256": "bc870d98e1c5eed8bf01e74a2ab5f5d4cac5b0d9ffb735473024e44408a8536d",
+  "bytes": 581608,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

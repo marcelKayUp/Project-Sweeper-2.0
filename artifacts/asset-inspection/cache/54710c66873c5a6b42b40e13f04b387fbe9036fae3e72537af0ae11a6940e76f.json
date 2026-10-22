@@ -1,0 +1,169 @@
+{
+  "path": "Weapons/modular Weapons/Stock_Pistol_3.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Stock_Pistol_3",
+      "vertices": 283,
+      "triangles": 526,
+      "shapeHash": "5fe6782ba462baaabda2ce60a6a40e0d9e2de5c47e4e27c161dc910946baf700",
+      "materials": [
+        "Black",
+        "Grey",
+        "White",
+        "Main"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": true,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.28043079376220703,
+          -0.05702132731676102,
+          -0.15955978631973267
+        ],
+        "max": [
+          0.044320110231637955,
+          0.05702132731676102,
+          0.0876934677362442
+        ],
+        "size": [
+          0.324750903993845,
+          0.11404265463352203,
+          0.24725325405597687
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 526,
+  "bounds": {
+    "min": [
+      -0.28043079376220703,
+      -0.05702132731676102,
+      -0.15955978631973267
+    ],
+    "max": [
+      0.044320110231637955,
+      0.05702132731676102,
+      0.0876934677362442
+    ],
+    "size": [
+      0.324750903993845,
+      0.11404265463352203,
+      0.24725325405597687
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Stock_Pistol_3",
+      "file": "thumbs/54710c66873c5a6b42b40e13f04b387fbe9036fae3e72537af0ae11a6940e76f-0.png",
+      "category": "components",
+      "parts": [
+        "Stock_Pistol_3"
+      ],
+      "triangles": 526
+    }
+  ],
+  "fileSha256": "ad7bda28c01db7e14a2d6a6cea279206c2f8643128436c13b969b17336e393d1",
+  "bytes": 584284,
+  "inspectorKey": "cd7358ff160fbb070b5f8fc4e2ffd138955146420a9b39a6462eafc8c1fe5591"
+}

@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-22",
+  "source": {
+    "author": "Unverified (user-provided)",
+    "license": "LicenseRef-UserProvided-Unverified",
+    "sourceUrl": "",
+    "status": "unverified; no license grant or author identity was established",
+    "file": "Humans_Master.blend",
+    "sha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+    "bytes": 10966012,
+    "userProvidedSource": "C:/Users/kaup/Desktop/Zeitalter Probierbereich/Models&Animations/All together.blend",
+    "copyMethod": "byte-for-byte copy; verified against the user-provided SHA-256",
+    "library": "apps/client/public/assets/characters/women/master.glb",
+    "catalog": "apps/client/public/assets/characters/women/catalog.json",
+    "recipe": "tools/characters/export_female_master.py",
+    "adaptations": [
+      "Export 40 original outfit meshes plus the native Pistol and Sword bone attachments.",
+      "Keep an independent copy of the original CharacterArmature and its 24 source actions.",
+      "Translate local diffuse swatches to PBR material copies; preserve the source blend bytes.",
+      "Evaluate modifiers and let the glTF exporter reduce/normalize skin weights to four influences."
+    ],
+    "openItems": [
+      "author and license verification",
+      "human art and animation acceptance",
+      "tactical game integration"
+    ]
+  },
+  "files": {
+    "assets/source/characters/women/Humans_Master.blend": {
+      "bytes": 10966012,
+      "sha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de"
+    },
+    "assets/source/characters/women/provenance.json": {
+      "bytes": 1285,
+      "sha256": "f19bd5d8cff62fa094c90feddb52efc0e73929fe23e8d4988c000765eeaeb65b"
+    },
+    "apps/client/public/assets/characters/women/master.glb": {
+      "bytes": 10156828,
+      "sha256": "ccb6aeddff8d8523d892f56a105b0df8bae25dc4a095538e9fcbbbdaf1ebfb47"
+    },
+    "apps/client/public/assets/characters/women/catalog.json": {
+      "bytes": 2729,
+      "sha256": "39ddd9b321addb31e1ce534e207c591cb5f4d71f9fc2b60e01c728a96a5dbb4c"
+    },
+    "assets/specs/characters/female-casual.json": {
+      "bytes": 349,
+      "sha256": "b9ace47a8f9f9c6a6b5c63116ac000d81a22386063e0aea96f53012a8fe1a273"
+    },
+    "assets/generated/characters/women/woman-16.glb": {
+      "bytes": 5036980,
+      "sha256": "a995f6875911757eb3a77067a8d2120594a9b838e71fc71b6f6ed5118e4351fc"
+    },
+    "assets/generated/characters/women/woman-16.json": {
+      "bytes": 348,
+      "sha256": "88bdef56081d2d700328c3b5a30f0fa63bf0c65e08de901b9e1a473e803e5c6f"
+    },
+    "assets/generated/characters/women/woman-16.manifest.json": {
+      "bytes": 2844,
+      "sha256": "1879008cd44a449764fe1c8ff2eb254e7b959011dcbbd7dd80979c7fac8be1ee"
+    },
+    "assets/source/characters/women/casual-workshop.blend": {
+      "bytes": 4822916,
+      "sha256": "7b83d72ab2d134789c881aa735e4dee1cad6ec71863e5289f49416d97460683f"
+    },
+    "assets/source/characters/women/pistol-workshop.blend": {
+      "bytes": 4931181,
+      "sha256": "f09b182fc024e733ca85ee97209348d6f0ed67f107ffb0842a64eb7256d6b87f"
+    },
+    "artifacts/characters/modular/check.json": {
+      "bytes": 16104,
+      "sha256": "21fc02744b0f869901300ddd155a2112cb34c47b3c240640da6002ea7d7d7be7"
+    },
+    "artifacts/characters/female/blender-casual/report.json": {
+      "bytes": 9204,
+      "sha256": "c2084046f95362a639ee757ce2a6fee9aec29de6df0136e7953e32eefadd162d"
+    },
+    "artifacts/characters/female/blender-pistol/report.json": {
+      "bytes": 9368,
+      "sha256": "0ba9d1ae9ac65d952ae6038cd3b207a06d4097352153f20267c654aa29f74ed2"
+    }
+  },
+  "checks": {
+    "tests": 129,
+    "typecheck": "passed",
+    "build": "passed",
+    "browserAndGlb": true,
+    "khronosExports": 28,
+    "nativeFemaleSets": 10,
+    "joints": 62,
+    "clips": 24,
+    "blenderImports": [
+      "Casual",
+      "Soldier + Pistol"
+    ],
+    "humanArtAcceptance": "open",
+    "licenseEvidence": "open",
+    "missionIntegration": "open"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "round": 1,
+  "judge": "gpt-6-luna · high · fresh context, labels stripped",
+  "views": ["front", "iso", "side"],
+  "winner": "B",
+  "keyAfterJudgment": { "A": "generated candidate 1.1.0 round-1 snapshot", "B": "Quaternius Casual Character" },
+  "passed": false,
+  "largestGap": "Arms and hands lose the human silhouette: long narrow forearms, thin detached-looking fingers and a held dark block obscuring the hand.",
+  "decision": "Continue improving body proportions, anatomical volume and continuous mesh/skin transitions."
+}

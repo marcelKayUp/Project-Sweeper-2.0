@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "generator": "terminal-family/1",
+  "recipe": "artifacts\\terminals\\seed47.json",
+  "recipeSha256": "ec7517ddb5c7ae1bbd3c8abab04f18416329997b4b5e63d16c9e5102ac998f69",
+  "codeSha256": "d779b5d9d294697108c9216dc4f7824bc156e3926e231f995807d08e01cf75f1",
+  "toolVersions": {
+    "blender": "5.2.2 LTS",
+    "python": "3.13.13",
+    "numpy": "2.3.4"
+  },
+  "license": "LicenseRef-Project-Authored",
+  "source": "Project-authored geometry/display graphics; palette roles from docs/ORGANISATIONSKATALOG.md. No external models, fonts or textures.",
+  "budgets": {
+    "triangles": 2400,
+    "materials": 5,
+    "glbBytes": 200000
+  },
+  "assets": [
+    {
+      "id": "terminal-pedestal-standard-daeyang",
+      "label": "Standterminal · Standard · Daeyang",
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-pedestal-standard-daeyang",
+        "form": "pedestal",
+        "size": "standard",
+        "scale": 1,
+        "organization": "daeyang",
+        "palette": {
+          "label": "Daeyang",
+          "body": "#0B2A5B",
+          "trim": "#C9CED6",
+          "accent": "#38D39F"
+        },
+        "seed": 47
+      },
+      "buildHash": "3ec9a0a7e028cbce9972dcc27c38e0ab815c46bdb0e7c05414a80a7cbafe4593",
+      "bytes": 32320,
+      "stats": {
+        "triangles": 444,
+        "vertices": 248,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.24500000476837158,
+            -0.2362973690032959,
+            0.0
+          ],
+          "max": [
+            0.24500000476837158,
+            0.20999999344348907,
+            1.0399999618530273
+          ]
+        },
+        "dimensions": [
+          0.49000000953674316,
+          0.446297362446785,
+          1.0399999618530273
+        ]
+      },
+      "files": {
+        "glb/terminal-pedestal-standard-daeyang.glb": "16c1c635135fc10b68c4d60e946b9837a0f71b43485b7c26f66180fab344a221",
+        "source/terminal-pedestal-standard-daeyang.blend": "b31b0ffcec644fdae461ba3c3a0bde63150a2bf4e900cc91bfca18505c93e56e",
+        "textures/terminal-pedestal-standard-daeyang.png": "8188803cdfbdcea035bf8f8951430e267369d7d728ff39fc00ec8ef9713a71bd",
+        "recipes/terminal-pedestal-standard-daeyang.json": "87edb46ba503fbf0f1a262061eff3e289343e55840956f52c8c1bcf06becf522"
+      }
+    }
+  ],
+  "lastRun": {
+    "built": 0,
+    "cacheHits": 1
+  },
+  "humanArtAcceptance": "open",
+  "missionIntegration": "not part of pilot"
+}

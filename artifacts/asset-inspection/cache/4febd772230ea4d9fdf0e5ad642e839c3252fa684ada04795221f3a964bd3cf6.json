@@ -1,0 +1,113 @@
+{
+  "path": "Weapons/Accessories/Silencer_2.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Silencer_2",
+      "vertices": 310,
+      "triangles": 608,
+      "shapeHash": "9b1fada7f22dbd83434cbfabb591b33b3fb20230a2d78d8a6785e8a9e7c2f090",
+      "materials": [
+        "Black"
+      ],
+      "modifiers": [],
+      "bounds": {
+        "min": [
+          -0.07010594010353088,
+          -0.1661759465932846,
+          -0.1580427587032318
+        ],
+        "max": [
+          1.587632656097412,
+          0.1661757081747055,
+          0.15804243087768555
+        ],
+        "size": [
+          1.657738596200943,
+          0.3323516547679901,
+          0.31608518958091736
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 608,
+  "bounds": {
+    "min": [
+      -0.07010594010353088,
+      -0.1661759465932846,
+      -0.1580427587032318
+    ],
+    "max": [
+      1.587632656097412,
+      0.1661757081747055,
+      0.15804243087768555
+    ],
+    "size": [
+      1.657738596200943,
+      0.3323516547679901,
+      0.31608518958091736
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\Accessories\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\Accessories\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Silencer_2",
+      "file": "thumbs/4febd772230ea4d9fdf0e5ad642e839c3252fa684ada04795221f3a964bd3cf6-0.png",
+      "category": "components",
+      "parts": [
+        "Silencer_2"
+      ],
+      "triangles": 608
+    }
+  ],
+  "fileSha256": "3b4fad2048a18c7c1783a93bac60e900fa23121dbf2e3a453a0fe0a0c1c4b75b",
+  "bytes": 524380,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

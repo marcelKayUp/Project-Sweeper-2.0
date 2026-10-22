@@ -1,0 +1,135 @@
+{
+  "path": "Weapons/Accessories/Flashlight.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Flashlight",
+      "vertices": 84,
+      "triangles": 156,
+      "shapeHash": "183b54cbdcaafe0f5a7c073dd76a90020dbf3a651977a2490077a6cd50b00d49",
+      "materials": [
+        "Black",
+        "Glass"
+      ],
+      "modifiers": [],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.11757472157478333,
+          -0.1592806875705719,
+          -0.03411295264959335
+        ],
+        "max": [
+          0.27226021885871887,
+          0.1592806875705719,
+          0.19312667846679688
+        ],
+        "size": [
+          0.3898349404335022,
+          0.3185613751411438,
+          0.22723963111639023
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 156,
+  "bounds": {
+    "min": [
+      -0.11757472157478333,
+      -0.1592806875705719,
+      -0.03411295264959335
+    ],
+    "max": [
+      0.27226021885871887,
+      0.1592806875705719,
+      0.19312667846679688
+    ],
+    "size": [
+      0.3898349404335022,
+      0.3185613751411438,
+      0.22723963111639023
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Glass",
+      "diffuseColor": [
+        0.0026341548655182123,
+        0.005688419099897146,
+        0.01463334821164608,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\Accessories\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\Accessories\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Flashlight",
+      "file": "thumbs/f3fba9da9579a7bd3729da2cf09d911f9253910bd260ad2206ace139f697e864-0.png",
+      "category": "components",
+      "parts": [
+        "Flashlight"
+      ],
+      "triangles": 156
+    }
+  ],
+  "fileSha256": "6f4e314685a36fcc62709861c7c3cc5327540cfece7b3c0d0fc706c218f209ad",
+  "bytes": 510400,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

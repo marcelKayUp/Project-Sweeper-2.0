@@ -1,0 +1,169 @@
+{
+  "path": "Weapons/modular Weapons/Barrel_Grenade_1.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Barrel_Grenade_1",
+      "vertices": 398,
+      "triangles": 773,
+      "shapeHash": "902ebd97fed4b00dec6433d00ae91bcf7b29a190084a5a665f965e8209a20dd1",
+      "materials": [
+        "Grey",
+        "Black",
+        "White",
+        "Main"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.35603150725364685,
+          -0.07291240990161896,
+          -0.15716421604156494
+        ],
+        "max": [
+          0.616564929485321,
+          0.07297030091285706,
+          0.13110299408435822
+        ],
+        "size": [
+          0.9725964367389679,
+          0.145882710814476,
+          0.28826721012592316
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 773,
+  "bounds": {
+    "min": [
+      -0.35603150725364685,
+      -0.07291240990161896,
+      -0.15716421604156494
+    ],
+    "max": [
+      0.616564929485321,
+      0.07297030091285706,
+      0.13110299408435822
+    ],
+    "size": [
+      0.9725964367389679,
+      0.145882710814476,
+      0.28826721012592316
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Barrel_Grenade_1",
+      "file": "thumbs/897a0b5cf54cd9457d77326624c9ffc5aceec2b1446109420889d2c5ac247364-0.png",
+      "category": "components",
+      "parts": [
+        "Barrel_Grenade_1"
+      ],
+      "triangles": 773
+    }
+  ],
+  "fileSha256": "bc10e7e559f5d846b95df9013e0ad4448ef88a82cc6dd1c1ccb8e9a5772d2f61",
+  "bytes": 594900,
+  "inspectorKey": "cd7358ff160fbb070b5f8fc4e2ffd138955146420a9b39a6462eafc8c1fe5591"
+}

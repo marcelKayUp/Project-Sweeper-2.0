@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "source": "modular-women-v1",
+  "id": "woman-1b",
+  "seed": 47,
+  "stature": 1,
+  "parts": {
+    "head": "Soldier",
+    "body": "Adventurer",
+    "legs": "Punk",
+    "feet": "SciFi"
+  },
+  "equipment": "none",
+  "palette": {
+    "skin": null,
+    "hair": null,
+    "cloth": null,
+    "armor": null,
+    "accent": null
+  }
+}

@@ -1,0 +1,9 @@
+00:03.234  blend            | Read blend: "C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\assets\source\characters\quaternius\Humans_Master.blend"
+00:03.297  reports          | WARNING Bibliotheksdatei, lädt leere Szene
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+range (0.0, 50.0)
+action Idle_Neutral slot OBLegacy Slot
+bones [('Hips', (1.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0)), ('Torso', (1.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0)), ('Chest', (1.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0)), ('UpperArm.L', (0.8079, -0.5335, -0.1463, 0.2033), (-0.0004, 0.0, -0.0001)), ('UpperArm.R', (0.8079, -0.5335, 0.1463, -0.2033), (-0.0004, -0.0, 0.0001)), ('UpperLeg.L', (1.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0)), ('UpperLeg.R', (1.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0))]
+curves 364 [('pose.bones["Body"].location', 0, 3), ('pose.bones["Body"].location', 1, 3), ('pose.bones["Body"].location', 2, 3), ('pose.bones["Body"].rotation_quaternion', 0, 3), ('pose.bones["Body"].rotation_quaternion', 1, 3), ('pose.bones["Body"].rotation_quaternion', 2, 3), ('pose.bones["Body"].rotation_quaternion', 3, 3), ('pose.bones["Foot.R"].location', 0, 2), ('pose.bones["Foot.R"].location', 1, 2), ('pose.bones["Foot.R"].location', 2, 2), ('pose.bones["Foot.R"].rotation_quaternion', 0, 2), ('pose.bones["Foot.R"].rotation_quaternion', 1, 2), ('pose.bones["Foot.R"].rotation_quaternion', 2, 2), ('pose.bones["Foot.R"].rotation_quaternion', 3, 2), ('pose.bones["Foot.L"].location', 0, 2)]
+
+Blender quit

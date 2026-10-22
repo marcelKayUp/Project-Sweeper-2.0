@@ -1,0 +1,34 @@
+{
+  "phase": "Quaternius-Master in die Werkstatt übernommen",
+  "updated": "22.10.2026 · Originalquelle als modulare Bibliothek integriert",
+  "steps": [
+    {
+      "title": "Quelle gesichert",
+      "detail": "Aktuellen Blender-Master samt 24 Animationen im Projekt gesichert. CC0-Herkunft und SHA-256 dokumentiert; die interaktive Quelldatei bleibt unverändert."
+    },
+    {
+      "title": "Modulare Werkstatt",
+      "detail": "Elf Sets, vier kombinierbare Teile, drei Ausrüstungsmeshes, Originalfarben und JSON-/GLB-Export."
+    },
+    {
+      "title": "Technische Prüfung bestanden",
+      "detail": "Alle Sets und Zubehör-Exporte: 62 Bones, 24 bewegte Clips, keine glTF-Fehler oder Warnungen. Browserprüfung und unabhängiger Blender-Import bestanden."
+    },
+    {
+      "title": "Menschliche Abnahme offen",
+      "detail": "Outfitmischungen, Bewegung und Spielkamera müssen noch beurteilt werden. Crouch und Reload fehlen in der Quelle."
+    }
+  ],
+  "images": [
+    {
+      "caption": "Werkstatt-Export Casual2: Originalteile und Farben, unabhängig in Blender importiert.",
+      "src": "./modular-front.png"
+    },
+    {
+      "caption": "Derselbe Export mit Idle_Neutral auf neutraler Reviewbühne, Isoansicht.",
+      "src": "./modular-iso.png"
+    }
+  ],
+  "finding": "Der Nutzer hat die direkte Übernahme des geöffneten CC0-Masters beauftragt. Die Werkstatt verwendet nun echte Quaternius-Teile. Der bisherige eigene Geometriegenerator hat den dokumentierten Referenzvergleich weiterhin nicht gewonnen und bleibt separat erreichbar.",
+  "validation": "Casual2: 5.776 Dreiecke, 9 Materialien, 62 Bones, 24 bewegte Clips. Menschliche Art-Abnahme und Missionsintegration bleiben offen; die frühere 5.000-Dreiecks-/19-Bone-Grenze gehört zum alten prozeduralen Piloten."
+}

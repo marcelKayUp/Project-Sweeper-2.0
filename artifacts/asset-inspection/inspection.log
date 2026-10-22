@@ -1,0 +1,11 @@
+NC_ASSET_PROGRESS {"done": 20, "files": 131, "cacheHits": 21, "inspected": 0, "errors": 0}
+NC_ASSET_PROGRESS {"done": 40, "files": 131, "cacheHits": 41, "inspected": 0, "errors": 0}
+NC_ASSET_PROGRESS {"done": 60, "files": 131, "cacheHits": 61, "inspected": 0, "errors": 0}
+NC_ASSET_PROGRESS {"done": 80, "files": 131, "cacheHits": 81, "inspected": 0, "errors": 0}
+NC_ASSET_PROGRESS {"done": 100, "files": 131, "cacheHits": 101, "inspected": 0, "errors": 0}
+NC_ASSET_PROGRESS {"done": 120, "files": 131, "cacheHits": 121, "inspected": 0, "errors": 0}
+NC_ASSET_PROGRESS {"done": 131, "files": 131, "cacheHits": 132, "inspected": 0, "errors": 0}
+NC_ASSET_RESULT {"files": 131, "bytes": 88036620, "cacheHits": 132, "inspected": 0, "errors": 0, "categories": {"characters": 1, "weapons": 57, "components": 73}, "renderErrors": 0, "sourceUnchanged": true, "sourceChanges": [], "licenseFiles": [], "duplicateFileGroups": [], "duplicateGeometryGroups": 3, "triangles": {"weapons": {"min": 668, "max": 4901}, "components": {"min": 156, "max": 2537}}, "thumbnails": 140, "elapsedSeconds": 1.44}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit

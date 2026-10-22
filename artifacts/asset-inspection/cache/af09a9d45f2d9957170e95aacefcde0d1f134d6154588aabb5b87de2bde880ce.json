@@ -1,0 +1,167 @@
+{
+  "path": "Weapons/Accessories/Bayonet.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Bayonet",
+      "vertices": 124,
+      "triangles": 240,
+      "shapeHash": "3da8067257428fb44c2e1d95108f96cb68eb01c7ddc7f650d7768df9525e5c08",
+      "materials": [
+        "Black",
+        "DarkMetal",
+        "LightMetal",
+        "LightMetal2"
+      ],
+      "modifiers": [],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.21293196082115173,
+          -0.06612740457057953,
+          -0.1390952318906784
+        ],
+        "max": [
+          0.9538326859474182,
+          0.06612740457057953,
+          0.09532506763935089
+        ],
+        "size": [
+          1.16676464676857,
+          0.13225480914115906,
+          0.2344202995300293
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 240,
+  "bounds": {
+    "min": [
+      -0.21293196082115173,
+      -0.06612740457057953,
+      -0.1390952318906784
+    ],
+    "max": [
+      0.9538326859474182,
+      0.06612740457057953,
+      0.09532506763935089
+    ],
+    "size": [
+      1.16676464676857,
+      0.13225480914115906,
+      0.2344202995300293
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkMetal",
+      "diffuseColor": [
+        0.04699999839067459,
+        0.04695870354771614,
+        0.045788172632455826,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "LightMetal",
+      "diffuseColor": [
+        0.11443537473678589,
+        0.11697068810462952,
+        0.1247718334197998,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "LightMetal2",
+      "diffuseColor": [
+        0.23748715221881866,
+        0.24295367300510406,
+        0.25979065895080566,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\Accessories\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\Accessories\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Bayonet",
+      "file": "thumbs/af09a9d45f2d9957170e95aacefcde0d1f134d6154588aabb5b87de2bde880ce-0.png",
+      "category": "components",
+      "parts": [
+        "Bayonet"
+      ],
+      "triangles": 240
+    }
+  ],
+  "fileSha256": "b74cdc09ec0c8b5cc0c78fb187c3dfa2d43b32986446755a6a806d26ef0be7a4",
+  "bytes": 526496,
+  "inspectorKey": "cd7358ff160fbb070b5f8fc4e2ffd138955146420a9b39a6462eafc8c1fe5591"
+}

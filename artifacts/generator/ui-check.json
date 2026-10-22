@@ -1,0 +1,35 @@
+{
+  "generatorVersion": "semantic-building/5",
+  "passed": true,
+  "viewports": [
+    "1366x768",
+    "1920x1080"
+  ],
+  "scenarios": [
+    "4 corporate headquarters exports match canonical v5 packages",
+    "physical corridor floor cells in 2D and 3D",
+    "measured CEO sanitary distance and path overlay",
+    "executive role and materials in room detail",
+    "corporate material and functional-zone switch",
+    "corporate 2D/3D presentation",
+    "all corporate config axes survive modified-site export",
+    "no CEO in a branch",
+    "converted circulation and cosmetic wear marks",
+    "31-room Legal program beside physical corridors",
+    "3 neutral family v5 exports match canonical package",
+    "24 reference workplaces produce 6 offices",
+    "dirty inputs disable stale export",
+    "mission floor with 3 local offices and external reception/loading matches API",
+    "area failure retains complete demand and removes export",
+    "circulation-first layout in all families",
+    "room-strip partition overlay",
+    "MIT notice in UI and built artifact",
+    "keyboard room selection",
+    "infrastructure overlay",
+    "graph view",
+    "3D mount/rotate/zoom/dispose",
+    "invalid seed rejects export",
+    "reload"
+  ],
+  "pageErrors": []
+}

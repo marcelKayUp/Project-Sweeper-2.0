@@ -1,0 +1,163 @@
+{
+  "path": "Weapons/modular Weapons/Body_Sniper_3.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Body_Sniper_3",
+      "vertices": 299,
+      "triangles": 544,
+      "shapeHash": "7ebb74c01483f8518d631ef99f27d33760c28bb667699f1d71df17e493029f28",
+      "materials": [
+        "Black",
+        "Grey",
+        "White",
+        "Main"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "bounds": {
+        "min": [
+          -0.2496953159570694,
+          -0.04144364595413208,
+          -0.2017212212085724
+        ],
+        "max": [
+          0.4224262833595276,
+          0.04071838781237602,
+          0.11426108330488205
+        ],
+        "size": [
+          0.672121599316597,
+          0.0821620337665081,
+          0.31598230451345444
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 544,
+  "bounds": {
+    "min": [
+      -0.2496953159570694,
+      -0.04144364595413208,
+      -0.2017212212085724
+    ],
+    "max": [
+      0.4224262833595276,
+      0.04071838781237602,
+      0.11426108330488205
+    ],
+    "size": [
+      0.672121599316597,
+      0.0821620337665081,
+      0.31598230451345444
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Body_Sniper_3",
+      "file": "thumbs/a483c1c1520fb0bf95686dfa8a8313db4cb5f7c56c8243d7f08fbc1a35b21606-0.png",
+      "category": "components",
+      "parts": [
+        "Body_Sniper_3"
+      ],
+      "triangles": 544
+    }
+  ],
+  "fileSha256": "d4a54b9378556cdf3eef0495f1beb0d375f9832f4d290485b4fa871d2368b01d",
+  "bytes": 585744,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

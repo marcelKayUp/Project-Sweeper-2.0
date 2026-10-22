@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "family": "neon-terminal",
+  "generator": "terminal-family/1",
+  "assets": [
+    {
+      "id": "terminal-pedestal-standard-daeyang",
+      "label": "Standterminal · Standard · Daeyang",
+      "file": "terminal-pedestal-standard-daeyang.glb",
+      "sha256": "16c1c635135fc10b68c4d60e946b9837a0f71b43485b7c26f66180fab344a221",
+      "bytes": 32320,
+      "stats": {
+        "triangles": 444,
+        "vertices": 248,
+        "materials": 5,
+        "meshObjects": 5,
+        "boundsBlender": {
+          "min": [
+            -0.24500000476837158,
+            -0.2362973690032959,
+            0.0
+          ],
+          "max": [
+            0.24500000476837158,
+            0.20999999344348907,
+            1.0399999618530273
+          ]
+        },
+        "dimensions": [
+          0.49000000953674316,
+          0.446297362446785,
+          1.0399999618530273
+        ]
+      },
+      "spec": {
+        "schemaVersion": 1,
+        "family": "neon-terminal",
+        "id": "terminal-pedestal-standard-daeyang",
+        "form": "pedestal",
+        "size": "standard",
+        "scale": 1,
+        "organization": "daeyang",
+        "palette": {
+          "label": "Daeyang",
+          "body": "#0B2A5B",
+          "trim": "#C9CED6",
+          "accent": "#38D39F"
+        },
+        "seed": 47
+      }
+    }
+  ]
+}

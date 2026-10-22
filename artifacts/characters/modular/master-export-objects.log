@@ -1,0 +1,54 @@
+09:32:26 | INFO: Data are loaded, start creating Blender stuff
+09:32:26 | INFO: Blender create Mesh node Cube.063
+09:32:26 | INFO: Blender create Mesh node Cube.052
+09:32:26 | INFO: Blender create Mesh node Cube.039
+09:32:26 | INFO: Blender create Mesh node Cube.020
+09:32:26 | INFO: Blender create Mesh node Plane
+09:32:26 | INFO: Blender create Mesh node Cube.070
+09:32:26 | INFO: Blender create Mesh node Cube.017
+09:32:26 | INFO: Blender create Mesh node Cube.016
+09:32:26 | INFO: Blender create Mesh node Cube.022
+09:32:26 | INFO: Blender create Mesh node Cube.010
+09:32:26 | INFO: Blender create Mesh node Cube.003
+09:32:26 | INFO: Blender create Mesh node Cube.015
+09:32:26 | INFO: Blender create Mesh node Cube.019
+09:32:26 | INFO: Blender create Mesh node Cube.008
+09:32:26 | INFO: Blender create Mesh node Cube.000
+09:32:26 | INFO: Blender create Mesh node Cube.014
+09:32:26 | INFO: Blender create Mesh node Cube.005
+09:32:26 | INFO: Blender create Mesh node Cube.036
+09:32:27 | INFO: Blender create Mesh node Cube.035
+09:32:27 | INFO: Blender create Mesh node Cube.032
+09:32:27 | INFO: Blender create Mesh node Cube.034
+09:32:27 | INFO: Blender create Mesh node Cube.043
+09:32:27 | INFO: Blender create Mesh node Cube.205
+09:32:27 | INFO: Blender create Mesh node Cube.025
+09:32:27 | INFO: Blender create Mesh node Cube.051
+09:32:27 | INFO: Blender create Mesh node Cube.204
+09:32:27 | INFO: Blender create Mesh node Cube.001
+09:32:27 | INFO: Blender create Mesh node Cube.208
+09:32:27 | INFO: Blender create Mesh node Cube.026
+09:32:27 | INFO: Blender create Mesh node Cube.009
+09:32:27 | INFO: Blender create Mesh node Cube.002
+09:32:27 | INFO: Blender create Mesh node Cube.047
+09:32:27 | INFO: Blender create Mesh node Cube.049
+09:32:28 | INFO: Blender create Mesh node Cube.046
+09:32:28 | INFO: Blender create Mesh node Cube.007
+09:32:28 | INFO: Blender create Mesh node Cube.011
+09:32:28 | INFO: Blender create Mesh node Cube.006
+09:32:28 | INFO: Blender create Mesh node Cube.012
+09:32:28 | INFO: Blender create Mesh node Cube.018
+09:32:28 | INFO: Blender create Mesh node Cube.024
+09:32:28 | INFO: Blender create Mesh node Cube.037
+09:32:28 | INFO: Blender create Mesh node Cube.023
+09:32:28 | INFO: Blender create Mesh node Cylinder
+09:32:28 | INFO: Blender create Mesh node Cube.027
+09:32:28 | INFO: Blender create Mesh node Cube.028
+09:32:28 | INFO: Blender create Mesh node Cube.031
+09:32:28 | INFO: Blender create Mesh node Cube.029
+09:32:30 | INFO: glTF import finished in 4.41s
+MESHES ['Adventurer_Body', 'Adventurer_Feet', 'Adventurer_Head', 'Adventurer_Legs', 'Backpack', 'Beach_Body', 'Beach_Feet', 'Beach_Head', 'Beach_Legs', 'Casual2_Body', 'Casual2_Feet', 'Casual2_Head', 'Casual2_Legs', 'Casual_Body', 'Casual_Feet', 'Casual_Head', 'Casual_Legs', 'Cube', 'Farmer_Body', 'Farmer_Feet', 'Farmer_Head', 'Farmer_Pants', 'Icosphere', 'King_Body', 'King_Feet', 'King_Head', 'King_Legs', 'Pistol', 'Punk_Body', 'Punk_Feet', 'Punk_Head', 'Punk_Legs', 'SpaceSuit_Body', 'SpaceSuit_Feet', 'SpaceSuit_Head', 'SpaceSuit_Legs', 'Suit_Body', 'Suit_Feet', 'Suit_Head', 'Suit_Legs', 'Swat_Body', 'Swat_Feet', 'Swat_Head', 'Swat_Legs', 'Sword', 'Worker_Body', 'Worker_Feet', 'Worker_Head', 'Worker_Legs']
+ALL [('Adventurer_Body', 'MESH'), ('Adventurer_Feet', 'MESH'), ('Adventurer_Head', 'MESH'), ('Adventurer_Legs', 'MESH'), ('Backpack', 'MESH'), ('Beach_Body', 'MESH'), ('Beach_Feet', 'MESH'), ('Beach_Head', 'MESH'), ('Beach_Legs', 'MESH'), ('Camera', 'CAMERA'), ('Casual2_Body', 'MESH'), ('Casual2_Feet', 'MESH'), ('Casual2_Head', 'MESH'), ('Casual2_Legs', 'MESH'), ('Casual_Body', 'MESH'), ('Casual_Feet', 'MESH'), ('Casual_Head', 'MESH'), ('Casual_Legs', 'MESH'), ('CharacterArmature', 'ARMATURE'), ('Cube', 'MESH'), ('Farmer_Body', 'MESH'), ('Farmer_Feet', 'MESH'), ('Farmer_Head', 'MESH'), ('Farmer_Pants', 'MESH'), ('Icosphere', 'MESH'), ('King_Body', 'MESH'), ('King_Feet', 'MESH'), ('King_Head', 'MESH'), ('King_Legs', 'MESH'), ('Light', 'LIGHT'), ('Pistol', 'MESH'), ('Punk_Body', 'MESH'), ('Punk_Feet', 'MESH'), ('Punk_Head', 'MESH'), ('Punk_Legs', 'MESH'), ('SpaceSuit_Body', 'MESH'), ('SpaceSuit_Feet', 'MESH'), ('SpaceSuit_Head', 'MESH'), ('SpaceSuit_Legs', 'MESH'), ('Suit_Body', 'MESH'), ('Suit_Feet', 'MESH'), ('Suit_Head', 'MESH'), ('Suit_Legs', 'MESH'), ('Swat_Body', 'MESH'), ('Swat_Feet', 'MESH'), ('Swat_Head', 'MESH'), ('Swat_Legs', 'MESH'), ('Sword', 'MESH'), ('Worker_Body', 'MESH'), ('Worker_Feet', 'MESH'), ('Worker_Head', 'MESH'), ('Worker_Legs', 'MESH')]
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit

@@ -1,0 +1,12 @@
+node_modules/
+.venv-assets/
+__pycache__/
+dist/
+dist-generator/
+dist-characters/
+dist-terminals/
+.vite/
+*.tsbuildinfo
+playwright-report/
+test-results/
+.DS_Store

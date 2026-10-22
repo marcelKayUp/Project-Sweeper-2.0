@@ -1,0 +1,163 @@
+{
+  "path": "Weapons/AR_5.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "AR_5",
+      "vertices": 1198,
+      "triangles": 2274,
+      "shapeHash": "66a3d7a4ffaa594ba1edafe8dc54a97e9be0d379fc1d26a3aa97f76ac7a1e3a3",
+      "materials": [
+        "Black",
+        "Grey",
+        "White",
+        "Main"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "bounds": {
+        "min": [
+          -1.0492308139801025,
+          -0.07388755679130554,
+          -0.0907110720872879
+        ],
+        "max": [
+          0.5235434770584106,
+          0.07388756424188614,
+          0.4470244348049164
+        ],
+        "size": [
+          1.5727742910385132,
+          0.14777512103319168,
+          0.5377355068922043
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 2274,
+  "bounds": {
+    "min": [
+      -1.0492308139801025,
+      -0.07388755679130554,
+      -0.0907110720872879
+    ],
+    "max": [
+      0.5235434770584106,
+      0.07388756424188614,
+      0.4470244348049164
+    ],
+    "size": [
+      1.5727742910385132,
+      0.14777512103319168,
+      0.5377355068922043
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "AR_5",
+      "file": "thumbs/fb66396500bf89999d6a49f6035acb58cf74fd0d6e07e3299054aa4281e8b164-0.png",
+      "category": "weapons",
+      "parts": [
+        "AR_5"
+      ],
+      "triangles": 2274
+    }
+  ],
+  "fileSha256": "03234efaad3a641dbfc325b1b888709f20b829a6a08dd2aa6f29ef96f71923e9",
+  "bytes": 662100,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

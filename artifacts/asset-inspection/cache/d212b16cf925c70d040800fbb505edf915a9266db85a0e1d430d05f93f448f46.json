@@ -1,0 +1,183 @@
+{
+  "path": "Weapons/Shotgun_2.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Shotgun_2",
+      "vertices": 410,
+      "triangles": 746,
+      "shapeHash": "fb260e61bb2ec5a6a3545c2b4a736294503507f9f1443e9a5bdafa3a6b07f592",
+      "materials": [
+        "Metal",
+        "Black",
+        "DarkMetal",
+        "Wood",
+        "DarkWood"
+      ],
+      "modifiers": [],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -1.4349383115768433,
+          -0.12326635420322418,
+          -0.5683020353317261
+        ],
+        "max": [
+          4.3499627113342285,
+          0.12326724827289581,
+          0.38115349411964417
+        ],
+        "size": [
+          5.784901022911072,
+          0.24653360247612,
+          0.9494555294513702
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 746,
+  "bounds": {
+    "min": [
+      -1.4349383115768433,
+      -0.12326635420322418,
+      -0.5683020353317261
+    ],
+    "max": [
+      4.3499627113342285,
+      0.12326724827289581,
+      0.38115349411964417
+    ],
+    "size": [
+      5.784901022911072,
+      0.24653360247612,
+      0.9494555294513702
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkMetal",
+      "diffuseColor": [
+        0.04699999839067459,
+        0.04695870354771614,
+        0.045788172632455826,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkWood",
+      "diffuseColor": [
+        0.10246890038251877,
+        0.07204850763082504,
+        0.055191364139318466,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Metal",
+      "diffuseColor": [
+        0.0666259378194809,
+        0.06847818195819855,
+        0.06700000166893005,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Wood",
+      "diffuseColor": [
+        0.13285954296588898,
+        0.09002935886383057,
+        0.06840453296899796,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Shotgun_2",
+      "file": "thumbs/d212b16cf925c70d040800fbb505edf915a9266db85a0e1d430d05f93f448f46-0.png",
+      "category": "weapons",
+      "parts": [
+        "Shotgun_2"
+      ],
+      "triangles": 746
+    }
+  ],
+  "fileSha256": "77302549dff954324c14f6139cea29ed1086a159c4dd5f07f5bf50d089387578",
+  "bytes": 553832,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

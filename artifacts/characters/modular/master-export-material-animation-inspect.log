@@ -1,0 +1,70 @@
+00:03.406  blend            | Read blend: "C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\assets\source\characters\quaternius\Humans_Master.blend"
+00:03.469  reports          | WARNING Bibliotheksdatei, lädt leere Szene
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+<string>:1: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+MATERIALS
+Beige use_nodes= True diffuse= (0.3325, 0.3095, 0.2016, 1.0) principled= [((0.3325, 0.3095, 0.2016, 1.0), False)]
+Black use_nodes= True diffuse= (0.0176, 0.0176, 0.0176, 1.0) principled= [((0.0176, 0.0176, 0.0176, 1.0), False)]
+Blue use_nodes= True diffuse= (0.0497, 0.063, 0.0976, 1.0) principled= [((0.0497, 0.063, 0.0976, 1.0), False)]
+Brown use_nodes= True diffuse= (0.1789, 0.1268, 0.0513, 1.0) principled= [((0.1789, 0.1268, 0.0513, 1.0), False)]
+Brown2 use_nodes= True diffuse= (0.1065, 0.0763, 0.032, 1.0) principled= [((0.1065, 0.0763, 0.032, 1.0), False)]
+DarkBrown use_nodes= True diffuse= (0.0704, 0.0482, 0.0369, 1.0) principled= [((0.0704, 0.0482, 0.0369, 1.0), False)]
+Earrings use_nodes= True diffuse= (0.4287, 0.2423, 0.0666, 1.0) principled= [((0.4287, 0.2423, 0.0666, 1.0), False)]
+Eye use_nodes= True diffuse= (0.0311, 0.0182, 0.0113, 1.0) principled= [((0.0311, 0.0182, 0.0113, 1.0), False)]
+Eyebrows use_nodes= True diffuse= (0.0482, 0.0343, 0.0222, 1.0) principled= [((0.0482, 0.0343, 0.0222, 1.0), False)]
+Gold use_nodes= True diffuse= (0.2789, 0.1746, 0.0395, 1.0) principled= [((0.2789, 0.1746, 0.0395, 1.0), False)]
+Green use_nodes= True diffuse= (0.0607, 0.0505, 0.0189, 1.0) principled= [((0.0607, 0.0505, 0.0189, 1.0), False)]
+Grey use_nodes= True diffuse= (0.0497, 0.0497, 0.0497, 1.0) principled= [((0.0497, 0.0497, 0.0497, 1.0), False)]
+Hair use_nodes= True diffuse= (0.0668, 0.0274, 0.009, 1.0) principled= [((0.0668, 0.0274, 0.009, 1.0), False)]
+Hair_White use_nodes= True diffuse= (0.5382, 0.5382, 0.5382, 1.0) principled= [((0.5382, 0.5382, 0.5382, 1.0), False)]
+LightBlue use_nodes= True diffuse= (0.0331, 0.0497, 0.063, 1.0) principled= [((0.0331, 0.0497, 0.063, 1.0), False)]
+LightBrown use_nodes= True diffuse= (0.305, 0.2789, 0.227, 1.0) principled= [((0.305, 0.2789, 0.227, 1.0), False)]
+LightGreen use_nodes= True diffuse= (0.0985, 0.0848, 0.0371, 1.0) principled= [((0.0985, 0.0848, 0.0371, 1.0), False)]
+Metal use_nodes= True diffuse= (0.1246, 0.1282, 0.1253, 1.0) principled= [((0.1246, 0.1282, 0.1253, 1.0), False)]
+Metal_Dark use_nodes= True diffuse= (0.0784, 0.08, 0.0784, 1.0) principled= [((0.0784, 0.08, 0.0784, 1.0), False)]
+Moustache use_nodes= True diffuse= (0.1626, 0.0527, 0.0013, 1.0) principled= [((0.1626, 0.0527, 0.0013, 1.0), False)]
+Muzzle use_nodes= True diffuse= (0.047, 0.0344, 0.0193, 1.0) principled= [((0.047, 0.0344, 0.0193, 1.0), False)]
+Purple use_nodes= True diffuse= (0.063, 0.0382, 0.1046, 1.0) principled= [((0.063, 0.0382, 0.1046, 1.0), False)]
+Red use_nodes= True diffuse= (0.2019, 0.0049, 0.0138, 1.0) principled= [((0.2019, 0.0049, 0.0138, 1.0), False)]
+Red_Dark use_nodes= True diffuse= (0.2051, 0.0203, 0.0343, 1.0) principled= [((0.2051, 0.0203, 0.0343, 1.0), False)]
+SciFi_Light use_nodes= True diffuse= (0.448, 0.3897, 0.3654, 1.0) principled= [((0.448, 0.3897, 0.3654, 1.0), False)]
+SciFi_Light_Accent use_nodes= True diffuse= (0.3663, 0.1119, 0.0307, 1.0) principled= [((0.3663, 0.1119, 0.0307, 1.0), False)]
+SciFi_Main use_nodes= True diffuse= (0.0545, 0.0887, 0.0844, 1.0) principled= [((0.0545, 0.0887, 0.0844, 1.0), False)]
+SciFi_MainDark use_nodes= True diffuse= (0.0296, 0.0452, 0.0497, 1.0) principled= [((0.0296, 0.0452, 0.0497, 1.0), False)]
+Skin use_nodes= True diffuse= (0.6172, 0.4179, 0.2384, 1.0) principled= [((0.6172, 0.4179, 0.2384, 1.0), False)]
+Skin_Darker use_nodes= True diffuse= (0.4869, 0.3306, 0.1896, 1.0) principled= [((0.4869, 0.3306, 0.1896, 1.0), False)]
+Suit use_nodes= True diffuse= (0.0152, 0.0212, 0.0273, 1.0) principled= [((0.0152, 0.0212, 0.0273, 1.0), False)]
+Swat use_nodes= True diffuse= (0.0782, 0.0865, 0.1022, 1.0) principled= [((0.0782, 0.0865, 0.1022, 1.0), False)]
+Swat_Black use_nodes= True diffuse= (0.0307, 0.0273, 0.0242, 1.0) principled= [((0.0307, 0.0273, 0.0242, 1.0), False)]
+Tie use_nodes= True diffuse= (0.0666, 0.0782, 0.1022, 1.0) principled= [((0.0666, 0.0782, 0.1022, 1.0), False)]
+Visor use_nodes= True diffuse= (0.008, 0.008, 0.008, 1.0) principled= [((0.008, 0.008, 0.008, 1.0), False)]
+White use_nodes= True diffuse= (0.4575, 0.4575, 0.4575, 1.0) principled= [((0.4575, 0.4575, 0.4575, 1.0), False)]
+Worker_Vest use_nodes= True diffuse= (0.4851, 0.1274, 0.0232, 1.0) principled= [((0.4851, 0.1274, 0.0232, 1.0), False)]
+Worker_Yellow use_nodes= True diffuse= (0.4564, 0.2961, 0.0065, 1.0) principled= [((0.4564, 0.2961, 0.0065, 1.0), False)]
+ACTIONS
+Death range= (0.0, 32.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Gun_Shoot range= (0.0, 18.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+HitRecieve range= (0.0, 17.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+HitRecieve_2 range= (0.0, 17.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Idle range= (0.0, 50.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Idle_Gun range= (0.0, 50.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Idle_Gun_Pointing range= (0.0, 50.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Idle_Gun_Shoot range= (0.0, 20.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Idle_Neutral range= (0.0, 50.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Idle_Sword range= (0.0, 50.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Interact range= (0.0, 38.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Kick_Left range= (0.0, 28.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Kick_Right range= (0.0, 28.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Punch_Left range= (0.0, 25.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Punch_Right range= (0.0, 25.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Roll range= (0.0, 40.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Run range= (0.0, 24.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Run_Back range= (0.0, 25.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Run_Left range= (0.0, 24.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Run_Right range= (0.0, 24.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Run_Shoot range= (0.0, 25.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Sword_Slash range= (0.0, 31.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Walk range= (0.0, 40.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+Wave range= (0.0, 50.0) slots= [('OBLegacy Slot', 'OBJECT')] layers= 1 curves= layered
+
+Blender quit

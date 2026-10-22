@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "family": "neon-terminal",
+  "id": "terminal-wall-compact-falkenfeld-kessler",
+  "form": "wall",
+  "size": "compact",
+  "scale": 0.8,
+  "organization": "falkenfeld-kessler",
+  "palette": {
+    "label": "Falkenfeld-Kessler",
+    "body": "#2B2D31",
+    "trim": "#8A9097",
+    "accent": "#E06A1B"
+  },
+  "seed": 42
+}

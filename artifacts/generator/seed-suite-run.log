@@ -1,0 +1,257 @@
+{
+  "generatorVersion": "semantic-building/5",
+  "seedCount": 900,
+  "accepted": 900,
+  "failed": 0,
+  "fallback": 0,
+  "suites": [
+    {
+      "family": "office",
+      "size": "compact",
+      "businessProfile": {
+        "occupants": 8,
+        "workplaces": 8,
+        "processUnits": 0,
+        "storageUnits": 4
+      },
+      "seeds": {
+        "first": 0,
+        "last": 99
+      },
+      "accepted": 100,
+      "failed": 0,
+      "fallback": 0,
+      "retries": 0,
+      "discardedLayoutCandidates": 0,
+      "nonGridLayouts": 100,
+      "minRoomCount": 13,
+      "maxRoomCount": 13,
+      "minTargetDistance": 10,
+      "maxTargetDistance": 43,
+      "errors": [],
+      "distinctMissionHashes": 100,
+      "distinctGeometries": 100
+    },
+    {
+      "family": "office",
+      "size": "standard",
+      "businessProfile": {
+        "occupants": 16,
+        "workplaces": 16,
+        "processUnits": 0,
+        "storageUnits": 8
+      },
+      "seeds": {
+        "first": 0,
+        "last": 99
+      },
+      "accepted": 100,
+      "failed": 0,
+      "fallback": 0,
+      "retries": 0,
+      "discardedLayoutCandidates": 0,
+      "nonGridLayouts": 100,
+      "minRoomCount": 15,
+      "maxRoomCount": 15,
+      "minTargetDistance": 12,
+      "maxTargetDistance": 51,
+      "errors": [],
+      "distinctMissionHashes": 100,
+      "distinctGeometries": 100
+    },
+    {
+      "family": "office",
+      "size": "large",
+      "businessProfile": {
+        "occupants": 24,
+        "workplaces": 24,
+        "processUnits": 0,
+        "storageUnits": 12
+      },
+      "seeds": {
+        "first": 0,
+        "last": 99
+      },
+      "accepted": 100,
+      "failed": 0,
+      "fallback": 0,
+      "retries": 0,
+      "discardedLayoutCandidates": 0,
+      "nonGridLayouts": 100,
+      "minRoomCount": 20,
+      "maxRoomCount": 20,
+      "minTargetDistance": 12,
+      "maxTargetDistance": 54,
+      "errors": [],
+      "distinctMissionHashes": 100,
+      "distinctGeometries": 100
+    },
+    {
+      "family": "laboratory",
+      "size": "compact",
+      "businessProfile": {
+        "occupants": 8,
+        "workplaces": 2,
+        "processUnits": 4,
+        "storageUnits": 4
+      },
+      "seeds": {
+        "first": 0,
+        "last": 99
+      },
+      "accepted": 100,
+      "failed": 0,
+      "fallback": 0,
+      "retries": 0,
+      "discardedLayoutCandidates": 0,
+      "nonGridLayouts": 100,
+      "minRoomCount": 13,
+      "maxRoomCount": 13,
+      "minTargetDistance": 10,
+      "maxTargetDistance": 43,
+      "errors": [],
+      "distinctMissionHashes": 100,
+      "distinctGeometries": 100
+    },
+    {
+      "family": "laboratory",
+      "size": "standard",
+      "businessProfile": {
+        "occupants": 16,
+        "workplaces": 4,
+        "processUnits": 8,
+        "storageUnits": 8
+      },
+      "seeds": {
+        "first": 0,
+        "last": 99
+      },
+      "accepted": 100,
+      "failed": 0,
+      "fallback": 0,
+      "retries": 0,
+      "discardedLayoutCandidates": 0,
+      "nonGridLayouts": 100,
+      "minRoomCount": 14,
+      "maxRoomCount": 14,
+      "minTargetDistance": 11,
+      "maxTargetDistance": 51,
+      "errors": [],
+      "distinctMissionHashes": 100,
+      "distinctGeometries": 100
+    },
+    {
+      "family": "laboratory",
+      "size": "large",
+      "businessProfile": {
+        "occupants": 24,
+        "workplaces": 6,
+        "processUnits": 12,
+        "storageUnits": 12
+      },
+      "seeds": {
+        "first": 0,
+        "last": 99
+      },
+      "accepted": 100,
+      "failed": 0,
+      "fallback": 0,
+      "retries": 0,
+      "discardedLayoutCandidates": 0,
+      "nonGridLayouts": 100,
+      "minRoomCount": 20,
+      "maxRoomCount": 20,
+      "minTargetDistance": 12,
+      "maxTargetDistance": 55,
+      "errors": [],
+      "distinctMissionHashes": 100,
+      "distinctGeometries": 100
+    },
+    {
+      "family": "factory",
+      "size": "compact",
+      "businessProfile": {
+        "occupants": 8,
+        "workplaces": 2,
+        "processUnits": 4,
+        "storageUnits": 8
+      },
+      "seeds": {
+        "first": 0,
+        "last": 99
+      },
+      "accepted": 100,
+      "failed": 0,
+      "fallback": 0,
+      "retries": 0,
+      "discardedLayoutCandidates": 0,
+      "nonGridLayouts": 100,
+      "minRoomCount": 13,
+      "maxRoomCount": 13,
+      "minTargetDistance": 11,
+      "maxTargetDistance": 43,
+      "errors": [],
+      "distinctMissionHashes": 100,
+      "distinctGeometries": 100
+    },
+    {
+      "family": "factory",
+      "size": "standard",
+      "businessProfile": {
+        "occupants": 16,
+        "workplaces": 4,
+        "processUnits": 8,
+        "storageUnits": 16
+      },
+      "seeds": {
+        "first": 0,
+        "last": 99
+      },
+      "accepted": 100,
+      "failed": 0,
+      "fallback": 0,
+      "retries": 0,
+      "discardedLayoutCandidates": 0,
+      "nonGridLayouts": 100,
+      "minRoomCount": 15,
+      "maxRoomCount": 15,
+      "minTargetDistance": 11,
+      "maxTargetDistance": 48,
+      "errors": [],
+      "distinctMissionHashes": 100,
+      "distinctGeometries": 100
+    },
+    {
+      "family": "factory",
+      "size": "large",
+      "businessProfile": {
+        "occupants": 24,
+        "workplaces": 6,
+        "processUnits": 12,
+        "storageUnits": 24
+      },
+      "seeds": {
+        "first": 0,
+        "last": 99
+      },
+      "accepted": 100,
+      "failed": 0,
+      "fallback": 0,
+      "retries": 0,
+      "discardedLayoutCandidates": 0,
+      "nonGridLayouts": 100,
+      "minRoomCount": 22,
+      "maxRoomCount": 22,
+      "minTargetDistance": 12,
+      "maxTargetDistance": 54,
+      "errors": [],
+      "distinctMissionHashes": 100,
+      "distinctGeometries": 100
+    }
+  ],
+  "limitations": [
+    "Geometric and semantic validation only",
+    "No full bot mission or human acceptance",
+    "No ordinary multiplayer client import"
+  ]
+}

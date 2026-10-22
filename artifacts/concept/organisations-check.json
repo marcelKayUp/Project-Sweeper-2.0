@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "scope": "editorial-competition-concept-v8",
+  "checks": [
+    {
+      "name": "original source unchanged and project copy byte-identical",
+      "detail": "22f416a762c751f00b4b26f6a9431b6e175cb676d04a9c7150f194501cb66438"
+    },
+    {
+      "name": "sequential complete catalogue with unique IDs and anchors",
+      "detail": {
+        "organizations": 70,
+        "companies": 30,
+        "independent": 40
+      }
+    },
+    {
+      "name": "all reusable actor planning profiles populated",
+      "detail": {
+        "interests": 70,
+        "resourceRoles": 70,
+        "dependencies": 70,
+        "tensionAxes": 70,
+        "companyMethodPreferences": 30,
+        "threeColorPalettes": 70,
+        "logoBriefings": 70
+      }
+    },
+    {
+      "name": "undefined names and rejected companies absent from active profiles",
+      "detail": true
+    },
+    {
+      "name": "six cooperation structures and reusable methods without fixed cast or plots",
+      "detail": {
+        "alliances": 6,
+        "fixedScenarios": 0,
+        "fixedContacts": 0
+      }
+    },
+    {
+      "name": "local document links and linked explicit anchors resolve",
+      "detail": 13
+    }
+  ],
+  "open": [
+    "human conceptual acceptance",
+    "HTN domain implementation and behavioural validation",
+    "multilingual and legal-form plausibility",
+    "runtime catalogue migration"
+  ],
+  "documents": {
+    "docs/ORGANISATIONEN.md": "5ff9545a9b4821e01ef61c089dac9caa728988ae68549b8606763cbd9f9cd0e6",
+    "docs/ORGANISATIONSKATALOG.md": "32c70ebce9c18afb65163316d2217fa98bc035b074e7678a98e3f06b4b24dd24",
+    "docs/decisions/0020-organisationslandschaft-und-lokale-konflikte.md": "6cb14aed7925011e9fe861e5b9731f8527e0e896975e5d0d22192d43b7218dda",
+    "docs/decisions/0019-bisherige-konzernentwuerfe-verworfen.md": "ce79676eb4586e786e5c0ac62b10192af4700d08f47ddb4449b4b44c8410913c"
+  }
+}

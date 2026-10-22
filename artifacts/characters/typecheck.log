@@ -1,0 +1,6 @@
+$ corepack pnpm --filter @neon/sim typecheck && corepack pnpm --filter @neon/generator typecheck && corepack pnpm --filter @neon/characters typecheck && corepack pnpm --filter @neon/server typecheck && corepack pnpm --filter @neon/client typecheck
+$ tsc --noEmit
+$ tsc --noEmit
+$ tsc --noEmit
+$ tsc --noEmit
+$ tsc --noEmit

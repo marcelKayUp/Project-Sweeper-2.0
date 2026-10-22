@@ -1,0 +1,13 @@
+{
+  "name": "@neon/generator",
+  "private": true,
+  "type": "module",
+  "version": "0.4.0",
+  "exports": {
+    ".": "./src/index.ts",
+    "./mit-license": "./licenses/halftheopposite-MIT.txt"
+  },
+  "scripts": { "test": "vitest run", "typecheck": "tsc --noEmit" },
+  "dependencies": { "@neon/sim": "workspace:*" },
+  "devDependencies": { "typescript": "7.0.2", "vitest": "5.0.5" }
+}

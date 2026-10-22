@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "source": "quaternius-modular-men-v1",
+  "id": "quaternius-16",
+  "seed": 42,
+  "stature": 1.15,
+  "parts": {
+    "head": "Punk",
+    "body": "Swat",
+    "legs": "Farmer",
+    "feet": "Worker"
+  },
+  "equipment": "pistol",
+  "palette": {
+    "skin": "#BD895D",
+    "hair": "#244C78",
+    "cloth": null,
+    "armor": "#183846",
+    "accent": "#EF7722"
+  }
+}

@@ -1,0 +1,13 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+allowBuilds:
+  esbuild: true
+  msgpackr-extract: true
+
+minimumReleaseAgeExclude:
+  - "@colyseus/schema@5.0.42"
+  - "@babylonjs/core@9.31.2"
+  - "@babylonjs/loaders@9.31.2"
+  - "@babylonjs/serializers@9.31.2"

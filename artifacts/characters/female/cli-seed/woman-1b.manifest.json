@@ -1,0 +1,86 @@
+{
+  "assetId": "woman-1b",
+  "generator": "NEON CONTRACT Character Creator",
+  "generatorVersion": "modular-1.1.0",
+  "nodeVersion": "v24.14.0",
+  "babylonVersion": "9.31.2",
+  "specification": {
+    "schemaVersion": 2,
+    "source": "modular-women-v1",
+    "id": "woman-1b",
+    "seed": 47,
+    "stature": 1,
+    "parts": {
+      "head": "Soldier",
+      "body": "Adventurer",
+      "legs": "Punk",
+      "feet": "SciFi"
+    },
+    "equipment": "none",
+    "palette": {
+      "skin": null,
+      "hair": null,
+      "cloth": null,
+      "armor": null,
+      "accent": null
+    }
+  },
+  "stats": {
+    "triangles": 8280,
+    "vertices": 16591,
+    "materials": 10,
+    "bones": 62,
+    "height": 1.05
+  },
+  "clips": [
+    "Death",
+    "Gun_Shoot",
+    "HitRecieve",
+    "HitRecieve_2",
+    "Idle",
+    "Idle_Gun",
+    "Idle_Gun_Pointing",
+    "Idle_Gun_Shoot",
+    "Idle_Neutral",
+    "Idle_Sword",
+    "Interact",
+    "Kick_Left",
+    "Kick_Right",
+    "Punch_Left",
+    "Punch_Right",
+    "Roll",
+    "Run",
+    "Run_Back",
+    "Run_Left",
+    "Run_Right",
+    "Run_Shoot",
+    "Sword_Slash",
+    "Walk",
+    "Wave"
+  ],
+  "source": {
+    "author": "Unverified (user-provided)",
+    "license": "LicenseRef-UserProvided-Unverified",
+    "url": "",
+    "sourceId": "modular-women-v1",
+    "assetSha256": "ccb6aeddff8d8523d892f56a105b0df8bae25dc4a095538e9fcbbbdaf1ebfb47",
+    "sourceBlendSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de"
+  },
+  "recipeHashes": {
+    "packages/characters/src/buildCharacter.ts": "c6b97c70efcf4b101d3480e85300a57b6fbf1e717f61f5670eab6e006be86343",
+    "packages/characters/src/index.ts": "f4cbbe83fbd9f1b88126048e37ccdcae27eb3a456ad43eb653779f16751e40fa",
+    "packages/characters/src/modularSpec.ts": "206bf8267efaf78716127b880f1448b38ff1a6e1f9e12f0258f7de1a7fd9bc35",
+    "packages/characters/src/spec.ts": "3182b5a85a3671b3513f7cee3fd466733f81c16c0944d15d0cf1b570ccd44ff5",
+    "packages/characters/src/types.ts": "0dec72ad7a9e0983882d2b1f2bdb9130163d46d2755be6f02727a485d7942b24",
+    "apps/client/src/characters/modularPreview.ts": "c2d81b77fe0d2fa92b09a7fc65037036bd8beb3030c38f044ff8e36e120b80a7",
+    "tools/characters/generate-character.mjs": "6671eba8f9b365088710ce72f7bb5748b043c44ead02b7024f0b9b0a624be955",
+    "pnpm-lock.yaml": "32bc7ed73977a5f6ff693b3bc3cfb7cc0e338b9c381495f00e01321b85ffaa7a",
+    "tools/characters/export_female_master.py": "f7cbb05f6a9ceabea4659c819c83bef3e0318b918437bb16a83706dfb8146065",
+    "apps/client/public/assets/characters/women/catalog.json": "39ddd9b321addb31e1ce534e207c591cb5f4d71f9fc2b60e01c728a96a5dbb4c"
+  },
+  "files": {
+    "woman-1b.glb": "bd436457a1d8a0491162b47936f8db1e6ad788e9518e45e25572ed1c119e40fd",
+    "woman-1b.json": "93e51b35ebc8f3816a97813747d84f9a8ff4aa699884e8ae5b236c16d26147ad"
+  },
+  "humanArtAcceptance": "open"
+}

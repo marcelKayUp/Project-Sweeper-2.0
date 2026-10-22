@@ -1,0 +1,52 @@
+22:20:58 | INFO: Data are loaded, start creating Blender stuff
+22:20:58 | INFO: Blender create Mesh node 0
+22:20:58 | INFO: Blender create Mesh node 1
+22:20:58 | INFO: Blender create Mesh node 2
+22:20:58 | INFO: Blender create Mesh node 3
+22:20:58 | INFO: Blender create Mesh node 4
+22:20:58 | INFO: Blender create Mesh node 5
+22:20:58 | INFO: Blender create Mesh node 6
+22:20:58 | INFO: Blender create Mesh node 7
+22:20:58 | INFO: Blender create Mesh node 8
+22:20:58 | INFO: Blender create Mesh node 9
+22:20:58 | INFO: Blender create Mesh node 10
+22:20:58 | INFO: Blender create Mesh node 11
+22:20:58 | INFO: Blender create Mesh node 12
+22:20:58 | INFO: Blender create Mesh node 13
+22:20:58 | INFO: Blender create Mesh node 14
+22:20:58 | INFO: Blender create Mesh node 15
+22:20:58 | INFO: Blender create Mesh node 16
+22:20:58 | INFO: Blender create Mesh node 17
+22:20:58 | INFO: Blender create Mesh node 18
+22:20:58 | INFO: Blender create Mesh node 19
+22:20:58 | INFO: Blender create Mesh node 20
+22:20:58 | INFO: Blender create Mesh node 21
+22:20:58 | INFO: Blender create Mesh node 22
+22:20:58 | INFO: Blender create Mesh node 23
+22:20:58 | INFO: Blender create Mesh node 24
+22:20:58 | INFO: Blender create Mesh node 25
+22:20:58 | INFO: Blender create Mesh node 26
+22:20:58 | INFO: Blender create Mesh node 27
+22:20:59 | INFO: Blender create Mesh node 28
+22:20:59 | INFO: Blender create Mesh node 29
+22:20:59 | INFO: Blender create Mesh node 30
+22:20:59 | INFO: Blender create Mesh node 31
+22:20:59 | INFO: Blender create Mesh node 32
+22:20:59 | INFO: Blender create Mesh node 33
+22:20:59 | INFO: Blender create Mesh node 34
+22:20:59 | INFO: Blender create Mesh node 35
+22:20:59 | INFO: Blender create Mesh node 36
+22:20:59 | INFO: glTF import finished in 0.41s
+C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\tools\characters\verify_blender.py:150: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  material.use_nodes = True
+C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\tools\characters\verify_blender.py:155: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+00:16.813  render           | Saved: 'C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\artifacts\characters\humanoid-review\blender\iso.png'
+00:21.906  render           | Saved: 'C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\artifacts\characters\humanoid-review\blender\front.png'
+00:28.328  render           | Saved: 'C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\artifacts\characters\humanoid-review\blender\back.png'
+00:35.578  render           | Saved: 'C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\artifacts\characters\humanoid-review\blender\walk.png'
+Info: Saved as "neon-runner-humanoid-review.blend"
+{"ok": true, "report": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Cyberpunk Game\\artifacts\\characters\\humanoid-review\\blender\\report.json", "blend": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Cyberpunk Game\\assets\\source\\characters\\neon-runner-humanoid-review.blend"}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit

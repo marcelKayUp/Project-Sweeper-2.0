@@ -1,0 +1,151 @@
+{
+  "path": "Weapons/Pistol_5.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Pistol_5",
+      "vertices": 530,
+      "triangles": 968,
+      "shapeHash": "71a03939546dd2507881f09eda0cc9ed6a42e4f243d5396ab1e86b9a8944056b",
+      "materials": [
+        "Metal",
+        "Black",
+        "LightMetal"
+      ],
+      "modifiers": [],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.3668200969696045,
+          -0.13717831671237946,
+          -0.4768260419368744
+        ],
+        "max": [
+          1.4524871110916138,
+          0.1371784210205078,
+          0.721818745136261
+        ],
+        "size": [
+          1.8193072080612183,
+          0.27435673773288727,
+          1.1986447870731354
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 968,
+  "bounds": {
+    "min": [
+      -0.3668200969696045,
+      -0.13717831671237946,
+      -0.4768260419368744
+    ],
+    "max": [
+      1.4524871110916138,
+      0.1371784210205078,
+      0.721818745136261
+    ],
+    "size": [
+      1.8193072080612183,
+      0.27435673773288727,
+      1.1986447870731354
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "LightMetal",
+      "diffuseColor": [
+        0.11443537473678589,
+        0.11697068810462952,
+        0.1247718334197998,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Metal",
+      "diffuseColor": [
+        0.0666259378194809,
+        0.06847818195819855,
+        0.06700000166893005,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Pistol_5",
+      "file": "thumbs/c6ea43b66f493d2dc86d4a428f9e5570461ec9f8883559493e9b47e8f0aa43a2-0.png",
+      "category": "weapons",
+      "parts": [
+        "Pistol_5"
+      ],
+      "triangles": 968
+    }
+  ],
+  "fileSha256": "9963201c6fc90f94cebb85fa2d3df76edb521cfa5cdb74c9ec5c0d1a4e8c5c82",
+  "bytes": 551692,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

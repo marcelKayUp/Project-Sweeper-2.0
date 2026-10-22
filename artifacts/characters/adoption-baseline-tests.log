@@ -1,0 +1,10 @@
+$ vitest run
+
+ RUN  v5.0.5 C:/Users/kaup/Desktop/Zeitalter Probierbereich/Cyberpunk Game/packages/characters
+
+
+ Test Files  1 passed (1)
+      Tests  10 passed (10)
+   Start at  09:24:43
+   Duration  1.20s (tests 75%, transform 16%, import 7%, worker 3%)
+

@@ -1,0 +1,40 @@
+20:51:13 | INFO: Data are loaded, start creating Blender stuff
+20:51:13 | INFO: Blender create Mesh node 0
+20:51:13 | INFO: Blender create Mesh node 1
+20:51:13 | INFO: Blender create Mesh node 2
+20:51:13 | INFO: Blender create Mesh node 3
+20:51:13 | INFO: Blender create Mesh node 4
+20:51:13 | INFO: Blender create Mesh node 5
+20:51:13 | INFO: Blender create Mesh node 6
+20:51:13 | INFO: Blender create Mesh node 7
+20:51:13 | INFO: Blender create Mesh node 8
+20:51:13 | INFO: Blender create Mesh node 9
+20:51:13 | INFO: Blender create Mesh node 10
+20:51:13 | INFO: Blender create Mesh node 11
+20:51:13 | INFO: Blender create Mesh node 12
+20:51:13 | INFO: Blender create Mesh node 13
+20:51:13 | INFO: Blender create Mesh node 14
+20:51:13 | INFO: Blender create Mesh node 15
+20:51:13 | INFO: Blender create Mesh node 16
+20:51:13 | INFO: Blender create Mesh node 17
+20:51:13 | INFO: Blender create Mesh node 18
+20:51:13 | INFO: Blender create Mesh node 19
+20:51:13 | INFO: Blender create Mesh node 20
+20:51:13 | INFO: Blender create Mesh node 21
+20:51:13 | INFO: Blender create Mesh node 22
+20:51:13 | INFO: Blender create Mesh node 23
+20:51:13 | INFO: Blender create Mesh node 24
+20:51:13 | INFO: Blender create Mesh node 25
+20:51:13 | INFO: glTF import finished in 0.05s
+Traceback (most recent call last):
+  File "C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\tools\characters\verify_blender.py", line 220, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\tools\characters\verify_blender.py", line 131, in main
+    raise AssertionError(f"{clip}: lost animated ground contact: {posed[clip]['floorRange']}")
+AssertionError: walk: lost animated ground contact: [-0.005864171776920557, 0.017867572605609894]
+
+Error: script failed, file: 'tools/characters/verify_blender.py', exiting.
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit

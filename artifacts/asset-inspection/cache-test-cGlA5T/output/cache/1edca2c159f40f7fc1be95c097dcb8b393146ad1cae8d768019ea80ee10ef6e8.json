@@ -1,0 +1,174 @@
+{
+  "path": "weapon.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "AR_1",
+      "vertices": 1564,
+      "triangles": 3004,
+      "shapeHash": "fa0fedd539a23cfa2ebd0063cfbe7c2d657be9418577811aebe7727538386c06",
+      "materials": [
+        "Black",
+        "Grey",
+        "White",
+        "Main"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.9053236246109009,
+          -0.06830154359340668,
+          -0.15507735311985016
+        ],
+        "max": [
+          0.986038327217102,
+          0.06830154359340668,
+          0.39770054817199707
+        ],
+        "size": [
+          1.891361951828003,
+          0.13660308718681335,
+          0.5527779012918472
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 3004,
+  "bounds": {
+    "min": [
+      -0.9053236246109009,
+      -0.06830154359340668,
+      -0.15507735311985016
+    ],
+    "max": [
+      0.986038327217102,
+      0.06830154359340668,
+      0.39770054817199707
+    ],
+    "size": [
+      1.891361951828003,
+      0.13660308718681335,
+      0.5527779012918472
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Cyberpunk Game\\artifacts\\asset-inspection\\cache-test-cGlA5T\\input\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    },
+    {
+      "name": "dependency.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Cyberpunk Game\\artifacts\\asset-inspection\\cache-test-cGlA5T\\input\\dependency.png",
+        "state": "present",
+        "sha256": "dddc85cc6a373023dff88f8d2e706932deafbac6f82cb95daf11c9dba4def295"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Cyberpunk Game\\artifacts\\asset-inspection\\cache-test-cGlA5T\\input\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    },
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Cyberpunk Game\\artifacts\\asset-inspection\\cache-test-cGlA5T\\input\\dependency.png",
+      "state": "present",
+      "sha256": "dddc85cc6a373023dff88f8d2e706932deafbac6f82cb95daf11c9dba4def295"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [],
+  "fileSha256": "51ab6483569bae217c9a5fed9ecd6962466ded0b91e69be26ed4966fdc2c6371",
+  "bytes": 1018106,
+  "inspectorKey": "cd7358ff160fbb070b5f8fc4e2ffd138955146420a9b39a6462eafc8c1fe5591"
+}

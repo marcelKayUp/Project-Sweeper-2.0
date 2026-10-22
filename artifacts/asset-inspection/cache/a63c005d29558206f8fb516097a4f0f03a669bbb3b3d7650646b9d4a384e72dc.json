@@ -1,0 +1,119 @@
+{
+  "path": "Weapons/Accessories/Stock.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Stock",
+      "vertices": 88,
+      "triangles": 170,
+      "shapeHash": "8b7e0cf5ca805e841e63e2ac3fdf070eecc30fb8d98035e1bc080935a13dc72a",
+      "materials": [
+        "Metal"
+      ],
+      "modifiers": [],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -1.5873634815216064,
+          -0.05708049237728119,
+          -0.626102089881897
+        ],
+        "max": [
+          0.032232023775577545,
+          0.05708043649792671,
+          0.12575136125087738
+        ],
+        "size": [
+          1.619595505297184,
+          0.1141609288752079,
+          0.7518534511327744
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 170,
+  "bounds": {
+    "min": [
+      -1.5873634815216064,
+      -0.05708049237728119,
+      -0.626102089881897
+    ],
+    "max": [
+      0.032232023775577545,
+      0.05708043649792671,
+      0.12575136125087738
+    ],
+    "size": [
+      1.619595505297184,
+      0.1141609288752079,
+      0.7518534511327744
+    ]
+  },
+  "materials": [
+    {
+      "name": "Metal",
+      "diffuseColor": [
+        0.0666259378194809,
+        0.06847818195819855,
+        0.06700000166893005,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\Accessories\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\Accessories\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Stock",
+      "file": "thumbs/a63c005d29558206f8fb516097a4f0f03a669bbb3b3d7650646b9d4a384e72dc-0.png",
+      "category": "components",
+      "parts": [
+        "Stock"
+      ],
+      "triangles": 170
+    }
+  ],
+  "fileSha256": "e3e02a526c24dbff4921d285a839441b0901d55cc4f0a92f3aa0498b79dcd930",
+  "bytes": 505092,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

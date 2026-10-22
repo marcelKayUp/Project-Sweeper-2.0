@@ -1,0 +1,206 @@
+{
+  "path": "Weapons/AR_4.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 2,
+  "meshes": [
+    {
+      "name": "AR_4",
+      "vertices": 2437,
+      "triangles": 4666,
+      "shapeHash": "4f8d5e63f621991e6455f74782258a212c80dae07536ec27006572e149fdcddd",
+      "materials": [
+        "Black",
+        "Grey",
+        "White",
+        "Main"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.8973807692527771,
+          -0.07305813580751419,
+          -0.09748399257659912
+        ],
+        "max": [
+          0.8947648406028748,
+          0.07304743677377701,
+          0.38535356521606445
+        ],
+        "size": [
+          1.7921456098556519,
+          0.1461055725812912,
+          0.4828375577926636
+        ]
+      },
+      "finite": true,
+      "skin": null
+    },
+    {
+      "name": "Magazine",
+      "vertices": 120,
+      "triangles": 232,
+      "shapeHash": "b76db589c9d264f1f056d2b3ff5932cc19a1040cfe1d8155addbe5c656425540",
+      "materials": [
+        "Black"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          0.21573609113693237,
+          -0.027540815994143486,
+          -0.262229859828949
+        ],
+        "max": [
+          0.4586517810821533,
+          0.027387291193008423,
+          0.050552673637866974
+        ],
+        "size": [
+          0.24291568994522095,
+          0.05492810718715191,
+          0.31278253346681595
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 4898,
+  "bounds": {
+    "min": [
+      -0.8973807692527771,
+      -0.07305813580751419,
+      -0.262229859828949
+    ],
+    "max": [
+      0.8947648406028748,
+      0.07304743677377701,
+      0.38535356521606445
+    ],
+    "size": [
+      1.7921456098556519,
+      0.1461055725812912,
+      0.6475834250450134
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "AR_4",
+      "file": "thumbs/069f2cf2d502877f90cf8ab699e62fc987f7ec64fd185c84461c7fc187e957f2-0.png",
+      "category": "weapons",
+      "parts": [
+        "AR_4",
+        "Magazine"
+      ],
+      "triangles": 4898
+    }
+  ],
+  "fileSha256": "bc8fbe5561d44bfd78a833d4acc9b4ca22af71b3ec0b9907bae7762c9a0049e9",
+  "bytes": 783620,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

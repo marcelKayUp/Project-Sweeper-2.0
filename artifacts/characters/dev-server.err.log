@@ -1,0 +1,68 @@
+10:39:41 [vite] (client) [Unhandled error] ReferenceError: MODULAR_VARIANTS is not defined
+ > ModularCharacterWorkshop src/characters/modularScreen.tsx:373:100
+    371 |          <section className="mw-panel">
+    372 |            <div className="mw-title"><span>NATIVE VORLAGEN</span><span className="mw-index">11</span></div>
+    373 |  ...s Set"><select aria-label="Quaternius-Modellvorlage" value={MODULAR_VARIANTS.find((variant) => Object.values(spec....
+        |                                                                 ^
+    374 |            <p className="mw-note">Jede Vorlage setzt Kopf, Oberkörper, Beine und Schuhe als zusammengehöriges Original...
+    375 |          </section>
+ > Object.react_stack_bottom_frame ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+ > performWorkOnRoot ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:18094:34
+
+10:39:41 [vite] (client) [console.warn] An error occurred in the <ModularCharacterWorkshop> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+10:39:49 [vite] (client) [Unhandled error] ReferenceError: MODULAR_VARIANTS is not defined
+ > ModularCharacterWorkshop src/characters/modularScreen.tsx:373:100
+    371 |          <section className="mw-panel">
+    372 |            <div className="mw-title"><span>NATIVE VORLAGEN</span><span className="mw-index">11</span></div>
+    373 |  ...s Set"><select aria-label="Quaternius-Modellvorlage" value={MODULAR_VARIANTS.find((variant) => Object.values(spec....
+        |                                                                 ^
+    374 |            <p className="mw-note">Jede Vorlage setzt Kopf, Oberkörper, Beine und Schuhe als zusammengehöriges Original...
+    375 |          </section>
+ > Object.react_stack_bottom_frame ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+ > performWorkOnRoot ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:18094:34
+
+10:39:49 [vite] (client) [console.warn] An error occurred in the <ModularCharacterWorkshop> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+10:40:05 [vite] (client) [Unhandled error] ReferenceError: MODULAR_VARIANTS is not defined
+ > src/characters/modularScreen.tsx:414:258
+    412 |          <section className="mw-panel mw-parts-panel">
+    413 |            <div className="mw-panel-heading"><div><span className="mw-eyebrow">TEILE AUS ORIGINAL-ASSET</span><h2>Figu...
+    414 |  ...ec.parts, [slot]: event.target.value as ModularVariant })}>{MODULAR_VARIANTS.map((variant) => <option key={variant...
+        |                                                                 ^
+    415 |            <SettingField label="Ausrüstung"><select aria-label="Ausrüstung" value={spec.equipment} onChange={(event) =...
+    416 |            <SettingField label="Körpergröße · uniforme Skalierung"><span className="mw-range"><input aria-label="Körpe...
+ > ModularCharacterWorkshop src/characters/modularScreen.tsx:414:25
+ > Object.react_stack_bottom_frame ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync ../../node_modules/.pnpm/react-dom@19.3.1_react@19.3.1/node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+
+10:40:05 [vite] (client) [console.warn] An error occurred in the <ModularCharacterWorkshop> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+

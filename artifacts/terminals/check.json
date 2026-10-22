@@ -1,0 +1,240 @@
+{
+  "passed": true,
+  "assertions": [
+    {
+      "name": "all 18 GLBs validate and reimport at correct meter scale",
+      "detail": {
+        "forms": 3,
+        "sizes": 2,
+        "palettes": 3,
+        "geometryUnaffectedByPalette": true
+      }
+    },
+    {
+      "name": "unchanged family build reuses all 18 checked outputs",
+      "detail": {
+        "built": 0,
+        "cacheHits": 18
+      }
+    },
+    {
+      "name": "fresh isolated repeat is byte-identical; damaged cache output is regenerated",
+      "detail": "terminal-pedestal-standard-daeyang"
+    },
+    {
+      "name": "changed seed varies the display without changing geometry"
+    },
+    {
+      "name": "browser shows all variants, source downloads, views and rapid switching",
+      "detail": {
+        "browser": "155.0.8059.85",
+        "pageErrors": 0
+      }
+    },
+    {
+      "name": "load failure blocks exports and another selection recovers"
+    }
+  ],
+  "assets": {
+    "terminal-pedestal-compact-daeyang": {
+      "triangles": 444,
+      "bytes": 32376,
+      "materials": 5,
+      "geometrySha256": "d3b7f621df909cf691628dc01ea701815c5e56a56c60cdf3da77105f750eb8ff",
+      "glbSha256": "91fcf0386d738cc3e0771353fba0918161719605bb10aaad3a1b17e7a72b05a6",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-pedestal-compact-falkenfeld-kessler": {
+      "triangles": 444,
+      "bytes": 32432,
+      "materials": 5,
+      "geometrySha256": "d3b7f621df909cf691628dc01ea701815c5e56a56c60cdf3da77105f750eb8ff",
+      "glbSha256": "61640df57a103fbdd4bbc93dd77301e3f0f8e8c8e2e62e7c8101d269f2ef53c0",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-pedestal-compact-nakamura-lindahl": {
+      "triangles": 444,
+      "bytes": 32404,
+      "materials": 5,
+      "geometrySha256": "d3b7f621df909cf691628dc01ea701815c5e56a56c60cdf3da77105f750eb8ff",
+      "glbSha256": "90126c5f816a0e1c15d67f6368b14fa792070f10529e69b44cc5a53e457ce04f",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-pedestal-standard-daeyang": {
+      "triangles": 444,
+      "bytes": 32316,
+      "materials": 5,
+      "geometrySha256": "d3b7f621df909cf691628dc01ea701815c5e56a56c60cdf3da77105f750eb8ff",
+      "glbSha256": "2a799acfbf4513564a6867a41358df0340c32daab28ef69bf6b13f3339df156f",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-pedestal-standard-falkenfeld-kessler": {
+      "triangles": 444,
+      "bytes": 32368,
+      "materials": 5,
+      "geometrySha256": "d3b7f621df909cf691628dc01ea701815c5e56a56c60cdf3da77105f750eb8ff",
+      "glbSha256": "2563db6a099d28e0d3c5ccf46d9f43ef73861dba33a219de23eab003a6497442",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-pedestal-standard-nakamura-lindahl": {
+      "triangles": 444,
+      "bytes": 32340,
+      "materials": 5,
+      "geometrySha256": "d3b7f621df909cf691628dc01ea701815c5e56a56c60cdf3da77105f750eb8ff",
+      "glbSha256": "1b8d95af556e2b75b7747a3a4c63de89b347d3703ecd9d3cbaa9c331d1f02cde",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-console-compact-daeyang": {
+      "triangles": 366,
+      "bytes": 27540,
+      "materials": 5,
+      "geometrySha256": "f50e18dc4ef8f0172b01c4c53f9095769dbc9bd953f34d327620df52229dcbe0",
+      "glbSha256": "9605bfdc71c8f8a8e54d3ff93bbecab5c2004dba5951cf0132d75011a60bddda",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-console-compact-falkenfeld-kessler": {
+      "triangles": 366,
+      "bytes": 27592,
+      "materials": 5,
+      "geometrySha256": "f50e18dc4ef8f0172b01c4c53f9095769dbc9bd953f34d327620df52229dcbe0",
+      "glbSha256": "49a7e03423aa81a0d2c448d89729c121b9e3976d0f8eb42712d21ea57533c408",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-console-compact-nakamura-lindahl": {
+      "triangles": 366,
+      "bytes": 27568,
+      "materials": 5,
+      "geometrySha256": "f50e18dc4ef8f0172b01c4c53f9095769dbc9bd953f34d327620df52229dcbe0",
+      "glbSha256": "8f54cd9e03b3036702a46e38bb759d80a0f6c9eeb58eb682f1352dd3ab58576e",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-console-standard-daeyang": {
+      "triangles": 366,
+      "bytes": 27476,
+      "materials": 5,
+      "geometrySha256": "f50e18dc4ef8f0172b01c4c53f9095769dbc9bd953f34d327620df52229dcbe0",
+      "glbSha256": "c3f1552ed655441aab8c0bc10bbea2068463a2ae3039518a7bd6ba86cd302aa2",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-console-standard-falkenfeld-kessler": {
+      "triangles": 366,
+      "bytes": 27532,
+      "materials": 5,
+      "geometrySha256": "f50e18dc4ef8f0172b01c4c53f9095769dbc9bd953f34d327620df52229dcbe0",
+      "glbSha256": "811fb1b4d3627d5336b3b0d946801d17243b2d4d446b0d6e50635a0896cb1f26",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-console-standard-nakamura-lindahl": {
+      "triangles": 366,
+      "bytes": 27504,
+      "materials": 5,
+      "geometrySha256": "f50e18dc4ef8f0172b01c4c53f9095769dbc9bd953f34d327620df52229dcbe0",
+      "glbSha256": "a454a851b17ed77197e0c3de5c40df80b7f1ff31098484e36fe8c7a081b7a4ef",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-wall-compact-daeyang": {
+      "triangles": 206,
+      "bytes": 18476,
+      "materials": 5,
+      "geometrySha256": "b661aa0fd0be93da04e4ad320c20b2768ee21265dd03b29b263496b976683033",
+      "glbSha256": "8c1cae803241a128914befe9436513385babb0c481d52d65d17cdff7f43e2941",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-wall-compact-falkenfeld-kessler": {
+      "triangles": 206,
+      "bytes": 18528,
+      "materials": 5,
+      "geometrySha256": "b661aa0fd0be93da04e4ad320c20b2768ee21265dd03b29b263496b976683033",
+      "glbSha256": "ffb809860b74a93e0f041054afd65472ab2300a0798a0ba66f1ee2b762c6df42",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-wall-compact-nakamura-lindahl": {
+      "triangles": 206,
+      "bytes": 18504,
+      "materials": 5,
+      "geometrySha256": "b661aa0fd0be93da04e4ad320c20b2768ee21265dd03b29b263496b976683033",
+      "glbSha256": "4ef824c66b0e2f5c958a8abc1c09b0f358f8e2bff6caca01badd3fa4bc5e9a7d",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-wall-standard-daeyang": {
+      "triangles": 206,
+      "bytes": 18412,
+      "materials": 5,
+      "geometrySha256": "b661aa0fd0be93da04e4ad320c20b2768ee21265dd03b29b263496b976683033",
+      "glbSha256": "acdd2442272eb5d4b2bffee242816c6b2706a1257a2d0a34b1f912eb56723ccd",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-wall-standard-falkenfeld-kessler": {
+      "triangles": 206,
+      "bytes": 18468,
+      "materials": 5,
+      "geometrySha256": "b661aa0fd0be93da04e4ad320c20b2768ee21265dd03b29b263496b976683033",
+      "glbSha256": "f05717a2e5e5a5ddec52b4ef18c46fcbbf8e6ed0d97f8f16bd670f6bc261a543",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "terminal-wall-standard-nakamura-lindahl": {
+      "triangles": 206,
+      "bytes": 18440,
+      "materials": 5,
+      "geometrySha256": "b661aa0fd0be93da04e4ad320c20b2768ee21265dd03b29b263496b976683033",
+      "glbSha256": "b408dc9118e124a212d5bf778c35af0fd07418c76fae857da064708d74c68bb3",
+      "validator": {
+        "errors": 0,
+        "warnings": 0
+      }
+    }
+  },
+  "pageErrors": [],
+  "warnings": []
+}

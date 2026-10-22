@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "actualAssets": 131,
+  "actualThumbnails": 140,
+  "actualSourcesUnchanged": true,
+  "cacheRuns": [
+    {
+      "label": "cold",
+      "cacheHits": 0,
+      "inspected": 2
+    },
+    {
+      "label": "unchanged",
+      "cacheHits": 2,
+      "inspected": 0
+    },
+    {
+      "label": "external-image-changed",
+      "cacheHits": 1,
+      "inspected": 1
+    },
+    {
+      "label": "blend-bytes-changed-with-same-mtime",
+      "cacheHits": 1,
+      "inspected": 1
+    }
+  ],
+  "fixtures": "artifacts\\asset-inspection\\cache-test-cGlA5T"
+}

@@ -1,0 +1,195 @@
+{
+  "path": "Weapons/SMG_2.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 2,
+  "meshes": [
+    {
+      "name": "Magazine_SMG_2",
+      "vertices": 120,
+      "triangles": 232,
+      "shapeHash": "ae236d6e395f55d752b0324e17b669bd37d20d6dc6d0c00f606c0f5cb901cd7c",
+      "materials": [
+        "Black"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "bounds": {
+        "min": [
+          0.468382328748703,
+          -0.02403208240866661,
+          -0.2452688366174698
+        ],
+        "max": [
+          0.7749367952346802,
+          0.023898089304566383,
+          0.14945615828037262
+        ],
+        "size": [
+          0.3065544664859772,
+          0.047930171713232994,
+          0.3947249948978424
+        ]
+      },
+      "finite": true,
+      "skin": null
+    },
+    {
+      "name": "SMG_2",
+      "vertices": 1361,
+      "triangles": 2588,
+      "shapeHash": "1216fa93ff94d57e6eceddc120a2b7ff0ff9aae8fa809ace6878fbd1eed29ce4",
+      "materials": [
+        "Black",
+        "Grey",
+        "White",
+        "Main"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "bounds": {
+        "min": [
+          -0.9309820532798767,
+          -0.0879920944571495,
+          -0.18251222372055054
+        ],
+        "max": [
+          1.2709999084472656,
+          0.08798179030418396,
+          0.49239683151245117
+        ],
+        "size": [
+          2.2019819617271423,
+          0.17597388476133347,
+          0.6749090552330017
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 2820,
+  "bounds": {
+    "min": [
+      -0.9309820532798767,
+      -0.0879920944571495,
+      -0.2452688366174698
+    ],
+    "max": [
+      1.2709999084472656,
+      0.08798179030418396,
+      0.49239683151245117
+    ],
+    "size": [
+      2.2019819617271423,
+      0.17597388476133347,
+      0.737665668129921
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "SMG_2",
+      "file": "thumbs/795a0d59faa50feec61e58a700d35b768012f2ee49b5cb368381eafc61a763a0-0.png",
+      "category": "weapons",
+      "parts": [
+        "Magazine_SMG_2",
+        "SMG_2"
+      ],
+      "triangles": 2820
+    }
+  ],
+  "fileSha256": "5a95e381d8aab84a9e99ffb40b64821c68550fad1e3e1232c1664888be189b50",
+  "bytes": 689724,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

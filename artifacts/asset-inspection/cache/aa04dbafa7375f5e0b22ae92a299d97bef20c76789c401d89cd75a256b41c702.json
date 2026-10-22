@@ -1,0 +1,4221 @@
+{
+  "path": "All together.blend",
+  "category": "characters",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 43,
+  "meshes": [
+    {
+      "name": "Adventurer_Body",
+      "vertices": 2083,
+      "triangles": 4066,
+      "shapeHash": "bd929d64216ac174ff8b8b9411fd36d1383e9c16f789f51ba2bae73a69747425",
+      "materials": [
+        "Skin",
+        "White",
+        "Brown2",
+        "LightGreen",
+        "Gold",
+        "Green"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          -0.8246226906776428,
+          -0.19307656586170197,
+          1.1186277866363525
+        ],
+        "max": [
+          0.8246226906776428,
+          0.20117786526679993,
+          1.568824291229248
+        ],
+        "size": [
+          1.6492453813552856,
+          0.3942544311285019,
+          0.4501965045928955
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 201,
+        "maxWeightSumDeviation": 0.09536218643188477
+      }
+    },
+    {
+      "name": "Adventurer_Feet",
+      "vertices": 195,
+      "triangles": 386,
+      "shapeHash": "f0546901027147d63fd420426a53070d3cece24723930cc4c87763a45ca026cc",
+      "materials": [
+        "Brown_02",
+        "Brown2"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.02338661439716816,
+          -0.2592366337776184,
+          -0.0005078905960544944
+        ],
+        "max": [
+          0.168980211019516,
+          0.029018020257353783,
+          0.4368411600589752
+        ],
+        "size": [
+          0.14559359662234783,
+          0.2882546540349722,
+          0.4373490506550297
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 0,
+        "maxWeightSumDeviation": 0.024964511394500732
+      }
+    },
+    {
+      "name": "Adventurer_Head",
+      "vertices": 357,
+      "triangles": 646,
+      "shapeHash": "9ba547cf6d916148e92a72a3777846f7154bf15f375a6acb87682f78e76a08b3",
+      "materials": [
+        "Skin",
+        "Hair_Brown",
+        "Brown"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          -0.10976700484752655,
+          -0.1773366779088974,
+          1.5383846759796143
+        ],
+        "max": [
+          0.10976700484752655,
+          0.0543777234852314,
+          1.8275761604309082
+        ],
+        "size": [
+          0.2195340096950531,
+          0.2317144013941288,
+          0.28919148445129395
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 10,
+        "maxWeightSumDeviation": 0.036452263593673706
+      }
+    },
+    {
+      "name": "Adventurer_Legs",
+      "vertices": 358,
+      "triangles": 664,
+      "shapeHash": "caab4151999ea8a405523718a276103eb69419fa2a5d2e225061212ff40d3fd1",
+      "materials": [
+        "Skin",
+        "Brown_02",
+        "White",
+        "Brown2",
+        "LightGreen",
+        "Gold"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.17259246110916138,
+          0.36354324221611023
+        ],
+        "max": [
+          0.20071758329868317,
+          0.05890693515539169,
+          1.18582284450531
+        ],
+        "size": [
+          0.20071758329868317,
+          0.23149939626455307,
+          0.8222796022891998
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 5,
+        "maxWeightSumDeviation": 0.062100376933813095
+      }
+    },
+    {
+      "name": "Casual_Body",
+      "vertices": 686,
+      "triangles": 1327,
+      "shapeHash": "eff388fdb7bbf53977b735718259386fa531420f4bfe049fc7edf34567966e65",
+      "materials": [
+        "Skin",
+        "White"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.1899036467075348,
+          1.0938491821289062
+        ],
+        "max": [
+          0.8250574469566345,
+          0.011646520346403122,
+          1.5405011177062988
+        ],
+        "size": [
+          0.8250574469566345,
+          0.2015501670539379,
+          0.4466519355773926
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 95,
+        "maxWeightSumDeviation": 0.09689903259277344
+      }
+    },
+    {
+      "name": "Casual_Feet",
+      "vertices": 140,
+      "triangles": 269,
+      "shapeHash": "99e62135147638b6ba7e3496b4d1d35fd1e2d68068ba07e143dc261a649580e3",
+      "materials": [
+        "Skin",
+        "Grey"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.03857474774122238,
+          -0.2708127796649933,
+          -0.008566934615373611
+        ],
+        "max": [
+          0.14234191179275513,
+          0.015243548899888992,
+          0.18354536592960358
+        ],
+        "size": [
+          0.10376716405153275,
+          0.2860563285648823,
+          0.1921123005449772
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 0,
+        "maxWeightSumDeviation": 0.023936688899993896
+      }
+    },
+    {
+      "name": "Casual_Head",
+      "vertices": 1337,
+      "triangles": 2526,
+      "shapeHash": "2cfc3d72a1e21787e63d3bfa791c343805a8a405934dc19b7e085377f44e5ce2",
+      "materials": [
+        "Skin",
+        "Hair_Brown",
+        "Brown",
+        "Hair_Blond"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          -0.11819484829902649,
+          -0.19252856075763702,
+          1.5232192277908325
+        ],
+        "max": [
+          0.1155499592423439,
+          0.09946297109127045,
+          1.8434743881225586
+        ],
+        "size": [
+          0.2337448075413704,
+          0.29199153184890747,
+          0.3202551603317261
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 10,
+        "maxWeightSumDeviation": 0.03625566139817238
+      }
+    },
+    {
+      "name": "Casual_Legs",
+      "vertices": 185,
+      "triangles": 353,
+      "shapeHash": "ec18194dad09a74d6dbd08a3b3bfafab96521f236149540cea3e901956ac4be3",
+      "materials": [
+        "Orange"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.1726076900959015,
+          0.146159365773201
+        ],
+        "max": [
+          0.1799163818359375,
+          0.05891212821006775,
+          1.1339181661605835
+        ],
+        "size": [
+          0.1799163818359375,
+          0.23151981830596924,
+          0.9877588003873825
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 16,
+        "maxWeightSumDeviation": 0.05568337440490723
+      }
+    },
+    {
+      "name": "Formad_Head",
+      "vertices": 1354,
+      "triangles": 2542,
+      "shapeHash": "87af8a192a2a80c9cf66441c5b1cbe76e134b772bd6a70c6f03904593db015b4",
+      "materials": [
+        "Skin",
+        "Brown",
+        "Red"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          -0.12052077054977417,
+          -0.2006874978542328,
+          1.524727702140808
+        ],
+        "max": [
+          0.12052077054977417,
+          0.11697254329919815,
+          1.8435581922531128
+        ],
+        "size": [
+          0.24104154109954834,
+          0.31766004115343094,
+          0.3188304901123047
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 10,
+        "maxWeightSumDeviation": 0.03625566139817238
+      }
+    },
+    {
+      "name": "Formal_Body",
+      "vertices": 670,
+      "triangles": 1297,
+      "shapeHash": "0129db94a19c4ff6308d2429512181ecab3bedeb014f2cbf53cad49f86cbd30e",
+      "materials": [
+        "Skin",
+        "LimeGreen",
+        "Gold"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.19307658076286316,
+          1.120074987411499
+        ],
+        "max": [
+          0.824622631072998,
+          0.016307979822158813,
+          1.5405011177062988
+        ],
+        "size": [
+          0.824622631072998,
+          0.20938456058502197,
+          0.4204261302947998
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 78,
+        "maxWeightSumDeviation": 0.09536117315292358
+      }
+    },
+    {
+      "name": "Formal_Feet",
+      "vertices": 128,
+      "triangles": 245,
+      "shapeHash": "d3c49e6e39f21429e5510ec131f983227e5d33bef85766ed7fdee24a5fc235ba",
+      "materials": [
+        "Skin",
+        "Red"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.042572423815727234,
+          -0.2554730176925659,
+          0.0010581016540527344
+        ],
+        "max": [
+          0.14541321992874146,
+          -0.0009074211120605469,
+          0.18213343620300293
+        ],
+        "size": [
+          0.10284079611301422,
+          0.25456559658050537,
+          0.1810753345489502
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 0,
+        "maxWeightSumDeviation": 0.02428872138261795
+      }
+    },
+    {
+      "name": "Formal_Legs",
+      "vertices": 140,
+      "triangles": 241,
+      "shapeHash": "5ab49721cdd418b478d4dee337ef36456b4e5ebeb89f82f9b6767f09d403ead6",
+      "materials": [
+        "Skin",
+        "LimeGreen"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.2187081277370453,
+          0.1788547784090042
+        ],
+        "max": [
+          0.21365399658679962,
+          0.08830408751964569,
+          1.1319034099578857
+        ],
+        "size": [
+          0.21365399658679962,
+          0.307012215256691,
+          0.9530486315488815
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 5,
+        "maxWeightSumDeviation": 0.05803078040480614
+      }
+    },
+    {
+      "name": "Medieval_Body",
+      "vertices": 838,
+      "triangles": 1607,
+      "shapeHash": "1cfedf48ffb6c1a9b47de6416e1db0f209f58354e5e7c79472de948553d98ad0",
+      "materials": [
+        "Skin",
+        "DarkBrown",
+        "Gold",
+        "LightBrown",
+        "Black",
+        "Metal"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.2054702192544937,
+          1.0586153268814087
+        ],
+        "max": [
+          0.8246226906776428,
+          0.047694381326436996,
+          1.5541465282440186
+        ],
+        "size": [
+          0.8246226906776428,
+          0.2531646005809307,
+          0.49553120136260986
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 137,
+        "maxWeightSumDeviation": 0.09536218643188477
+      }
+    },
+    {
+      "name": "Medieval_Feet",
+      "vertices": 148,
+      "triangles": 285,
+      "shapeHash": "b55e0cae6a3407625beaac39c40e212b2960044519b2cc9f2a745dfc9a2e2242",
+      "materials": [
+        "DarkBrown",
+        "LightBrown"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.03019694611430168,
+          -0.2554730176925659,
+          9.125861834036186e-05
+        ],
+        "max": [
+          0.14707447588443756,
+          0.015308661386370659,
+          0.4579719305038452
+        ],
+        "size": [
+          0.11687752977013588,
+          0.2707816790789366,
+          0.45788067188550485
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 0,
+        "maxWeightSumDeviation": 0.02455589920282364
+      }
+    },
+    {
+      "name": "Medieval_Head",
+      "vertices": 1063,
+      "triangles": 2022,
+      "shapeHash": "48598bcbc192403cd8de8ac3675c3f5b317ee04b42123656259c5db086f792d2",
+      "materials": [
+        "Skin",
+        "White",
+        "Brown",
+        "DarkBrown",
+        "Black"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          -0.17243099212646484,
+          -0.19251185655593872,
+          1.5206129550933838
+        ],
+        "max": [
+          0.17243099212646484,
+          0.11952418833971024,
+          1.8774540424346924
+        ],
+        "size": [
+          0.3448619842529297,
+          0.31203604489564896,
+          0.3568410873413086
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 10,
+        "maxWeightSumDeviation": 0.3533668518066406
+      }
+    },
+    {
+      "name": "Medieval_Legs",
+      "vertices": 161,
+      "triangles": 299,
+      "shapeHash": "80612297b51761b1de88a75d63b191569277801f800669f7a4b34349cb249e5c",
+      "materials": [
+        "Black"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.1859443485736847,
+          0.34477776288986206
+        ],
+        "max": [
+          0.222610205411911,
+          0.0603448711335659,
+          1.1365841627120972
+        ],
+        "size": [
+          0.222610205411911,
+          0.2462892197072506,
+          0.7918063998222351
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 9,
+        "maxWeightSumDeviation": 0.05409156158566475
+      }
+    },
+    {
+      "name": "Pistol",
+      "vertices": 580,
+      "triangles": 1040,
+      "shapeHash": "d9a7725c74d947357a94e4c4274056f1652b3c226f6df57275067b62c92d8e61",
+      "materials": [
+        "DarkBrown",
+        "Grey",
+        "Metal",
+        "Black"
+      ],
+      "modifiers": [],
+      "bounds": {
+        "min": [
+          -0.18184389173984528,
+          -0.11979253590106964,
+          -0.02292622998356819
+        ],
+        "max": [
+          0.07645698636770248,
+          0.06285607069730759,
+          0.04470391198992729
+        ],
+        "size": [
+          0.25830087810754776,
+          0.18264860659837723,
+          0.06763014197349548
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 580,
+        "overFourInfluences": 0,
+        "maxWeightSumDeviation": 1
+      }
+    },
+    {
+      "name": "Punk_Body",
+      "vertices": 816,
+      "triangles": 1559,
+      "shapeHash": "bd2131c60d526bba412e8e5cfb0587889e65aec45bb6530328abe741b4858139",
+      "materials": [
+        "Skin",
+        "Pink",
+        "Black"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.19307656586170197,
+          1.1195662021636963
+        ],
+        "max": [
+          0.8246226906776428,
+          0.021419547498226166,
+          1.5402880907058716
+        ],
+        "size": [
+          0.8246226906776428,
+          0.21449611335992813,
+          0.4207218885421753
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 92,
+        "maxWeightSumDeviation": 0.09536218643188477
+      }
+    },
+    {
+      "name": "Punk_Feet",
+      "vertices": 182,
+      "triangles": 360,
+      "shapeHash": "2b4c3e13082dc9f3276508158c4de2b09c47f25efb03c5edb23ed6f71d186c37",
+      "materials": [
+        "Black",
+        "Grey"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.026456622406840324,
+          -0.25889721512794495,
+          0.0017639514990150928
+        ],
+        "max": [
+          0.1498422622680664,
+          0.02728360891342163,
+          0.4289843440055847
+        ],
+        "size": [
+          0.12338563986122608,
+          0.2861808240413666,
+          0.4272203925065696
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 0,
+        "maxWeightSumDeviation": 0.02494192123413086
+      }
+    },
+    {
+      "name": "Punk_Head",
+      "vertices": 757,
+      "triangles": 1386,
+      "shapeHash": "16ba816179da45a90a9e8fd183207193fb570d28220631d12764fcd794785ad6",
+      "materials": [
+        "Skin",
+        "Pink",
+        "Black",
+        "Hair_Brown",
+        "Brown"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          -0.10976700484752655,
+          -0.217988982796669,
+          1.5387425422668457
+        ],
+        "max": [
+          0.10976700484752655,
+          0.12408371269702911,
+          1.959575891494751
+        ],
+        "size": [
+          0.2195340096950531,
+          0.3420726954936981,
+          0.4208333492279053
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 19,
+        "maxWeightSumDeviation": 0.03625566139817238
+      }
+    },
+    {
+      "name": "Punk_Legs",
+      "vertices": 194,
+      "triangles": 366,
+      "shapeHash": "7f3f57b28d197300402b85e68ae6afb3812f85f3e290727168e9e2298d8eb5fe",
+      "materials": [
+        "Skin",
+        "Black"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.17259246110916138,
+          0.37228116393089294
+        ],
+        "max": [
+          0.1879744976758957,
+          0.05890693515539169,
+          1.1246545314788818
+        ],
+        "size": [
+          0.1879744976758957,
+          0.23149939626455307,
+          0.7523733675479889
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 5,
+        "maxWeightSumDeviation": 0.06366173923015594
+      }
+    },
+    {
+      "name": "SciFi_Body",
+      "vertices": 852,
+      "triangles": 1619,
+      "shapeHash": "67aee4acb936b1cfb9d0284de259b7053e89871ad542a4d80c9024bd81078eaa",
+      "materials": [
+        "Skin",
+        "Black",
+        "Metal",
+        "LightBlue",
+        "Blue"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.1898868829011917,
+          1.124452829360962
+        ],
+        "max": [
+          0.8246226906776428,
+          0.030172713100910187,
+          1.5422685146331787
+        ],
+        "size": [
+          0.8246226906776428,
+          0.2200595960021019,
+          0.4178156852722168
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 80,
+        "maxWeightSumDeviation": 0.09536218643188477
+      }
+    },
+    {
+      "name": "SciFi_Feet",
+      "vertices": 164,
+      "triangles": 317,
+      "shapeHash": "e5269309a59d6376120ea0ee534747c947810f11279fdf374af275de43ed4faf",
+      "materials": [
+        "Black",
+        "Metal"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.022552387788891792,
+          -0.2554730176925659,
+          9.123158088186756e-05
+        ],
+        "max": [
+          0.16001193225383759,
+          0.022998875007033348,
+          0.5304673314094543
+        ],
+        "size": [
+          0.1374595444649458,
+          0.27847189269959927,
+          0.5303760998285725
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 0,
+        "maxWeightSumDeviation": 0.02466416358947754
+      }
+    },
+    {
+      "name": "SciFi_Head",
+      "vertices": 1373,
+      "triangles": 2582,
+      "shapeHash": "e16a06daaa46f2cb7508a1a556b8b3674eca4a036daa5f9c6a44f64e7da09978",
+      "materials": [
+        "Skin",
+        "Black",
+        "LightBlue",
+        "Brown",
+        "Hair_Black",
+        "Blue"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          -0.11436916887760162,
+          -0.19232743978500366,
+          1.5383846759796143
+        ],
+        "max": [
+          0.11656457185745239,
+          0.09888793528079987,
+          1.854073405265808
+        ],
+        "size": [
+          0.23093374073505402,
+          0.29121537506580353,
+          0.31568872928619385
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 10,
+        "maxWeightSumDeviation": 0.03625566139817238
+      }
+    },
+    {
+      "name": "SciFi_Legs",
+      "vertices": 150,
+      "triangles": 272,
+      "shapeHash": "f14b3ff28d371d0ecdd69000d73d9bd20e4d4475cb3ce4864b6ef522da99a4c7",
+      "materials": [
+        "Skin",
+        "Black",
+        "Metal",
+        "LightBlue",
+        "Blue"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.17259246110916138,
+          0.4328564703464508
+        ],
+        "max": [
+          0.18919867277145386,
+          0.05890693515539169,
+          1.1338180303573608
+        ],
+        "size": [
+          0.18919867277145386,
+          0.23149939626455307,
+          0.70096156001091
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 8,
+        "maxWeightSumDeviation": 0.05609917640686035
+      }
+    },
+    {
+      "name": "Soldier_Body",
+      "vertices": 701,
+      "triangles": 1354,
+      "shapeHash": "5828b9d60f27bda8e17a4df8826b9e2f19af514b0ec93e271746ee19efd249fc",
+      "materials": [
+        "Black",
+        "Swat",
+        "Skin"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.19307658076286316,
+          1.1323659420013428
+        ],
+        "max": [
+          0.8246226906776428,
+          0.01630798541009426,
+          1.5476174354553223
+        ],
+        "size": [
+          0.8246226906776428,
+          0.20938456617295742,
+          0.4152514934539795
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 104,
+        "maxWeightSumDeviation": 0.09536314010620117
+      }
+    },
+    {
+      "name": "Soldier_Feet",
+      "vertices": 261,
+      "triangles": 518,
+      "shapeHash": "70f0a68834e6ef96ad0d23cce0ac7986fbb6f9d6c79da2971d1767b5bcddc616",
+      "materials": [
+        "Grey",
+        "Black"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.017411284148693085,
+          -0.2592366337776184,
+          -0.0005078905960544944
+        ],
+        "max": [
+          0.17536288499832153,
+          0.035896752029657364,
+          0.42895519733428955
+        ],
+        "size": [
+          0.15795160084962845,
+          0.29513338580727577,
+          0.42946308793034405
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 0,
+        "maxWeightSumDeviation": 0.043727464973926544
+      }
+    },
+    {
+      "name": "Soldier_Head",
+      "vertices": 1534,
+      "triangles": 2848,
+      "shapeHash": "1ffb86f1e7bda98f359ebdd3c40cc6171682534021ade8461a9b589df337ec04",
+      "materials": [
+        "Skin",
+        "Hair_Brown",
+        "Brown"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          -0.11052416265010834,
+          -0.1773366779088974,
+          1.5383846759796143
+        ],
+        "max": [
+          0.11052416265010834,
+          0.06774181127548218,
+          1.8292977809906006
+        ],
+        "size": [
+          0.22104832530021667,
+          0.24507848918437958,
+          0.29091310501098633
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 12,
+        "maxWeightSumDeviation": 0.04211738705635071
+      }
+    },
+    {
+      "name": "Soldier_Legs",
+      "vertices": 345,
+      "triangles": 654,
+      "shapeHash": "19d679c9384f63600e8f997e2a2fa5a7baddd71720630f81826f0cb7d104c2b4",
+      "materials": [
+        "Grey",
+        "Black",
+        "Swat"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.17806778848171234,
+          0.33335116505622864
+        ],
+        "max": [
+          0.19804887473583221,
+          0.05370798707008362,
+          1.1541752815246582
+        ],
+        "size": [
+          0.19804887473583221,
+          0.23177577555179596,
+          0.8208241164684296
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 23,
+        "maxWeightSumDeviation": 0.06357143446803093
+      }
+    },
+    {
+      "name": "Suit_Body",
+      "vertices": 706,
+      "triangles": 1369,
+      "shapeHash": "aadfdab74a497858edce6668bebbe5338c0dfcc0b9ab690335b9ae3d8e2ee69a",
+      "materials": [
+        "Skin",
+        "Black",
+        "White"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.19307656586170197,
+          1.1308772563934326
+        ],
+        "max": [
+          0.8246226906776428,
+          0.026226134970784187,
+          1.5405011177062988
+        ],
+        "size": [
+          0.8246226906776428,
+          0.21930270083248615,
+          0.4096238613128662
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 109,
+        "maxWeightSumDeviation": 0.09534996747970581
+      }
+    },
+    {
+      "name": "Suit_Feet",
+      "vertices": 136,
+      "triangles": 261,
+      "shapeHash": "8573b09228a88bdd21489c7b36c2f437e9dfa48d1c1117c69f04fa89764f01f8",
+      "materials": [
+        "Skin",
+        "Black"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.03400614112615585,
+          -0.2714686095714569,
+          -0.0018691833829507232
+        ],
+        "max": [
+          0.1538134664297104,
+          0.005355557426810265,
+          0.19183754920959473
+        ],
+        "size": [
+          0.11980732530355453,
+          0.2768241669982672,
+          0.19370673259254545
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 0,
+        "maxWeightSumDeviation": 0.024035979062318802
+      }
+    },
+    {
+      "name": "Suit_Head",
+      "vertices": 1337,
+      "triangles": 2526,
+      "shapeHash": "4727c741c4e635b92d9f06cc184cce5a42fa83a14d92c03be01128e3e8da0925",
+      "materials": [
+        "Skin",
+        "Hair_Brown",
+        "Brown",
+        "Hair_Blond"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          -0.11813229322433472,
+          -0.19251185655593872,
+          1.5230847597122192
+        ],
+        "max": [
+          0.11548881232738495,
+          0.09976670891046524,
+          1.8433116674423218
+        ],
+        "size": [
+          0.23362110555171967,
+          0.29227856546640396,
+          0.32022690773010254
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 10,
+        "maxWeightSumDeviation": 0.03625566139817238
+      }
+    },
+    {
+      "name": "Suit_Legs",
+      "vertices": 186,
+      "triangles": 348,
+      "shapeHash": "87b4de740800b2430ac2eea21c5d6e52e577cf5ff2fceeeae3e7f0953b7786f3",
+      "materials": [
+        "Black"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.1704561710357666,
+          0.14762254059314728
+        ],
+        "max": [
+          0.17982158064842224,
+          0.058906927704811096,
+          1.158845067024231
+        ],
+        "size": [
+          0.17982158064842224,
+          0.2293630987405777,
+          1.0112225264310837
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 20,
+        "maxWeightSumDeviation": 0.05964110419154167
+      }
+    },
+    {
+      "name": "Sword",
+      "vertices": 438,
+      "triangles": 872,
+      "shapeHash": "22e2c90bad9e4e09f927b412e2d960ca2f6f85ec0a0440cb4c9cfa245e16a42d",
+      "materials": [
+        "Metal_Dark",
+        "Gold",
+        "Brown2",
+        "Metal"
+      ],
+      "modifiers": [],
+      "bounds": {
+        "min": [
+          -0.7763733863830566,
+          -0.8309556245803833,
+          1.3988174200057983
+        ],
+        "max": [
+          -0.5948247313499451,
+          0.03559591621160507,
+          1.44031822681427
+        ],
+        "size": [
+          0.18154865503311157,
+          0.8665515407919884,
+          0.04150080680847168
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 438,
+        "overFourInfluences": 0,
+        "maxWeightSumDeviation": 1
+      }
+    },
+    {
+      "name": "Witch_Body",
+      "vertices": 720,
+      "triangles": 1391,
+      "shapeHash": "50779c1199bb5ee3b67449c702108fa57927009db31bcc5559ef913f4f66666f",
+      "materials": [
+        "Skin",
+        "Brown2",
+        "Purple",
+        "Gold"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.19135811924934387,
+          1.1312552690505981
+        ],
+        "max": [
+          0.8246949911117554,
+          0.016309384256601334,
+          1.5405009984970093
+        ],
+        "size": [
+          0.8246949911117554,
+          0.2076675035059452,
+          0.40924572944641113
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 91,
+        "maxWeightSumDeviation": 0.09662878513336182
+      }
+    },
+    {
+      "name": "Witch_Feet",
+      "vertices": 154,
+      "triangles": 296,
+      "shapeHash": "5e7bce8bb5594dd977387f9d0bb80136f6459558f2e1dcb703e75689af9a2bf3",
+      "materials": [
+        "Brown2"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.013738198205828667,
+          -0.25770533084869385,
+          9.123949712375179e-05
+        ],
+        "max": [
+          0.16196686029434204,
+          0.037041861563920975,
+          0.4580116868019104
+        ],
+        "size": [
+          0.14822866208851337,
+          0.2947471924126148,
+          0.45792044730478665
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 0,
+        "maxWeightSumDeviation": 0.024090368300676346
+      }
+    },
+    {
+      "name": "Witch_Head",
+      "vertices": 1556,
+      "triangles": 2946,
+      "shapeHash": "985f96b3dda4131c25e8b228a28536bc50a4881ede04aaaf070d734023611686",
+      "materials": [
+        "Skin",
+        "Purple",
+        "Brown",
+        "Gold",
+        "Hair_Black"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          -0.2577662467956543,
+          -0.3158798813819885,
+          1.4792596101760864
+        ],
+        "max": [
+          0.2677484154701233,
+          0.23227205872535706,
+          2.0452044010162354
+        ],
+        "size": [
+          0.5255146622657776,
+          0.5481519401073456,
+          0.5659447908401489
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 10,
+        "maxWeightSumDeviation": 0.03625566139817238
+      }
+    },
+    {
+      "name": "Witch_Legs",
+      "vertices": 159,
+      "triangles": 276,
+      "shapeHash": "e80f53308e6aff9d6dfa30fafb75fb26ed9e20efae5824f541b06be1f451d089",
+      "materials": [
+        "Purple",
+        "Brown",
+        "Gold"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.20828849077224731,
+          0.3856247067451477
+        ],
+        "max": [
+          0.22005502879619598,
+          0.1332385540008545,
+          1.134667158126831
+        ],
+        "size": [
+          0.22005502879619598,
+          0.3415270447731018,
+          0.7490424513816833
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 17,
+        "maxWeightSumDeviation": 0.08975525945425034
+      }
+    },
+    {
+      "name": "Worker_Body",
+      "vertices": 672,
+      "triangles": 1305,
+      "shapeHash": "81de50305c7c770d2622736be55372b53018f8e24075b02710cf966877f3a3f1",
+      "materials": [
+        "Skin",
+        "Worker_Vest",
+        "White",
+        "Worker_Yellow"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.1922663301229477,
+          1.1456189155578613
+        ],
+        "max": [
+          0.8246226906776428,
+          0.01969549059867859,
+          1.5405011177062988
+        ],
+        "size": [
+          0.8246226906776428,
+          0.21196182072162628,
+          0.3948822021484375
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 91,
+        "maxWeightSumDeviation": 0.09536218643188477
+      }
+    },
+    {
+      "name": "Worker_Feet",
+      "vertices": 136,
+      "triangles": 261,
+      "shapeHash": "feaff7c9b9beb95ad03a05d6c980ffa822da5949b82010571b161bf5dfb95a81",
+      "materials": [
+        "Skin",
+        "Black"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.03400614112615585,
+          -0.2714686095714569,
+          -0.0018691833829507232
+        ],
+        "max": [
+          0.1538134664297104,
+          0.005355557426810265,
+          0.19714908301830292
+        ],
+        "size": [
+          0.11980732530355453,
+          0.2768241669982672,
+          0.19901826640125364
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 0,
+        "maxWeightSumDeviation": 0.023959100246429443
+      }
+    },
+    {
+      "name": "Worker_Head",
+      "vertices": 1160,
+      "triangles": 2148,
+      "shapeHash": "734efc84c1b90b56f1fad9f0b1cb76584a42cf0aee6143fb8212bfc085b1c24e",
+      "materials": [
+        "Skin",
+        "DarkBrown",
+        "Brown",
+        "Worker_Yellow"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          -0.11909330636262894,
+          -0.23725727200508118,
+          1.5383846759796143
+        ],
+        "max": [
+          0.11909330636262894,
+          0.09190116077661514,
+          1.858777403831482
+        ],
+        "size": [
+          0.23818661272525787,
+          0.3291584327816963,
+          0.3203927278518677
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 12,
+        "maxWeightSumDeviation": 0.03625566139817238
+      }
+    },
+    {
+      "name": "Worker_Legs",
+      "vertices": 217,
+      "triangles": 416,
+      "shapeHash": "169b6f80b9c80090f56607558b7b04cbcd0d81d09eaef9e896d3a7371892d9a9",
+      "materials": [
+        "Brown_02",
+        "Brown2"
+      ],
+      "modifiers": [
+        "MIRROR",
+        "ARMATURE"
+      ],
+      "bounds": {
+        "min": [
+          0.0,
+          -0.17259246110916138,
+          0.1462647020816803
+        ],
+        "max": [
+          0.1950058490037918,
+          0.05890693515539169,
+          1.1541715860366821
+        ],
+        "size": [
+          0.1950058490037918,
+          0.23149939626455307,
+          1.0079068839550018
+        ]
+      },
+      "finite": true,
+      "skin": {
+        "unweightedVertices": 0,
+        "overFourInfluences": 14,
+        "maxWeightSumDeviation": 0.06040167808532715
+      }
+    }
+  ],
+  "triangles": 48065,
+  "bounds": {
+    "min": [
+      -0.8246226906776428,
+      -0.8309556245803833,
+      -0.02292622998356819
+    ],
+    "max": [
+      0.8250574469566345,
+      0.23227205872535706,
+      2.0452044010162354
+    ],
+    "size": [
+      1.6496801376342773,
+      1.0632276833057404,
+      2.0681306309998035
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.03071345016360283,
+        0.02732088789343834,
+        0.024157628417015076,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Blue",
+      "diffuseColor": [
+        0.005220126360654831,
+        0.07556140422821045,
+        0.15232181549072266,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Brown",
+      "diffuseColor": [
+        0.03106195665895939,
+        0.018161438405513763,
+        0.01130784023553133,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Brown2",
+      "diffuseColor": [
+        0.10653223842382431,
+        0.07631582021713257,
+        0.032025814056396484,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Brown_02",
+      "diffuseColor": [
+        0.17885959148406982,
+        0.12677308917045593,
+        0.051317352801561356,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkBrown",
+      "diffuseColor": [
+        0.06680474430322647,
+        0.027386492118239403,
+        0.00902561191469431,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Gold",
+      "diffuseColor": [
+        0.42869052290916443,
+        0.24228115379810333,
+        0.0666259378194809,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Green",
+      "diffuseColor": [
+        0.06071806326508522,
+        0.05050992593169212,
+        0.018883628770709038,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.04970657452940941,
+        0.04970657452940941,
+        0.04970657452940941,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Hair_Black",
+      "diffuseColor": [
+        0.021911652758717537,
+        0.020826540887355804,
+        0.021978337317705154,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Hair_Blond",
+      "diffuseColor": [
+        0.25979405641555786,
+        0.17865963280200958,
+        0.0627506673336029,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Hair_Brown",
+      "diffuseColor": [
+        0.048171836882829666,
+        0.03433981165289879,
+        0.022173885256052017,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "LightBlue",
+      "diffuseColor": [
+        0.014906845986843109,
+        0.19880175590515137,
+        0.29568830132484436,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "LightBrown",
+      "diffuseColor": [
+        0.1574312299489975,
+        0.060594554990530014,
+        0.01763145811855793,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "LightGreen",
+      "diffuseColor": [
+        0.09850181639194489,
+        0.08484306186437607,
+        0.03705023229122162,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "LimeGreen",
+      "diffuseColor": [
+        0.06206335127353668,
+        0.1375798135995865,
+        0.0564524307847023,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Metal",
+      "diffuseColor": [
+        0.1733521670103073,
+        0.1733521670103073,
+        0.1733521670103073,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Metal_Dark",
+      "diffuseColor": [
+        0.07838419079780579,
+        0.08000797778367996,
+        0.07838419079780579,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Orange",
+      "diffuseColor": [
+        0.3423798084259033,
+        0.1214110255241394,
+        0.039835505187511444,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Pink",
+      "diffuseColor": [
+        0.137580007314682,
+        0.011954739689826965,
+        0.12987622618675232,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Purple",
+      "diffuseColor": [
+        0.05383463203907013,
+        0.009618318639695644,
+        0.13758108019828796,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Red",
+      "diffuseColor": [
+        0.13757821917533875,
+        0.01585523784160614,
+        0.0038432562723755836,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Skin",
+      "diffuseColor": [
+        0.6172067523002625,
+        0.4178851246833801,
+        0.23839758336544037,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Swat",
+      "diffuseColor": [
+        0.07818741351366043,
+        0.08650047332048416,
+        0.10224173218011856,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.45752230286598206,
+        0.45752230286598206,
+        0.45752230286598206,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Worker_Vest",
+      "diffuseColor": [
+        0.48514997959136963,
+        0.12743771076202393,
+        0.023153362795710564,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Worker_Yellow",
+      "diffuseColor": [
+        0.4564110040664673,
+        0.29613831639289856,
+        0.006512089632451534,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "outside-inspected-roots"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "outside-inspected-roots"
+    }
+  ],
+  "rigs": [
+    {
+      "name": "CharacterArmature",
+      "objectMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "bones": [
+        {
+          "name": "Abdomen",
+          "parent": "Hips",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            0.0,
+            0.0,
+            -0.0003438,
+            0.0,
+            0.1767093,
+            -0.9842631,
+            -0.0630912,
+            0.0,
+            0.9842631,
+            0.1767093,
+            1.1073713,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Body",
+          "parent": "Root",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.0004532,
+            0.0,
+            0.0,
+            -1.0,
+            -0.0682938,
+            0.0,
+            1.0,
+            0.0,
+            0.9735949,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Torso",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            -0.0,
+            0.0,
+            -0.0003438,
+            0.0,
+            -0.0189413,
+            -0.9998206,
+            -0.0405598,
+            0.0,
+            0.9998206,
+            -0.0189413,
+            1.3773061,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Foot.L",
+          "parent": "Root",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.096859,
+            0.0,
+            -0.9999857,
+            -0.0053476,
+            -0.0620955,
+            0.0,
+            0.0053476,
+            -0.9999857,
+            0.0227517,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Foot.R",
+          "parent": "Root",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            0.0,
+            0.0,
+            -0.096859,
+            0.0,
+            -0.9999857,
+            -0.0053476,
+            -0.0620955,
+            0.0,
+            0.0053476,
+            -0.9999857,
+            0.0227517,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            -0.0,
+            0.0,
+            -0.0003438,
+            -0.0,
+            -0.0,
+            -1.0000001,
+            -0.0430837,
+            0.0,
+            1.0,
+            -0.0,
+            1.5872616,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Body",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            0.0,
+            0.0,
+            -0.0003438,
+            0.0,
+            0.1385238,
+            -0.9903591,
+            -0.0777892,
+            0.0,
+            0.9903591,
+            0.1385238,
+            1.0022898,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Index1.L",
+          "parent": "Wrist.L",
+          "deform": true,
+          "restMatrix": [
+            -0.2222198,
+            0.9699396,
+            0.0991754,
+            0.5945569,
+            -0.9699396,
+            -0.2302672,
+            0.0787044,
+            -0.0928082,
+            0.0991752,
+            -0.0787044,
+            0.9919525,
+            1.4447639,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Index1.R",
+          "parent": "Wrist.R",
+          "deform": true,
+          "restMatrix": [
+            -0.2222198,
+            -0.9699396,
+            -0.0991754,
+            -0.5945569,
+            0.9699396,
+            -0.2302672,
+            0.0787044,
+            -0.0928082,
+            -0.0991752,
+            -0.0787044,
+            0.9919525,
+            1.4447639,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Index2.L",
+          "parent": "Index1.L",
+          "deform": true,
+          "restMatrix": [
+            -0.0637885,
+            0.9823844,
+            -0.1756472,
+            0.7119422,
+            -0.9823845,
+            -0.0927905,
+            -0.1622063,
+            -0.1206759,
+            -0.1756474,
+            0.1622063,
+            0.9709979,
+            1.4352388,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Index2.R",
+          "parent": "Index1.R",
+          "deform": true,
+          "restMatrix": [
+            -0.0637885,
+            -0.9823844,
+            0.1756472,
+            -0.7119422,
+            0.9823845,
+            -0.0927905,
+            -0.1622063,
+            -0.1206759,
+            0.1756474,
+            0.1622063,
+            0.9709979,
+            1.4352388,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Index3.L",
+          "parent": "Index2.L",
+          "deform": true,
+          "restMatrix": [
+            -0.0402603,
+            0.9895317,
+            -0.1385858,
+            0.7431569,
+            -0.9895319,
+            -0.058723,
+            -0.1318277,
+            -0.1236243,
+            -0.1385859,
+            0.1318277,
+            0.9815372,
+            1.4403929,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Index3.R",
+          "parent": "Index2.R",
+          "deform": true,
+          "restMatrix": [
+            -0.0402603,
+            -0.9895317,
+            0.1385858,
+            -0.7431569,
+            0.9895319,
+            -0.058723,
+            -0.1318277,
+            -0.1236243,
+            0.1385859,
+            0.1318277,
+            0.9815372,
+            1.4403929,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Index4.L",
+          "parent": "Index3.L",
+          "deform": true,
+          "restMatrix": [
+            -0.0336518,
+            0.9882575,
+            -0.1490452,
+            0.7715055,
+            -0.9882578,
+            -0.0551431,
+            -0.1424998,
+            -0.1253066,
+            -0.1490453,
+            0.1424998,
+            0.9785086,
+            1.4441695,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Index4.R",
+          "parent": "Index3.R",
+          "deform": true,
+          "restMatrix": [
+            -0.0336518,
+            -0.9882575,
+            0.1490452,
+            -0.7715055,
+            0.9882578,
+            -0.0551431,
+            -0.1424998,
+            -0.1253066,
+            0.1490453,
+            0.1424998,
+            0.9785086,
+            1.4441695,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "LowerArm.L",
+          "parent": "UpperArm.L",
+          "deform": true,
+          "restMatrix": [
+            -0.1504457,
+            0.9886072,
+            -0.0047056,
+            0.3344123,
+            -0.9886072,
+            -0.150465,
+            -0.0040437,
+            -0.0560654,
+            -0.0047057,
+            0.0040437,
+            0.9999807,
+            1.4432137,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "LowerArm.R",
+          "parent": "UpperArm.R",
+          "deform": true,
+          "restMatrix": [
+            -0.1504457,
+            -0.9886072,
+            0.0047056,
+            -0.3344123,
+            0.9886072,
+            -0.150465,
+            -0.0040437,
+            -0.0560654,
+            0.0047057,
+            0.0040437,
+            0.9999807,
+            1.4432137,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "LowerLeg.L",
+          "parent": "UpperLeg.L",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.096859,
+            0.0,
+            0.0473068,
+            0.9988834,
+            -0.0873964,
+            0.0,
+            -0.9988804,
+            0.0473064,
+            0.5569783,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "LowerLeg.R",
+          "parent": "UpperLeg.R",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            0.0,
+            0.0,
+            -0.096859,
+            0.0,
+            0.0473068,
+            0.9988834,
+            -0.0873964,
+            0.0,
+            -0.9988804,
+            0.0473064,
+            0.5569783,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Middle1.L",
+          "parent": "Wrist.L",
+          "deform": true,
+          "restMatrix": [
+            -0.0139441,
+            0.9999024,
+            0.000923,
+            0.5945569,
+            -0.9999025,
+            -0.0139449,
+            0.0009101,
+            -0.0928082,
+            0.0009228,
+            -0.0009101,
+            0.9999992,
+            1.4447639,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Middle1.R",
+          "parent": "Wrist.R",
+          "deform": true,
+          "restMatrix": [
+            -0.0139441,
+            -0.9999024,
+            -0.000923,
+            -0.5945569,
+            0.9999025,
+            -0.0139449,
+            0.0009101,
+            -0.0928082,
+            -0.0009228,
+            -0.0009101,
+            0.9999992,
+            1.4447639,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Middle2.L",
+          "parent": "Middle1.L",
+          "deform": true,
+          "restMatrix": [
+            0.0118898,
+            0.995555,
+            -0.093429,
+            0.7143928,
+            -0.9955552,
+            0.0030558,
+            -0.094133,
+            -0.0944795,
+            -0.0934292,
+            0.094133,
+            0.9911659,
+            1.4446548,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Middle2.R",
+          "parent": "Middle1.R",
+          "deform": true,
+          "restMatrix": [
+            0.0118898,
+            -0.995555,
+            0.093429,
+            -0.7143928,
+            0.9955552,
+            0.0030558,
+            -0.094133,
+            -0.0944795,
+            0.0934292,
+            0.094133,
+            0.9911659,
+            1.4446548,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Middle3.L",
+          "parent": "Middle2.L",
+          "deform": true,
+          "restMatrix": [
+            0.0015621,
+            0.9981441,
+            -0.0608787,
+            0.7534046,
+            -0.9981442,
+            -0.0021499,
+            -0.0608608,
+            -0.0943598,
+            -0.0608788,
+            0.0608609,
+            0.9962879,
+            1.4483435,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Middle3.R",
+          "parent": "Middle2.R",
+          "deform": true,
+          "restMatrix": [
+            0.0015621,
+            -0.9981441,
+            0.0608787,
+            -0.7534046,
+            0.9981442,
+            -0.0021499,
+            -0.0608608,
+            -0.0943598,
+            0.0608788,
+            0.0608609,
+            0.9962879,
+            1.4483435,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Middle4.L",
+          "parent": "Middle3.L",
+          "deform": true,
+          "restMatrix": [
+            0.0046613,
+            0.9926633,
+            -0.1208232,
+            0.7924964,
+            -0.9926634,
+            -0.0100052,
+            -0.1204985,
+            -0.094444,
+            -0.1208233,
+            0.1204985,
+            0.9853333,
+            1.4507271,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Middle4.R",
+          "parent": "Middle3.R",
+          "deform": true,
+          "restMatrix": [
+            0.0046613,
+            -0.9926633,
+            0.1208232,
+            -0.7924964,
+            0.9926634,
+            -0.0100052,
+            -0.1204985,
+            -0.094444,
+            0.1208233,
+            0.1204985,
+            0.9853333,
+            1.4507271,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            -0.0,
+            0.0,
+            -0.0003438,
+            0.0,
+            0.0,
+            -1.0000001,
+            -0.0430837,
+            0.0,
+            1.0,
+            -0.0,
+            1.510533,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "PT.L",
+          "parent": "Root",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.096859,
+            0.0,
+            0.0053475,
+            -0.9999857,
+            -0.7577317,
+            0.0,
+            0.9999857,
+            0.0053475,
+            0.4905909,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "PT.R",
+          "parent": "Root",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            0.0,
+            0.0,
+            -0.096859,
+            0.0,
+            0.0053475,
+            -0.9999857,
+            -0.7577317,
+            0.0,
+            0.9999857,
+            0.0053475,
+            0.4905909,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Pinky1.L",
+          "parent": "Wrist.L",
+          "deform": true,
+          "restMatrix": [
+            0.4003016,
+            0.9159487,
+            0.0282233,
+            0.5945569,
+            -0.9159488,
+            0.3989734,
+            0.0431066,
+            -0.0928082,
+            0.0282231,
+            -0.0431066,
+            0.9986717,
+            1.4447639,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Pinky1.R",
+          "parent": "Wrist.R",
+          "deform": true,
+          "restMatrix": [
+            0.4003016,
+            -0.9159487,
+            -0.0282233,
+            -0.5945569,
+            0.9159488,
+            0.3989734,
+            0.0431066,
+            -0.0928082,
+            -0.0282231,
+            -0.0431066,
+            0.9986717,
+            1.4447639,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Pinky2.L",
+          "parent": "Pinky1.L",
+          "deform": true,
+          "restMatrix": [
+            0.2797734,
+            0.9569378,
+            -0.077439,
+            0.7007713,
+            -0.9569379,
+            0.2714472,
+            -0.1028903,
+            -0.0465429,
+            -0.0774391,
+            0.1028904,
+            0.9916736,
+            1.4397652,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Pinky2.R",
+          "parent": "Pinky1.R",
+          "deform": true,
+          "restMatrix": [
+            0.2797734,
+            -0.9569378,
+            0.077439,
+            -0.7007713,
+            0.9569379,
+            0.2714472,
+            -0.1028903,
+            -0.0465429,
+            0.0774391,
+            0.1028904,
+            0.9916736,
+            1.4397652,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Pinky3.L",
+          "parent": "Pinky2.L",
+          "deform": true,
+          "restMatrix": [
+            0.3081402,
+            0.9472086,
+            -0.0885745,
+            0.7254313,
+            -0.9472086,
+            0.2968007,
+            -0.1212653,
+            -0.0395478,
+            -0.0885746,
+            0.1212654,
+            0.9886602,
+            1.4424167,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Pinky3.R",
+          "parent": "Pinky2.R",
+          "deform": true,
+          "restMatrix": [
+            0.3081402,
+            -0.9472086,
+            0.0885745,
+            -0.7254313,
+            0.9472086,
+            0.2968007,
+            -0.1212653,
+            -0.0395478,
+            0.0885746,
+            0.1212654,
+            0.9886602,
+            1.4424167,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Pinky4.L",
+          "parent": "Pinky3.L",
+          "deform": true,
+          "restMatrix": [
+            0.3094367,
+            0.9448366,
+            -0.1073901,
+            0.7507771,
+            -0.9448366,
+            0.2927365,
+            -0.1469324,
+            -0.0316058,
+            -0.1073901,
+            0.1469325,
+            0.9832995,
+            1.4456615,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Pinky4.R",
+          "parent": "Pinky3.R",
+          "deform": true,
+          "restMatrix": [
+            0.3094367,
+            -0.9448366,
+            0.1073901,
+            -0.7507771,
+            0.9448366,
+            0.2927365,
+            -0.1469324,
+            -0.0316058,
+            0.1073901,
+            0.1469325,
+            0.9832995,
+            1.4456615,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Ring1.L",
+          "parent": "Wrist.L",
+          "deform": true,
+          "restMatrix": [
+            0.2095259,
+            0.9772475,
+            0.0329602,
+            0.5945569,
+            -0.9772477,
+            0.2081516,
+            0.0407479,
+            -0.0928082,
+            0.03296,
+            -0.0407479,
+            0.9986257,
+            1.4447639,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Ring1.R",
+          "parent": "Wrist.R",
+          "deform": true,
+          "restMatrix": [
+            0.2095259,
+            -0.9772475,
+            -0.0329602,
+            -0.5945569,
+            0.9772477,
+            0.2081516,
+            0.0407479,
+            -0.0928082,
+            -0.03296,
+            -0.0407479,
+            0.9986257,
+            1.4447639,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Ring2.L",
+          "parent": "Ring1.L",
+          "deform": true,
+          "restMatrix": [
+            0.1628648,
+            0.9829633,
+            -0.0851959,
+            0.7111,
+            -0.9829634,
+            0.1541944,
+            -0.100037,
+            -0.0679848,
+            -0.085196,
+            0.100037,
+            0.9913296,
+            1.4399045,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Ring2.R",
+          "parent": "Ring1.R",
+          "deform": true,
+          "restMatrix": [
+            0.1628648,
+            -0.9829633,
+            0.0851959,
+            -0.7111,
+            0.9829634,
+            0.1541944,
+            -0.100037,
+            -0.0679848,
+            0.085196,
+            0.100037,
+            0.9913296,
+            1.4399045,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Ring3.L",
+          "parent": "Ring2.L",
+          "deform": true,
+          "restMatrix": [
+            0.1382852,
+            0.9846364,
+            -0.1066233,
+            0.7434633,
+            -0.9846365,
+            0.1250924,
+            -0.121833,
+            -0.0629081,
+            -0.1066234,
+            0.121833,
+            0.986807,
+            1.4431981,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Ring3.R",
+          "parent": "Ring2.R",
+          "deform": true,
+          "restMatrix": [
+            0.1382852,
+            -0.9846364,
+            0.1066233,
+            -0.7434633,
+            0.9846365,
+            0.1250924,
+            -0.121833,
+            -0.0629081,
+            0.1066234,
+            0.121833,
+            0.986807,
+            1.4431981,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Ring4.L",
+          "parent": "Ring3.L",
+          "deform": true,
+          "restMatrix": [
+            0.1562301,
+            0.9819602,
+            -0.1065204,
+            0.7751544,
+            -0.9819603,
+            0.1427826,
+            -0.1239661,
+            -0.0588819,
+            -0.1065205,
+            0.1239661,
+            0.9865525,
+            1.4471194,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Ring4.R",
+          "parent": "Ring3.R",
+          "deform": true,
+          "restMatrix": [
+            0.1562301,
+            -0.9819602,
+            0.1065204,
+            -0.7751544,
+            0.9819603,
+            0.1427826,
+            -0.1239661,
+            -0.0588819,
+            0.1065205,
+            0.1239661,
+            0.9865525,
+            1.4471194,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Root",
+          "parent": null,
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.0,
+            -0.0722887,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Shoulder.L",
+          "parent": "Chest",
+          "deform": true,
+          "restMatrix": [
+            0.3153855,
+            0.8521231,
+            -0.417634,
+            0.0632915,
+            -0.8521233,
+            0.0606172,
+            -0.519819,
+            -0.0636832,
+            -0.417634,
+            0.519819,
+            0.7452316,
+            1.4101833,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Shoulder.R",
+          "parent": "Chest",
+          "deform": true,
+          "restMatrix": [
+            0.3153855,
+            -0.8521231,
+            0.417634,
+            -0.0632915,
+            0.8521233,
+            0.0606172,
+            -0.519819,
+            -0.0636832,
+            0.417634,
+            0.519819,
+            0.7452316,
+            1.4101833,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Thumb1.L",
+          "parent": "Wrist.L",
+          "deform": true,
+          "restMatrix": [
+            -0.2076975,
+            0.6098292,
+            0.7648333,
+            0.5945569,
+            -0.6098295,
+            -0.6920655,
+            0.3862042,
+            -0.0928082,
+            0.7648332,
+            -0.3862041,
+            0.5156322,
+            1.4447639,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Thumb1.R",
+          "parent": "Wrist.R",
+          "deform": true,
+          "restMatrix": [
+            -0.2076975,
+            -0.6098292,
+            -0.7648333,
+            -0.5945569,
+            0.6098295,
+            -0.6920655,
+            0.3862042,
+            -0.0928082,
+            -0.7648332,
+            -0.3862041,
+            0.5156322,
+            1.4447639,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Thumb2.L",
+          "parent": "Thumb1.L",
+          "deform": true,
+          "restMatrix": [
+            -0.5470283,
+            0.7566886,
+            0.3580259,
+            0.6451017,
+            -0.7566888,
+            -0.6298854,
+            0.175119,
+            -0.1501691,
+            0.3580257,
+            -0.175119,
+            0.9171428,
+            1.4127539,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Thumb2.R",
+          "parent": "Thumb1.R",
+          "deform": true,
+          "restMatrix": [
+            -0.5470283,
+            -0.7566886,
+            -0.3580259,
+            -0.6451017,
+            0.7566888,
+            -0.6298854,
+            0.175119,
+            -0.1501691,
+            -0.3580257,
+            -0.175119,
+            0.9171428,
+            1.4127539,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Thumb3.L",
+          "parent": "Thumb2.L",
+          "deform": true,
+          "restMatrix": [
+            -0.4972696,
+            0.8422548,
+            0.208158,
+            0.6686507,
+            -0.8422551,
+            -0.5262085,
+            0.1170944,
+            -0.1697718,
+            0.2081578,
+            -0.1170945,
+            0.9710608,
+            1.407304,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Thumb3.R",
+          "parent": "Thumb2.R",
+          "deform": true,
+          "restMatrix": [
+            -0.4972696,
+            -0.8422548,
+            -0.208158,
+            -0.6686507,
+            0.8422551,
+            -0.5262085,
+            0.1170944,
+            -0.1697718,
+            -0.2081578,
+            -0.1170945,
+            0.9710608,
+            1.407304,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Torso",
+          "parent": "Abdomen",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            -0.0,
+            0.0,
+            -0.0003438,
+            0.0,
+            -0.0193551,
+            -0.9998127,
+            -0.0380358,
+            0.0,
+            0.9998128,
+            -0.0193551,
+            1.2469289,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "UpperArm.L",
+          "parent": "Shoulder.L",
+          "deform": true,
+          "restMatrix": [
+            0.0173545,
+            0.9998494,
+            0.0,
+            0.1174372,
+            -0.9998496,
+            0.0173546,
+            1e-07,
+            -0.0598315,
+            0.0,
+            1e-07,
+            1.0,
+            1.4432137,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "UpperArm.R",
+          "parent": "Shoulder.R",
+          "deform": true,
+          "restMatrix": [
+            0.0173545,
+            -0.9998494,
+            -0.0,
+            -0.1174372,
+            0.9998496,
+            0.0173546,
+            1e-07,
+            -0.0598315,
+            0.0,
+            1e-07,
+            1.0,
+            1.4432137,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "UpperLeg.L",
+          "parent": "Body",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.096859,
+            0.0,
+            -0.0878605,
+            0.9961358,
+            -0.0450638,
+            0.0,
+            -0.9961328,
+            -0.0878605,
+            1.0369303,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "UpperLeg.R",
+          "parent": "Body",
+          "deform": true,
+          "restMatrix": [
+            1.0,
+            0.0,
+            0.0,
+            -0.096859,
+            0.0,
+            -0.0878605,
+            0.9961358,
+            -0.0450638,
+            0.0,
+            -0.9961328,
+            -0.0878605,
+            1.0369303,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Wrist.L",
+          "parent": "LowerArm.L",
+          "deform": true,
+          "restMatrix": [
+            -0.046674,
+            0.9986451,
+            -0.0230135,
+            0.5673941,
+            -0.9986452,
+            -0.0471799,
+            -0.0219575,
+            -0.091525,
+            -0.0230136,
+            0.0219575,
+            0.999494,
+            1.4441667,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "Wrist.R",
+          "parent": "LowerArm.R",
+          "deform": true,
+          "restMatrix": [
+            -0.046674,
+            -0.9986451,
+            0.0230135,
+            -0.5673941,
+            0.9986452,
+            -0.0471799,
+            -0.0219575,
+            -0.091525,
+            0.0230136,
+            0.0219575,
+            0.999494,
+            1.4441667,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "name": "Death",
+      "frames": [
+        0.0,
+        32.0
+      ],
+      "curves": 364,
+      "movingCurves": 76,
+      "curveHash": "53d98abf7ee631826540b317b15cc4bd3bb1222e95b71722b9f8c6c2f2ff2a1c",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Gun_Shoot",
+      "frames": [
+        0.0,
+        18.0
+      ],
+      "curves": 364,
+      "movingCurves": 57,
+      "curveHash": "033accde24f33530e1c7b5982821f35781069ebb952ad1b484aef6e5b48114c1",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "HitRecieve",
+      "frames": [
+        0.0,
+        17.0
+      ],
+      "curves": 364,
+      "movingCurves": 35,
+      "curveHash": "74113fea7ca939e9bf3601e3e2506cecdc755788d3027017a984bb55323e8e5b",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "HitRecieve_2",
+      "frames": [
+        0.0,
+        17.0
+      ],
+      "curves": 364,
+      "movingCurves": 41,
+      "curveHash": "cbfb021d167d178cb8551d1870bb5d357ab20c9ed0bfc9098f10c5bc4bdc86f6",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Idle",
+      "frames": [
+        0.0,
+        50.0
+      ],
+      "curves": 364,
+      "movingCurves": 64,
+      "curveHash": "aaa9168f070c801b252a824b51f22f942056fde7837818cf2831bbc8a591bcf5",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Idle_Gun",
+      "frames": [
+        0.0,
+        50.0
+      ],
+      "curves": 364,
+      "movingCurves": 56,
+      "curveHash": "38226ec055c7d8382858eb67967c148b5ffb5be66359e9f6cb1e2c2373807b1b",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Idle_Gun_Pointing",
+      "frames": [
+        0.0,
+        50.0
+      ],
+      "curves": 364,
+      "movingCurves": 72,
+      "curveHash": "ec3071867045490c2dbdcc8c7458f7cd8d5410644c30b7ef3d2adf34e7ab7a98",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Idle_Gun_Shoot",
+      "frames": [
+        0.0,
+        20.0
+      ],
+      "curves": 364,
+      "movingCurves": 89,
+      "curveHash": "b2c5bdfe0c95530bd21a15ff3708b62d10cfb2db40fa311feb04f28b8d7d00b6",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Idle_Neutral",
+      "frames": [
+        0.0,
+        50.0
+      ],
+      "curves": 364,
+      "movingCurves": 22,
+      "curveHash": "73b199a5f91a42b3cf700b76064b571b2eb0d3540de2573b48e4924f8bcabc6e",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Idle_Sword",
+      "frames": [
+        0.0,
+        50.0
+      ],
+      "curves": 364,
+      "movingCurves": 64,
+      "curveHash": "4f4c77bbacf8d8b793b55779f00973eb64d5910de0a957a4e86cdbd990fc726f",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Interact",
+      "frames": [
+        0.0,
+        38.0
+      ],
+      "curves": 364,
+      "movingCurves": 37,
+      "curveHash": "7231bb467ea4a69b820a7a9e02705403cd926b0d0b72b0268eb08584799dfb6c",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Kick_Left",
+      "frames": [
+        0.0,
+        28.0
+      ],
+      "curves": 392,
+      "movingCurves": 66,
+      "curveHash": "4a7976dfa043926522e019d64f66a137495d42720cfe9177ebf8134de25c1dd2",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Kick_Right",
+      "frames": [
+        0.0,
+        28.0
+      ],
+      "curves": 392,
+      "movingCurves": 66,
+      "curveHash": "6085a5570e110b77a7bcf89e7b5c649333350b4f53f9b0a5f795b2c68cde5cc6",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Punch_Left",
+      "frames": [
+        0.0,
+        25.0
+      ],
+      "curves": 392,
+      "movingCurves": 61,
+      "curveHash": "6ac7c24ddad002692fbc1168fc8f6ac3c3fca500bdd2ee4da94c12c26135a4b6",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Punch_Right",
+      "frames": [
+        0.0,
+        25.0
+      ],
+      "curves": 392,
+      "movingCurves": 61,
+      "curveHash": "46986ec78393fb4b7ba3d85e1907026a160b7d6a5b1ec367b2ddd4089ec2ea9c",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Roll",
+      "frames": [
+        0.0,
+        40.0
+      ],
+      "curves": 392,
+      "movingCurves": 134,
+      "curveHash": "498b0e93cd5fa8210d57e086d60a98d721a37c3ee2862a9352dfdff8942c1c8d",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Run",
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "curves": 392,
+      "movingCurves": 78,
+      "curveHash": "4ebf98e196b4b4df0a32458ca2f2050a8892fc084dad62869e54b87b7b03dcb8",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Run_Back",
+      "frames": [
+        0.0,
+        25.0
+      ],
+      "curves": 392,
+      "movingCurves": 78,
+      "curveHash": "fb0d1bf949efba5f1e7c3426d5faacacd3ab7d412114cad9cd8816a2deb0161b",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Run_Left",
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "curves": 434,
+      "movingCurves": 70,
+      "curveHash": "c0254e21a6a428e8edc059fae4813b31dfa067048ad1dd9b706ee533f41e7585",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Run_Right",
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "curves": 434,
+      "movingCurves": 70,
+      "curveHash": "41dcd7b7a98637298c4385eefbde5b559cf9844675240e7f0943c3d038ef32e4",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Run_Shoot",
+      "frames": [
+        0.0,
+        25.0
+      ],
+      "curves": 392,
+      "movingCurves": 78,
+      "curveHash": "2ae8806cc3875cba75a8eb5f0565ccc810e3b1a8bc5728a36c11bffa50da3b9d",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Sword_Slash",
+      "frames": [
+        0.0,
+        31.0
+      ],
+      "curves": 364,
+      "movingCurves": 60,
+      "curveHash": "88eccc7740f4427edade2e7cf6eeace8bd2a188cc6bcdc3d2255c14bea5cfdbe",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Walk",
+      "frames": [
+        0.0,
+        40.0
+      ],
+      "curves": 392,
+      "movingCurves": 88,
+      "curveHash": "6b8a86f7b0c25511f618f241dd2b9e6fa525cb191b80298a485c6f3c0eea6e2e",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    },
+    {
+      "name": "Wave",
+      "frames": [
+        0.0,
+        50.0
+      ],
+      "curves": 364,
+      "movingCurves": 77,
+      "curveHash": "bb8c7e13b2c0b9374b9209ecf3495e5d590121078ba2f7c50fb01e7900219cdf",
+      "probe": "five-frame-skin-sample",
+      "sampleParts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "maxVertexDisplacement": 0.0,
+      "floorRange": [
+        -0.008566934615373611,
+        -0.008566934615373611
+      ]
+    }
+  ],
+  "groups": {
+    "Adventurer": {
+      "body": "Adventurer_Body",
+      "feet": "Adventurer_Feet",
+      "head": "Adventurer_Head",
+      "legs": "Adventurer_Legs"
+    },
+    "Casual": {
+      "body": "Casual_Body",
+      "feet": "Casual_Feet",
+      "head": "Casual_Head",
+      "legs": "Casual_Legs"
+    },
+    "Formal": {
+      "body": "Formal_Body",
+      "feet": "Formal_Feet",
+      "legs": "Formal_Legs",
+      "head": "Formad_Head"
+    },
+    "Medieval": {
+      "body": "Medieval_Body",
+      "feet": "Medieval_Feet",
+      "head": "Medieval_Head",
+      "legs": "Medieval_Legs"
+    },
+    "Punk": {
+      "body": "Punk_Body",
+      "feet": "Punk_Feet",
+      "head": "Punk_Head",
+      "legs": "Punk_Legs"
+    },
+    "SciFi": {
+      "body": "SciFi_Body",
+      "feet": "SciFi_Feet",
+      "head": "SciFi_Head",
+      "legs": "SciFi_Legs"
+    },
+    "Soldier": {
+      "body": "Soldier_Body",
+      "feet": "Soldier_Feet",
+      "head": "Soldier_Head",
+      "legs": "Soldier_Legs"
+    },
+    "Suit": {
+      "body": "Suit_Body",
+      "feet": "Suit_Feet",
+      "head": "Suit_Head",
+      "legs": "Suit_Legs"
+    },
+    "Witch": {
+      "body": "Witch_Body",
+      "feet": "Witch_Feet",
+      "head": "Witch_Head",
+      "legs": "Witch_Legs"
+    },
+    "Worker": {
+      "body": "Worker_Body",
+      "feet": "Worker_Feet",
+      "head": "Worker_Head",
+      "legs": "Worker_Legs"
+    }
+  },
+  "aliases": [
+    {
+      "source": "Formad_Head",
+      "group": "Formal",
+      "purpose": "review grouping only; source name unchanged"
+    }
+  ],
+  "flags": [
+    "source-name-alias",
+    "static-animation"
+  ],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Adventurer",
+      "file": "thumbs/aa04dbafa7375f5e0b22ae92a299d97bef20c76789c401d89cd75a256b41c702-0.png",
+      "category": "characters",
+      "parts": [
+        "Adventurer_Body",
+        "Adventurer_Feet",
+        "Adventurer_Head",
+        "Adventurer_Legs"
+      ],
+      "triangles": 5762
+    },
+    {
+      "label": "Casual",
+      "file": "thumbs/aa04dbafa7375f5e0b22ae92a299d97bef20c76789c401d89cd75a256b41c702-1.png",
+      "category": "characters",
+      "parts": [
+        "Casual_Body",
+        "Casual_Feet",
+        "Casual_Head",
+        "Casual_Legs"
+      ],
+      "triangles": 4475
+    },
+    {
+      "label": "Formal",
+      "file": "thumbs/aa04dbafa7375f5e0b22ae92a299d97bef20c76789c401d89cd75a256b41c702-2.png",
+      "category": "characters",
+      "parts": [
+        "Formal_Body",
+        "Formal_Feet",
+        "Formal_Legs",
+        "Formad_Head"
+      ],
+      "triangles": 4325
+    },
+    {
+      "label": "Medieval",
+      "file": "thumbs/aa04dbafa7375f5e0b22ae92a299d97bef20c76789c401d89cd75a256b41c702-3.png",
+      "category": "characters",
+      "parts": [
+        "Medieval_Body",
+        "Medieval_Feet",
+        "Medieval_Head",
+        "Medieval_Legs"
+      ],
+      "triangles": 4213
+    },
+    {
+      "label": "Punk",
+      "file": "thumbs/aa04dbafa7375f5e0b22ae92a299d97bef20c76789c401d89cd75a256b41c702-4.png",
+      "category": "characters",
+      "parts": [
+        "Punk_Body",
+        "Punk_Feet",
+        "Punk_Head",
+        "Punk_Legs"
+      ],
+      "triangles": 3671
+    },
+    {
+      "label": "SciFi",
+      "file": "thumbs/aa04dbafa7375f5e0b22ae92a299d97bef20c76789c401d89cd75a256b41c702-5.png",
+      "category": "characters",
+      "parts": [
+        "SciFi_Body",
+        "SciFi_Feet",
+        "SciFi_Head",
+        "SciFi_Legs"
+      ],
+      "triangles": 4790
+    },
+    {
+      "label": "Soldier",
+      "file": "thumbs/aa04dbafa7375f5e0b22ae92a299d97bef20c76789c401d89cd75a256b41c702-6.png",
+      "category": "characters",
+      "parts": [
+        "Soldier_Body",
+        "Soldier_Feet",
+        "Soldier_Head",
+        "Soldier_Legs"
+      ],
+      "triangles": 5374
+    },
+    {
+      "label": "Suit",
+      "file": "thumbs/aa04dbafa7375f5e0b22ae92a299d97bef20c76789c401d89cd75a256b41c702-7.png",
+      "category": "characters",
+      "parts": [
+        "Suit_Body",
+        "Suit_Feet",
+        "Suit_Head",
+        "Suit_Legs"
+      ],
+      "triangles": 4504
+    },
+    {
+      "label": "Witch",
+      "file": "thumbs/aa04dbafa7375f5e0b22ae92a299d97bef20c76789c401d89cd75a256b41c702-8.png",
+      "category": "characters",
+      "parts": [
+        "Witch_Body",
+        "Witch_Feet",
+        "Witch_Head",
+        "Witch_Legs"
+      ],
+      "triangles": 4909
+    },
+    {
+      "label": "Worker",
+      "file": "thumbs/aa04dbafa7375f5e0b22ae92a299d97bef20c76789c401d89cd75a256b41c702-9.png",
+      "category": "characters",
+      "parts": [
+        "Worker_Body",
+        "Worker_Feet",
+        "Worker_Head",
+        "Worker_Legs"
+      ],
+      "triangles": 4130
+    }
+  ],
+  "fileSha256": "e478c764a329f5ba8a425df865e2b9061bba42add8afe8e7324cc2cb257fc8de",
+  "bytes": 10966012,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

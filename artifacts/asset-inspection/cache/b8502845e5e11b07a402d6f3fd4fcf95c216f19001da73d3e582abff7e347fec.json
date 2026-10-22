@@ -1,0 +1,161 @@
+{
+  "path": "Weapons/Shotgun_1.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Shotgun_1",
+      "vertices": 670,
+      "triangles": 1270,
+      "shapeHash": "fac02548077672e998aae223e49ae203be3276dfd0b4ff5e44de9919a96172b9",
+      "materials": [
+        "LightMetal",
+        "Metal",
+        "DarkMetal",
+        "Black"
+      ],
+      "modifiers": [],
+      "bounds": {
+        "min": [
+          -1.4144084453582764,
+          -0.1232668086886406,
+          -0.524006724357605
+        ],
+        "max": [
+          3.800569534301758,
+          0.12326677143573761,
+          0.41867390275001526
+        ],
+        "size": [
+          5.214977979660034,
+          0.2465335801243782,
+          0.9426806271076202
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 1270,
+  "bounds": {
+    "min": [
+      -1.4144084453582764,
+      -0.1232668086886406,
+      -0.524006724357605
+    ],
+    "max": [
+      3.800569534301758,
+      0.12326677143573761,
+      0.41867390275001526
+    ],
+    "size": [
+      5.214977979660034,
+      0.2465335801243782,
+      0.9426806271076202
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkMetal",
+      "diffuseColor": [
+        0.04699999839067459,
+        0.04695870354771614,
+        0.045788172632455826,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "LightMetal",
+      "diffuseColor": [
+        0.11443537473678589,
+        0.11697068810462952,
+        0.1247718334197998,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Metal",
+      "diffuseColor": [
+        0.0666259378194809,
+        0.06847818195819855,
+        0.06700000166893005,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Shotgun_1",
+      "file": "thumbs/b8502845e5e11b07a402d6f3fd4fcf95c216f19001da73d3e582abff7e347fec-0.png",
+      "category": "weapons",
+      "parts": [
+        "Shotgun_1"
+      ],
+      "triangles": 1270
+    }
+  ],
+  "fileSha256": "442eda63e8f2529f6879df711d7949e181a86c39613434cacd86a456bddb4801",
+  "bytes": 571188,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

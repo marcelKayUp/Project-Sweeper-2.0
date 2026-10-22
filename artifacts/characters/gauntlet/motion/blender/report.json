@@ -1,0 +1,205 @@
+{
+  "blenderVersion": "5.2.2 LTS",
+  "source": "artifacts\\characters\\gauntlet\\motion\\neon-runner.glb",
+  "blend": "artifacts\\characters\\gauntlet\\motion\\neon-runner.blend",
+  "meshCount": 31,
+  "importerHelperCount": 1,
+  "boneCount": 19,
+  "triangles": 1364,
+  "restBounds": {
+    "min": [
+      -0.23778599500656128,
+      -0.1495094895362854,
+      -4.9737990656174066e-15
+    ],
+    "max": [
+      0.23778599500656128,
+      0.08413815498352051,
+      1.0320316553115845
+    ]
+  },
+  "clips": {
+    "idle": {
+      "action": "idle",
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "bounds": {
+        "min": [
+          -0.24151715636253357,
+          -0.15869185328483582,
+          -4.9737990656174066e-15
+        ],
+        "max": [
+          0.25194311141967773,
+          0.08107884228229523,
+          1.032516598701477
+        ]
+      },
+      "maxVertexDisplacement": 0.030158858826079233,
+      "floorSamples": 31,
+      "floorRange": [
+        -4.9737990656174066e-15,
+        -4.9737990656174066e-15
+      ]
+    },
+    "walk": {
+      "action": "walk",
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "bounds": {
+        "min": [
+          -0.2757640779018402,
+          -0.24953368306159973,
+          3.262888640165329e-05
+        ],
+        "max": [
+          0.25009989738464355,
+          0.2027123123407364,
+          1.0371055603027344
+        ]
+      },
+      "maxVertexDisplacement": 0.22136667157244802,
+      "floorSamples": 31,
+      "floorRange": [
+        -2.2094696760177612e-05,
+        3.289594314992428e-05
+      ]
+    },
+    "crouch": {
+      "action": "crouch",
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "bounds": {
+        "min": [
+          -0.3559377193450928,
+          -0.27358752489089966,
+          -4.6566128730773926e-08
+        ],
+        "max": [
+          0.25629734992980957,
+          0.08107884228229523,
+          0.973180890083313
+        ]
+      },
+      "maxVertexDisplacement": 0.25429691775328195,
+      "floorSamples": 31,
+      "floorRange": [
+        -6.612390279769897e-08,
+        4.6566128730773926e-08
+      ]
+    },
+    "shoot": {
+      "action": "shoot",
+      "frames": [
+        0.0,
+        14.40000057220459
+      ],
+      "bounds": {
+        "min": [
+          -0.23024313151836395,
+          -0.30921775102615356,
+          -4.9737990656174066e-15
+        ],
+        "max": [
+          0.23776775598526,
+          0.08610677719116211,
+          1.032545804977417
+        ]
+      },
+      "maxVertexDisplacement": 0.4800334214332191,
+      "floorSamples": 20,
+      "floorRange": [
+        -4.9737990656174066e-15,
+        -4.9737990656174066e-15
+      ]
+    },
+    "reload": {
+      "action": "reload",
+      "frames": [
+        0.0,
+        16.799999237060547
+      ],
+      "bounds": {
+        "min": [
+          -0.23301850259304047,
+          -0.2640569806098938,
+          -4.9737990656174066e-15
+        ],
+        "max": [
+          0.23777617514133453,
+          0.08107884228229523,
+          1.0300891399383545
+        ]
+      },
+      "maxVertexDisplacement": 0.38964457259018137,
+      "floorSamples": 22,
+      "floorRange": [
+        -4.9737990656174066e-15,
+        -4.9737990656174066e-15
+      ]
+    },
+    "hit": {
+      "action": "hit",
+      "frames": [
+        0.0,
+        12.0
+      ],
+      "bounds": {
+        "min": [
+          -0.4163551330566406,
+          -0.2597554624080658,
+          -3.70966263290029e-05
+        ],
+        "max": [
+          0.3018636405467987,
+          0.10296936333179474,
+          1.0444414615631104
+        ]
+      },
+      "maxVertexDisplacement": 0.3340183820755688,
+      "floorSamples": 16,
+      "floorRange": [
+        -3.5006553389393957e-06,
+        7.63232856115792e-06
+      ]
+    },
+    "death": {
+      "action": "death",
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "bounds": {
+        "min": [
+          -0.34864699840545654,
+          -0.2700865864753723,
+          -6.461748853325844e-05
+        ],
+        "max": [
+          0.4478251338005066,
+          0.10120062530040741,
+          0.975877583026886
+        ]
+      },
+      "maxVertexDisplacement": 0.41251740888504124,
+      "floorSamples": 31,
+      "floorRange": [
+        -0.00011376990005373955,
+        0.00036475807428359985
+      ]
+    }
+  },
+  "renders": [
+    "artifacts\\characters\\gauntlet\\motion\\blender\\iso.png",
+    "artifacts\\characters\\gauntlet\\motion\\blender\\front.png",
+    "artifacts\\characters\\gauntlet\\motion\\blender\\back.png",
+    "artifacts\\characters\\gauntlet\\motion\\blender\\walk.png"
+  ],
+  "humanArtAcceptance": "open"
+}

@@ -1,0 +1,274 @@
+{
+  "generatorVersion": "semantic-building/5",
+  "seeds": 300,
+  "accepted": 300,
+  "failed": 0,
+  "variants": 20,
+  "failedVariants": [],
+  "suites": [
+    {
+      "config": {
+        "corporation": "kasane",
+        "family": "office",
+        "size": "standard",
+        "siteRole": "headquarters"
+      },
+      "seeds": {
+        "first": 0,
+        "last": 24
+      },
+      "accepted": 25,
+      "failed": 0,
+      "retries": 0,
+      "discardedLayouts": 6,
+      "minRooms": 21,
+      "maxRooms": 21,
+      "minCorridorCells": 80,
+      "minExecutiveSanitaryDistance": 14,
+      "maxExecutiveSanitaryDistance": 16,
+      "errors": []
+    },
+    {
+      "config": {
+        "corporation": "kasane",
+        "family": "laboratory",
+        "size": "standard",
+        "siteRole": "headquarters"
+      },
+      "seeds": {
+        "first": 0,
+        "last": 24
+      },
+      "accepted": 25,
+      "failed": 0,
+      "retries": 0,
+      "discardedLayouts": 0,
+      "minRooms": 16,
+      "maxRooms": 16,
+      "minCorridorCells": 80,
+      "minExecutiveSanitaryDistance": null,
+      "maxExecutiveSanitaryDistance": null,
+      "errors": []
+    },
+    {
+      "config": {
+        "corporation": "kasane",
+        "family": "factory",
+        "size": "standard",
+        "siteRole": "headquarters"
+      },
+      "seeds": {
+        "first": 0,
+        "last": 24
+      },
+      "accepted": 25,
+      "failed": 0,
+      "retries": 0,
+      "discardedLayouts": 0,
+      "minRooms": 17,
+      "maxRooms": 17,
+      "minCorridorCells": 80,
+      "minExecutiveSanitaryDistance": null,
+      "maxExecutiveSanitaryDistance": null,
+      "errors": []
+    },
+    {
+      "config": {
+        "corporation": "concord",
+        "family": "office",
+        "size": "standard",
+        "siteRole": "headquarters"
+      },
+      "seeds": {
+        "first": 0,
+        "last": 24
+      },
+      "accepted": 25,
+      "failed": 0,
+      "retries": 0,
+      "discardedLayouts": 7,
+      "minRooms": 19,
+      "maxRooms": 19,
+      "minCorridorCells": 80,
+      "minExecutiveSanitaryDistance": 14,
+      "maxExecutiveSanitaryDistance": 16,
+      "errors": []
+    },
+    {
+      "config": {
+        "corporation": "concord",
+        "family": "laboratory",
+        "size": "standard",
+        "siteRole": "headquarters"
+      },
+      "seeds": {
+        "first": 0,
+        "last": 24
+      },
+      "accepted": 25,
+      "failed": 0,
+      "retries": 0,
+      "discardedLayouts": 0,
+      "minRooms": 15,
+      "maxRooms": 15,
+      "minCorridorCells": 82,
+      "minExecutiveSanitaryDistance": null,
+      "maxExecutiveSanitaryDistance": null,
+      "errors": []
+    },
+    {
+      "config": {
+        "corporation": "concord",
+        "family": "factory",
+        "size": "standard",
+        "siteRole": "headquarters"
+      },
+      "seeds": {
+        "first": 0,
+        "last": 24
+      },
+      "accepted": 25,
+      "failed": 0,
+      "retries": 0,
+      "discardedLayouts": 0,
+      "minRooms": 16,
+      "maxRooms": 16,
+      "minCorridorCells": 82,
+      "minExecutiveSanitaryDistance": null,
+      "maxExecutiveSanitaryDistance": null,
+      "errors": []
+    },
+    {
+      "config": {
+        "corporation": "parallax",
+        "family": "office",
+        "size": "standard",
+        "siteRole": "headquarters"
+      },
+      "seeds": {
+        "first": 0,
+        "last": 24
+      },
+      "accepted": 25,
+      "failed": 0,
+      "retries": 0,
+      "discardedLayouts": 4,
+      "minRooms": 21,
+      "maxRooms": 21,
+      "minCorridorCells": 80,
+      "minExecutiveSanitaryDistance": 14,
+      "maxExecutiveSanitaryDistance": 16,
+      "errors": []
+    },
+    {
+      "config": {
+        "corporation": "parallax",
+        "family": "laboratory",
+        "size": "standard",
+        "siteRole": "headquarters"
+      },
+      "seeds": {
+        "first": 0,
+        "last": 24
+      },
+      "accepted": 25,
+      "failed": 0,
+      "retries": 0,
+      "discardedLayouts": 0,
+      "minRooms": 16,
+      "maxRooms": 16,
+      "minCorridorCells": 80,
+      "minExecutiveSanitaryDistance": null,
+      "maxExecutiveSanitaryDistance": null,
+      "errors": []
+    },
+    {
+      "config": {
+        "corporation": "parallax",
+        "family": "factory",
+        "size": "standard",
+        "siteRole": "headquarters"
+      },
+      "seeds": {
+        "first": 0,
+        "last": 24
+      },
+      "accepted": 25,
+      "failed": 0,
+      "retries": 0,
+      "discardedLayouts": 0,
+      "minRooms": 17,
+      "maxRooms": 17,
+      "minCorridorCells": 78,
+      "minExecutiveSanitaryDistance": null,
+      "maxExecutiveSanitaryDistance": null,
+      "errors": []
+    },
+    {
+      "config": {
+        "corporation": "verdant",
+        "family": "office",
+        "size": "standard",
+        "siteRole": "headquarters"
+      },
+      "seeds": {
+        "first": 0,
+        "last": 24
+      },
+      "accepted": 25,
+      "failed": 0,
+      "retries": 0,
+      "discardedLayouts": 7,
+      "minRooms": 22,
+      "maxRooms": 22,
+      "minCorridorCells": 80,
+      "minExecutiveSanitaryDistance": 14,
+      "maxExecutiveSanitaryDistance": 16,
+      "errors": []
+    },
+    {
+      "config": {
+        "corporation": "verdant",
+        "family": "laboratory",
+        "size": "standard",
+        "siteRole": "headquarters"
+      },
+      "seeds": {
+        "first": 0,
+        "last": 24
+      },
+      "accepted": 25,
+      "failed": 0,
+      "retries": 0,
+      "discardedLayouts": 0,
+      "minRooms": 17,
+      "maxRooms": 17,
+      "minCorridorCells": 80,
+      "minExecutiveSanitaryDistance": null,
+      "maxExecutiveSanitaryDistance": null,
+      "errors": []
+    },
+    {
+      "config": {
+        "corporation": "verdant",
+        "family": "factory",
+        "size": "standard",
+        "siteRole": "headquarters"
+      },
+      "seeds": {
+        "first": 0,
+        "last": 24
+      },
+      "accepted": 25,
+      "failed": 0,
+      "retries": 0,
+      "discardedLayouts": 0,
+      "minRooms": 18,
+      "maxRooms": 18,
+      "minCorridorCells": 80,
+      "minExecutiveSanitaryDistance": null,
+      "maxExecutiveSanitaryDistance": null,
+      "errors": []
+    }
+  ]
+}

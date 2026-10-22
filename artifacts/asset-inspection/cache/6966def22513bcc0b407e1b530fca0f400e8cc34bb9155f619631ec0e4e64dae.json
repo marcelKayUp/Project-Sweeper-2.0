@@ -1,0 +1,161 @@
+{
+  "path": "Weapons/Bullpup_3.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Bullpup_3",
+      "vertices": 1290,
+      "triangles": 2390,
+      "shapeHash": "c8476da25d56ee8a5e1abf0dfe10911b11c450b0340ddd4904a7a78197d86b2d",
+      "materials": [
+        "Black",
+        "Main",
+        "MainDark",
+        "MainLight"
+      ],
+      "modifiers": [],
+      "bounds": {
+        "min": [
+          -1.626685380935669,
+          -0.15562395751476288,
+          -0.5197610259056091
+        ],
+        "max": [
+          2.6787123680114746,
+          0.15466037392616272,
+          1.0758559703826904
+        ],
+        "size": [
+          4.3053977489471436,
+          0.3102843314409256,
+          1.5956169962882996
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 2390,
+  "bounds": {
+    "min": [
+      -1.626685380935669,
+      -0.15562395751476288,
+      -0.5197610259056091
+    ],
+    "max": [
+      2.6787123680114746,
+      0.15466037392616272,
+      1.0758559703826904
+    ],
+    "size": [
+      4.3053977489471436,
+      0.3102843314409256,
+      1.5956169962882996
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.020288560539484024,
+        0.02518685907125473,
+        0.029556844383478165,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "MainDark",
+      "diffuseColor": [
+        0.011938209645450115,
+        0.016988111659884453,
+        0.025391679257154465,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "MainLight",
+      "diffuseColor": [
+        0.028379689902067184,
+        0.03557529300451279,
+        0.04202481731772423,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Bullpup_3",
+      "file": "thumbs/6966def22513bcc0b407e1b530fca0f400e8cc34bb9155f619631ec0e4e64dae-0.png",
+      "category": "weapons",
+      "parts": [
+        "Bullpup_3"
+      ],
+      "triangles": 2390
+    }
+  ],
+  "fileSha256": "0b14e43cbf26746af350edb314ea41b023d804e4e17fdf212d188fadf2fbeca0",
+  "bytes": 614504,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

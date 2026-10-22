@@ -1,0 +1,11 @@
+00:03.672  blend            | Read blend: "C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\artifacts\asset-inspection\cache-test-cGlA5T\input\weapon.blend"
+00:03.672  blend.doversion  | WARNING Region type 4 missing in space type "Info" (id: 7) - removing region
+C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\tools\assets\inspect_blend.py:214: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  used_images = {n.image for m in materials if m.use_nodes and m.node_tree for n in m.node_tree.nodes if n.type == "TEX_IMAGE" and n.image}
+C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\tools\assets\inspect_blend.py:248: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  "materials": [{"name": m.name, "diffuseColor": list(m.diffuse_color), "nodeTypes": sorted({n.type for n in m.node_tree.nodes}) if m.use_nodes and m.node_tree else []} for m in materials],
+NC_ASSET_PROGRESS {"done": 1, "files": 1, "cacheHits": 1, "inspected": 1, "errors": 0}
+NC_ASSET_RESULT {"files": 1, "bytes": 717800, "cacheHits": 1, "inspected": 1, "errors": 0, "categories": {"weapons": 1}, "renderErrors": 0, "sourceUnchanged": true, "sourceChanges": [], "licenseFiles": [], "duplicateFileGroups": [], "duplicateGeometryGroups": 0, "triangles": {"weapons": {"min": 3537, "max": 3537}}, "thumbnails": 0, "elapsedSeconds": 0.08}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit

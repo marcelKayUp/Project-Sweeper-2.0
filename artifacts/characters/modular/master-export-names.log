@@ -1,0 +1,11 @@
+00:02.484  blend            | Read blend: "C:\Users\kaup\Desktop\Zeitalter Probierbereich\Cyberpunk Game\assets\source\characters\quaternius\Humans_Master.blend"
+00:02.546  reports          | WARNING Bibliotheksdatei, lädt leere Szene
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+LIB None False Casual2_Body
+COPY None Casual2_Body.001
+RENAMED Casual2_Body.001
+LIBNAME Casual2_Body
+REMOVE None
+AFTER Casual2_Body.001
+
+Blender quit

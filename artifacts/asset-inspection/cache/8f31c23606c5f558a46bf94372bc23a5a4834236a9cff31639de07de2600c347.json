@@ -1,0 +1,161 @@
+{
+  "path": "Weapons/AssaultRifle_5.blend",
+  "category": "weapons",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "AssaultRifle_5",
+      "vertices": 688,
+      "triangles": 1306,
+      "shapeHash": "db7b068bcb1ca888c58286bceea188d31287565231fc4905dc82a026afaf3ccd",
+      "materials": [
+        "Black",
+        "DarkMetal",
+        "Metal",
+        "DarkWood"
+      ],
+      "modifiers": [],
+      "bounds": {
+        "min": [
+          -1.5997707843780518,
+          -0.0980105921626091,
+          -0.7213854789733887
+        ],
+        "max": [
+          3.8218863010406494,
+          0.09801040589809418,
+          0.8799761533737183
+        ],
+        "size": [
+          5.421657085418701,
+          0.19602099806070328,
+          1.601361632347107
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 1306,
+  "bounds": {
+    "min": [
+      -1.5997707843780518,
+      -0.0980105921626091,
+      -0.7213854789733887
+    ],
+    "max": [
+      3.8218863010406494,
+      0.09801040589809418,
+      0.8799761533737183
+    ],
+    "size": [
+      5.421657085418701,
+      0.19602099806070328,
+      1.601361632347107
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.026966236531734467,
+        0.02748231776058674,
+        0.02909727953374386,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkMetal",
+      "diffuseColor": [
+        0.04699999839067459,
+        0.04695870354771614,
+        0.045788172632455826,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "DarkWood",
+      "diffuseColor": [
+        0.10246890038251877,
+        0.07204850763082504,
+        0.055191364139318466,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Metal",
+      "diffuseColor": [
+        0.0666259378194809,
+        0.06847818195819855,
+        0.06700000166893005,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "AssaultRifle_5",
+      "file": "thumbs/8f31c23606c5f558a46bf94372bc23a5a4834236a9cff31639de07de2600c347-0.png",
+      "category": "weapons",
+      "parts": [
+        "AssaultRifle_5"
+      ],
+      "triangles": 1306
+    }
+  ],
+  "fileSha256": "987bcc35275499d9dbd5af52f9820b07cb2ade22ab9f0cb6ba4ed959173fcce1",
+  "bytes": 572648,
+  "inspectorKey": "884d2dcc81506ed18026f76b0d81e30f0d713bcaf64f3c8a6366ece581307707"
+}

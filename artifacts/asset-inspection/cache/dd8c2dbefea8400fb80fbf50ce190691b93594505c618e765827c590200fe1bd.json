@@ -1,0 +1,169 @@
+{
+  "path": "Weapons/modular Weapons/Stock_Grenade_1.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Stock_Grenade_1",
+      "vertices": 230,
+      "triangles": 436,
+      "shapeHash": "f10fcfafa678c8b36c21a8397e0e3db1016c1b17c65c28765ee717f0125a2c32",
+      "materials": [
+        "Black",
+        "Grey",
+        "White",
+        "Main"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.6669071912765503,
+          -0.05471840873360634,
+          -0.3292735815048218
+        ],
+        "max": [
+          2.8861546041980546e-08,
+          0.05471840873360634,
+          0.11256056278944016
+        ],
+        "size": [
+          0.6669072201380963,
+          0.10943681746721268,
+          0.44183414429426193
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 436,
+  "bounds": {
+    "min": [
+      -0.6669071912765503,
+      -0.05471840873360634,
+      -0.3292735815048218
+    ],
+    "max": [
+      2.8861546041980546e-08,
+      0.05471840873360634,
+      0.11256056278944016
+    ],
+    "size": [
+      0.6669072201380963,
+      0.10943681746721268,
+      0.44183414429426193
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Stock_Grenade_1",
+      "file": "thumbs/dd8c2dbefea8400fb80fbf50ce190691b93594505c618e765827c590200fe1bd-0.png",
+      "category": "components",
+      "parts": [
+        "Stock_Grenade_1"
+      ],
+      "triangles": 436
+    }
+  ],
+  "fileSha256": "84074442abb312953481283a990e751b65eaeb14b72ad2ccf2a763d04387fc0c",
+  "bytes": 580408,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

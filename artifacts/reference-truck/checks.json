@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "gltfErrors": 0,
+  "gltfWarnings": 0,
+  "sharedMeshUsers": [
+    6,
+    6,
+    6
+  ],
+  "meshDefinitions": 8,
+  "appliedProfiles": {
+    "sideInset": {
+      "movedVertices": 8,
+      "maxShiftPixels": 7.5077
+    }
+  },
+  "meshPositionsChangedFromBaseline": true,
+  "landmarkRmsPixels": 7.424030971769015,
+  "focalLengthAtSearchBoundary": true,
+  "silhouetteIoU": 0.9221024415826583,
+  "comparison": "artifacts/reference-truck/comparison.png",
+  "asset": "assets/generated/vehicles/reference-truck/reference-truck.glb"
+}

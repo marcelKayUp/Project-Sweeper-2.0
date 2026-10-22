@@ -1,0 +1,1707 @@
+{
+  "formatVersion": 2,
+  "generatorVersion": "semantic-building/2",
+  "contentVersion": "building-catalog/1",
+  "stageVersions": {
+    "program": 2,
+    "floorplan": 2,
+    "topology": 2,
+    "tactics": 1,
+    "encounters": 1,
+    "dressing": 1
+  },
+  "config": {
+    "seed": 42,
+    "family": "laboratory",
+    "size": "compact",
+    "crewSize": 4,
+    "mission": "data-heist",
+    "instanceId": "preview",
+    "maxAttempts": 10
+  },
+  "attempt": 1,
+  "seeds": {
+    "program": 688077237,
+    "floorplan": 1035999616,
+    "topology": 2690959498,
+    "tactics": 1353484031,
+    "encounters": 2311280286,
+    "dressing": 211873349
+  },
+  "building": {
+    "layout": {
+      "method": "graph",
+      "templateId": "laboratory-cycle/1",
+      "candidate": 4,
+      "partitionSeed": 1159593828,
+      "embeddingSeed": 1051463705,
+      "searchNodes": 96,
+      "backtracks": 84,
+      "partitions": [
+        {
+          "id": "bsp-",
+          "bounds": {
+            "x": 1,
+            "y": 1,
+            "width": 18,
+            "height": 18
+          },
+          "axis": "y",
+          "offset": 7
+        },
+        {
+          "id": "bsp-0",
+          "bounds": {
+            "x": 1,
+            "y": 1,
+            "width": 18,
+            "height": 7
+          },
+          "axis": "x",
+          "offset": 8
+        },
+        {
+          "id": "bsp-00",
+          "bounds": {
+            "x": 1,
+            "y": 1,
+            "width": 8,
+            "height": 7
+          },
+          "axis": "x",
+          "offset": 3
+        },
+        {
+          "id": "bsp-001",
+          "bounds": {
+            "x": 5,
+            "y": 1,
+            "width": 4,
+            "height": 7
+          },
+          "axis": "y",
+          "offset": 3
+        },
+        {
+          "id": "bsp-01",
+          "bounds": {
+            "x": 10,
+            "y": 1,
+            "width": 9,
+            "height": 7
+          },
+          "axis": "x",
+          "offset": 3
+        },
+        {
+          "id": "bsp-011",
+          "bounds": {
+            "x": 14,
+            "y": 1,
+            "width": 5,
+            "height": 7
+          },
+          "axis": "y",
+          "offset": 3
+        },
+        {
+          "id": "bsp-1",
+          "bounds": {
+            "x": 1,
+            "y": 9,
+            "width": 18,
+            "height": 10
+          },
+          "axis": "y",
+          "offset": 3
+        },
+        {
+          "id": "bsp-10",
+          "bounds": {
+            "x": 1,
+            "y": 9,
+            "width": 18,
+            "height": 3
+          },
+          "axis": "x",
+          "offset": 12
+        },
+        {
+          "id": "bsp-100",
+          "bounds": {
+            "x": 1,
+            "y": 9,
+            "width": 12,
+            "height": 3
+          },
+          "axis": "x",
+          "offset": 5
+        },
+        {
+          "id": "bsp-11",
+          "bounds": {
+            "x": 1,
+            "y": 13,
+            "width": 18,
+            "height": 6
+          },
+          "axis": "x",
+          "offset": 7
+        },
+        {
+          "id": "bsp-111",
+          "bounds": {
+            "x": 9,
+            "y": 13,
+            "width": 10,
+            "height": 6
+          },
+          "axis": "x",
+          "offset": 6
+        }
+      ],
+      "rejected": [
+        {
+          "candidate": 1,
+          "reason": "Vorgegebener Raumgraph passt nicht auf diese BSP-Flächen",
+          "nodes": 148
+        },
+        {
+          "candidate": 2,
+          "reason": "Vorgegebener Raumgraph passt nicht auf diese BSP-Flächen",
+          "nodes": 147
+        },
+        {
+          "candidate": 3,
+          "reason": "Vorgegebener Raumgraph passt nicht auf diese BSP-Flächen",
+          "nodes": 103
+        }
+      ]
+    },
+    "rooms": [
+      {
+        "id": "room-00",
+        "type": "reception",
+        "zone": "public",
+        "minArea": 9,
+        "x": 1,
+        "y": 13,
+        "width": 7,
+        "height": 6
+      },
+      {
+        "id": "room-01",
+        "type": "security",
+        "zone": "staff",
+        "minArea": 9,
+        "x": 1,
+        "y": 9,
+        "width": 5,
+        "height": 3
+      },
+      {
+        "id": "room-02",
+        "type": "office",
+        "zone": "staff",
+        "minArea": 9,
+        "x": 1,
+        "y": 1,
+        "width": 3,
+        "height": 7
+      },
+      {
+        "id": "room-03",
+        "type": "laboratory",
+        "zone": "research",
+        "minArea": 12,
+        "x": 5,
+        "y": 1,
+        "width": 4,
+        "height": 3
+      },
+      {
+        "id": "room-04",
+        "type": "restroom",
+        "zone": "staff",
+        "minArea": 9,
+        "x": 9,
+        "y": 13,
+        "width": 6,
+        "height": 6
+      },
+      {
+        "id": "room-05",
+        "type": "airlock",
+        "zone": "research",
+        "minArea": 9,
+        "x": 7,
+        "y": 9,
+        "width": 6,
+        "height": 3
+      },
+      {
+        "id": "room-06",
+        "type": "cleanroom",
+        "zone": "secure",
+        "minArea": 12,
+        "x": 5,
+        "y": 5,
+        "width": 4,
+        "height": 3
+      },
+      {
+        "id": "room-07",
+        "type": "server",
+        "zone": "secure",
+        "minArea": 9,
+        "x": 10,
+        "y": 1,
+        "width": 3,
+        "height": 7
+      },
+      {
+        "id": "room-08",
+        "type": "loading",
+        "zone": "logistics",
+        "minArea": 9,
+        "x": 16,
+        "y": 13,
+        "width": 3,
+        "height": 6
+      },
+      {
+        "id": "room-09",
+        "type": "storage",
+        "zone": "logistics",
+        "minArea": 9,
+        "x": 14,
+        "y": 9,
+        "width": 5,
+        "height": 3
+      },
+      {
+        "id": "room-10",
+        "type": "mechanical",
+        "zone": "technical",
+        "minArea": 9,
+        "x": 14,
+        "y": 5,
+        "width": 5,
+        "height": 3
+      },
+      {
+        "id": "room-11",
+        "type": "breakroom",
+        "zone": "staff",
+        "minArea": 9,
+        "x": 14,
+        "y": 1,
+        "width": 5,
+        "height": 3
+      }
+    ],
+    "program": [
+      {
+        "type": "airlock",
+        "count": 1,
+        "minArea": 9
+      },
+      {
+        "type": "breakroom",
+        "count": 1,
+        "minArea": 9
+      },
+      {
+        "type": "cleanroom",
+        "count": 1,
+        "minArea": 12
+      },
+      {
+        "type": "laboratory",
+        "count": 1,
+        "minArea": 12
+      },
+      {
+        "type": "loading",
+        "count": 1,
+        "minArea": 9
+      },
+      {
+        "type": "mechanical",
+        "count": 1,
+        "minArea": 9
+      },
+      {
+        "type": "office",
+        "count": 1,
+        "minArea": 9
+      },
+      {
+        "type": "reception",
+        "count": 1,
+        "minArea": 9
+      },
+      {
+        "type": "restroom",
+        "count": 1,
+        "minArea": 9
+      },
+      {
+        "type": "security",
+        "count": 1,
+        "minArea": 9
+      },
+      {
+        "type": "server",
+        "count": 1,
+        "minArea": 9
+      },
+      {
+        "type": "storage",
+        "count": 1,
+        "minArea": 9
+      }
+    ],
+    "connections": [
+      {
+        "id": "link-0-1",
+        "from": "room-00",
+        "to": "room-01",
+        "kind": "controlled",
+        "portal": {
+          "x": 5,
+          "y": 12
+        }
+      },
+      {
+        "id": "link-1-2",
+        "from": "room-01",
+        "to": "room-02",
+        "kind": "open",
+        "portal": {
+          "x": 1,
+          "y": 8
+        }
+      },
+      {
+        "id": "link-2-3",
+        "from": "room-02",
+        "to": "room-03",
+        "kind": "controlled",
+        "portal": {
+          "x": 4,
+          "y": 2
+        }
+      },
+      {
+        "id": "link-3-7",
+        "from": "room-03",
+        "to": "room-07",
+        "kind": "controlled",
+        "portal": {
+          "x": 9,
+          "y": 1
+        }
+      },
+      {
+        "id": "link-7-11",
+        "from": "room-07",
+        "to": "room-11",
+        "kind": "controlled",
+        "portal": {
+          "x": 13,
+          "y": 2
+        }
+      },
+      {
+        "id": "link-10-11",
+        "from": "room-11",
+        "to": "room-10",
+        "kind": "controlled",
+        "portal": {
+          "x": 14,
+          "y": 4
+        }
+      },
+      {
+        "id": "link-9-10",
+        "from": "room-10",
+        "to": "room-09",
+        "kind": "controlled",
+        "portal": {
+          "x": 14,
+          "y": 8
+        }
+      },
+      {
+        "id": "link-8-9",
+        "from": "room-09",
+        "to": "room-08",
+        "kind": "open",
+        "portal": {
+          "x": 17,
+          "y": 12
+        }
+      },
+      {
+        "id": "link-4-8",
+        "from": "room-08",
+        "to": "room-04",
+        "kind": "controlled",
+        "portal": {
+          "x": 15,
+          "y": 14
+        }
+      },
+      {
+        "id": "link-0-4",
+        "from": "room-04",
+        "to": "room-00",
+        "kind": "controlled",
+        "portal": {
+          "x": 8,
+          "y": 17
+        }
+      },
+      {
+        "id": "link-1-5",
+        "from": "room-01",
+        "to": "room-05",
+        "kind": "controlled",
+        "portal": {
+          "x": 6,
+          "y": 10
+        }
+      },
+      {
+        "id": "link-5-9",
+        "from": "room-05",
+        "to": "room-09",
+        "kind": "controlled",
+        "portal": {
+          "x": 13,
+          "y": 10
+        }
+      },
+      {
+        "id": "link-5-6",
+        "from": "room-05",
+        "to": "room-06",
+        "kind": "airlock",
+        "portal": {
+          "x": 8,
+          "y": 8
+        }
+      },
+      {
+        "id": "link-4-5",
+        "from": "room-04",
+        "to": "room-05",
+        "kind": "shortcut",
+        "portal": {
+          "x": 11,
+          "y": 12
+        }
+      }
+    ],
+    "entries": [
+      {
+        "roomId": "room-00",
+        "cell": {
+          "x": 0,
+          "y": 16
+        }
+      },
+      {
+        "roomId": "room-08",
+        "cell": {
+          "x": 19,
+          "y": 16
+        }
+      }
+    ],
+    "infrastructure": [
+      {
+        "kind": "power",
+        "source": "room-10",
+        "nodes": [
+          "room-00",
+          "room-01",
+          "room-02",
+          "room-03",
+          "room-04",
+          "room-05",
+          "room-06",
+          "room-07",
+          "room-08",
+          "room-09",
+          "room-10",
+          "room-11"
+        ],
+        "edges": [
+          {
+            "from": "room-10",
+            "to": "room-09"
+          },
+          {
+            "from": "room-09",
+            "to": "room-08"
+          },
+          {
+            "from": "room-08",
+            "to": "room-04"
+          },
+          {
+            "from": "room-04",
+            "to": "room-00"
+          },
+          {
+            "from": "room-09",
+            "to": "room-05"
+          },
+          {
+            "from": "room-05",
+            "to": "room-01"
+          },
+          {
+            "from": "room-10",
+            "to": "room-11"
+          },
+          {
+            "from": "room-11",
+            "to": "room-07"
+          },
+          {
+            "from": "room-07",
+            "to": "room-03"
+          },
+          {
+            "from": "room-03",
+            "to": "room-02"
+          },
+          {
+            "from": "room-05",
+            "to": "room-06"
+          }
+        ]
+      },
+      {
+        "kind": "ventilation",
+        "source": "room-10",
+        "nodes": [
+          "room-03",
+          "room-04",
+          "room-05",
+          "room-06",
+          "room-07",
+          "room-08",
+          "room-09",
+          "room-10",
+          "room-11"
+        ],
+        "edges": [
+          {
+            "from": "room-10",
+            "to": "room-11"
+          },
+          {
+            "from": "room-11",
+            "to": "room-07"
+          },
+          {
+            "from": "room-07",
+            "to": "room-03"
+          },
+          {
+            "from": "room-10",
+            "to": "room-09"
+          },
+          {
+            "from": "room-09",
+            "to": "room-08"
+          },
+          {
+            "from": "room-08",
+            "to": "room-04"
+          },
+          {
+            "from": "room-09",
+            "to": "room-05"
+          },
+          {
+            "from": "room-05",
+            "to": "room-06"
+          }
+        ]
+      },
+      {
+        "kind": "network",
+        "source": "room-07",
+        "nodes": [
+          "room-00",
+          "room-01",
+          "room-02",
+          "room-03",
+          "room-05",
+          "room-06",
+          "room-07",
+          "room-10",
+          "room-11"
+        ],
+        "edges": [
+          {
+            "from": "room-07",
+            "to": "room-03"
+          },
+          {
+            "from": "room-03",
+            "to": "room-02"
+          },
+          {
+            "from": "room-02",
+            "to": "room-01"
+          },
+          {
+            "from": "room-01",
+            "to": "room-00"
+          },
+          {
+            "from": "room-01",
+            "to": "room-05"
+          },
+          {
+            "from": "room-05",
+            "to": "room-06"
+          },
+          {
+            "from": "room-07",
+            "to": "room-11"
+          },
+          {
+            "from": "room-11",
+            "to": "room-10"
+          }
+        ]
+      },
+      {
+        "kind": "security",
+        "source": "room-01",
+        "nodes": [
+          "room-00",
+          "room-01",
+          "room-02",
+          "room-03",
+          "room-04",
+          "room-05",
+          "room-06",
+          "room-07",
+          "room-08"
+        ],
+        "edges": [
+          {
+            "from": "room-01",
+            "to": "room-00"
+          },
+          {
+            "from": "room-01",
+            "to": "room-02"
+          },
+          {
+            "from": "room-02",
+            "to": "room-03"
+          },
+          {
+            "from": "room-01",
+            "to": "room-05"
+          },
+          {
+            "from": "room-05",
+            "to": "room-06"
+          },
+          {
+            "from": "room-03",
+            "to": "room-07"
+          },
+          {
+            "from": "room-00",
+            "to": "room-04"
+          },
+          {
+            "from": "room-04",
+            "to": "room-08"
+          }
+        ]
+      }
+    ],
+    "missionGraph": {
+      "entryRoom": "room-00",
+      "secondaryEntryRoom": "room-08",
+      "targetRoom": "room-07",
+      "objectives": [
+        {
+          "id": "infiltrate",
+          "roomId": "room-00",
+          "action": "enter",
+          "requires": []
+        },
+        {
+          "id": "copy",
+          "roomId": "room-07",
+          "action": "copy-twice",
+          "requires": [
+            "infiltrate"
+          ]
+        },
+        {
+          "id": "extract",
+          "roomId": "room-00",
+          "action": "extract",
+          "requires": [
+            "copy"
+          ]
+        }
+      ],
+      "routes": [
+        [
+          "room-00",
+          "room-01",
+          "room-02",
+          "room-03",
+          "room-07"
+        ],
+        [
+          "room-00",
+          "room-04",
+          "room-08",
+          "room-09",
+          "room-10",
+          "room-11",
+          "room-07"
+        ]
+      ]
+    },
+    "dressing": [
+      {
+        "id": "decoration-room-00",
+        "roomId": "room-00",
+        "x": 6,
+        "y": 17,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-01",
+        "roomId": "room-01",
+        "x": 3,
+        "y": 9,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-02",
+        "roomId": "room-02",
+        "x": 2,
+        "y": 1,
+        "module": "desk"
+      },
+      {
+        "id": "decoration-room-03",
+        "roomId": "room-03",
+        "x": 8,
+        "y": 1,
+        "module": "bench"
+      },
+      {
+        "id": "decoration-room-04",
+        "roomId": "room-04",
+        "x": 14,
+        "y": 17,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-05",
+        "roomId": "room-05",
+        "x": 9,
+        "y": 11,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-06",
+        "roomId": "room-06",
+        "x": 8,
+        "y": 6,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-07",
+        "roomId": "room-07",
+        "x": 11,
+        "y": 3,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-08",
+        "roomId": "room-08",
+        "x": 17,
+        "y": 13,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-09",
+        "roomId": "room-09",
+        "x": 15,
+        "y": 11,
+        "module": "cabinet"
+      },
+      {
+        "id": "decoration-room-10",
+        "roomId": "room-10",
+        "x": 15,
+        "y": 5,
+        "module": "cabinet"
+      }
+    ]
+  },
+  "mission": {
+    "id": "generated-preview",
+    "width": 20,
+    "height": 20,
+    "walls": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 2,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 0
+      },
+      {
+        "x": 4,
+        "y": 0
+      },
+      {
+        "x": 5,
+        "y": 0
+      },
+      {
+        "x": 6,
+        "y": 0
+      },
+      {
+        "x": 7,
+        "y": 0
+      },
+      {
+        "x": 8,
+        "y": 0
+      },
+      {
+        "x": 9,
+        "y": 0
+      },
+      {
+        "x": 10,
+        "y": 0
+      },
+      {
+        "x": 11,
+        "y": 0
+      },
+      {
+        "x": 12,
+        "y": 0
+      },
+      {
+        "x": 13,
+        "y": 0
+      },
+      {
+        "x": 14,
+        "y": 0
+      },
+      {
+        "x": 15,
+        "y": 0
+      },
+      {
+        "x": 16,
+        "y": 0
+      },
+      {
+        "x": 17,
+        "y": 0
+      },
+      {
+        "x": 18,
+        "y": 0
+      },
+      {
+        "x": 19,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 1
+      },
+      {
+        "x": 4,
+        "y": 1
+      },
+      {
+        "x": 13,
+        "y": 1
+      },
+      {
+        "x": 19,
+        "y": 1
+      },
+      {
+        "x": 0,
+        "y": 2
+      },
+      {
+        "x": 9,
+        "y": 2
+      },
+      {
+        "x": 19,
+        "y": 2
+      },
+      {
+        "x": 0,
+        "y": 3
+      },
+      {
+        "x": 4,
+        "y": 3
+      },
+      {
+        "x": 9,
+        "y": 3
+      },
+      {
+        "x": 13,
+        "y": 3
+      },
+      {
+        "x": 19,
+        "y": 3
+      },
+      {
+        "x": 0,
+        "y": 4
+      },
+      {
+        "x": 4,
+        "y": 4
+      },
+      {
+        "x": 5,
+        "y": 4
+      },
+      {
+        "x": 6,
+        "y": 4
+      },
+      {
+        "x": 7,
+        "y": 4
+      },
+      {
+        "x": 8,
+        "y": 4
+      },
+      {
+        "x": 9,
+        "y": 4
+      },
+      {
+        "x": 13,
+        "y": 4
+      },
+      {
+        "x": 15,
+        "y": 4
+      },
+      {
+        "x": 16,
+        "y": 4
+      },
+      {
+        "x": 17,
+        "y": 4
+      },
+      {
+        "x": 18,
+        "y": 4
+      },
+      {
+        "x": 19,
+        "y": 4
+      },
+      {
+        "x": 0,
+        "y": 5
+      },
+      {
+        "x": 4,
+        "y": 5
+      },
+      {
+        "x": 9,
+        "y": 5
+      },
+      {
+        "x": 13,
+        "y": 5
+      },
+      {
+        "x": 19,
+        "y": 5
+      },
+      {
+        "x": 0,
+        "y": 6
+      },
+      {
+        "x": 4,
+        "y": 6
+      },
+      {
+        "x": 9,
+        "y": 6
+      },
+      {
+        "x": 13,
+        "y": 6
+      },
+      {
+        "x": 19,
+        "y": 6
+      },
+      {
+        "x": 0,
+        "y": 7
+      },
+      {
+        "x": 4,
+        "y": 7
+      },
+      {
+        "x": 9,
+        "y": 7
+      },
+      {
+        "x": 13,
+        "y": 7
+      },
+      {
+        "x": 19,
+        "y": 7
+      },
+      {
+        "x": 0,
+        "y": 8
+      },
+      {
+        "x": 2,
+        "y": 8
+      },
+      {
+        "x": 3,
+        "y": 8
+      },
+      {
+        "x": 4,
+        "y": 8
+      },
+      {
+        "x": 5,
+        "y": 8
+      },
+      {
+        "x": 6,
+        "y": 8
+      },
+      {
+        "x": 7,
+        "y": 8
+      },
+      {
+        "x": 9,
+        "y": 8
+      },
+      {
+        "x": 10,
+        "y": 8
+      },
+      {
+        "x": 11,
+        "y": 8
+      },
+      {
+        "x": 12,
+        "y": 8
+      },
+      {
+        "x": 13,
+        "y": 8
+      },
+      {
+        "x": 15,
+        "y": 8
+      },
+      {
+        "x": 16,
+        "y": 8
+      },
+      {
+        "x": 17,
+        "y": 8
+      },
+      {
+        "x": 18,
+        "y": 8
+      },
+      {
+        "x": 19,
+        "y": 8
+      },
+      {
+        "x": 0,
+        "y": 9
+      },
+      {
+        "x": 6,
+        "y": 9
+      },
+      {
+        "x": 13,
+        "y": 9
+      },
+      {
+        "x": 19,
+        "y": 9
+      },
+      {
+        "x": 0,
+        "y": 10
+      },
+      {
+        "x": 19,
+        "y": 10
+      },
+      {
+        "x": 0,
+        "y": 11
+      },
+      {
+        "x": 6,
+        "y": 11
+      },
+      {
+        "x": 13,
+        "y": 11
+      },
+      {
+        "x": 19,
+        "y": 11
+      },
+      {
+        "x": 0,
+        "y": 12
+      },
+      {
+        "x": 1,
+        "y": 12
+      },
+      {
+        "x": 2,
+        "y": 12
+      },
+      {
+        "x": 3,
+        "y": 12
+      },
+      {
+        "x": 4,
+        "y": 12
+      },
+      {
+        "x": 6,
+        "y": 12
+      },
+      {
+        "x": 7,
+        "y": 12
+      },
+      {
+        "x": 8,
+        "y": 12
+      },
+      {
+        "x": 9,
+        "y": 12
+      },
+      {
+        "x": 10,
+        "y": 12
+      },
+      {
+        "x": 12,
+        "y": 12
+      },
+      {
+        "x": 13,
+        "y": 12
+      },
+      {
+        "x": 14,
+        "y": 12
+      },
+      {
+        "x": 15,
+        "y": 12
+      },
+      {
+        "x": 16,
+        "y": 12
+      },
+      {
+        "x": 18,
+        "y": 12
+      },
+      {
+        "x": 19,
+        "y": 12
+      },
+      {
+        "x": 0,
+        "y": 13
+      },
+      {
+        "x": 8,
+        "y": 13
+      },
+      {
+        "x": 15,
+        "y": 13
+      },
+      {
+        "x": 19,
+        "y": 13
+      },
+      {
+        "x": 0,
+        "y": 14
+      },
+      {
+        "x": 8,
+        "y": 14
+      },
+      {
+        "x": 19,
+        "y": 14
+      },
+      {
+        "x": 0,
+        "y": 15
+      },
+      {
+        "x": 8,
+        "y": 15
+      },
+      {
+        "x": 15,
+        "y": 15
+      },
+      {
+        "x": 19,
+        "y": 15
+      },
+      {
+        "x": 8,
+        "y": 16
+      },
+      {
+        "x": 15,
+        "y": 16
+      },
+      {
+        "x": 0,
+        "y": 17
+      },
+      {
+        "x": 15,
+        "y": 17
+      },
+      {
+        "x": 19,
+        "y": 17
+      },
+      {
+        "x": 0,
+        "y": 18
+      },
+      {
+        "x": 8,
+        "y": 18
+      },
+      {
+        "x": 15,
+        "y": 18
+      },
+      {
+        "x": 19,
+        "y": 18
+      },
+      {
+        "x": 0,
+        "y": 19
+      },
+      {
+        "x": 1,
+        "y": 19
+      },
+      {
+        "x": 2,
+        "y": 19
+      },
+      {
+        "x": 3,
+        "y": 19
+      },
+      {
+        "x": 4,
+        "y": 19
+      },
+      {
+        "x": 5,
+        "y": 19
+      },
+      {
+        "x": 6,
+        "y": 19
+      },
+      {
+        "x": 7,
+        "y": 19
+      },
+      {
+        "x": 8,
+        "y": 19
+      },
+      {
+        "x": 9,
+        "y": 19
+      },
+      {
+        "x": 10,
+        "y": 19
+      },
+      {
+        "x": 11,
+        "y": 19
+      },
+      {
+        "x": 12,
+        "y": 19
+      },
+      {
+        "x": 13,
+        "y": 19
+      },
+      {
+        "x": 14,
+        "y": 19
+      },
+      {
+        "x": 15,
+        "y": 19
+      },
+      {
+        "x": 16,
+        "y": 19
+      },
+      {
+        "x": 17,
+        "y": 19
+      },
+      {
+        "x": 18,
+        "y": 19
+      },
+      {
+        "x": 19,
+        "y": 19
+      }
+    ],
+    "lowCover": [
+      {
+        "id": "cover-room-01",
+        "x": 2,
+        "y": 10,
+        "protects": "e"
+      },
+      {
+        "id": "cover-room-02",
+        "x": 2,
+        "y": 2,
+        "protects": "w"
+      },
+      {
+        "id": "cover-room-03",
+        "x": 6,
+        "y": 2,
+        "protects": "e"
+      },
+      {
+        "id": "cover-room-06",
+        "x": 6,
+        "y": 6,
+        "protects": "w"
+      },
+      {
+        "id": "cover-room-07",
+        "x": 11,
+        "y": 2,
+        "protects": "e"
+      },
+      {
+        "id": "cover-room-08",
+        "x": 17,
+        "y": 14,
+        "protects": "w"
+      },
+      {
+        "id": "cover-room-09",
+        "x": 15,
+        "y": 10,
+        "protects": "e"
+      },
+      {
+        "id": "cover-room-10",
+        "x": 15,
+        "y": 6,
+        "protects": "w"
+      },
+      {
+        "id": "cover-room-11",
+        "x": 15,
+        "y": 2,
+        "protects": "w"
+      }
+    ],
+    "terminal": {
+      "id": "terminal",
+      "x": 11,
+      "y": 4
+    },
+    "door": {
+      "id": "shortcut",
+      "x": 11,
+      "y": 12
+    },
+    "extraction": [
+      {
+        "x": 1,
+        "y": 13
+      },
+      {
+        "x": 2,
+        "y": 13
+      },
+      {
+        "x": 1,
+        "y": 14
+      },
+      {
+        "x": 2,
+        "y": 14
+      }
+    ],
+    "spawns": [
+      {
+        "id": "kite",
+        "name": "Kite",
+        "team": "crew",
+        "weapon": "rifle",
+        "x": 1,
+        "y": 13,
+        "patrol": []
+      },
+      {
+        "id": "voss",
+        "name": "Voss",
+        "team": "crew",
+        "weapon": "sidearm",
+        "x": 2,
+        "y": 13,
+        "patrol": []
+      },
+      {
+        "id": "nera",
+        "name": "Nera",
+        "team": "crew",
+        "weapon": "rifle",
+        "x": 1,
+        "y": 14,
+        "patrol": []
+      },
+      {
+        "id": "sol",
+        "name": "Sol",
+        "team": "crew",
+        "weapon": "sidearm",
+        "x": 2,
+        "y": 14,
+        "patrol": []
+      },
+      {
+        "id": "enemy-0",
+        "name": "Wache 1",
+        "team": "enemy",
+        "weapon": "rifle",
+        "x": 5,
+        "y": 11,
+        "patrol": [
+          {
+            "x": 5,
+            "y": 11
+          },
+          {
+            "x": 4,
+            "y": 11
+          }
+        ]
+      },
+      {
+        "id": "enemy-1",
+        "name": "Wache 2",
+        "team": "enemy",
+        "weapon": "rifle",
+        "x": 18,
+        "y": 11,
+        "patrol": [
+          {
+            "x": 18,
+            "y": 11
+          },
+          {
+            "x": 17,
+            "y": 11
+          }
+        ]
+      },
+      {
+        "id": "enemy-2",
+        "name": "Wache 3",
+        "team": "enemy",
+        "weapon": "rifle",
+        "x": 8,
+        "y": 3,
+        "patrol": [
+          {
+            "x": 8,
+            "y": 3
+          },
+          {
+            "x": 7,
+            "y": 3
+          }
+        ]
+      },
+      {
+        "id": "enemy-3",
+        "name": "Wache 4",
+        "team": "enemy",
+        "weapon": "rifle",
+        "x": 18,
+        "y": 3,
+        "patrol": [
+          {
+            "x": 18,
+            "y": 3
+          },
+          {
+            "x": 17,
+            "y": 3
+          }
+        ]
+      },
+      {
+        "id": "enemy-4",
+        "name": "Flanker 5",
+        "team": "enemy",
+        "weapon": "rifle",
+        "x": 12,
+        "y": 7,
+        "patrol": [
+          {
+            "x": 12,
+            "y": 7
+          },
+          {
+            "x": 11,
+            "y": 7
+          }
+        ]
+      },
+      {
+        "id": "enemy-5",
+        "name": "Flanker 6",
+        "team": "enemy",
+        "weapon": "rifle",
+        "x": 18,
+        "y": 18,
+        "patrol": [
+          {
+            "x": 18,
+            "y": 18
+          },
+          {
+            "x": 17,
+            "y": 18
+          }
+        ]
+      }
+    ],
+    "hash": "2dec2636fd78d24b650fd802adde70fb4d90c3fd29c2fc8b4a28f55b8b65f92e"
+  },
+  "report": {
+    "errors": [],
+    "warnings": [
+      {
+        "code": "playtest-open",
+        "message": "Geometrie und Semantik geprüft; taktische Fairness, Botlauf und menschliche Spielabnahme offen.",
+        "ids": []
+      },
+      {
+        "code": "infrastructure-abstract",
+        "message": "Versorgung folgt Raumverbindungen; physische Leitungen und Sabotageaktionen sind noch nicht implementiert.",
+        "ids": []
+      }
+    ],
+    "metrics": {
+      "roomCount": 12,
+      "walkableCells": 256,
+      "targetDistance": 28,
+      "independentRoutes": 2,
+      "coverCount": 9,
+      "preferenceScore": 80
+    }
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "errors": []
+    }
+  ],
+  "hash": "15b20c4771308d6790d4f650f81855a9fbc4cfb0569b5ed5941952435e69897a"
+}

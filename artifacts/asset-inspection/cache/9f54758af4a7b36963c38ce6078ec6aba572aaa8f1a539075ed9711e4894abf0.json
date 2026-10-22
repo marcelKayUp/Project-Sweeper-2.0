@@ -1,0 +1,169 @@
+{
+  "path": "Weapons/modular Weapons/Body_AR4.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Body_AR4",
+      "vertices": 514,
+      "triangles": 994,
+      "shapeHash": "09153eecfc7d98116a10a64cc33620db3ee128b3b4dd7420aef5961c8d05c843",
+      "materials": [
+        "White",
+        "Black",
+        "Main",
+        "Grey"
+      ],
+      "modifiers": [
+        "NODES"
+      ],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.505770206451416,
+          -0.06281045824289322,
+          -0.16771644353866577
+        ],
+        "max": [
+          0.4680986702442169,
+          0.06297927349805832,
+          0.1524631381034851
+        ],
+        "size": [
+          0.9738688766956329,
+          0.12578973174095154,
+          0.3201795816421509
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 994,
+  "bounds": {
+    "min": [
+      -0.505770206451416,
+      -0.06281045824289322,
+      -0.16771644353866577
+    ],
+    "max": [
+      0.4680986702442169,
+      0.06297927349805832,
+      0.1524631381034851
+    ],
+    "size": [
+      0.9738688766956329,
+      0.12578973174095154,
+      0.3201795816421509
+    ]
+  },
+  "materials": [
+    {
+      "name": "Black",
+      "diffuseColor": [
+        0.0290982685983181,
+        0.0290982685983181,
+        0.0290982685983181,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Grey",
+      "diffuseColor": [
+        0.10247143357992172,
+        0.10247143357992172,
+        0.10247143357992172,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.6151726245880127,
+        0.21127153933048248,
+        0.028615577146410942,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    },
+    {
+      "name": "White",
+      "diffuseColor": [
+        0.4575273394584656,
+        0.4575273394584656,
+        0.4575273394584656,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\modular Weapons\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Body_AR4",
+      "file": "thumbs/9f54758af4a7b36963c38ce6078ec6aba572aaa8f1a539075ed9711e4894abf0-0.png",
+      "category": "components",
+      "parts": [
+        "Body_AR4"
+      ],
+      "triangles": 994
+    }
+  ],
+  "fileSha256": "a3a65389081e4b0f1111d90205076a098a013cb9b3308feba4d817884379721e",
+  "bytes": 605276,
+  "inspectorKey": "cd7358ff160fbb070b5f8fc4e2ffd138955146420a9b39a6462eafc8c1fe5591"
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "family": "neon-terminal",
+  "id": "terminal-pedestal-compact-nakamura-lindahl",
+  "form": "pedestal",
+  "size": "compact",
+  "scale": 0.8,
+  "organization": "nakamura-lindahl",
+  "palette": {
+    "label": "Nakamura-Lindahl",
+    "body": "#F4F1EA",
+    "trim": "#1F3A4D",
+    "accent": "#B3263A"
+  },
+  "seed": 42
+}

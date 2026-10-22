@@ -1,0 +1,119 @@
+{
+  "path": "Weapons/Accessories/Grip.blend",
+  "category": "components",
+  "status": "ok",
+  "sceneUnits": {
+    "system": "NONE",
+    "scaleLength": 1.0
+  },
+  "evaluation": "All source objects and collections temporarily enabled in this background process; rest-pose modifiers evaluated; original visibility recorded; source never saved.",
+  "objects": 1,
+  "meshes": [
+    {
+      "name": "Grip",
+      "vertices": 400,
+      "triangles": 796,
+      "shapeHash": "bce5beb71e8cd181e026a57abda9118b2041fa8d37a834a317db473f7efb71c0",
+      "materials": [
+        "Main"
+      ],
+      "modifiers": [],
+      "sourceVisibility": {
+        "hideViewport": false,
+        "hideRender": false,
+        "hideLocal": false
+      },
+      "bounds": {
+        "min": [
+          -0.13169598579406738,
+          -0.13847337663173676,
+          -0.24411603808403015
+        ],
+        "max": [
+          0.13169598579406738,
+          0.13847337663173676,
+          0.4227513074874878
+        ],
+        "size": [
+          0.26339197158813477,
+          0.2769467532634735,
+          0.6668673455715179
+        ]
+      },
+      "finite": true,
+      "skin": null
+    }
+  ],
+  "triangles": 796,
+  "bounds": {
+    "min": [
+      -0.13169598579406738,
+      -0.13847337663173676,
+      -0.24411603808403015
+    ],
+    "max": [
+      0.13169598579406738,
+      0.13847337663173676,
+      0.4227513074874878
+    ],
+    "size": [
+      0.26339197158813477,
+      0.2769467532634735,
+      0.6668673455715179
+    ]
+  },
+  "materials": [
+    {
+      "name": "Main",
+      "diffuseColor": [
+        0.020288560539484024,
+        0.02518685907125473,
+        0.029556844383478165,
+        1.0
+      ],
+      "nodeTypes": [
+        "BSDF_DIFFUSE",
+        "BSDF_PRINCIPLED",
+        "FRAME",
+        "OUTPUT_MATERIAL"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Texture.png",
+      "usedByMaterial": false,
+      "packed": false,
+      "dependency": {
+        "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\Accessories\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+        "state": "missing"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "C:\\Users\\kaup\\Desktop\\Zeitalter Probierbereich\\Models&Animations\\Weapons\\Accessories\\ \\Blender\\DavidThorn\\Library\\Large\\Texture.png",
+      "state": "missing"
+    }
+  ],
+  "rigs": [],
+  "actions": [],
+  "groups": {},
+  "aliases": [],
+  "flags": [],
+  "textBlockNames": [],
+  "thumbnails": [
+    {
+      "label": "Grip",
+      "file": "thumbs/6e1fb3d0012764f9e3d92c2aab932fd30b4c0950fb576a87a35a909a38ace41d-0.png",
+      "category": "components",
+      "parts": [
+        "Grip"
+      ],
+      "triangles": 796
+    }
+  ],
+  "fileSha256": "377167f99333a9ff92245fdfee657d9e4773c3794be9bb6b01aabaf9449eb136",
+  "bytes": 532392,
+  "inspectorKey": "132b06b7e8c4dd66a8a70a07c1e92cd51f9b2887090b4f51e3dde4d8b52ae4b0"
+}

@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "referenceSha256": "a803bbc8419aef6a541b0b5e43f8c49f3f9b6dd773228d4906adadb7255645ef",
+  "sourceRecipeSha256": null,
+  "analyzerSha256": "9b9a3a277ccb1c319003151da89aa1054abfd7fa8c22fe539232741996538156",
+  "semanticsSha256": "24669db0234c80136a8c75ef49822355797dd33e36862c11c5acdcdd1cf84891",
+  "classification": {
+    "category": "furniture",
+    "subtype": "cabinet",
+    "construction": "manufactured-planar",
+    "origin": "controlled-fixture"
+  },
+  "analysisCacheKey": "bce568422e7f85f94a60eb7178c1f0eda61431e0cbbb038b425125d67d5bd561",
+  "symmetryPlan": [
+    {
+      "scope": "main-body",
+      "type": "bilateral",
+      "plane": "XZ",
+      "status": "assumed",
+      "origin": "fixture-definition",
+      "reason": "Symmetric shell with one excluded handle",
+      "useForGeometry": true,
+      "exceptions": [
+        "handle"
+      ],
+      "activeForGeometry": true
+    }
+  ],
+  "profiles": {
+    "front": {
+      "surfaceId": "front",
+      "originalPoints": [
+        [
+          106.0,
+          76.0
+        ],
+        [
+          428.0,
+          107.0
+        ],
+        [
+          425.0,
+          353.0
+        ],
+        [
+          108.0,
+          324.0
+        ]
+      ],
+      "points": [
+        [
+          102.7414,
+          72.0051
+        ],
+        [
+          432.1073,
+          101.5628
+        ],
+        [
+          429.1854,
+          357.4896
+        ],
+        [
+          105.1988,
+          327.9642
+        ]
+      ],
+      "changedVertices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "boundaryKinds": [
+        "crease",
+        "crease",
+        "crease",
+        "crease"
+      ],
+      "review": "accepted",
+      "modelEligible": true,
+      "symmetryScopes": [
+        "main-body"
+      ],
+      "mirrorOnXZ": true
+    },
+    "paint-detail": {
+      "surfaceId": "paint",
+      "originalPoints": [
+        [
+          225.0,
+          89.0
+        ],
+        [
+          266.0,
+          93.0
+        ],
+        [
+          264.0,
+          335.0
+        ],
+        [
+          225.0,
+          331.0
+        ]
+      ],
+      "points": [
+        [
+          225.0,
+          89.0
+        ],
+        [
+          266.0,
+          93.0
+        ],
+        [
+          264.0,
+          335.0
+        ],
+        [
+          225.0,
+          331.0
+        ]
+      ],
+      "changedVertices": [],
+      "boundaryKinds": [
+        "appearance",
+        "appearance",
+        "appearance",
+        "appearance"
+      ],
+      "review": "accepted",
+      "modelEligible": false,
+      "symmetryScopes": [
+        "main-body"
+      ],
+      "mirrorOnXZ": true
+    },
+    "shadow-detail": {
+      "surfaceId": "shadow",
+      "originalPoints": [
+        [
+          114.0,
+          235.0
+        ],
+        [
+          421.0,
+          263.0
+        ],
+        [
+          421.0,
+          276.0
+        ],
+        [
+          114.0,
+          250.0
+        ]
+      ],
+      "points": [
+        [
+          114.0,
+          235.0
+        ],
+        [
+          421.0,
+          263.0
+        ],
+        [
+          421.0,
+          276.0
+        ],
+        [
+          114.0,
+          250.0
+        ]
+      ],
+      "changedVertices": [],
+      "boundaryKinds": [
+        "lighting",
+        "lighting",
+        "lighting",
+        "lighting"
+      ],
+      "review": "accepted",
+      "modelEligible": false,
+      "symmetryScopes": [
+        "main-body"
+      ],
+      "mirrorOnXZ": true
+    }
+  }
+}

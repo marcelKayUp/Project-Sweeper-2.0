@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "source": "quaternius-modular-men-v1",
+  "id": "quaternius-16",
+  "seed": 42,
+  "stature": 1,
+  "parts": {
+    "head": "Punk",
+    "body": "Farmer",
+    "legs": "Swat",
+    "feet": "SpaceSuit"
+  },
+  "equipment": "none",
+  "palette": {
+    "skin": null,
+    "hair": null,
+    "cloth": null,
+    "armor": null,
+    "accent": null
+  }
+}

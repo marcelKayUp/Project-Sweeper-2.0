@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "runner-16",
+  "seed": 42,
+  "body": "standard",
+  "stature": 0.996,
+  "hair": "bob",
+  "outfit": "tech",
+  "accessory": "none",
+  "palette": {
+    "skin": "#E0B99A",
+    "hair": "#392B46",
+    "cloth": "#312D48",
+    "armor": "#A6A2B8",
+    "accent": "#F2A344"
+  }
+}

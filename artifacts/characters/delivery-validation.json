@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "files": [
+    {
+      "name": "runner",
+      "file": "assets\\generated\\characters\\neon-runner.glb",
+      "bytes": 200020,
+      "sha256": "577ba5386a9042e3e79d055f5087c5d57ae62bc972d68139311915ac00ec8e16",
+      "errors": 0,
+      "warnings": 0,
+      "warningSummary": {}
+    },
+    {
+      "name": "guard",
+      "file": "assets\\generated\\characters\\neon-guard.glb",
+      "bytes": 206228,
+      "sha256": "7786276918647b930a5c14d9d265045499a1c25b7c9334b69bb4c7501b747e76",
+      "errors": 0,
+      "warnings": 0,
+      "warningSummary": {}
+    },
+    {
+      "name": "tech",
+      "file": "assets\\generated\\characters\\neon-tech.glb",
+      "bytes": 206444,
+      "sha256": "585cf157328221da3c507784520adda108b45430f66834fd848efd8740336d5e",
+      "errors": 0,
+      "warnings": 0,
+      "warningSummary": {}
+    }
+  ]
+}

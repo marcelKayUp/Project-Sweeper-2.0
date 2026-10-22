@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "blender": "5.2.2 LTS",
+  "reimports": [
+    {
+      "id": "terminal-pedestal-standard-daeyang",
+      "format": "glb",
+      "meshObjects": 5,
+      "dimensions": [
+        0.49000000953674316,
+        0.446297362446785,
+        1.0399999618530273
+      ],
+      "bottom": 0.0,
+      "packedDisplay": true
+    },
+    {
+      "id": "terminal-pedestal-standard-daeyang",
+      "format": "blend",
+      "meshObjects": 5,
+      "dimensions": [
+        0.49000000953674316,
+        0.446297362446785,
+        1.0399999618530273
+      ],
+      "bottom": 0.0,
+      "packedDisplay": true
+    },
+    {
+      "id": "terminal-console-standard-daeyang",
+      "format": "glb",
+      "meshObjects": 5,
+      "dimensions": [
+        0.7200000286102295,
+        0.5046170651912689,
+        0.6797000765800476
+      ],
+      "bottom": 0.0,
+      "packedDisplay": true
+    },
+    {
+      "id": "terminal-console-standard-daeyang",
+      "format": "blend",
+      "meshObjects": 5,
+      "dimensions": [
+        0.7200000286102295,
+        0.5046170651912689,
+        0.6797000765800476
+      ],
+      "bottom": 0.0,
+      "packedDisplay": true
+    },
+    {
+      "id": "terminal-wall-standard-daeyang",
+      "format": "glb",
+      "meshObjects": 5,
+      "dimensions": [
+        0.4399999976158142,
+        0.28599999845027924,
+        0.49000000953674316
+      ],
+      "bottom": 0.0,
+      "packedDisplay": true
+    },
+    {
+      "id": "terminal-wall-standard-daeyang",
+      "format": "blend",
+      "meshObjects": 5,
+      "dimensions": [
+        0.4399999976158142,
+        0.28599999845027924,
+        0.49000000953674316
+      ],
+      "bottom": 0.0,
+      "packedDisplay": true
+    }
+  ],
+  "invalidRecipesRejected": [
+    "negative-seed",
+    "boolean-seed",
+    "invalid-scale",
+    "unknown-form",
+    "invalid-color",
+    "unknown-field"
+  ]
+}

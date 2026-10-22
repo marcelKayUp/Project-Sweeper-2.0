@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "family": "neon-terminal",
+  "id": "terminal-pedestal-standard-daeyang",
+  "form": "pedestal",
+  "size": "standard",
+  "scale": 1,
+  "organization": "daeyang",
+  "palette": {
+    "label": "Daeyang",
+    "body": "#0B2A5B",
+    "trim": "#C9CED6",
+    "accent": "#38D39F"
+  },
+  "seed": 47
+}

@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-22",
+  "source": {
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "url": "https://quaternius.com/packs/ultimatemodularcharacters.html"
+  },
+  "toolVersions": {
+    "node": "v24.14.0",
+    "babylon": "9.31.2",
+    "blender": "5.2.2 LTS"
+  },
+  "files": {
+    "assets/source/characters/quaternius/Humans_Master.blend": {
+      "bytes": 1888266,
+      "sha256": "0e57cc03b9ef01a63251f087fe031bbc340704051a84216a45fb0e2dc31971a9"
+    },
+    "apps/client/public/assets/characters/quaternius/master.glb": {
+      "bytes": 11739728,
+      "sha256": "24b97f51739924047948d846e1ed88dd103e2171ceef29d2c73fc8c2269a0ee7"
+    },
+    "apps/client/public/assets/characters/quaternius/catalog.json": {
+      "bytes": 2760,
+      "sha256": "7e121eedd1d757bdff92e9d4059f236d5de010e263fc98bbc0e1a133a517de85"
+    },
+    "assets/specs/characters/quaternius-casual2.json": {
+      "bytes": 349,
+      "sha256": "768ba9b6ab8e71a3ee03889cd1bceb4d65b4b8f5b97e6ef20f73e623302fa243"
+    },
+    "assets/generated/characters/quaternius/quaternius-casual2.glb": {
+      "bytes": 4973100,
+      "sha256": "dea7bb1ef92f3a6aeb43e9fbdb316dd77df735a235c2a91463e8482500248f2b"
+    },
+    "assets/generated/characters/quaternius/quaternius-casual2.json": {
+      "bytes": 371,
+      "sha256": "1aec96e9c6dc960d05428a07471ad64ffba4c91525e93f62e73409fab284b71e"
+    },
+    "assets/generated/characters/quaternius/quaternius-casual2.manifest.json": {
+      "bytes": 2939,
+      "sha256": "7e78a7539df37b52f14674ec5958ac0f962b9f3dcae3bbd831db4ddd387be9e5"
+    },
+    "assets/source/characters/quaternius/casual2-workshop.blend": {
+      "bytes": 4910899,
+      "sha256": "17886b24e692109b4cedfe2391f27cbc38d8c285bc38628f2fa55fbeb2af403f"
+    },
+    "artifacts/characters/modular/check.json": {
+      "bytes": 16104,
+      "sha256": "21fc02744b0f869901300ddd155a2112cb34c47b3c240640da6002ea7d7d7be7"
+    },
+    "artifacts/characters/modular/blender/report.json": {
+      "bytes": 7330,
+      "sha256": "500f682a9d546ffd8a26278d4e65c444de9e8c154cc1e5f26e7f322a6c0e0db2"
+    },
+    "artifacts/characters/modular/review/front.png": {
+      "bytes": 808329,
+      "sha256": "1ad47d52c1162a911fd39808b5c4be377b456ad9c693520f3621699a3b47acb0"
+    },
+    "artifacts/characters/modular/review/iso.png": {
+      "bytes": 825506,
+      "sha256": "47547fe073af9c7febe78df78d24e5d3c3174427f578a6a50dabc9068f86fa1c"
+    }
+  },
+  "checks": {
+    "browserAndGlb": true,
+    "khronosExports": 28,
+    "joints": 62,
+    "clips": 24,
+    "tests": 129,
+    "typecheck": "passed",
+    "cliRepeatSha256": "dea7bb1ef92f3a6aeb43e9fbdb316dd77df735a235c2a91463e8482500248f2b",
+    "humanArtAcceptance": "open",
+    "missionIntegration": "open",
+    "missingNativeClips": [
+      "Crouch",
+      "Reload"
+    ],
+    "validationScope": "Current workshop proof covers male and female libraries; this delivery retains its original male source and files."
+  }
+}
