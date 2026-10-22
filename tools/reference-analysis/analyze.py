@@ -52,6 +52,7 @@ def symmetry_plan(items, catalog):
         raise ValueError("Invalid symmetry list")
     result = []
     for item in items:
+        if not isinstance(item,dict): raise ValueError("Symmetry must be an object")
         if item.get("status") not in catalog["symmetryStatuses"] or item.get("type") not in ("bilateral", "rotational", "repetition", "none"):
             raise ValueError("Invalid symmetry type/status")
         if not isinstance(item.get("scope"), str) or not item["scope"] or type(item.get("useForGeometry", False)) is not bool:
@@ -143,10 +144,12 @@ def refine_boundary(anchors, edges, kinds, accepted, band, geometry_kinds):
 def measure(spec_path, out, force=False):
     cv2.setNumThreads(1); cv2.setRNGSeed(0)
     spec = load(spec_path); catalog = load(CATALOG)
+    if not isinstance(spec,dict): raise ValueError("Analysis spec must be an object")
     if spec.get("schemaVersion") != 1 or not isinstance(spec.get("id"),str) or not spec["id"]:
         raise ValueError("Unsupported analysis spec")
     source_path = local(spec["sourceRecipe"]) if "sourceRecipe" in spec else None
     source = load(source_path) if source_path else {}
+    if not isinstance(source,dict): raise ValueError("Source recipe must be an object")
     reference = local(spec.get("reference", source.get("reference", "")))
     classification = spec.get("classification", {})
     if classification.get("category") not in catalog["categories"] or classification.get("construction") not in catalog["constructions"] or not classification.get("origin"):
@@ -188,7 +191,7 @@ def measure(spec_path, out, force=False):
     seeds = []
     for index, request in enumerate(requests):
         seed = points([request["seed"]],image.size,1)[0]
-        x,y = np.rint(seed).astype(int)
+        x,y = np.clip(np.rint(seed),[0,0],[image.width-1,image.height-1]).astype(int)
         if mask[y,x] == 0 or any(np.linalg.norm(seed-other) < 8 for other in seeds):
             raise ValueError("Surface seeds must be distinct and inside object region")
         if request.get("shapeHypothesis") not in ("planar","curved","mixed","unknown"):

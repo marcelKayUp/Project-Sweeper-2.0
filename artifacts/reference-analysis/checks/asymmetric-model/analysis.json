@@ -602,8 +602,8 @@
     "glbBytes": 500000
   },
   "surfaceRefinement": {
-    "reportSha256": "6adcfe293b3c2e0bb2e8113b49fff6e3314fc33e252b446d86f3fd3d3c4af7c0",
-    "analysisCacheKey": "f23322d633c4ec8d7d1b267eb2a6a7af0e73a260a51ea4ed157fe6c573ab51cc",
+    "reportSha256": "dad8f5a70d3f161872ffa2905ed0ff6e8c6e8855cb9d26e583f9713f493cdeab",
+    "analysisCacheKey": "d64e4ed26af71dfd35026230c0c4ee1d0d163c8e36c0c09b3266755eba9852c4",
     "symmetryPlan": [
       {
         "scope": "main-body",

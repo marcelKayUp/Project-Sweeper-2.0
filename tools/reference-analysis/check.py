@@ -112,6 +112,14 @@ def main():
     try: vehicle.apply_refinement(load(recipe_path),recipe_path,path,(596,335))
     except ValueError: failures.append("lighting-cannot-drive-mesh")
     else: raise AssertionError("Unsafe model binding accepted")
+    for name,scope in [("unconfirmed-body","main-body"),("unconfirmed-wheels","wheels")]:
+        unsafe=load(ROOT/"artifacts/reference-analysis/truck/geometry-patches.json")
+        for item in unsafe["symmetryPlan"]:
+            if item["scope"]==scope: item.update(status="candidate",activeForGeometry=False)
+        path=folder/(name+".json"); path.write_text(json.dumps(unsafe),encoding="utf-8")
+        try: vehicle.apply_refinement(load(recipe_path),recipe_path,path,(596,335))
+        except ValueError: failures.append(name)
+        else: raise AssertionError("Template forced unconfirmed symmetry: "+scope)
     asym=load(ROOT/"assets/specs/reference-analysis/truck.json")
     asym["id"]="truck-asymmetric-panel"
     asym["symmetryHypotheses"][0]["exceptions"].append("sideInset")

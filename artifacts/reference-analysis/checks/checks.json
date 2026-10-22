@@ -1,6 +1,6 @@
 {
   "passed": true,
-  "sameAnalyzerSha256": "9b9a3a277ccb1c319003151da89aa1054abfd7fa8c22fe539232741996538156",
+  "sameAnalyzerSha256": "e667e944f20f337efce0822927695146f81faa2be052d989bd3e98779ae49ffd",
   "references": [
     "user-truck-photo",
     "controlled-cabinet-fixture"
@@ -18,7 +18,9 @@
     "unknown-boundary-kind",
     "class-prior-is-not-proof",
     "crossed-polygon",
-    "lighting-cannot-drive-mesh"
+    "lighting-cannot-drive-mesh",
+    "unconfirmed-body",
+    "unconfirmed-wheels"
   ],
   "truck3DProfileChanged": true,
   "truckAppliedProfiles": {

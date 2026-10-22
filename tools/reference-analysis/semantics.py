@@ -5,7 +5,7 @@ def selected_symmetries(plan, scope):
     selected=[]
     for item in plan:
         base=item["scope"]
-        if not item.get("activeForGeometry") or item.get("status") not in ("assumed","supported"):
+        if item.get("useForGeometry") is not True or not item.get("activeForGeometry") or item.get("status") not in ("assumed","supported"):
             continue
         if scope!=base and not scope.startswith(base+"/"):
             continue

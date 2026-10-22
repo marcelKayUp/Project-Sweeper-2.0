@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "cacheKey": "bce568422e7f85f94a60eb7178c1f0eda61431e0cbbb038b425125d67d5bd561",
+  "cacheKey": "eea9e9ec4f48f4112882c8c7a32e2300bb22432b884302b82ae21b4525de5e86",
   "specSha256": "4f74ed639f25d819177c468f20d9efa9681a260f5fa15d9fa91cfac1b22bf045",
   "referenceSha256": "a803bbc8419aef6a541b0b5e43f8c49f3f9b6dd773228d4906adadb7255645ef",
   "sourceRecipeSha256": null,
-  "analyzerSha256": "9b9a3a277ccb1c319003151da89aa1054abfd7fa8c22fe539232741996538156",
+  "analyzerSha256": "e667e944f20f337efce0822927695146f81faa2be052d989bd3e98779ae49ffd",
   "versions": {
     "python": "3.12.14",
     "opencv": "5.0.0",

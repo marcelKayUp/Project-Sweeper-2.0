@@ -2,15 +2,15 @@
   "schemaVersion": 1,
   "referenceSha256": "a803bbc8419aef6a541b0b5e43f8c49f3f9b6dd773228d4906adadb7255645ef",
   "sourceRecipeSha256": null,
-  "analyzerSha256": "9b9a3a277ccb1c319003151da89aa1054abfd7fa8c22fe539232741996538156",
-  "semanticsSha256": "24669db0234c80136a8c75ef49822355797dd33e36862c11c5acdcdd1cf84891",
+  "analyzerSha256": "e667e944f20f337efce0822927695146f81faa2be052d989bd3e98779ae49ffd",
+  "semanticsSha256": "0178723b380829fadd9360c7a8e24dabee9a8f01937ebbafa98d7116f1eae3e6",
   "classification": {
     "category": "furniture",
     "subtype": "cabinet",
     "construction": "manufactured-planar",
     "origin": "controlled-fixture"
   },
-  "analysisCacheKey": "bce568422e7f85f94a60eb7178c1f0eda61431e0cbbb038b425125d67d5bd561",
+  "analysisCacheKey": "eea9e9ec4f48f4112882c8c7a32e2300bb22432b884302b82ae21b4525de5e86",
   "symmetryPlan": [
     {
       "scope": "main-body",

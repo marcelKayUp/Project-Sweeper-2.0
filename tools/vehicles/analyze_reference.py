@@ -100,12 +100,12 @@ def apply_refinement(spec,spec_path,refinement_path,size):
         raise ValueError("Truck template requires an explicitly active bilateral main-body assumption")
     mirror_flags={name:policy.mirror_allowed(plan,"main-body/"+name) for name in spec["profiles"]}
     if not mirror_flags["cargo"]: raise ValueError("Truck template cannot build an asymmetric cargo shell")
-    wheel_plan=[item for item in plan if item.get("scope")=="wheels" and item.get("type")=="repetition" and item.get("activeForGeometry")]
+    wheel_plan=[item for item in plan if item.get("scope")=="wheels" and item.get("type")=="repetition" and item.get("useForGeometry") is True and item.get("activeForGeometry") and item.get("status") in ("assumed","supported")]
     if len(wheel_plan)!=1 or wheel_plan[0].get("exceptions"):
         raise ValueError("Truck template requires an explicit repeated-wheel plan without missing-wheel exceptions")
     applied={}
     for name,patch in report.get("profiles",{}).items():
-        if not patch.get("modelEligible"): continue
+        if patch.get("modelEligible") is not True: continue
         if name not in spec["profiles"] or patch.get("review")!="accepted":
             raise ValueError("Unknown/unreviewed geometry binding")
         original=np.array(spec["profiles"][name],dtype=float)
@@ -118,7 +118,7 @@ def apply_refinement(spec,spec_path,refinement_path,size):
             raise ValueError("Geometry patch exceeds bounded refinement")
         kinds=patch["boundaryKinds"]
         if len(kinds)!=len(original): raise ValueError("Invalid boundary-kind count")
-        for index in np.nonzero(movement>.15)[0]:
+        for index in np.nonzero(movement>1e-5)[0]:
             if kinds[index] not in ("silhouette","crease") or kinds[index-1] not in ("silhouette","crease"):
                 raise ValueError("Appearance/lighting/unknown boundary cannot alter geometry")
         spec["profiles"][name]=refined.tolist()

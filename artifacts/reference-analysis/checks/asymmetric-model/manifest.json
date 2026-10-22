@@ -3,13 +3,13 @@
   "generator": "reference-truck/2",
   "referenceSha256": "8778355ba7a7d5c55a502c20bbd90184e2fa21034096e2a28bed72796e6bf0c7",
   "generatorSha256": "d3e1c8445a952ea0263fac68389b83c82896fb16fe6e6485c0042c9059dd875c",
-  "analysisSha256": "7634277247334d23d6dfeae24b00825727c13ce5cae5dd4f0ee94dd5f506489b",
+  "analysisSha256": "b5620435b794726eea82e8fbf096f98fc5b43338d8cb4e3d3dbdc96f656ed4ed",
   "blenderVersion": "5.2.2 LTS",
   "triangles": 2021,
   "materials": 5,
   "meshObjects": 23,
   "glbBytes": 71440,
-  "glbSha256": "b60c3cd0dc6ffe83fac5f236d9725fd42db5faf649028e4379693a7d5ee94d28",
+  "glbSha256": "0307791bf3918db30c0784958a11ca85b20747b37055e5f3710e49def66a0f23",
   "blenderDimensionsMetersXYZ": [
     14.475776195526123,
     2.8289999961853027,
@@ -35,8 +35,8 @@
     "geometry": "Project-authored parametric approximation; no reference pixels used as model textures."
   },
   "surfaceRefinement": {
-    "reportSha256": "6adcfe293b3c2e0bb2e8113b49fff6e3314fc33e252b446d86f3fd3d3c4af7c0",
-    "analysisCacheKey": "f23322d633c4ec8d7d1b267eb2a6a7af0e73a260a51ea4ed157fe6c573ab51cc",
+    "reportSha256": "dad8f5a70d3f161872ffa2905ed0ff6e8c6e8855cb9d26e583f9713f493cdeab",
+    "analysisCacheKey": "d64e4ed26af71dfd35026230c0c4ee1d0d163c8e36c0c09b3266755eba9852c4",
     "symmetryPlan": [
       {
         "scope": "main-body",
