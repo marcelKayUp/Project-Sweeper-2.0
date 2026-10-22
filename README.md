@@ -1,5 +1,7 @@
 # NEON CONTRACT
 
+Deutsch · [English](README.en.md)
+
 Kooperatives Cyberpunk-Taktikspiel für 4–8 Spieler: ein Runner pro Person, gemeinsame Aufträge, Deckung, Aktionspunkte und langfristig eine persistente Crew.
 
 Dies ist kein kommerzielles Projekt. Es ist die Testwiese eines Vibe-Coders, um seine Grenzen und die der KI auszuloten, und ein Gelegenheitsspiel für ihn und seine Freundesgruppe.
