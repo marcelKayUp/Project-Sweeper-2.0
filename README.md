@@ -2,6 +2,8 @@
 
 Kooperatives Cyberpunk-Taktikspiel für 4–8 Spieler: ein Runner pro Person, gemeinsame Aufträge, Deckung, Aktionspunkte und langfristig eine persistente Crew.
 
+Dies ist kein kommerzielles Projekt. Es ist die Testwiese eines Vibe-Coders, um seine Grenzen und die der KI auszuloten, und ein Gelegenheitsspiel für ihn und seine Freundesgruppe.
+
 **Projektstand, 21.10.2026:** Regel-/Grafikstücke und ein lokaler Missionsprototyp sind vorhanden. Neu ist ein semantischer Gebäudegenerator mit separater Werkstatt. Die übrigen Planungsdokumente bleiben Vorschläge; eine vollständige menschliche MVP-Abnahme ist damit nicht belegt.
 
 Version 5 ergänzt ein echtes Flurnetz mit eigenen Raumtüren und kurzen, geometrisch geprüften Sanitärwegen: CEO höchstens 16 Raster-Schritte über Assistenz/Flur. Die Werkstatt zeichnet den ausgewählten WC-Weg. Flächenstufen: 28×24, 32×28 und 32×32; Belegung bleibt unverändert. Siehe [0014](docs/decisions/0014-flurerschliessung-und-sanitaerwege.md).
