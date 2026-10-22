@@ -148,6 +148,8 @@ Die zugehörigen Einträge in [MVP_MODULE.md](MVP_MODULE.md), [MVP_SCREENS.md](M
 
 **Abnahme:** Trennung während Aktion/Phase, Rückkehr, zweiter Tab und abgelaufene Reservierung; keine Ressourcenverdopplung.
 
+**Stand 23.10.2026:** Ein Ausfall während der Mission behält Runner, AP, HP, Position und Besitz. Dieselbe Sitzung kann fünf Minuten wieder aufgenommen werden; ein zweiter Tab übernimmt nicht. An der nächsten Crewphasengrenze übernimmt ein defensiver Bot, wenn die Person weg ist. Er liest nur die Teamsicht, heilt sich unter der Hälfte der HP oder meldet Bereit, und nutzt keinen eigenen Zufall. Die Rückgabe an den Menschen folgt an der nächsten Grenze. Die Koordination kann freie Lobby-Slots mit diesem Bot besetzen. Die Vier-Browser-Prüfung mit Ausfall und die menschliche Abnahme bleiben offen.
+
 ### AP-16 · Vier-Client-Abnahme
 
 **Größe:** M · **Nach:** AP-10/13/14/15 · **Zuordnung:** MOD-12.

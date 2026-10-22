@@ -31,6 +31,7 @@ export const lobbySchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("preset"), preset: z.enum(["rifle", "sidearm"]) }),
   z.object({ kind: z.literal("bereit"), ready: z.boolean() }),
   z.object({ kind: z.literal("start") }),
+  z.object({ kind: z.literal("bot") }),
   z.object({ kind: z.literal("zeit"), seconds: z.union([z.literal(60), z.literal(90), z.literal(120)]) }),
 ]);
 

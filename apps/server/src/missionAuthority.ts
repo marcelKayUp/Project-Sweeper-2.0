@@ -1,3 +1,4 @@
+import { defensiveIntent } from "@neon/bots";
 import {
   applyCommand,
   closeTeamPhase,
@@ -17,9 +18,12 @@ import { parseCommand, parseLobby, type CommandMessage } from "./validate.ts";
 const ORDER = ["kite", "voss", "nera", "sol"] as const;
 const MISSION_SEED = 1;
 const RATE_WINDOW_MS = 1000;
+const BOT_STEPS = 2;
 
 export const COMMANDS_PER_SECOND = 20;
 export const DEFAULT_PHASE_SECONDS = 90;
+export const RESUME_SECONDS = 300;
+export const RESUME_MS = RESUME_SECONDS * 1000;
 
 export type PhaseSeconds = 60 | 90 | 120;
 export type RunnerId = (typeof ORDER)[number];
@@ -34,6 +38,7 @@ export type AuthorityEvent =
   | { readonly kind: "lobby"; readonly sessionId: string; readonly payload: unknown }
   | { readonly kind: "command"; readonly sessionId: string; readonly payload: unknown }
   | { readonly kind: "leave"; readonly sessionId: string }
+  | { readonly kind: "resume"; readonly sessionId: string; readonly now: number }
   | { readonly kind: "expire"; readonly now: number };
 
 export type RoomInput =
@@ -47,12 +52,15 @@ export type RoomInput =
     }
   | { readonly kind: "close-team-phase"; readonly round: number };
 
+export type SlotHolder = "human" | "bot" | "reserviert" | "offen";
+
 export interface AuthoritySlot {
   readonly runnerId: string;
   readonly name: string;
   readonly preset: string;
   readonly ready: boolean;
   readonly connected: boolean;
+  readonly holder: SlotHolder;
 }
 
 export interface AuthorityStand {
@@ -60,6 +68,7 @@ export interface AuthorityStand {
   readonly roomPhase: "lobby" | "mission" | "ended";
   readonly ownRunnerId: string;
   readonly epoch: number;
+  readonly control: "human" | "bot" | "";
   readonly coordinator: boolean;
   readonly round: number;
   readonly phase: string;
@@ -119,6 +128,10 @@ interface Seat {
   ready: boolean;
   connected: boolean;
   epoch: number;
+  controller: "human" | "bot";
+  home: "human" | "bot";
+  resumeUntil: number;
+  returnAtBoundary: boolean;
 }
 
 interface Receipt {
@@ -174,6 +187,10 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
       ready: false,
       connected: true,
       epoch: 1,
+      controller: "human",
+      home: "human",
+      resumeUntil: 0,
+      returnAtBoundary: false,
     });
     views.set(sessionId, emptyNote());
     return { ok: true };
@@ -220,18 +237,23 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
       handleLeave(item.sessionId);
       return;
     }
+    if (item.kind === "resume") {
+      handleResume(item.sessionId, item.now);
+      return;
+    }
     if (!closeDue(item.now)) return;
     const pending = queue.splice(0, queue.length);
     for (const late of pending) {
       if (late.kind === "command") handleCommand(late.sessionId, late.payload, true);
       else if (late.kind === "lobby") handleLobby(late.sessionId, late.payload);
       else if (late.kind === "leave") handleLeave(late.sessionId);
+      else if (late.kind === "resume") handleResume(late.sessionId, late.now);
     }
   }
 
   function handleLeave(sessionId: string): void {
     const seat = seats.get(sessionId);
-    if (!seat) return;
+    if (!seat || seat.home === "bot") return;
     if (!sim) {
       seats.delete(sessionId);
       views.delete(sessionId);
@@ -239,7 +261,35 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
       rates.delete(sessionId);
       return;
     }
+    if (!seat.connected) return;
     seat.connected = false;
+    seat.returnAtBoundary = false;
+    if (seat.controller === "human") seat.resumeUntil = clock.now() + RESUME_MS;
+  }
+
+  function handleResume(sessionId: string, now: number): void {
+    const seat = seats.get(sessionId);
+    const revision = sim?.revision ?? 0;
+    if (!seat || !sim || seat.home === "bot") {
+      note(sessionId, "", "Keine Wiederaufnahme.", revision);
+      return;
+    }
+    if (seat.controller === "human" && seat.connected) {
+      note(sessionId, "", "Dieser Runner ist bereits verbunden.", revision);
+      return;
+    }
+    if (!Number.isInteger(now) || seat.resumeUntil === 0 || now > seat.resumeUntil) {
+      note(sessionId, "", "Die Wiederaufnahme ist abgelaufen.", revision);
+      return;
+    }
+    seat.connected = true;
+    if (seat.controller === "bot") {
+      seat.returnAtBoundary = true;
+      note(sessionId, "", "Die Rückgabe folgt an der nächsten Crewphase.", revision);
+      return;
+    }
+    seat.resumeUntil = 0;
+    note(sessionId, "", "", revision);
   }
 
   function handleLobby(sessionId: string, payload: unknown): void {
@@ -273,7 +323,44 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
       setPhaseSeconds(sessionId, parsed.message.seconds);
       return;
     }
+    if (parsed.message.kind === "bot") {
+      seatBot(sessionId);
+      return;
+    }
     tryStart(sessionId);
+  }
+
+  function seatBot(sessionId: string): void {
+    if (coordinatorSession() !== sessionId) {
+      note(sessionId, "", "Nur die Koordination setzt Bots ein.", 0);
+      return;
+    }
+    const runnerId = ORDER.find((id) => ![...seats.values()].some((seat) => seat.runnerId === id));
+    if (!runnerId) {
+      note(sessionId, "", "Der Raum ist voll.", 0);
+      return;
+    }
+    seats.set(`bot:${runnerId}`, {
+      runnerId,
+      name: "Bot",
+      preset: "rifle",
+      ready: true,
+      connected: true,
+      epoch: 1,
+      controller: "bot",
+      home: "bot",
+      resumeUntil: 0,
+      returnAtBoundary: false,
+    });
+    configRevision += 1;
+    for (const seat of seats.values()) {
+      if (seat.controller === "human") seat.ready = false;
+    }
+    for (const id of seats.keys()) {
+      if (seats.get(id)?.controller === "human") {
+        views.set(id, { notice: "Ein Bot besetzt einen Slot. Bereit ist aufgehoben.", commandId: "", commandRevision: 0 });
+      }
+    }
   }
 
   function setPhaseSeconds(sessionId: string, seconds: PhaseSeconds): void {
@@ -287,7 +374,9 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
     }
     phaseSeconds = seconds;
     configRevision += 1;
-    for (const seat of seats.values()) seat.ready = false;
+    for (const seat of seats.values()) {
+      if (seat.controller === "human") seat.ready = false;
+    }
     for (const id of seats.keys()) views.set(id, { notice: "Neue Zeit, Bereit ist aufgehoben.", commandId: "", commandRevision: 0 });
   }
 
@@ -297,7 +386,7 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
       return;
     }
     const all = [...seats.values()];
-    if (all.length !== 4 || all.some((seat) => !seat.connected)) {
+    if (all.length !== 4 || all.some((seat) => seat.controller === "human" && !seat.connected)) {
       note(sessionId, "", "Vier verbundene Runner werden gebraucht.", 0);
       return;
     }
@@ -313,6 +402,7 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
     sim = createMissionState(spec, MISSION_SEED);
     openedAt = clock.now();
     note(sessionId, "", "", sim.revision);
+    actBots();
   }
 
   function handleCommand(sessionId: string, payload: unknown, late: boolean): void {
@@ -333,6 +423,10 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
     }
     if (parsed.command.epoch !== seat.epoch || parsed.command.unitId !== seat.runnerId) {
       remember(sessionId, parsed.command.commandId, "Dieser Runner gehört dir nicht.");
+      return;
+    }
+    if (seat.controller !== "human") {
+      remember(sessionId, parsed.command.commandId, "Die Rückgabe folgt an der nächsten Crewphase.");
       return;
     }
     if (sim.result || sim.phase === "ended") {
@@ -363,6 +457,10 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
       action: parsed.command.action.kind,
     });
     remember(sessionId, parsed.command.commandId, null);
+    if (sim.round !== previousRound) {
+      handoff(clock.now());
+      actBots();
+    }
   }
 
   function closeDue(now: number): boolean {
@@ -376,7 +474,68 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
     inputs.push({ kind: "close-team-phase", round });
     openedAt = sim.result || sim.phase !== "crew" ? null : now;
     record(step.events);
+    handoff(now);
+    actBots();
     return true;
+  }
+
+  function handoff(now: number): void {
+    for (const runnerId of ORDER) {
+      const seat = [...seats.values()].find((item) => item.runnerId === runnerId);
+      if (!seat) continue;
+      if (seat.controller === "human" && !seat.connected) {
+        seat.controller = "bot";
+        seat.returnAtBoundary = false;
+        seat.epoch += 1;
+        continue;
+      }
+      if (seat.controller === "bot" && seat.returnAtBoundary) {
+        if (seat.connected && now <= seat.resumeUntil) {
+          seat.controller = "human";
+          seat.returnAtBoundary = false;
+          seat.resumeUntil = 0;
+          seat.epoch += 1;
+        } else {
+          seat.returnAtBoundary = false;
+        }
+      }
+    }
+  }
+
+  function actBots(): void {
+    for (const runnerId of ORDER) {
+      const seat = [...seats.values()].find((item) => item.runnerId === runnerId);
+      if (!seat || seat.controller !== "bot") continue;
+      for (let step = 0; step < BOT_STEPS; step += 1) {
+        if (!sim || !spec || sim.result || sim.phase !== "crew") return;
+        const command = defensiveIntent(projectTeam(sim, spec), seat.runnerId);
+        if (!command) break;
+        const applied = applyCommand(sim, spec, command);
+        if (applied.rejection !== null) {
+          if (command.kind === "ready") break;
+          const fallback = applyCommand(sim, spec, { kind: "ready", unitId: seat.runnerId });
+          if (fallback.rejection === null) commitBot(seat, fallback.state, fallback.events, "ready");
+          break;
+        }
+        commitBot(seat, applied.state, applied.events, command.kind);
+        if (command.kind === "ready") break;
+      }
+    }
+  }
+
+  function commitBot(seat: Seat, state: MissionState, events: readonly MissionEvent[], action: CrewCommand["kind"]): void {
+    if (!sim) return;
+    const round = sim.round;
+    sim = state;
+    record(events);
+    inputs.push({
+      kind: "crew-command",
+      commandId: `bot-${seat.runnerId}-${round}-${seat.epoch}-${action}`,
+      runnerId: seat.runnerId,
+      round,
+      epoch: seat.epoch,
+      action,
+    });
   }
 
   function record(events: readonly MissionEvent[]): void {
@@ -432,7 +591,7 @@ function hiddenEnemyIds(): readonly string[] {
   function coordinatorSession(): string | null {
     for (const runnerId of ORDER) {
       for (const [sessionId, seat] of seats) {
-        if (seat.runnerId === runnerId && seat.connected) return sessionId;
+        if (seat.runnerId === runnerId && seat.connected && seat.controller === "human") return sessionId;
       }
     }
     return null;
@@ -448,6 +607,7 @@ function hiddenEnemyIds(): readonly string[] {
       roomPhase: sim?.result ? "ended" : sim ? "mission" : "lobby",
       ownRunnerId: seat?.runnerId ?? "",
       epoch: seat?.epoch ?? 0,
+      control: seat?.controller ?? "",
       coordinator: coordinatorSession() === sessionId,
       round: view?.round ?? 1,
       phase: view?.phase ?? "crew",
@@ -481,6 +641,7 @@ function hiddenEnemyIds(): readonly string[] {
           preset: found?.preset ?? "",
           ready: found?.ready ?? false,
           connected: found?.connected ?? false,
+          holder: holderOf(found),
         };
       }),
       units: view?.units ?? [],
@@ -519,6 +680,13 @@ function hiddenEnemyIds(): readonly string[] {
     latestBatch: () => batch,
     shared,
   };
+}
+
+function holderOf(seat: Seat | undefined): SlotHolder {
+  if (!seat) return "offen";
+  if (seat.controller === "bot") return "bot";
+  if (!seat.connected) return "reserviert";
+  return "human";
 }
 
 function emptyNote(): SessionNote {

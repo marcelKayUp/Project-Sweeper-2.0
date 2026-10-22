@@ -2,6 +2,7 @@ import { MISSION_ID, PROTOCOL_VERSION } from "@neon/sim";
 import { describe, expect, it } from "vitest";
 import {
   COMMANDS_PER_SECOND,
+  RESUME_MS,
   createMissionAuthority,
   scrubHiddenNotice,
   type AuthorityStand,
@@ -338,5 +339,84 @@ describe("Missionsraum", () => {
     expect(names.every((id) => allowed.has(id))).toBe(true);
     expect(scrubHiddenNotice("Ziel wache-haupt bei 12,4", ["wache-haupt"])).toBe("Aktion abgelehnt.");
     expect(scrubHiddenNotice("Kein Sichtkontakt.", ["wache-haupt"])).toBe("Kein Sichtkontakt.");
+  });
+
+  it("besetzt freie Slots mit Bots und lässt sie nur Bereit melden", () => {
+    const room = openRoom();
+    room.authority.join(room.ids[0], "Kite");
+    room.authority.join(room.ids[1], "Voss");
+    room.lobby(room.ids[1], { kind: "bot" });
+    expect(room.authority.stand(room.ids[1]).notice).toBe("Nur die Koordination setzt Bots ein.");
+    room.authority.submit([{ kind: "leave", sessionId: room.ids[1] }]);
+    for (let index = 0; index < 3; index += 1) room.lobby(room.ids[0], { kind: "bot" });
+    room.lobby(room.ids[0], { kind: "bot" });
+    const lobby = room.authority.stand(room.ids[0]);
+    expect(lobby.notice).toBe("Der Raum ist voll.");
+    expect(lobby.slots.map((slot) => slot.holder)).toEqual(["human", "bot", "bot", "bot"]);
+    expect(lobby.slots.filter((slot) => slot.holder === "human").every((slot) => slot.ready === false)).toBe(true);
+    room.lobby(room.ids[0], { kind: "preset", preset: "sidearm" });
+    room.lobby(room.ids[0], { kind: "bereit", ready: true });
+    room.lobby(room.ids[0], { kind: "start" });
+    const started = room.authority.stand(room.ids[0]);
+    expect(started.roomPhase).toBe("mission");
+    expect(started.control).toBe("human");
+    expect(unit(started, "kite")).toMatchObject({ ap: 8, ready: false });
+    expect(unit(started, "voss").ready).toBe(true);
+    expect(started.units.every((item) => item.team === "crew")).toBe(true);
+    expect(JSON.stringify(started).includes("wache-haupt")).toBe(false);
+    expect(room.authority.inputs().every((input) => input.kind === "crew-command" && input.action === "ready")).toBe(true);
+    const before = unit(started, "kite");
+    room.authority.submit([{ kind: "resume", sessionId: "fremd", now: 1_000 }]);
+    expect(room.authority.stand("fremd").notice).toBe("Keine Wiederaufnahme.");
+    expect(unit(room.authority.stand(room.ids[0]), "kite")).toMatchObject({ x: before.x, y: before.y, hp: before.hp, ap: before.ap });
+  });
+
+  it("gibt den Runner an der Phasengrenze zurück und setzt Ressourcen nicht zurück", () => {
+    const room = openRoom();
+    room.start(60);
+    room.command(room.ids[0], wish("schritt", "kite", 1, { kind: "move", x: 1, y: 8 }));
+    const spent = unit(room.authority.stand(room.ids[0]), "kite");
+    room.authority.submit([{ kind: "leave", sessionId: room.ids[0] }]);
+    room.authority.submit([{ kind: "resume", sessionId: room.ids[0], now: 1_000 }]);
+    const returned = room.authority.stand(room.ids[0]);
+    expect(returned.notice).toBe("");
+    expect(returned.control).toBe("human");
+    expect(returned.epoch).toBe(1);
+    expect(unit(returned, "kite")).toMatchObject({ x: spent.x, y: spent.y, hp: spent.hp, ap: spent.ap, magazine: spent.magazine });
+    room.authority.submit([{ kind: "resume", sessionId: room.ids[0], now: 1_000 }]);
+    expect(room.authority.stand(room.ids[0]).notice).toBe("Dieser Runner ist bereits verbunden.");
+
+    room.authority.submit([{ kind: "leave", sessionId: room.ids[0] }]);
+    room.command(room.ids[0], wish("weg", "kite", 1, { kind: "move", x: 2, y: 8 }));
+    expect(room.authority.stand(room.ids[0]).notice).toBe("Die Verbindung ist unterbrochen.");
+    room.authority.submit([{ kind: "resume", sessionId: room.ids[0], now: 1_000 + RESUME_MS + 1 }]);
+    expect(room.authority.stand(room.ids[0]).notice).toBe("Die Wiederaufnahme ist abgelaufen.");
+    expect(unit(room.authority.stand(room.ids[1]), "kite")).toMatchObject({ x: 1, y: 8, ap: 7 });
+
+    room.authority.submit([{ kind: "expire", now: 61_000 }]);
+    const held = room.authority.stand(room.ids[0]);
+    expect(held.round).toBe(2);
+    expect(held.control).toBe("bot");
+    expect(held.epoch).toBe(2);
+    expect(held.slots[0]?.holder).toBe("bot");
+    expect(unit(held, "kite")).toMatchObject({ x: 1, y: 8, hp: spent.hp, ready: true });
+    room.command(room.ids[0], wish("alt", "kite", 2, { kind: "move", x: 2, y: 8 }));
+    expect(room.authority.stand(room.ids[0]).notice).toBe("Dieser Runner gehört dir nicht.");
+    room.command(room.ids[0], wish("wartet", "kite", 2, { kind: "move", x: 2, y: 8 }, 2));
+    expect(room.authority.stand(room.ids[0]).notice).toBe("Die Rückgabe folgt an der nächsten Crewphase.");
+
+    room.setNow(2_000);
+    room.authority.submit([{ kind: "resume", sessionId: room.ids[0], now: 2_000 }]);
+    expect(room.authority.stand(room.ids[0])).toMatchObject({ control: "bot", notice: "Die Rückgabe folgt an der nächsten Crewphase." });
+    room.authority.submit([{ kind: "expire", now: 121_000 }]);
+    const back = room.authority.stand(room.ids[0]);
+    expect(back.round).toBe(3);
+    expect(back.control).toBe("human");
+    expect(back.epoch).toBe(3);
+    expect(back.slots[0]?.holder).toBe("human");
+    expect(unit(back, "kite")).toMatchObject({ x: 1, y: 8, hp: spent.hp, ap: 8 });
+    room.command(room.ids[0], wish("weiter", "kite", 3, { kind: "move", x: 2, y: 8 }, 3));
+    expect(unit(room.authority.stand(room.ids[0]), "kite")).toMatchObject({ x: 2, y: 8, ap: 7 });
+    expect(JSON.stringify(room.authority.stand(room.ids[0])).includes("wache-haupt")).toBe(false);
   });
 });

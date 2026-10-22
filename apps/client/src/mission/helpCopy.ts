@@ -38,7 +38,7 @@ export const helpSections: readonly HelpSection[] = [
   {
     id: "verbindung",
     title: "Verbindung",
-    body: "Der Server behält den Einsatz. Diese Version nimmt einen geschlossenen Browser noch nicht wieder auf. Schließen der Hilfe verlässt die Sitzung nicht.",
+    body: "Fällt die Verbindung aus, bleiben AP, HP und Besitz des Runners erhalten. Dieselbe Sitzung kann fünf Minuten lang wieder aufgenommen werden. Ein zweiter Tab übernimmt nicht. Bleibt die Person weg, übernimmt an der nächsten Crewphasengrenze ein defensiver Bot. Er liest nur die Teamsicht, heilt sich unter der Hälfte der HP oder meldet Bereit. Die Rückgabe folgt an der nächsten Grenze. Die Koordination kann freie Lobby-Slots mit einem Bot besetzen. Schließen der Hilfe verlässt die Sitzung nicht.",
   },
 ];
 

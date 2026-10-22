@@ -27,9 +27,12 @@ export function TacticalView({
   gap,
   linked,
   pending,
+  held = false,
+  linkNote = "",
   moveMode,
   onMoveMode,
   onCommand,
+  onRetry,
   onHelp,
   onSettings,
 }: {
@@ -38,6 +41,9 @@ export function TacticalView({
   gap: boolean;
   linked: boolean;
   pending: boolean;
+  held?: boolean;
+  linkNote?: string;
+  onRetry?: () => void;
   moveMode: boolean;
   onMoveMode: () => void;
   onCommand: (action: MissionAction) => void;
@@ -98,14 +104,14 @@ export function TacticalView({
 
   const offers = actionOffers(stand, targetId);
   const own = stand.units.find((unit) => unit.id === stand.ownRunnerId) ?? null;
-  const locked = !linked || pending || stand.phase !== "crew";
+  const locked = !linked || pending || held || stand.phase !== "crew";
   const seconds = remainingSeconds(stand.deadlineAt, now);
   const preview = shotPreview(stand, stand.ownRunnerId, targetId);
   const cells = overviewCells(stand);
   const pose = poseAfterSkip(stand.units.map((unit) => ({ id: unit.id, x: unit.x, y: unit.y, hp: unit.hp })));
   const sheet = selected ?? own;
 
-  chooseRef.current = (cell) => pick(stand, cell, moveMode, linked, pending, offers.move, setSelectedId, setTargetId, setHint, onCommand, (focus) => viewRef.current?.focus(focus));
+  chooseRef.current = (cell) => pick(stand, cell, moveMode, linked && !held, pending, offers.move, setSelectedId, setTargetId, setHint, onCommand, (focus) => viewRef.current?.focus(focus));
 
   function skipAnimation() {
     setSnap(true);
@@ -126,6 +132,7 @@ export function TacticalView({
       data-move={moveMode ? "1" : "0"}
       data-gap={gap ? "1" : "0"}
       data-link={linked ? "1" : "0"}
+      data-control={held ? "bot" : "human"}
       data-pending={pending ? "1" : "0"}
       data-notice={textField(payload, "notice")}
       data-overview={overview ? "1" : "0"}
@@ -196,10 +203,16 @@ export function TacticalView({
         </div>
         <p data-preview={preview ? "1" : "0"}>{preview || "Vorschau wartet auf ein sichtbares Ziel."}</p>
         <p data-own-status={own?.status ?? ""}>
-          {linked ? "" : "Verbindung verloren. "}
+          {linkNote ? `${linkNote} ` : ""}
+          {!linked && !linkNote ? "Verbindung verloren. " : ""}
           {gap ? "Stand wird erneuert. " : ""}
           {hint || textField(payload, "notice") || "Der Server bestätigt jede Aktion."}
         </p>
+        {onRetry ? (
+          <button type="button" data-action="erneut" onClick={onRetry}>
+            Erneut verbinden
+          </button>
+        ) : null}
         {sheet ? <Sheet unit={sheet} own={sheet.id === stand.ownRunnerId} pose={pose.find((item) => item.id === sheet.id) ?? null} /> : null}
         <ul className="mission-slots" data-panel="crew">
           {stand.units

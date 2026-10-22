@@ -14,6 +14,7 @@ interface SlotStand {
   preset: string;
   ready: boolean;
   connected: boolean;
+  holder?: string;
 }
 
 interface UnitStand {
@@ -38,6 +39,8 @@ interface Stand {
   ack: number;
   roomPhase: "lobby" | "mission" | "ended";
   ownRunnerId: string;
+  epoch?: number;
+  control?: string;
   coordinator: boolean;
   round: number;
   phase: string;
@@ -65,13 +68,17 @@ interface Stand {
 }
 
 interface JoinRequest {
-  mode: "create" | "join";
+  mode: "create" | "join" | "resume";
   name: string;
   code: string;
+  token: string;
 }
+
+const RESUME_KEY = "neon-mission-resume";
 
 interface JoinedRoom {
   roomId: string;
+  reconnectionToken?: string;
   leave: () => void;
   send: (type: string, payload: unknown) => void;
   onMessage: (type: string, handler: (payload: unknown) => void) => void;
@@ -94,6 +101,7 @@ export function MissionScreen() {
   const [prefs, setPrefs] = useState(() => readPreferences(window.localStorage));
   const [panel, setPanel] = useState<"none" | "settings" | "help">("none");
   const roomRef = useRef<JoinedRoom | null>(null);
+  const releaseRef = useRef(true);
   const commandNo = useRef(0);
   if (pendingId && stand?.commandId === pendingId) setPendingId(null);
 
@@ -102,9 +110,11 @@ export function MissionScreen() {
     const handle: { cancelled: boolean; room: JoinedRoom | null } = { cancelled: false, room: null };
     const client = new Client(serverUrl);
     const pending =
-      join.mode === "create"
-        ? client.create("mission", { name: join.name })
-        : client.joinById(join.code, { name: join.name });
+      join.mode === "resume"
+        ? client.reconnect(join.token)
+        : join.mode === "create"
+          ? client.create("mission", { name: join.name })
+          : client.joinById(join.code, { name: join.name });
     void Promise.resolve(pending)
       .then((joined) => {
         const room = joined as unknown as JoinedRoom;
@@ -114,6 +124,7 @@ export function MissionScreen() {
         }
         handle.room = room;
         roomRef.current = room;
+        writeToken(room.reconnectionToken);
         setLinked(true);
         setRoomId(room.roomId);
         room.onMessage("stand", (payload) => {
@@ -152,16 +163,18 @@ export function MissionScreen() {
     return () => {
       handle.cancelled = true;
       setLinked(false);
-      handle.room?.leave();
+      if (releaseRef.current) handle.room?.leave();
+      releaseRef.current = true;
       roomRef.current = null;
     };
   }, [join, serverUrl]);
 
   function issue(action: MissionAction): void {
     const room = roomRef.current;
-    if (!room || !stand?.ownRunnerId || pendingId || !linked) return;
+    if (!room || !stand?.ownRunnerId || pendingId || !linked || stand.control === "bot") return;
     commandNo.current += 1;
     const commandId = `${stand.ownRunnerId}-${commandNo.current}`;
+    const epoch = typeof stand.epoch === "number" && stand.epoch >= 1 ? stand.epoch : 1;
     setPendingId(commandId);
     room.send("befehl", {
       protocol: PROTOCOL_VERSION,
@@ -169,13 +182,23 @@ export function MissionScreen() {
       commandId,
       round: stand.round,
       phase: "crew",
-      epoch: 1,
+      epoch,
       unitId: stand.ownRunnerId,
       action,
     });
   }
 
+  function retry(): void {
+    const token = readToken();
+    if (!token) return;
+    releaseRef.current = false;
+    setError("");
+    setJoin({ mode: "resume", name: name.trim() || "Runner", code: "", token });
+  }
+
   function leaveToGate(): void {
+    releaseRef.current = true;
+    clearToken();
     setJoin(null);
     setStand(null);
     setPendingId(null);
@@ -201,12 +224,15 @@ export function MissionScreen() {
         gap={feed.gap}
         linked={linked}
         pending={pendingId !== null}
+        held={stand.control === "bot"}
+        linkNote={linkNote(linked, stand.control, error)}
         moveMode={moveMode}
         onMoveMode={() => setMoveMode((value) => !value)}
         onCommand={(action) => {
           issue(action);
           if (action.kind === "move") setMoveMode(false);
         }}
+        onRetry={!linked && readToken() ? retry : undefined}
         onHelp={() => setPanel("help")}
         onSettings={() => setPanel("settings")}
       />
@@ -221,6 +247,7 @@ export function MissionScreen() {
         onPreset={(preset) => roomRef.current?.send("lobby", { kind: "preset", preset })}
         onReady={() => roomRef.current?.send("lobby", { kind: "bereit", ready: true })}
         onStart={() => roomRef.current?.send("lobby", { kind: "start" })}
+        onBot={() => roomRef.current?.send("lobby", { kind: "bot" })}
         onTime={(seconds) => {
           if (stand.coordinator) roomRef.current?.send("lobby", timeWish(seconds));
         }}
@@ -237,7 +264,7 @@ export function MissionScreen() {
         onSubmit={(event) => {
           event.preventDefault();
           setError("");
-          setJoin({ mode: "create", name: name.trim() || "Runner", code: "" });
+          setJoin({ mode: "create", name: name.trim() || "Runner", code: "", token: "" });
         }}
       >
         <p className="kicker">Neon Contract</p>
@@ -260,11 +287,24 @@ export function MissionScreen() {
             disabled={code.trim().length === 0 || (join !== null && !error)}
             onClick={() => {
               setError("");
-              setJoin({ mode: "join", name: name.trim() || "Runner", code: code.trim() });
+              setJoin({ mode: "join", name: name.trim() || "Runner", code: code.trim(), token: "" });
             }}
           >
             Beitreten
           </button>
+          {readToken() ? (
+            <button
+              type="button"
+              data-action="erneut"
+              disabled={join !== null && !error}
+              onClick={() => {
+                setError("");
+                setJoin({ mode: "resume", name: name.trim() || "Runner", code: "", token: readToken() ?? "" });
+              }}
+            >
+              Wieder aufnehmen
+            </button>
+          ) : null}
           <button type="button" data-action="einstellungen" onClick={() => setPanel("settings")}>
             Einstellungen
           </button>
@@ -285,6 +325,7 @@ function Lobby({
   onPreset,
   onReady,
   onStart,
+  onBot,
   onTime,
   onHelp,
   onSettings,
@@ -295,11 +336,13 @@ function Lobby({
   onPreset: (preset: "rifle" | "sidearm") => void;
   onReady: () => void;
   onStart: () => void;
+  onBot: () => void;
   onTime: (seconds: 60 | 90 | 120) => void;
   onHelp: () => void;
   onSettings: () => void;
 }) {
-  const ready = stand.slots.every((slot) => slot.connected && slot.ready && (slot.preset === "rifle" || slot.preset === "sidearm"));
+  const ready = stand.slots.every((slot) => slotPresent(slot) && slot.ready && (slot.preset === "rifle" || slot.preset === "sidearm"));
+  const openSlot = stand.slots.some((slot) => !slotPresent(slot));
   return (
     <main
       className="mission"
@@ -325,11 +368,11 @@ function Lobby({
         <h2>Crew</h2>
         <ul className="mission-slots">
           {stand.slots.map((slot) => (
-            <li key={slot.runnerId} data-slot={slot.runnerId} data-preset={slot.preset} data-ready={slot.ready ? "1" : "0"} data-connected={slot.connected ? "1" : "0"}>
+            <li key={slot.runnerId} data-slot={slot.runnerId} data-preset={slot.preset} data-ready={slot.ready ? "1" : "0"} data-connected={slot.connected ? "1" : "0"} data-holder={slot.holder ?? "offen"}>
               <span className="shape runner-mark">{mark(slot.runnerId)}</span>
               <span>
                 <strong>{slot.runnerId}</strong>
-                <small>{slot.connected ? "Mensch" : "frei"}</small>
+                <small>{slotLabel(slot)}</small>
               </span>
               <span>{slot.preset === "sidearm" ? "Pistole" : slot.preset === "rifle" ? "Gewehr" : "—"}</span>
               <span>{slot.ready ? "bereit" : "offen"}</span>
@@ -360,6 +403,11 @@ function Lobby({
           <button type="button" data-action="bereit" onClick={onReady}>
             Bereit
           </button>
+          {stand.coordinator ? (
+            <button type="button" data-action="bot" disabled={!openSlot} onClick={onBot}>
+              Bot einsetzen
+            </button>
+          ) : null}
           {stand.coordinator ? (
             <button type="button" data-action="start" disabled={!ready} onClick={onStart}>
               Mission starten
@@ -455,6 +503,49 @@ function isStand(payload: unknown): payload is Stand {
 function safeText(value: string | undefined): string | null {
   if (!value) return null;
   return /^[\p{L}\p{N} .,:!?()\-]{1,140}$/u.test(value) ? value : null;
+}
+
+function slotPresent(slot: SlotStand): boolean {
+  return slot.holder === "bot" || slot.connected;
+}
+
+function slotLabel(slot: SlotStand): string {
+  if (slot.holder === "bot") return "Bot";
+  if (slot.holder === "reserviert") return "reserviert";
+  if (slot.holder === "human" || slot.connected) return "Mensch";
+  return "frei";
+}
+
+function linkNote(linked: boolean, control: string | undefined, error: string): string {
+  if (control === "bot") return "Der Bot hält den Runner bis zur nächsten Crewphase.";
+  if (!linked) return error || "Verbindung verloren.";
+  return "";
+}
+
+function readToken(): string | null {
+  try {
+    const value = sessionStorage.getItem(RESUME_KEY);
+    return value && value.includes(":") ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeToken(token: string | undefined) {
+  if (!token || !token.includes(":")) return;
+  try {
+    sessionStorage.setItem(RESUME_KEY, token);
+  } catch {
+    // Ein Neuladen startet dann neu.
+  }
+}
+
+function clearToken() {
+  try {
+    sessionStorage.removeItem(RESUME_KEY);
+  } catch {
+    // Der Speicher ist gesperrt.
+  }
 }
 
 function ownPreset(stand: Stand): string {

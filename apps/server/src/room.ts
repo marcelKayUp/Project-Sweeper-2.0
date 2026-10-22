@@ -1,5 +1,5 @@
 import { Room, ServerError, type Client } from "@colyseus/core";
-import { createMissionAuthority, type MissionAuthority } from "./missionAuthority.ts";
+import { createMissionAuthority, RESUME_SECONDS, type MissionAuthority } from "./missionAuthority.ts";
 import { MissionSync } from "./schema.ts";
 
 export class MissionRoom extends Room<{ state: MissionSync }> {
@@ -32,6 +32,20 @@ export class MissionRoom extends Room<{ state: MissionSync }> {
     const joined = this.authority.join(client.sessionId, options?.name);
     if (!joined.ok) throw new ServerError(403, joined.rejection);
     this.publish();
+  }
+
+  override onDrop(client: Client): void {
+    const phase = this.authority.stand(client.sessionId).roomPhase;
+    this.authority.submit([{ kind: "leave", sessionId: client.sessionId }]);
+    this.publish();
+    if (phase === "lobby") return;
+    void this.allowReconnection(client, RESUME_SECONDS).catch(() => undefined);
+  }
+
+  override onReconnect(client: Client): void {
+    this.authority.submit([{ kind: "resume", sessionId: client.sessionId, now: Date.now() }]);
+    this.publish();
+    this.arm();
   }
 
   override onLeave(client: Client): void {

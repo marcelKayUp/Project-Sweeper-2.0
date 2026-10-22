@@ -8,6 +8,8 @@ import { MissionRoom } from "./room.ts";
 
 interface WireRoom {
   roomId: string;
+  reconnectionToken: string;
+  reconnection: { enabled: boolean };
   leave(consented?: boolean): Promise<number>;
   send(type: string, payload?: unknown): void;
   onMessage(type: string, handler: (payload: unknown) => void): void;
@@ -193,4 +195,53 @@ describe("Ghost-Floor-Raum", () => {
       await Promise.all(rooms.map((room) => room.leave()));
     }
   }, 20000);
+
+  it("nimmt dieselbe Sitzung nach dem Ausfall wieder auf und lässt einen zweiten Tab nicht hinein", async () => {
+    const client = new Client(url);
+    const creator = (await client.create("mission", { name: "Kite" })) as unknown as WireRoom;
+    const stands = collect(creator);
+    let active: WireRoom = creator;
+    try {
+      for (let index = 0; index < 3; index += 1) creator.send("lobby", { kind: "bot" });
+      await until(stands, (stand) => stand.slots.filter((slot) => slot.holder === "bot").length === 3, "bots");
+      creator.send("lobby", { kind: "preset", preset: "sidearm" });
+      creator.send("lobby", { kind: "bereit", ready: true });
+      await until(stands, (stand) => stand.slots.every((slot) => slot.ready), "bereit");
+      creator.send("lobby", { kind: "start" });
+      const started = await until(stands, (stand) => stand.roomPhase === "mission" && stand.units.some((unit) => unit.id === "voss" && unit.ready), "gestartet");
+      expect(started.units.find((unit) => unit.id === "kite")).toMatchObject({ ap: 8, ready: false });
+      expect(started.units.every((unit) => unit.team === "crew")).toBe(true);
+      creator.send("befehl", wish("schritt", "kite", 1, { kind: "move", x: 1, y: 8 }));
+      const moved = await until(stands, (stand) => stand.commandId === "schritt" && stand.notice === "", "schritt");
+      const kite = moved.units.find((unit) => unit.id === "kite");
+      expect(kite).toMatchObject({ x: 1, y: 8, ap: 7 });
+
+      creator.reconnection.enabled = false;
+      const token = creator.reconnectionToken;
+      await creator.leave(false);
+      active = await reopen(client, token);
+      const restored = collect(active);
+      active.send("hallo", {});
+      const back = await until(restored, (stand) => stand.ownRunnerId === "kite" && stand.roomPhase === "mission", "wieder");
+      expect(back.control).toBe("human");
+      expect(back.epoch).toBe(1);
+      expect(back.units.find((unit) => unit.id === "kite")).toMatchObject({ x: 1, y: 8, ap: 7, hp: kite?.hp });
+      await expect(client.joinById(active.roomId, { name: "Zweit" })).rejects.toThrow();
+    } finally {
+      await active.leave().catch(() => undefined);
+    }
+  }, 20000);
 });
+
+async function reopen(client: Client, token: string): Promise<WireRoom> {
+  let error: unknown;
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    try {
+      return (await client.reconnect(token)) as unknown as WireRoom;
+    } catch (caught) {
+      error = caught;
+      await new Promise((resolve) => setTimeout(resolve, 25));
+    }
+  }
+  throw error;
+}
