@@ -1,6 +1,6 @@
 {
     "schema":  1,
-    "builtAt":  "2026-10-22T22:59:13Z",
+    "builtAt":  "2026-10-22T23:10:53Z",
     "usage":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Tag MOD-03",
     "rebuild":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Build",
     "note":  "Abruf der gekennzeichneten Planungsabschnitte. Bei Abweichungen gilt das Quelldokument.",
@@ -36,11 +36,11 @@
                     },
                     {
                         "path":  "docs/ARBEITSPAKETE.md",
-                        "sha256":  "1cdc0c5b5385c3186b5a3da1239355563ccdc384a3674cb8f47c6cfb16e1f3e7"
+                        "sha256":  "bdbb043e81a570ecec3c9875e88145d7e8a5fd1ef9116f3ed10999588854da5e"
                     },
                     {
                         "path":  "docs/ENTWICKLUNGSPLAN.md",
-                        "sha256":  "6240ac291b829124bd340fa36488aff433937aece1058d0091dcdf8053db58af"
+                        "sha256":  "b79c10f8671711ff031ad72ab79ad6a63bcc99c205b5b9651587bbe92d4b9ae7"
                     },
                     {
                         "path":  "docs/decisions/0001-modulare-planung.md",
@@ -320,7 +320,6 @@
                                                   "docs/ARBEITSPAKETE.md#AP-13",
                                                   "docs/ARBEITSPAKETE.md#AP-14",
                                                   "docs/ARBEITSPAKETE.md#AP-15",
-                                                  "docs/ENTWICKLUNGSPLAN.md#M3",
                                                   "docs/MVP_MODULE.md#MOD-08"
                                               ]
                            },
@@ -374,6 +373,7 @@
                                            ],
                                "references":  [
                                                   "docs/ARBEITSPAKETE.md#AP-10",
+                                                  "docs/ARBEITSPAKETE.md#AP-13",
                                                   "docs/ARBEITSPAKETE.md#AP-16",
                                                   "docs/ARBEITSPAKETE.md#AP-21",
                                                   "docs/MVP_MODULE.md#MOD-07",
@@ -394,7 +394,6 @@
                                                   "docs/ARBEITSPAKETE.md#AP-18",
                                                   "docs/ARBEITSPAKETE.md#AP-19",
                                                   "docs/ARBEITSPAKETE.md#AP-20",
-                                                  "docs/ENTWICKLUNGSPLAN.md#M3",
                                                   "docs/MVP_GENERATOREN.md#GEN-12",
                                                   "docs/MVP_MODULE.md#MOD-12"
                                               ]

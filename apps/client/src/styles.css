@@ -179,6 +179,36 @@ body,
   opacity: 0.45;
 }
 
+.mission[data-scale="115"] .mission-card p,
+.mission[data-scale="115"] .mission-card li,
+.mission[data-scale="115"] .mission-side p,
+.mission[data-scale="115"] .mission-side li,
+.mission[data-scale="115"] button {
+  font-size: 18px;
+}
+
+.mission[data-scale="125"] .mission-card p,
+.mission[data-scale="125"] .mission-card li,
+.mission[data-scale="125"] .mission-side p,
+.mission[data-scale="125"] .mission-side li,
+.mission[data-scale="125"] button {
+  font-size: 21px;
+}
+
+.mission[data-contrast="1"] button,
+.mission[data-contrast="1"] .mission-slots li,
+.mission[data-contrast="1"] .cell {
+  border-color: #f6f3ec;
+}
+
+.mission button {
+  transition: background 160ms linear;
+}
+
+.mission[data-motion="reduce"] button {
+  transition: none;
+}
+
 .mission button:focus-visible,
 .mission input:focus-visible,
 .cell:focus-visible {

@@ -128,6 +128,8 @@ Die zugehörigen Einträge in [MVP_MODULE.md](MVP_MODULE.md), [MVP_SCREENS.md](M
 
 **Abnahme:** vier getrennte Sessions erreichen gemeinsam den Missionsstart; Konfigurationsänderungen invalidieren die richtigen Bereitmeldungen. Falls der UI-Rahmen unerwartet groß wird: Zugang/Settings und Lobby als getrennte Unteraufträge liefern.
 
+**Stand 23.10.2026:** `?stueck=mission` zeigt Menü, privaten Zugang, Lobby, Ausrüstung, Briefing, Bereit und Start. Die Koordination sendet 60, 90 oder 120 Sekunden; der Server hebt die Bereitmeldungen auf und erhöht die Fassung. Einstellungen für Schriftgröße, Kontrast und Bewegung bleiben lokal und enthalten keine Spielwerte. Hilfe beschreibt den vorhandenen Stand und hält die Frist nicht an. Ein Browserdurchlauf hat die gespeicherte Skalierung, die Frist 60 und die aufgehobene Bereitmeldung gesehen. Freie Slots mit einem Bot zu besetzen bleibt offen, weil die erlaubte Bot-Sicht und die Übernahme an der Phasengrenze zu AP-15 gehören. Die menschliche Abnahme bleibt offen.
+
 ### AP-14 · Spielansicht und taktische Übersicht
 
 **Größe:** M · **Nach:** AP-09/12/13 · **Screens:** S06 minimal, S09/S10, S12.

@@ -10,6 +10,9 @@ import {
   GHOST_WALLS,
   GHOST_WIDTH,
 } from "@neon/sim/layout";
+import { timeWish } from "./helpCopy.ts";
+import { HelpPanel, SettingsPanel } from "./PrepPanels.tsx";
+import { preferenceMarks, readPreferences, writePreferences, type UiPreferences } from "./preferences.ts";
 import { createTeamFeed, takeBatch, takeSnapshot, type TeamBatch } from "./teamStore.ts";
 
 const WALLS = new Set(GHOST_WALLS.map((cell) => key(cell.x, cell.y)));
@@ -57,6 +60,7 @@ interface Stand {
   resultRound: number;
   notice: string;
   phaseSeconds?: number;
+  configRevision?: number;
   lastEventId?: number;
   width?: number;
   height?: number;
@@ -95,6 +99,8 @@ export function MissionScreen() {
   const [stand, setStand] = useState<Stand | null>(null);
   const [feed, setFeed] = useState(createTeamFeed());
   const [moveMode, setMoveMode] = useState(false);
+  const [prefs, setPrefs] = useState(() => readPreferences(window.localStorage));
+  const [panel, setPanel] = useState<"none" | "settings" | "help">("none");
   const roomRef = useRef<JoinedRoom | null>(null);
   const commandNo = useRef(0);
 
@@ -154,14 +160,24 @@ export function MissionScreen() {
     };
   }, [join, serverUrl]);
 
+  function updatePrefs(next: UiPreferences): void {
+    setPrefs(writePreferences(window.localStorage, next));
+  }
+
+  if (panel === "settings") return <SettingsPanel prefs={prefs} onChange={updatePrefs} onBack={() => setPanel("none")} />;
+  if (panel === "help") return <HelpPanel prefs={prefs} onBack={() => setPanel("none")} />;
+
   if (stand?.outcome === "sieg" || stand?.outcome === "niederlage") {
-    return <Result stand={stand} />;
+    return <Result stand={stand} prefs={prefs} onHelp={() => setPanel("help")} onSettings={() => setPanel("settings")} />;
   }
   if (stand?.roomPhase === "mission") {
     return (
       <Battle
         stand={stand}
+        prefs={prefs}
         gap={feed.gap}
+        onHelp={() => setPanel("help")}
+        onSettings={() => setPanel("settings")}
         moveMode={moveMode}
         onMoveMode={() => setMoveMode((value) => !value)}
         onCell={(x, y) => {
@@ -177,15 +193,21 @@ export function MissionScreen() {
     return (
       <Lobby
         stand={stand}
+        prefs={prefs}
         roomId={roomId}
         onPreset={(preset) => roomRef.current?.send("lobby", { kind: "preset", preset })}
         onReady={() => roomRef.current?.send("lobby", { kind: "bereit", ready: true })}
         onStart={() => roomRef.current?.send("lobby", { kind: "start" })}
+        onTime={(seconds) => {
+          if (stand.coordinator) roomRef.current?.send("lobby", timeWish(seconds));
+        }}
+        onHelp={() => setPanel("help")}
+        onSettings={() => setPanel("settings")}
       />
     );
   }
   return (
-    <main className="mission mission-gate">
+    <main className="mission mission-gate" data-menu="1" {...preferenceMarks(prefs)}>
       <form
         className="mission-card"
         data-screen="zugang"
@@ -220,6 +242,12 @@ export function MissionScreen() {
           >
             Beitreten
           </button>
+          <button type="button" data-action="einstellungen" onClick={() => setPanel("settings")}>
+            Einstellungen
+          </button>
+          <button type="button" data-action="hilfe" onClick={() => setPanel("help")}>
+            Hilfe
+          </button>
         </div>
         <p data-error={error ? "1" : "0"}>{error || (join ? "Verbinden …" : "Privater Raum, vier Plätze.")}</p>
       </form>
@@ -229,16 +257,24 @@ export function MissionScreen() {
 
 function Lobby({
   stand,
+  prefs,
   roomId,
   onPreset,
   onReady,
   onStart,
+  onTime,
+  onHelp,
+  onSettings,
 }: {
   stand: Stand;
+  prefs: UiPreferences;
   roomId: string;
   onPreset: (preset: "rifle" | "sidearm") => void;
   onReady: () => void;
   onStart: () => void;
+  onTime: (seconds: 60 | 90 | 120) => void;
+  onHelp: () => void;
+  onSettings: () => void;
 }) {
   const ready = stand.slots.every((slot) => slot.connected && slot.ready && (slot.preset === "rifle" || slot.preset === "sidearm"));
   return (
@@ -251,9 +287,9 @@ function Lobby({
       data-ack={stand.ack}
       data-coordinator={stand.coordinator ? "1" : "0"}
       data-notice={stand.notice}
+      {...preferenceMarks(prefs)}
     >
-      <section className="mission-card">
-        <p className="kicker">Briefing</p>
+      <section className="mission-card" data-panel="briefing">
         <h1>Ghost Floor</h1>
         <p>Auftrag: das Terminal mit zwei Interaktionen zu je 4 AP kopieren. Danach extrahiert sich mindestens ein handlungsfähiger Runner für 1 AP, und kein handlungsfähiger Runner bleibt auf der Karte.</p>
         <p>Niederlage, wenn kein handlungsfähiger Runner mehr im Einsatz ist und der Auftrag offen bleibt, oder nach 24 vollständig beendeten Runden.</p>
@@ -270,14 +306,28 @@ function Lobby({
               <span className="shape runner-mark">{mark(slot.runnerId)}</span>
               <span>
                 <strong>{slot.runnerId}</strong>
-                <small>{slot.connected ? slot.name || "verbunden" : "frei"}</small>
+                <small>{slot.connected ? "Mensch" : "frei"}</small>
               </span>
               <span>{slot.preset === "sidearm" ? "Pistole" : slot.preset === "rifle" ? "Gewehr" : "—"}</span>
               <span>{slot.ready ? "bereit" : "offen"}</span>
             </li>
           ))}
         </ul>
-        <div className="mission-actions">
+        <div className="mission-actions" data-panel="zeit">
+          {([60, 90, 120] as const).map((seconds) => (
+            <button
+              key={seconds}
+              type="button"
+              data-action={`zeit-${seconds}`}
+              aria-pressed={crewSeconds(stand) === seconds}
+              disabled={!stand.coordinator || crewSeconds(stand) === seconds}
+              onClick={() => onTime(seconds)}
+            >
+              {seconds} s
+            </button>
+          ))}
+        </div>
+        <div className="mission-actions" data-panel="ausruestung">
           <button type="button" data-preset="rifle" aria-pressed={ownPreset(stand) === "rifle"} onClick={() => onPreset("rifle")}>
             Gewehr
           </button>
@@ -295,7 +345,15 @@ function Lobby({
             <p>Die Koordination startet die Mission.</p>
           )}
         </div>
-        <p>Gewehr: Reichweite 10, Magazin 6, zwei Reserve. Pistole: Reichweite 6, Magazin 8, zwei Reserve. Schuss 3 AP, Treffer 2 HP.</p>
+        <p>Gewehr: Reichweite 10, Magazin 6, zwei Reserve. Pistole: Reichweite 6, Magazin 8, zwei Reserve. Ein Medkit heilt 2 HP. Schuss 3 AP, Treffer 2 HP. Fassung {stand.configRevision ?? 1}.</p>
+        <div className="mission-actions">
+          <button type="button" data-action="einstellungen" onClick={onSettings}>
+            Einstellungen
+          </button>
+          <button type="button" data-action="hilfe" onClick={onHelp}>
+            Hilfe
+          </button>
+        </div>
         <p data-notice={stand.notice}>{stand.notice}</p>
       </section>
     </main>
@@ -304,18 +362,24 @@ function Lobby({
 
 function Battle({
   stand,
+  prefs,
   gap,
   moveMode,
   onMoveMode,
   onCell,
   onCommand,
+  onHelp,
+  onSettings,
 }: {
   stand: Stand;
+  prefs: UiPreferences;
   gap: boolean;
   moveMode: boolean;
   onMoveMode: () => void;
   onCell: (x: number, y: number) => void;
   onCommand: (action: { kind: "interact"; targetId: "terminal" } | { kind: "extract" } | { kind: "ready" }) => void;
+  onHelp: () => void;
+  onSettings: () => void;
 }) {
   const own = stand.units.find((unit) => unit.id === stand.ownRunnerId);
   const occupied = new Map(stand.units.filter((unit) => unit.status !== "extracted").map((unit) => [key(unit.x, unit.y), unit]));
@@ -335,6 +399,7 @@ function Battle({
       data-move={moveMode ? "1" : "0"}
       data-gap={gap ? "1" : "0"}
       data-notice={stand.notice}
+      {...preferenceMarks(prefs)}
     >
       <div className="mission-map" role="grid" aria-label="Ghost Floor">
         {rows(height).map((y) =>
@@ -377,6 +442,12 @@ function Battle({
           <button type="button" data-action="bereit" onClick={() => onCommand({ kind: "ready" })} disabled={stand.phase !== "crew"}>
             Bereit
           </button>
+          <button type="button" data-action="einstellungen" onClick={onSettings}>
+            Einstellungen
+          </button>
+          <button type="button" data-action="hilfe" onClick={onHelp}>
+            Hilfe
+          </button>
         </div>
         <p>Schritt 1 AP. Terminal 4 AP, orthogonal daneben. Extraktion 1 AP in der Zone am Westrand.</p>
         <p data-notice={stand.notice}>{gap ? "Stand wird erneuert." : stand.notice || "Der Server bestätigt jede Aktion."}</p>
@@ -395,10 +466,20 @@ function Battle({
   );
 }
 
-function Result({ stand }: { stand: Stand }) {
+function Result({
+  stand,
+  prefs,
+  onHelp,
+  onSettings,
+}: {
+  stand: Stand;
+  prefs: UiPreferences;
+  onHelp: () => void;
+  onSettings: () => void;
+}) {
   const success = stand.outcome === "sieg";
   return (
-    <main className="mission mission-gate" data-screen="ergebnis" data-mission-result={stand.outcome} data-result-round={stand.resultRound} data-own-runner={stand.ownRunnerId} data-ack={stand.ack}>
+    <main className="mission mission-gate" data-screen="ergebnis" data-mission-result={stand.outcome} data-result-round={stand.resultRound} data-own-runner={stand.ownRunnerId} data-ack={stand.ack} {...preferenceMarks(prefs)}>
       <section className="mission-card">
         <p className="kicker">Ghost Floor</p>
         <h1>{success ? "Erfolg" : "Niederlage"}</h1>
@@ -415,6 +496,14 @@ function Result({ stand }: { stand: Stand }) {
               </li>
             ))}
         </ul>
+        <div className="mission-actions">
+          <button type="button" data-action="einstellungen" onClick={onSettings}>
+            Einstellungen
+          </button>
+          <button type="button" data-action="hilfe" onClick={onHelp}>
+            Hilfe
+          </button>
+        </div>
       </section>
     </main>
   );
