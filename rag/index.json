@@ -1,6 +1,6 @@
 {
     "schema":  1,
-    "builtAt":  "2026-10-22T22:44:06Z",
+    "builtAt":  "2026-10-22T22:45:51Z",
     "usage":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Tag MOD-03",
     "rebuild":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Build",
     "note":  "Abruf der gekennzeichneten Planungsabschnitte. Bei Abweichungen gilt das Quelldokument.",
@@ -40,7 +40,7 @@
                     },
                     {
                         "path":  "docs/ENTWICKLUNGSPLAN.md",
-                        "sha256":  "d23eb6ee83ab275962f840d2f48a2b26fe081777eb08a480a3b6db330b3fb725"
+                        "sha256":  "2af21512d2ef487c5316fa945e5b81f453d7c088240187cf22591e2c8f2794ef"
                     },
                     {
                         "path":  "docs/decisions/0001-modulare-planung.md",
