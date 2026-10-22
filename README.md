@@ -21,6 +21,37 @@ GitHub zeigt Kontaktbögen und die Terminalvorschau ebenfalls als Bilder. Die da
 - [Figuren](artifacts/asset-inspection/contact-characters.png), [Waffen](artifacts/asset-inspection/contact-weapons.png), [Bauteile](artifacts/asset-inspection/contact-components.png)
 - [Terminals](artifacts/terminals/contact-sheet.png), [Werkstattbild](artifacts/terminals/workshop.png)
 
+## Pakete
+
+Node.js 24.14.0 und pnpm 12.14.0 über Corepack. Im Projektordner einmal `corepack pnpm install`.
+
+- [`@neon/sim`](packages/sim): deterministische Regeln. Keine Grafik und kein Netzwerk.
+- [`@neon/generator`](packages/generator): semantischer Gebäudegenerator.
+- [`@neon/characters`](packages/characters): Figurenrezepte und Prüfung, ohne Renderer.
+- [`@neon/server`](apps/server): Colyseus-Spielserver.
+- [`@neon/client`](apps/client): React-Oberfläche, Babylon-Taktikansicht und die älteren Phaser-Stücke.
+
+`corepack pnpm test` prüft Simulation, Generator, Figuren und Server. `corepack pnpm typecheck` prüft zusätzlich den Client. Blender wird nur für Figurenexport, Terminals und Assetprüfung gebraucht.
+
+## Einstieg für Agenten
+
+Regeln stehen in [AGENTS.md](AGENTS.md). Vor einer Aufgabe diese README, [ARCHITEKTUR.md](docs/ARCHITEKTUR.md), [PROTOTYP.md](docs/PROTOTYP.md) und den betroffenen Meilenstein in [ENTWICKLUNGSPLAN.md](docs/ENTWICKLUNGSPLAN.md) lesen.
+
+Der Tag-Index liegt in `rag/`. Abruf aus dem Projektordner:
+
+```powershell
+powershell -NoProfile -File tools/rag/NeonRag.ps1 -Tag MOD-03
+```
+
+Kennungen sind `MOD-01`–`MOD-15`, `S01`–`S23`, `GEN-00`–`GEN-12` samt Teilkennungen wie `GEN-02A`, `AP-01`–`AP-36`, `M0`–`M7` und Entscheidungen als `DEC-` plus Dateinummer, zum Beispiel `DEC-0024`. Mehrere Kennungen gehen in denselben Aufruf: `-Tag MOD-03,AP-05` oder `-Tag S01-S04`. Freitext sucht `-Query Deckung`, `-List` zeigt die Kennungen. Der Treffer enthält Planabschnitt, MVP-Mindestvertrag und Verweise. Spätere Stufen erweitern v0.1 nicht automatisch. Weicht der Index vom Quelldokument ab, gilt das Quelldokument. Meldet das Skript veraltete Quellen, neu bauen mit:
+
+```powershell
+powershell -NoProfile -File tools/rag/NeonRag.ps1 -Build
+```
+
+`corepack pnpm rag` startet dasselbe Skript.
+
+
 **Projektstand, 21.10.2026:** Regel-/Grafikstücke und ein lokaler Missionsprototyp sind vorhanden. Neu ist ein semantischer Gebäudegenerator mit separater Werkstatt. Die übrigen Planungsdokumente bleiben Vorschläge; eine vollständige menschliche MVP-Abnahme ist damit nicht belegt.
 
 Version 5 ergänzt ein echtes Flurnetz mit eigenen Raumtüren und kurzen, geometrisch geprüften Sanitärwegen: CEO höchstens 16 Raster-Schritte über Assistenz/Flur. Die Werkstatt zeichnet den ausgewählten WC-Weg. Flächenstufen: 28×24, 32×28 und 32×32; Belegung bleibt unverändert. Siehe [0014](docs/decisions/0014-flurerschliessung-und-sanitaerwege.md).

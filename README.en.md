@@ -21,6 +21,36 @@ GitHub also shows the contact sheets and the terminal preview as images. The acc
 - [Characters](artifacts/asset-inspection/contact-characters.png), [weapons](artifacts/asset-inspection/contact-weapons.png), [components](artifacts/asset-inspection/contact-components.png)
 - [Terminals](artifacts/terminals/contact-sheet.png), [workshop image](artifacts/terminals/workshop.png)
 
+## Packages
+
+Node.js 24.14.0 and pnpm 12.14.0 through Corepack. In the project folder, run `corepack pnpm install` once.
+
+- [`@neon/sim`](packages/sim): deterministic rules. No graphics and no networking.
+- [`@neon/generator`](packages/generator): semantic building generator.
+- [`@neon/characters`](packages/characters): character recipes and checks, without a renderer.
+- [`@neon/server`](apps/server): Colyseus game server.
+- [`@neon/client`](apps/client): React interface, Babylon tactical view, and the older Phaser pieces.
+
+`corepack pnpm test` checks simulation, generator, characters, and server. `corepack pnpm typecheck` also checks the client. Blender is needed only for character export, terminals, and asset inspection.
+
+## Entry point for agents
+
+The rules are in [AGENTS.md](AGENTS.md). Before a task, read this README, [ARCHITEKTUR.md](docs/ARCHITEKTUR.md), [PROTOTYP.md](docs/PROTOTYP.md), and the affected milestone in [ENTWICKLUNGSPLAN.md](docs/ENTWICKLUNGSPLAN.md).
+
+The tag index lives in `rag/`. From the project folder:
+
+```powershell
+powershell -NoProfile -File tools/rag/NeonRag.ps1 -Tag MOD-03
+```
+
+Tags are `MOD-01`–`MOD-15`, `S01`–`S23`, `GEN-00`–`GEN-12` including partial tags such as `GEN-02A`, `AP-01`–`AP-36`, `M0`–`M7`, and decisions as `DEC-` plus the file number, for example `DEC-0024`. Several tags go in one call: `-Tag MOD-03,AP-05` or `-Tag S01-S04`. Free text uses `-Query Deckung`, and `-List` shows the tags. A hit contains the plan section, the MVP minimum contract, and references. Later stages do not automatically extend v0.1. If the index and a source document disagree, the source document wins. If the script reports stale sources, rebuild with:
+
+```powershell
+powershell -NoProfile -File tools/rag/NeonRag.ps1 -Build
+```
+
+`corepack pnpm rag` starts the same script.
+
 **Project status, 21 October 2026:** Rule and graphics pieces and a local mission prototype are in place. New is a semantic building generator with its own workshop. The other planning documents remain proposals; a complete human MVP acceptance is not established by them.
 
 Version 5 adds a real corridor network with its own room doors and short, geometrically checked sanitary routes: the CEO is at most 16 grid steps away via assistant and corridor. The workshop draws the selected restroom route. Area steps: 28×24, 32×28, and 32×32; occupancy stays unchanged. See [0014](docs/decisions/0014-flurerschliessung-und-sanitaerwege.md).
