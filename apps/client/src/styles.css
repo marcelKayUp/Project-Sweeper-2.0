@@ -250,6 +250,11 @@ body,
   font-weight: 700;
 }
 
+.kind-fog {
+  background: #07090d;
+  color: transparent;
+}
+
 .mission-slots {
   list-style: none;
   margin: 0;

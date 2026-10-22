@@ -108,7 +108,7 @@ Die zugehörigen Einträge in [MVP_MODULE.md](MVP_MODULE.md), [MVP_SCREENS.md](M
 
 **Abnahme:** fremde Runner, doppelte Befehle, veraltete Phase und konkurrierender Start werden korrekt behandelt.
 
-**Stand 23.10.2026:** Nachweis in `@neon/server` und `@neon/sim`. Der Raum führt Lobby und Befehle seriell aus. Die Verbindung bestimmt den Runner; eine mitgeschickte Spieler-ID verleiht kein Recht. Dieselbe Command-ID liefert dasselbe Ergebnis ohne zweite Wirkung. Eine falsche Epoche oder ein fremder Runner wird abgelehnt. Die Crewfrist startet bei 90 Sekunden; die Koordination kann vor dem Start 60 oder 120 setzen und hebt damit offene Bereitmeldungen auf. Der Ablauf wird als `close-team-phase` in dieselbe Eingabereihenfolge gelegt. Ungenutzte AP verfallen mit dem bestehenden Phasenende. Neue Befehle sind auf 20 je Session und Sekunde begrenzt, wie schon im Rasterraum; Wiederholungen zählen nicht erneut. Die Epoche beginnt bei 1 und wechselt noch nicht. Die vorhandene Missionsansicht zeigt die gesetzte Frist, hat aber noch keinen Wähler. Teamsicht, Reconnect, defensive Übernahme und die Vier-Browser-Prüfung bleiben offen. Regelversion 2, Protokollversion 1.
+**Stand 23.10.2026:** Nachweis in `@neon/server` und `@neon/sim`. Der Raum führt Lobby und Befehle seriell aus. Die Verbindung bestimmt den Runner; eine mitgeschickte Spieler-ID verleiht kein Recht. Dieselbe Command-ID liefert dasselbe Ergebnis ohne zweite Wirkung. Eine falsche Epoche oder ein fremder Runner wird abgelehnt. Die Crewfrist startet bei 90 Sekunden; die Koordination kann vor dem Start 60 oder 120 setzen und hebt damit offene Bereitmeldungen auf. Der Ablauf wird als `close-team-phase` in dieselbe Eingabereihenfolge gelegt. Ungenutzte AP verfallen mit dem bestehenden Phasenende. Neue Befehle sind auf 20 je Session und Sekunde begrenzt, wie schon im Rasterraum; Wiederholungen zählen nicht erneut. Die Epoche beginnt bei 1 und wechselt noch nicht. Die vorhandene Missionsansicht zeigt die gesetzte Frist, hat aber noch keinen Wähler. Die Teamsicht ist in AP-12 nachgewiesen. Reconnect, defensive Übernahme und die Vier-Browser-Prüfung bleiben offen. Regelversion 2, Protokollversion 1.
 
 ### AP-12 · TeamView und Synchronisierung
 
@@ -117,6 +117,8 @@ Die zugehörigen Einträge in [MVP_MODULE.md](MVP_MODULE.md), [MVP_SCREENS.md](M
 **Lieferung:** gefilterte Projektion, Snapshots, Ereignis-Batches, Bestätigungen und Client-Store.
 
 **Abnahme:** keine geheimen Gegnerdaten im Client; fehlende Ereignisse werden über Snapshot behoben.
+
+**Stand 23.10.2026:** Nachweis in `@neon/sim`, `@neon/server` und `apps/client/src/mission/teamStore.test.ts`. Bewegungen und Schüsse fehlen in der Ausgabe, sobald eine beteiligte Einheit nicht in der Teamsicht ist. Eine Ablehnung, die eine versteckte Gegner-ID enthält, wird zu „Aktion abgelehnt.“ Jede Session erhält denselben gefilterten Stand und nur neue, fortlaufend nummerierte Ereignisse. Dieselbe Command-ID hängt kein zweites Ereignis an. Der Client verändert keine Trefferpunkte anhand von Ereignissen. Fehlt eine Nummer, fordert er den Stand mit `hallo` erneut an; der Snapshot ersetzt Anzeige, Cursor und Animation und behält den zugewiesenen Runner. Bekannte Zellen kommen aus diesem Stand. Regelversion 2, Protokollversion 1.
 
 ### AP-13 · Zugang und Vorbereitung
 

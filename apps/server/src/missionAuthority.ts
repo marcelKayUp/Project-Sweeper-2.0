@@ -2,8 +2,10 @@ import {
   applyCommand,
   closeTeamPhase,
   createMissionState,
+  projectEvents,
   projectTeam,
   type CrewCommand,
+  type MissionEvent,
   type MissionSpec,
   type MissionState,
   type PublicUnit,
@@ -73,6 +75,16 @@ export interface AuthorityStand {
   readonly phaseSeconds: PhaseSeconds;
   readonly configRevision: number;
   readonly deadlineAt: number;
+  readonly lastEventId: number;
+  readonly width: number;
+  readonly height: number;
+  readonly knownCells: readonly { readonly x: number; readonly y: number }[];
+  readonly visibleCells: readonly { readonly x: number; readonly y: number }[];
+  readonly walls: readonly { readonly x: number; readonly y: number }[];
+  readonly lowCover: readonly { readonly id: string; readonly x: number; readonly y: number; readonly protects: string }[];
+  readonly terminal: { readonly id: string; readonly x: number; readonly y: number } | null;
+  readonly door: { readonly id: string; readonly x: number; readonly y: number } | null;
+  readonly extraction: readonly { readonly x: number; readonly y: number }[];
   readonly slots: readonly AuthoritySlot[];
   readonly units: readonly PublicUnit[];
 }
@@ -90,6 +102,14 @@ export interface SharedMission {
   readonly ack: number;
   readonly phaseSeconds: PhaseSeconds;
   readonly configRevision: number;
+  readonly lastEventId: number;
+}
+
+export interface TeamBatch {
+  readonly fromId: number;
+  readonly toId: number;
+  readonly targetRevision: number;
+  readonly events: readonly (MissionEvent & { readonly id: number })[];
 }
 
 interface Seat {
@@ -119,6 +139,8 @@ export interface MissionAuthority {
   stand(sessionId: string): AuthorityStand;
   deadlineAt(): number | null;
   inputs(): readonly RoomInput[];
+  events(): TeamBatch["events"];
+  latestBatch(): TeamBatch | null;
   shared(): SharedMission;
 }
 
@@ -128,6 +150,7 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
   const views = new Map<string, SessionNote>();
   const rates = new Map<string, number[]>();
   const inputs: RoomInput[] = [];
+  const teamEvents: TeamBatch["events"][number][] = [];
   const queue: AuthorityEvent[] = [];
   let sim: MissionState | null = null;
   let spec: MissionSpec | null = null;
@@ -136,6 +159,7 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
   let openedAt: number | null = null;
   let ack = 0;
   let draining = false;
+  let batch: TeamBatch | null = null;
 
   function join(sessionId: string, name: unknown): JoinResult {
     drain();
@@ -156,8 +180,18 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
   }
 
   function submit(events: readonly AuthorityEvent[]): void {
+    batch = null;
+    const before = teamEvents.length;
     queue.push(...events);
     drain();
+    if (teamEvents.length > before && sim) {
+      const fresh = teamEvents.slice(before);
+      const first = fresh[0];
+      const last = fresh[fresh.length - 1];
+      if (first && last) {
+        batch = { fromId: first.id, toId: last.id, targetRevision: sim.revision, events: fresh };
+      }
+    }
   }
 
   function drain(): void {
@@ -319,6 +353,7 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
     sim = step.state;
     if (sim.result || sim.phase !== "crew") openedAt = null;
     else if (sim.round !== previousRound) openedAt = clock.now();
+    record(step.events);
     inputs.push({
       kind: "crew-command",
       commandId: parsed.command.commandId,
@@ -340,16 +375,30 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
     sim = step.state;
     inputs.push({ kind: "close-team-phase", round });
     openedAt = sim.result || sim.phase !== "crew" ? null : now;
+    record(step.events);
     return true;
   }
 
-  function remember(sessionId: string, commandId: string, rejection: string | null): void {
-    const revision = sim?.revision ?? 0;
-    const bucket = seen.get(sessionId) ?? new Map<string, Receipt>();
-    bucket.set(commandId, { rejection, revision });
-    seen.set(sessionId, bucket);
-    note(sessionId, commandId, rejection, revision);
+  function record(events: readonly MissionEvent[]): void {
+    if (!sim || !spec) return;
+    const allowed = projectEvents(events, projectTeam(sim, spec));
+    for (const event of allowed) teamEvents.push({ ...event, id: teamEvents.length + 1 });
   }
+
+function remember(sessionId: string, commandId: string, rejection: string | null): void {
+  const safe = rejection === null ? null : scrubHiddenNotice(rejection, hiddenEnemyIds());
+  const revision = sim?.revision ?? 0;
+  const bucket = seen.get(sessionId) ?? new Map<string, Receipt>();
+  bucket.set(commandId, { rejection: safe, revision });
+  seen.set(sessionId, bucket);
+  note(sessionId, commandId, safe, revision);
+}
+
+function hiddenEnemyIds(): readonly string[] {
+  if (!sim || !spec) return [];
+  const visible = new Set(projectTeam(sim, spec).units.map((unit) => unit.id));
+  return sim.units.filter((unit) => unit.team === "enemy" && !visible.has(unit.id)).map((unit) => unit.id);
+}
 
   function recall(sessionId: string, commandId: string): boolean {
     const prior = seen.get(sessionId)?.get(commandId);
@@ -414,6 +463,16 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
       phaseSeconds,
       configRevision,
       deadlineAt: due ?? 0,
+      lastEventId: teamEvents.length,
+      width: view?.width ?? 0,
+      height: view?.height ?? 0,
+      knownCells: view?.knownCells.map(copyPoint) ?? [],
+      visibleCells: view?.visibleCells.map(copyPoint) ?? [],
+      walls: view?.walls.map(copyPoint) ?? [],
+      lowCover: view?.lowCover.map((cover) => ({ id: cover.id, x: cover.x, y: cover.y, protects: cover.protects })) ?? [],
+      terminal: view?.terminal ? { id: view.terminal.id, x: view.terminal.x, y: view.terminal.y } : null,
+      door: view?.door ? { id: view.door.id, x: view.door.x, y: view.door.y } : null,
+      extraction: view?.extraction.map(copyPoint) ?? [],
       slots: ORDER.map((runnerId) => {
         const found = [...seats.values()].find((item) => item.runnerId === runnerId);
         return {
@@ -443,6 +502,7 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
       ack: sample.ack,
       phaseSeconds: sample.phaseSeconds,
       configRevision: sample.configRevision,
+      lastEventId: sample.lastEventId,
     };
   }
 
@@ -455,12 +515,23 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
     stand,
     deadlineAt,
     inputs: () => inputs.slice(),
+    events: () => teamEvents.slice(),
+    latestBatch: () => batch,
     shared,
   };
 }
 
 function emptyNote(): SessionNote {
   return { notice: "", commandId: "", commandRevision: 0 };
+}
+
+function copyPoint(cell: { readonly x: number; readonly y: number }): { readonly x: number; readonly y: number } {
+  return { x: cell.x, y: cell.y };
+}
+
+export function scrubHiddenNotice(notice: string, hiddenIds: readonly string[]): string {
+  if (hiddenIds.some((id) => id.length > 0 && notice.includes(id))) return "Aktion abgelehnt.";
+  return notice;
 }
 
 function toCrew(unitId: string, action: CommandMessage["action"]): CrewCommand {

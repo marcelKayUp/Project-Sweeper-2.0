@@ -147,12 +147,18 @@ describe("Ghost-Floor-Raum", () => {
       expect(remaining).toBeGreaterThan(50_000);
       expect(remaining).toBeLessThanOrEqual(60_000);
       expect(started.units.every((unit) => unit.team === "crew")).toBe(true);
+      expect(started.lastEventId).toBe(0);
+      expect(JSON.stringify(started).includes("wache-haupt")).toBe(false);
 
       creator.send("lobby", { kind: "start" });
       const second = await until(stands[0]!, (stand) => stand.notice === "Die Mission läuft bereits.", "zweiter-start");
       expect(second.round).toBe(1);
       expect(second.revision).toBe(started.revision);
 
+      const batches: unknown[] = [];
+      rooms[1]?.onMessage("ereignisse", (payload) => {
+        batches.push(payload);
+      });
       const step = wish("schritt", "voss", 1, { kind: "move", x: 1, y: 8 });
       rooms[1]?.send("befehl", step);
       const moved = await until(stands[1]!, (stand) => stand.commandId === "schritt" && stand.notice === "", "schritt");
@@ -161,6 +167,9 @@ describe("Ghost-Floor-Raum", () => {
       const replay = await until(stands[1]!, (stand) => stand.commandId === "schritt" && stand.ack > moved.ack, "doppelt");
       expect(replay.units.find((unit) => unit.id === "voss")).toMatchObject({ x: 1, y: 8, ap: 7 });
       expect(replay.revision).toBe(moved.revision);
+      expect(replay.lastEventId).toBe(moved.lastEventId);
+      expect(JSON.stringify(batches).includes("wache-haupt")).toBe(false);
+      expect(batches.length).toBeGreaterThan(0);
 
       creator.send("befehl", wish("fremd", "voss", 1, { kind: "move", x: 1, y: 7 }));
       const foreign = await until(stands[0]!, (stand) => stand.commandId === "fremd", "fremd");

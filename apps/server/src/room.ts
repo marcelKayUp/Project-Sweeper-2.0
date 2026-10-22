@@ -61,7 +61,11 @@ export class MissionRoom extends Room<{ state: MissionSync }> {
     this.state.ack = shared.ack;
     this.state.phaseSeconds = shared.phaseSeconds;
     this.state.configRevision = shared.configRevision;
+    this.state.lastEventId = shared.lastEventId;
     for (const client of this.clients) client.send("stand", this.authority.stand(client.sessionId));
+    const events = this.authority.latestBatch();
+    if (!events) return;
+    for (const client of this.clients) client.send("ereignisse", events);
   }
 
   private arm(): void {

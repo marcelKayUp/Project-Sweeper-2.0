@@ -89,7 +89,7 @@ Arbeit:
 
 **Menschlicher Test:** Mindestens zwei Viererpartien, dabei Verständlichkeit und Wartezeit aufzeichnen. Wenn derzeit keine Gruppe verfügbar ist, technische Abnahme abschließen und die menschliche Prüfung ausdrücklich offenlassen. Kein Agent darf Spaß oder reale Spielzeit aus Botläufen als bestätigt ausgeben.
 
-**Stand 23.10.2026:** AP-11 ist im Server umgesetzt: vier Slots, Besitz, deduplizierte Command-IDs, Controller-Epochen und die Frist 60/90/120 als protokollierte Eingabe `close-team-phase`. AP-12 bis AP-16 und die menschliche Abnahme bleiben offen.
+**Stand 23.10.2026:** AP-11 und AP-12 sind umgesetzt. Der Server gibt nur die Teamsicht aus: versteckte Einheiten, Zellen und Schussereignisse bleiben im Raum. Der Client zeichnet bekannte Zellen aus diesem Stand und holt bei einer Ereignislücke denselben Stand nach. AP-13 bis AP-16 und die menschliche Abnahme bleiben offen.
 
 **Entscheidung danach:** Ist die Kernmission verständlich und erzeugen Deckung, AP und Extraktion Entscheidungen? Falls nein, diese Regeln überarbeiten, bevor weiterer Inhalt hinzukommt.
 

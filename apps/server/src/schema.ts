@@ -15,6 +15,7 @@ export const MissionSync = schema(
     ack: t.number().default(0),
     phaseSeconds: t.number().default(90),
     configRevision: t.number().default(1),
+    lastEventId: t.number().default(0),
   },
   "MissionSync",
 );

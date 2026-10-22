@@ -7,6 +7,7 @@ import {
   closeTeamPhase,
   createMissionState,
   missionChecksum,
+  projectEvents,
   projectTeam,
   SIGHT_RANGE,
   type CrewCommand,
@@ -58,6 +59,19 @@ describe("Ghost Floor", () => {
     expect(again.state).toBe(finished.state);
     expect(missionChecksum(start)).toBe(before);
     expect(projectTeam(start, floor).units.map((item) => item.id)).toEqual(["kite", "nera", "sol", "voss"]);
+    const hidden = projectEvents(
+      [
+        { type: "UnitMoved", unitId: "kite", x: 1, y: 8 },
+        { type: "UnitMoved", unitId: "wache-haupt", x: 8, y: 8 },
+        { type: "ShotResolved", shooterId: "wache-haupt", targetId: "kite", status: "hit", damage: 2, reaction: true },
+        { type: "PhaseChanged", phase: "crew", round: 2 },
+      ],
+      projectTeam(start, floor),
+    );
+    expect(hidden).toEqual([
+      { type: "UnitMoved", unitId: "kite", x: 1, y: 8 },
+      { type: "PhaseChanged", phase: "crew", round: 2 },
+    ]);
   });
 
   it("verliert, wenn alle extrahieren, bevor die Daten kopiert sind", () => {

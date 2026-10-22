@@ -10,6 +10,7 @@ import {
   GHOST_WALLS,
   GHOST_WIDTH,
 } from "@neon/sim/layout";
+import { createTeamFeed, takeBatch, takeSnapshot, type TeamBatch } from "./teamStore.ts";
 
 const WALLS = new Set(GHOST_WALLS.map((cell) => key(cell.x, cell.y)));
 const EXTRACTION = new Set(GHOST_EXTRACTION.map((cell) => key(cell.x, cell.y)));
@@ -56,6 +57,15 @@ interface Stand {
   resultRound: number;
   notice: string;
   phaseSeconds?: number;
+  lastEventId?: number;
+  width?: number;
+  height?: number;
+  knownCells?: Array<{ x: number; y: number }>;
+  walls?: Array<{ x: number; y: number }>;
+  lowCover?: Array<{ x: number; y: number }>;
+  terminal?: { x: number; y: number } | null;
+  door?: { x: number; y: number } | null;
+  extraction?: Array<{ x: number; y: number }>;
   slots: SlotStand[];
   units: UnitStand[];
 }
@@ -83,6 +93,7 @@ export function MissionScreen() {
   const [join, setJoin] = useState<JoinRequest | null>(null);
   const [roomId, setRoomId] = useState("");
   const [stand, setStand] = useState<Stand | null>(null);
+  const [feed, setFeed] = useState(createTeamFeed());
   const [moveMode, setMoveMode] = useState(false);
   const roomRef = useRef<JoinedRoom | null>(null);
   const commandNo = useRef(0);
@@ -106,7 +117,24 @@ export function MissionScreen() {
         roomRef.current = room;
         setRoomId(room.roomId);
         room.onMessage("stand", (payload) => {
-          if (isStand(payload)) setStand(payload);
+          if (!isStand(payload)) return;
+          setStand(payload);
+          setFeed((current) =>
+            takeSnapshot(current, {
+              revision: payload.revision,
+              lastEventId: typeof payload.lastEventId === "number" ? payload.lastEventId : current.lastEventId,
+              ownRunnerId: payload.ownRunnerId,
+              units: payload.units.map((unit) => ({ id: unit.id, hp: unit.hp })),
+            }),
+          );
+        });
+        room.onMessage("ereignisse", (payload) => {
+          if (!isBatch(payload)) return;
+          setFeed((current) => {
+            const next = takeBatch(current, payload);
+            if (next.gap && !current.gap) room.send("hallo", {});
+            return next;
+          });
         });
         room.send("hallo", {});
         room.onError((_code, message) => {
@@ -133,6 +161,7 @@ export function MissionScreen() {
     return (
       <Battle
         stand={stand}
+        gap={feed.gap}
         moveMode={moveMode}
         onMoveMode={() => setMoveMode((value) => !value)}
         onCell={(x, y) => {
@@ -275,12 +304,14 @@ function Lobby({
 
 function Battle({
   stand,
+  gap,
   moveMode,
   onMoveMode,
   onCell,
   onCommand,
 }: {
   stand: Stand;
+  gap: boolean;
   moveMode: boolean;
   onMoveMode: () => void;
   onCell: (x: number, y: number) => void;
@@ -288,6 +319,9 @@ function Battle({
 }) {
   const own = stand.units.find((unit) => unit.id === stand.ownRunnerId);
   const occupied = new Map(stand.units.filter((unit) => unit.status !== "extracted").map((unit) => [key(unit.x, unit.y), unit]));
+  const seen = seenMap(stand);
+  const width = seen?.width ?? GHOST_WIDTH;
+  const height = seen?.height ?? GHOST_HEIGHT;
   return (
     <main
       className="mission"
@@ -299,14 +333,15 @@ function Battle({
       data-ack={stand.ack}
       data-own-runner={stand.ownRunnerId}
       data-move={moveMode ? "1" : "0"}
+      data-gap={gap ? "1" : "0"}
       data-notice={stand.notice}
     >
       <div className="mission-map" role="grid" aria-label="Ghost Floor">
-        {rows().map((y) =>
-          columns().map((x) => {
+        {rows(height).map((y) =>
+          columns(width).map((x) => {
             const id = key(x, y);
             const unit = occupied.get(id);
-            const kind = cellKind(id, unit, stand.doorOpen);
+            const kind = seen ? seenKind(seen, id, unit, stand.doorOpen) : cellKind(id, unit, stand.doorOpen);
             return (
               <button key={id} type="button" role="gridcell" data-cell={id} data-kind={kind} className={`cell kind-${kind}`} onClick={() => onCell(x, y)}>
                 {cellLabel(kind, unit)}
@@ -328,7 +363,12 @@ function Battle({
           <button type="button" data-action="bewegen" aria-pressed={moveMode} onClick={onMoveMode} disabled={stand.phase !== "crew"}>
             Bewegen
           </button>
-          <button type="button" data-action="terminal" onClick={() => onCommand({ kind: "interact", targetId: "terminal" })} disabled={stand.phase !== "crew"}>
+          <button
+            type="button"
+            data-action="terminal"
+            onClick={() => onCommand({ kind: "interact", targetId: "terminal" })}
+            disabled={stand.phase !== "crew" || (seen !== null && stand.terminal == null)}
+          >
             Terminal kopieren
           </button>
           <button type="button" data-action="extraktion" onClick={() => onCommand({ kind: "extract" })} disabled={stand.phase !== "crew"}>
@@ -339,7 +379,7 @@ function Battle({
           </button>
         </div>
         <p>Schritt 1 AP. Terminal 4 AP, orthogonal daneben. Extraktion 1 AP in der Zone am Westrand.</p>
-        <p data-notice={stand.notice}>{stand.notice || "Der Server bestätigt jede Aktion."}</p>
+        <p data-notice={stand.notice}>{gap ? "Stand wird erneuert." : stand.notice || "Der Server bestätigt jede Aktion."}</p>
         <ul className="mission-slots">
           {stand.units
             .filter((unit) => unit.team === "crew")
@@ -486,10 +526,53 @@ function key(x: number, y: number): string {
   return `${x},${y}`;
 }
 
-function columns(): number[] {
-  return Array.from({ length: GHOST_WIDTH }, (_item, index) => index);
+function seenMap(stand: Stand): SeenMap | null {
+  if (!Array.isArray(stand.knownCells)) return null;
+  return {
+    known: new Set(stand.knownCells.map((cell) => key(cell.x, cell.y))),
+    walls: new Set((stand.walls ?? []).map((cell) => key(cell.x, cell.y))),
+    cover: new Set((stand.lowCover ?? []).map((cell) => key(cell.x, cell.y))),
+    extraction: new Set((stand.extraction ?? []).map((cell) => key(cell.x, cell.y))),
+    terminal: stand.terminal ? key(stand.terminal.x, stand.terminal.y) : "",
+    door: stand.door ? key(stand.door.x, stand.door.y) : "",
+    width: stand.width && stand.width > 0 ? stand.width : GHOST_WIDTH,
+    height: stand.height && stand.height > 0 ? stand.height : GHOST_HEIGHT,
+  };
 }
 
-function rows(): number[] {
-  return Array.from({ length: GHOST_HEIGHT }, (_item, index) => index);
+function seenKind(seen: SeenMap, id: string, unit: UnitStand | undefined, doorOpen: boolean): string {
+  if (!seen.known.has(id)) return "fog";
+  if (unit?.team === "crew") return "runner";
+  if (unit?.team === "enemy") return "enemy";
+  if (id === seen.terminal) return "terminal";
+  if (id === seen.door) return doorOpen ? "door-open" : "door";
+  if (seen.walls.has(id)) return "wall";
+  if (seen.extraction.has(id)) return "extract";
+  if (seen.cover.has(id)) return "cover";
+  return "floor";
+}
+
+function isBatch(payload: unknown): payload is TeamBatch {
+  if (!payload || typeof payload !== "object") return false;
+  const value = payload as Partial<TeamBatch>;
+  return typeof value.fromId === "number" && typeof value.toId === "number" && typeof value.targetRevision === "number" && Array.isArray(value.events);
+}
+
+interface SeenMap {
+  readonly known: ReadonlySet<string>;
+  readonly walls: ReadonlySet<string>;
+  readonly cover: ReadonlySet<string>;
+  readonly extraction: ReadonlySet<string>;
+  readonly terminal: string;
+  readonly door: string;
+  readonly width: number;
+  readonly height: number;
+}
+
+function columns(length: number): number[] {
+  return Array.from({ length }, (_item, index) => index);
+}
+
+function rows(length: number): number[] {
+  return Array.from({ length }, (_item, index) => index);
 }

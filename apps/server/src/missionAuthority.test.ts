@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   COMMANDS_PER_SECOND,
   createMissionAuthority,
+  scrubHiddenNotice,
   type AuthorityStand,
   type PhaseSeconds,
 } from "./missionAuthority.ts";
@@ -177,6 +178,10 @@ describe("Missionsraum", () => {
     expect(room.authority.stand(room.ids[0]).notice).toBe("Die Phase ist vorbei.");
     expect(unit(room.authority.stand(room.ids[0]), "kite")).toMatchObject({ x: 1, y: 8, ap: 7 });
     expect(room.authority.inputs().map((input) => input.kind === "crew-command" && input.commandId)).toEqual(["schritt"]);
+    const revealed = JSON.stringify(room.authority.stand(room.ids[0]));
+    expect(revealed.includes("wache-haupt")).toBe(false);
+    expect(room.authority.stand(room.ids[0]).knownCells.some((cell) => cell.x === 19 && cell.y === 19)).toBe(false);
+    expect(room.authority.events().map((event) => event.type === "UnitMoved" && event.unitId)).toEqual(["kite"]);
   });
 
   it("löst zwei Züge auf dasselbe Feld in der Eingabereihenfolge auf", () => {
@@ -310,5 +315,28 @@ describe("Missionsraum", () => {
     room.setNow(2_001);
     room.command(room.ids[0], wish("flut", "kite", 1, { kind: "move", x: 1, y: 8 }));
     expect(unit(room.authority.stand(room.ids[0]), "kite")).toMatchObject({ x: 1, y: 8, ap: 7 });
+  });
+
+  it("zeigt beiden Sessions dieselbe erlaubte Sicht und keine versteckten Gegnerereignisse", () => {
+    const room = openRoom();
+    room.start();
+    const kite = room.authority.stand(room.ids[0]);
+    const voss = room.authority.stand(room.ids[1]);
+    expect(kite.units).toEqual(voss.units);
+    expect(kite.knownCells).toEqual(voss.knownCells);
+    expect(kite.walls).toEqual(voss.walls);
+    expect(kite.units.every((item) => item.team === "crew")).toBe(true);
+    expect(JSON.stringify(kite).includes("patrol")).toBe(false);
+    expect(Object.hasOwn(kite, "contacts")).toBe(false);
+    room.authority.submit([{ kind: "expire", now: 91_000 }]);
+    const allowed = new Set(room.authority.stand(room.ids[0]).units.map((item) => item.id));
+    const names = room.authority.events().flatMap((event) => {
+      if (event.type === "UnitMoved") return [event.unitId];
+      if (event.type === "ShotResolved") return [event.shooterId, event.targetId];
+      return [];
+    });
+    expect(names.every((id) => allowed.has(id))).toBe(true);
+    expect(scrubHiddenNotice("Ziel wache-haupt bei 12,4", ["wache-haupt"])).toBe("Aktion abgelehnt.");
+    expect(scrubHiddenNotice("Kein Sichtkontakt.", ["wache-haupt"])).toBe("Kein Sichtkontakt.");
   });
 });

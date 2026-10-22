@@ -1,6 +1,6 @@
 {
     "schema":  1,
-    "builtAt":  "2026-10-22T22:45:51Z",
+    "builtAt":  "2026-10-22T22:59:13Z",
     "usage":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Tag MOD-03",
     "rebuild":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Build",
     "note":  "Abruf der gekennzeichneten Planungsabschnitte. Bei Abweichungen gilt das Quelldokument.",
@@ -36,11 +36,11 @@
                     },
                     {
                         "path":  "docs/ARBEITSPAKETE.md",
-                        "sha256":  "6daadc06b42266d70c6a711300c1d74e0eff49a783f64ca53a9aa069242f1281"
+                        "sha256":  "1cdc0c5b5385c3186b5a3da1239355563ccdc384a3674cb8f47c6cfb16e1f3e7"
                     },
                     {
                         "path":  "docs/ENTWICKLUNGSPLAN.md",
-                        "sha256":  "2af21512d2ef487c5316fa945e5b81f453d7c088240187cf22591e2c8f2794ef"
+                        "sha256":  "6240ac291b829124bd340fa36488aff433937aece1058d0091dcdf8053db58af"
                     },
                     {
                         "path":  "docs/decisions/0001-modulare-planung.md",
@@ -316,6 +316,7 @@
                                                "docs/ARBEITSPAKETE.md#AP-12"
                                            ],
                                "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-11",
                                                   "docs/ARBEITSPAKETE.md#AP-13",
                                                   "docs/ARBEITSPAKETE.md#AP-14",
                                                   "docs/ARBEITSPAKETE.md#AP-15",
@@ -333,6 +334,7 @@
                                "references":  [
                                                   "docs/ARBEITSPAKETE.md#AP-14",
                                                   "docs/ARBEITSPAKETE.md#AP-16",
+                                                  "docs/ENTWICKLUNGSPLAN.md#M3",
                                                   "docs/MVP_GENERATOREN.md#GEN-09",
                                                   "docs/MVP_MODULE.md#MOD-09",
                                                   "docs/MVP_SCREENS.md#S01",

@@ -307,6 +307,17 @@ export function projectTeam(state: MissionState, spec: MissionSpec): TeamView {
   };
 }
 
+export function projectEvents(events: readonly MissionEvent[], view: TeamView): MissionEvent[] {
+  const visible = new Set(view.units.map((unit) => unit.id));
+  const allowed: MissionEvent[] = [];
+  for (const event of events) {
+    if (event.type === "UnitMoved" && !visible.has(event.unitId)) continue;
+    if (event.type === "ShotResolved" && (!visible.has(event.shooterId) || !visible.has(event.targetId))) continue;
+    allowed.push(event);
+  }
+  return allowed;
+}
+
 export function missionChecksum(state: MissionState): string {
   return stableHash(canonical(state));
 }

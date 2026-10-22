@@ -39,6 +39,7 @@ export {
   closeTeamPhase,
   createMissionState,
   missionChecksum,
+  projectEvents,
   projectTeam,
   stableHash,
 } from "./mission.ts";
