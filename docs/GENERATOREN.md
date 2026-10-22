@@ -237,6 +237,8 @@ Teilmodule:
 
 **Planungsstand 21.10.2026:** Die [Asset-Pipeline-Recherche](ASSET_PIPELINE.md) vergleicht vorhandene Repos und schlägt lokale parametrisierte Blender-Produktion mit optionalem MCP-Zugang für Codex, Claude Code oder Cursor vor. Nur Planung, keine Installation oder Implementierungsfreigabe; siehe [0015](decisions/0015-agentengesteuerte-asset-pipeline.md). Prop-/Umgebungspilot und geriggte Figuren sind getrennte Abnahmeschritte. Der folgende Mindestumfang bleibt bestehen.
 
+**Neuronale Hilfsmodelle (22.10.2026):** [0025](decisions/0025-neuronale-hilfsmodelle-als-eingabe.md) lässt Ergebnisse neuronaler Modelle nur als eingefrorene, gehashte Eingabe zu. Umgesetzt ist die optionale SAM-2-Objektfreistellung für die Bildanalyse. Generierte Netze sind keine Lieferassets.
+
 **Eingaben:** Artvorgaben, Rolle/Fraktion, Format-/Animationsanforderungen und bestehender Assetkatalog.
 
 **Teilmodule:** Produktionsauftrag; Blend-Quelle und GLB-Export im Maßstab 1,0; optional externe Bildgenerierung für Portraits; Auswahl/Nachbearbeitung; Maßstabs- und Clip-Prüfung; Modulzuordnung für Boden, Wand, Tür, Deckung und Treppe; Rechte-/Quellenmanifest.

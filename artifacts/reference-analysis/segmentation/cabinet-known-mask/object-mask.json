@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "cabinet-segmentation",
+  "segmentationSpec": "artifacts/reference-analysis/segmentation/cabinet-segmentation.json",
+  "segmentationSpecSha256": "cfb5cd49a6501f4f36f53ae1a7661a894859b31013a75d2f70913ffbfffca827",
+  "reference": "artifacts/reference-analysis/segmentation/cabinet-reference.png",
+  "referenceSha256": "1d8273ffc4e58ad968d2e56f59cac4400e34ceb3c2b8ac3cab075375a1708396",
+  "prompt": {
+    "model": "sam2.1-hiera-tiny",
+    "origin": "controlled-fixture",
+    "box": [
+      90,
+      28,
+      538,
+      368
+    ],
+    "points": [
+      [
+        300,
+        210
+      ]
+    ],
+    "pointLabels": [
+      1
+    ]
+  },
+  "model": {
+    "id": "controlled-fixture-mask"
+  },
+  "result": {
+    "maskPixels": 125490,
+    "removedSpecklePixels": 0,
+    "holePixels": 0,
+    "polygonVertices": 86,
+    "polygonEpsilonPixels": 0.75,
+    "polygonIoU": 0.999116,
+    "maskSha256": "6bf9da3d5a38eb84e7280d7d4277e67dbe7ec09ce1b475db6155b5f486dc84f6"
+  },
+  "analysisSpec": "artifacts/reference-analysis/segmentation/cabinet-known-mask/analysis-spec.json",
+  "limitations": [
+    "The mask only replaces the hand-drawn object outline.",
+    "Mask edges are image regions, not reviewed geometric boundaries.",
+    "Surface seeds, classes and symmetry stay agent inputs."
+  ]
+}

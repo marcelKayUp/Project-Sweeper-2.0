@@ -1,5 +1,6 @@
 node_modules/
 .venv-assets/
+.venv-sam/
 __pycache__/
 dist/
 dist-generator/

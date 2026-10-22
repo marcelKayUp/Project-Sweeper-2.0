@@ -16,20 +16,28 @@ from analyze import CATALOG, ROOT, load, measure, sha, symmetry_plan
 from semantics import mirror_allowed
 
 
-def main():
-    folder=ROOT/"artifacts/reference-analysis/checks"
-    folder.mkdir(parents=True,exist_ok=True)
+CABINET_FACES=[[(100,70),(205,35),(530,65),(435,100)],[(435,100),(530,65),(525,322),(432,360)],[(100,70),(435,100),(432,360),(102,330)]]
+
+
+def cabinet_fixture(folder):
+    """Controlled reference with a known object region; shared with check_segmentation.py."""
     reference=folder/"cabinet-reference.png"
     image=Image.new("RGB",(640,400),"#263440"); draw=ImageDraw.Draw(image)
-    truth=[[100,70],[435,100],[432,360],[102,330]]
-    draw.polygon([(100,70),(205,35),(530,65),(435,100)],fill="#ccd3d7",outline="#17212a",width=3)
-    draw.polygon([(435,100),(530,65),(525,322),(432,360)],fill="#7e8b95",outline="#17212a",width=3)
-    draw.polygon([tuple(x) for x in truth],fill="#aeb9c2",outline="#17212a",width=3)
+    for face,fill in zip(CABINET_FACES,("#ccd3d7","#7e8b95","#aeb9c2")):
+        draw.polygon(face,fill=fill,outline="#17212a",width=3)
     # High-contrast paint and shadow features lie on the same geometric front face.
     draw.polygon([(220,83),(272,87),(269,344),(218,340)],fill="#287cba")
     draw.polygon([(108,231),(429,259),(429,283),(108,255)],fill="#6b7780")
     draw.rectangle((400,202,415,243),fill="#17212a") # one asymmetric handle
     image.save(reference)
+    return reference
+
+
+def main():
+    folder=ROOT/"artifacts/reference-analysis/checks"
+    folder.mkdir(parents=True,exist_ok=True)
+    reference=cabinet_fixture(folder)
+    truth=[list(x) for x in CABINET_FACES[2]]
     coarse=[[106,76],[428,107],[425,353],[108,324]]
     spec={"schemaVersion":1,"id":"cabinet-fixture","reference":str(reference.relative_to(ROOT)),
           "objectRegion":[[98,69],[204,33],[532,64],[528,324],[434,363],[100,333]],

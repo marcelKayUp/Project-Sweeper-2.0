@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "reference-truck-sam",
+  "sourceRecipe": "assets/specs/vehicles/reference-truck.json",
+  "objectSegmentation": {"model":"sam2.1-hiera-tiny","origin":"agent-image-assessment","box":[72,14,532,312],"points":[[200,105],[470,270]],"pointLabels":[1,1]},
+  "classification": {"category":"vehicle","subtype":"articulated-truck","construction":"manufactured-mixed","origin":"agent-image-assessment"},
+  "symmetryHypotheses": [
+    {"scope":"main-body","type":"bilateral","plane":"XZ","status":"assumed","origin":"class-prior","useForGeometry":true,"exceptions":["markings","attachments"],"reason":"Opposite side is hidden; symmetric body is an explicit modeling assumption."},
+    {"scope":"wheels","type":"repetition","status":"assumed","origin":"agent-image-assessment","useForGeometry":true,"exceptions":[],"reason":"Repeated wheel parts; radii remain separately parameterized."}
+  ],
+  "surfaceRequests": [
+    {"id":"cargo-side","seed":[200,105],"shapeHypothesis":"planar","boundary":{"sourceProfile":"sideInset","kind":"crease","review":"accepted"},"binding":{"targetProfile":"sideInset"}},
+    {"id":"cargo-roof","seed":[315,35],"shapeHypothesis":"planar"},
+    {"id":"cargo-front","seed":[393,104],"shapeHypothesis":"mixed"},
+    {"id":"tractor-top","seed":[422,225],"shapeHypothesis":"curved"},
+    {"id":"tractor-front","seed":[470,270],"shapeHypothesis":"planar"},
+    {"id":"side-fairing","seed":[174,204],"shapeHypothesis":"planar"}
+  ]
+}

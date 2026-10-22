@@ -1,0 +1,7 @@
+torch==2.14.1
+torchvision==0.29.1
+numpy==2.3.5
+Pillow==12.3.0
+opencv-python-headless==5.0.0.93
+tqdm==4.70.1
+setuptools==84.2.1

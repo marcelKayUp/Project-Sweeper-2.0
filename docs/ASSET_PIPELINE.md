@@ -10,6 +10,8 @@ Stand: 21.10.2026 · **Recherche und Planungsvorschlag, keine Implementierungsfr
 
 **Begrenzter Folgeauftrag vom 22.10.2026:** Ein lokaler Prüfer analysiert den vom Nutzer bereitgestellten Assetordner mit Hash-Cache, Rig-/Clipvergleich und Kontaktbögen. Quellen bleiben unverändert. Dieser beauftragte Analyseschritt ist unter [ASSET_INSPECTION.md](ASSET_INSPECTION.md) dokumentiert und keine allgemeine Produktions- oder Spielintegrationsfreigabe.
 
+**Neuronale Hilfsmodelle vom 22.10.2026:** [0025](decisions/0025-neuronale-hilfsmodelle-als-eingabe.md) erlaubt Ergebnisse neuronaler Modelle nur als eingefrorene, gehashte Eingabe, nie als Lieferasset. Umgesetzt ist die optionale [SAM-2-Objektfreistellung](IMAGE_REFERENCE_ANALYSIS.md#7-optionale-objektfreistellung-mit-sam-2) für die Bildanalyse. TRELLIS als Formvorlage wartet auf Hardwareprüfung und eigenen Auftrag. Recherche siehe Abschnitt 2.
+
 **Folgeauftrag zum Figuren-Teil:** Der später am selben Tag ausdrücklich beauftragte TypeScript-Character-Creator wird separat unter [CHARACTER_CREATOR.md](CHARACTER_CREATOR.md) und [0016](decisions/0016-typescript-character-creator.md) umgesetzt. Das ist keine pauschale Freigabe der hier geplanten gesamten Asset-Pipeline. Für diesen Pilot ergänzen TypeScript-Rezept und JSON die Blend-Quellenregel.
 
 Zuordnung: GEN-10, GEN-02G, GEN-11, MOD-10/15; Platzhalterbezug AP-04/14. Ergänzt [0007](decisions/0007-babylon-taktikansicht.md) und [0013](decisions/0013-isometrische-fortsetzung.md). Die vorgeschlagene Richtung steht in [0015](decisions/0015-agentengesteuerte-asset-pipeline.md). v0.1 und die offene M7-Abnahme werden dadurch nicht erweitert.
@@ -55,6 +57,20 @@ Gesucht wurden Blender-MCP-Brücken, Agenten-CLI/Skills, prozedurale Low-Poly-We
 **[princeton-vl/infinigen](https://github.com/princeton-vl/infinigen)** — BSD-3-Clause laut Repository-Metadaten. Umfangreiche prozedurale Szenen und Innenräume mit fotorealistischem Schwerpunkt. Referenz für Generatorarchitektur; für unser kleines stilisiertes Modulkit voraussichtlich zu großer Integrationsumfang. [README](https://github.com/princeton-vl/infinigen/blob/main/README.md), [Lizenz](https://github.com/princeton-vl/infinigen/blob/main/LICENSE).
 
 **[zorrobyte/asset-studio](https://github.com/zorrobyte/asset-studio)** — 0BSD für den Pipelinecode. Vollständig lokaler Text-zu-3D-Ansatz mit CLI/MCP, Qwen-Image, Pixal3D/TRELLIS.2 und Blender-Nachbearbeitung. Die Referenzinstallation setzt Windows 11, RTX 5090 mit 32 GB, Docker/WSL2 und ungefähr 120 GB freien Speicher voraus. Kein Abo nötig, aber erhebliche Hardware- und Gewichtsanforderungen. Modelllizenzen sind separat; eine angebotene Bildmodellvariante ist ausdrücklich nicht kommerziell. Ohne Prüfung der vorhandenen Hardware kein Basiskandidat. Die veröffentlichten Laufzeiten sind Messungen des Autors, keine Werte dieses Projekts. [README](https://github.com/zorrobyte/asset-studio/blob/master/README.md), [Lizenz](https://github.com/zorrobyte/asset-studio/blob/master/LICENSE).
+
+### Neuronale Bild- und 3D-Modelle (Recherche 22.10.2026)
+
+Anlass war die Frage nach SAM 2, TRELLIS/InstantMesh und Blender. Geprüft wurden Primärquellen; eigene Läufe gab es nur für SAM 2 (siehe [0025](decisions/0025-neuronale-hilfsmodelle-als-eingabe.md)).
+
+- **[SAM 2.1](https://github.com/facebookresearch/sam2)**: Apache-2.0 für Code und Checkpoints, kleinste Variante 38,9 Mio. Parameter. Arbeitet mit Rahmen- und Punktprompts sowie Verfolgung über Bildfolgen. Das Repo empfiehlt eine GPU und unter Windows WSL. Übernommen für die Objektfreistellung.
+- **[TRELLIS](https://github.com/microsoft/TRELLIS)**: Code und Gewichte unter MIT. Braucht eine NVIDIA-GPU mit mindestens 16 GB und ist nur unter Linux getestet. Der GLB-Export entfernt standardmäßig 95 % der Flächen und backt eine 1024er-Textur über [nvdiffrast](https://github.com/NVlabs/nvdiffrast/blob/main/LICENSE.txt), dessen Lizenz nur nichtkommerzielle Nutzung erlaubt. Kandidat als Formvorlage.
+- **[TRELLIS.2](https://github.com/microsoft/TRELLIS.2)**: MIT, verlangt mindestens 24 GB GPU-Speicher. Der Export zielt auf 1.000.000 Flächen und 4096er-Texturen. Zurückgestellt.
+- **[InstantMesh](https://github.com/TencentARC/InstantMesh)**: Code unter Apache-2.0. Baut auf [Zero123++](https://github.com/SUDO-AI-3D/zero123plus) auf, dessen Gewichte unter CC-BY-NC 4.0 stehen. Nicht übernommen.
+- **[SAM 3](https://github.com/facebookresearch/sam3) / [SAM 3D Objects](https://github.com/facebookresearch/sam-3d-objects)**: Textprompts beziehungsweise Bild plus Maske zu 3D. Beide stehen unter der eigenen SAM License; SAM-3-Checkpoints gibt es nur auf Anfrage. Die SAM-3D-Demo exportiert Gaussian Splats statt eines Netzes. Zurückgestellt.
+- **[MeshAnything V2](https://github.com/buaacyw/MeshAnythingV2)**: Erzeugt aus dichten Netzen Netze im Stil von Hand gebauter Modelle mit höchstens 1.600 Flächen, bei etwa 8 GB GPU-Speicher. Ein mögliches späteres Bindeglied zu Low-Poly; die Lizenz ist noch nicht geprüft.
+- **Hunyuan3D 2.x**: Die Lizenz gilt nicht in der EU, im Vereinigten Königreich und in Südkorea. Für dieses Projekt ausgeschlossen.
+
+Generierte Netze verletzen ohne Nacharbeit den Familienvertrag: keine benannten Teile, keine Materialrollen, eingebranntes Licht, keine Budgets. Deshalb bleiben sie Eingaben.
 
 ### Recherchestand festhalten
 
@@ -198,7 +214,7 @@ Integration prüft fehlendes Asset mit sichtbarem Rückfall, vier Kamerawinkel, 
 
 **Optionaler Vergleich vor Schritt 2:** dasselbe Terminal-Briefing mit Blender und lokalem Kiln bauen. Tatsächliche Einrichtungsprobleme, Anzahl nötiger Korrekturen, Änderbarkeit, gemessene Budgets und Spielkamera-Bilder vergleichen. Keine vorab erfundenen Qualitäts- oder Zeitwerte. Kiln nur als Hauptweg übernehmen, wenn der Nutzen den zusätzlichen Quellformatvertrag rechtfertigt; dann 0007 ausdrücklich ergänzen.
 
-Nicht-Ziele des Einstiegs: lokales Diffusionsmodell, bezahlte Text-/Bild-zu-3D-Dienste, automatische Retopologie beliebiger Figuren, große Bibliothek, komplette Gebäudeerzeugung, WFC, Kampagneninhalte oder eine neue allgemeine Agentenplattform. Ein erster brauchbarer Prop erteilt keine Freigabe für diese Erweiterungen.
+Nicht-Ziele des Einstiegs: lokales Diffusionsmodell (Ausnahme nur als Formvorlage nach [0025](decisions/0025-neuronale-hilfsmodelle-als-eingabe.md)), bezahlte Text-/Bild-zu-3D-Dienste, automatische Retopologie beliebiger Figuren, große Bibliothek, komplette Gebäudeerzeugung, WFC, Kampagneninhalte oder eine neue allgemeine Agentenplattform. Ein erster brauchbarer Prop erteilt keine Freigabe für diese Erweiterungen.
 
 ## 10. Tatsächlicher Nachweis dieses Planungsauftrags
 

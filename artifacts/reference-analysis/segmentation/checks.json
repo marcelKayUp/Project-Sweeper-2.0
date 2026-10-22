@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "complete": false,
+  "threshold": 0.95,
+  "offline": {
+    "invalidCasesRejected": [
+      "box-outside-image",
+      "inverted-box",
+      "nonfinite-point",
+      "label-count-mismatch",
+      "invalid-label",
+      "too-many-points",
+      "unknown-prompt-key",
+      "missing-origin",
+      "no-positive-prompt",
+      "region-and-segmentation",
+      "unknown-model",
+      "missing-checkpoint",
+      "pinned-hash-mismatch",
+      "empty-mask",
+      "split-mask",
+      "positive-point-outside-mask",
+      "negative-point-inside-mask",
+      "mask-fills-image",
+      "mask-leaks-outside-box"
+    ],
+    "speckleAndHoleHandling": {
+      "removedSpecklePixels": 9,
+      "holePixels": 400
+    },
+    "analyzeWithoutTorch": true,
+    "knownMaskOutlineIoU": 0.999116,
+    "knownMaskPolygonVertices": 86,
+    "derivedSpecAnalysed": true
+  },
+  "model": {
+    "status": "not-run",
+    "reason": "--offline-only"
+  },
+  "scope": "Offline checks only; SAM was not run and no mask quality is shown."
+}

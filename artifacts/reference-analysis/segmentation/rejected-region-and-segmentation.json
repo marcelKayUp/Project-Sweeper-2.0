@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "id": "cabinet-segmentation",
+  "reference": "artifacts/reference-analysis/segmentation/cabinet-reference.png",
+  "objectSegmentation": {
+    "model": "sam2.1-hiera-tiny",
+    "origin": "controlled-fixture",
+    "box": [
+      90,
+      28,
+      538,
+      368
+    ],
+    "points": [
+      [
+        300,
+        210
+      ]
+    ],
+    "pointLabels": [
+      1
+    ]
+  },
+  "classification": {
+    "category": "furniture",
+    "subtype": "cabinet",
+    "construction": "manufactured-planar",
+    "origin": "controlled-fixture"
+  },
+  "surfaceRequests": [
+    {
+      "id": "front",
+      "seed": [
+        173,
+        180
+      ],
+      "shapeHypothesis": "planar"
+    },
+    {
+      "id": "top",
+      "seed": [
+        300,
+        62
+      ],
+      "shapeHypothesis": "planar"
+    },
+    {
+      "id": "side",
+      "seed": [
+        487,
+        192
+      ],
+      "shapeHypothesis": "planar"
+    }
+  ],
+  "objectRegion": [
+    [
+      1,
+      1
+    ],
+    [
+      50,
+      1
+    ],
+    [
+      50,
+      50
+    ]
+  ]
+}
