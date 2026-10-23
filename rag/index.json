@@ -1,12 +1,12 @@
 {
     "schema":  1,
-    "builtAt":  "2026-10-23T00:17:37Z",
+    "builtAt":  "2026-10-23T06:10:21Z",
     "usage":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Tag MOD-03",
     "rebuild":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Build",
     "note":  "Abruf der gekennzeichneten Planungsabschnitte. Bei Abweichungen gilt das Quelldokument.",
     "counts":  {
-                   "chunks":  171,
-                   "tags":  136,
+                   "chunks":  172,
+                   "tags":  137,
                    "subtags":  16
                },
     "sources":  [
@@ -36,11 +36,11 @@
                     },
                     {
                         "path":  "docs/ARBEITSPAKETE.md",
-                        "sha256":  "023364fe3b3084b74939cb68ac53aeed257a1edb51f2b1bd509cb200cf88299b"
+                        "sha256":  "c54deeababc6b6bd4bb4462e788e2c8e0a34b37d1d30d22750564de345e573c5"
                     },
                     {
                         "path":  "docs/ENTWICKLUNGSPLAN.md",
-                        "sha256":  "e264037636c73a58bf89851ff93b2923dafeea3710e34179251819cb9378c7be"
+                        "sha256":  "1e8123dbca4a904cc059fe52ee53e0b3007a259c23674295fec13a6f0ba1f155"
                     },
                     {
                         "path":  "docs/decisions/0001-modulare-planung.md",
@@ -141,6 +141,10 @@
                     {
                         "path":  "docs/decisions/0030-gegnerpolicies-und-missionsbot.md",
                         "sha256":  "7a3d75a53c71f2d5ffa625f006e1f06a40156e44042042544661e0c164adafa4"
+                    },
+                    {
+                        "path":  "docs/decisions/0031-erster-inventar-speicher.md",
+                        "sha256":  "17243c1b7f2d22b0b47fbfe44f23af5b24a094b52328d989768cb032e4571c91"
                     }
                 ],
     "tags":  {
@@ -487,6 +491,7 @@
                                "references":  [
                                                   "docs/ARBEITSPAKETE.md#AP-24",
                                                   "docs/ARBEITSPAKETE.md#AP-27",
+                                                  "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
                                                   "docs/MVP_GENERATOREN.md#GEN-07",
                                                   "docs/MVP_MODULE.md#MOD-14"
                                               ]
@@ -538,6 +543,7 @@
                                                   "docs/ARBEITSPAKETE.md#AP-29",
                                                   "docs/ARBEITSPAKETE.md#AP-30",
                                                   "docs/decisions/0002-gestufte-charakterentwicklung.md#DEC-0002",
+                                                  "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
                                                   "docs/MVP_GENERATOREN.md#GEN-06",
                                                   "docs/MVP_MODULE.md#MOD-13",
                                                   "docs/MVP_SCREENS.md#S07",
@@ -1020,6 +1026,19 @@
                                                      "docs/ENTWICKLUNGSPLAN.md#M2"
                                                  ]
                               },
+                 "DEC-0031":  {
+                                  "kind":  "DEC",
+                                  "title":  "Erster Speicher für Inventar und Ergebnisbuchung",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031"
+                                              ],
+                                  "references":  [
+                                                     "docs/ARBEITSPAKETE.md#AP-23",
+                                                     "docs/ARBEITSPAKETE.md#AP-26",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M6"
+                                                 ]
+                              },
                  "GEN-00":  {
                                 "kind":  "GEN",
                                 "title":  "Seedverwaltung und Pipeline-Steuerung",
@@ -1443,8 +1462,10 @@
                             "references":  [
                                                "docs/ARBEITSPAKETE.md#AP-16",
                                                "docs/decisions/0030-gegnerpolicies-und-missionsbot.md#DEC-0030",
+                                               "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
                                                "docs/ENTWICKLUNGSPLAN.md#M2",
                                                "docs/ENTWICKLUNGSPLAN.md#M4",
+                                               "docs/ENTWICKLUNGSPLAN.md#M6",
                                                "docs/MODULE.md#MOD-07",
                                                "docs/MODULE.md#MOD-08",
                                                "docs/MODULE.md#MOD-09",
@@ -1460,7 +1481,9 @@
                                             "docs/ENTWICKLUNGSPLAN.md#M4"
                                         ],
                             "references":  [
+                                               "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
                                                "docs/ENTWICKLUNGSPLAN.md#M5",
+                                               "docs/ENTWICKLUNGSPLAN.md#M6",
                                                "docs/MODULE.md#MOD-04",
                                                "docs/MODULE.md#MOD-05",
                                                "docs/MODULE.md#MOD-06",
@@ -1479,6 +1502,7 @@
                                                "docs/ARBEITSPAKETE.md#AP-22",
                                                "docs/decisions/0001-modulare-planung.md#DEC-0001",
                                                "docs/decisions/0009-semantischer-gebaeudegenerator.md#DEC-0009",
+                                               "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
                                                "docs/ENTWICKLUNGSPLAN.md#M6",
                                                "docs/ENTWICKLUNGSPLAN.md#M7",
                                                "docs/MODULE.md#MOD-07"
@@ -1496,6 +1520,7 @@
                                                "docs/decisions/0003-mvp-mindestumfang.md#DEC-0003",
                                                "docs/decisions/0016-typescript-character-creator.md#DEC-0016",
                                                "docs/decisions/0020-organisationslandschaft-und-lokale-konflikte.md#DEC-0020",
+                                               "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
                                                "docs/ENTWICKLUNGSPLAN.md#M7",
                                                "docs/GENERATOREN.md#GEN-07",
                                                "docs/GENERATOREN.md#GEN-08",
@@ -1855,6 +1880,7 @@
                                             ],
                                 "references":  [
                                                    "docs/decisions/0002-gestufte-charakterentwicklung.md#DEC-0002",
+                                                   "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
                                                    "docs/MODULE.md#MOD-14",
                                                    "docs/MVP_GENERATOREN.md#GEN-06",
                                                    "docs/MVP_GENERATOREN.md#GEN-07",
@@ -1887,6 +1913,7 @@
                                             ],
                                 "references":  [
                                                    "docs/ARBEITSPAKETE.md#AP-23",
+                                                   "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
                                                    "docs/GENERATOREN.md#GEN-07",
                                                    "docs/MODULE.md#MOD-13",
                                                    "docs/MVP_GENERATOREN.md#GEN-07",

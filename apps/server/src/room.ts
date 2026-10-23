@@ -1,6 +1,11 @@
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { Room, ServerError, type Client } from "@colyseus/core";
+import { campaignStore } from "./campaignStore.ts";
 import { createMissionAuthority, RESUME_SECONDS, type MissionAuthority } from "./missionAuthority.ts";
 import { MissionSync } from "./schema.ts";
+
+export const DEFAULT_CAMPAIGN_FILE = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "campaign.json");
 
 export class MissionRoom extends Room<{ state: MissionSync }> {
   private authority: MissionAuthority = createMissionAuthority({ now: () => Date.now() });
@@ -23,7 +28,7 @@ export class MissionRoom extends Room<{ state: MissionSync }> {
   };
 
   override async onCreate(options?: { seed?: unknown }): Promise<void> {
-    this.authority = createMissionAuthority({ now: () => Date.now() }, readRoomSeed(options?.seed));
+    this.authority = createMissionAuthority({ now: () => Date.now() }, readRoomSeed(options?.seed), campaignStore());
     this.maxClients = 4;
     this.setState(new MissionSync());
     await this.setPrivate(true);
@@ -58,6 +63,7 @@ export class MissionRoom extends Room<{ state: MissionSync }> {
   override onDispose(): void {
     if (this.timer) clearTimeout(this.timer);
     this.timer = undefined;
+    this.authority.abort();
   }
 
   private publish(): void {

@@ -8,6 +8,25 @@ import { TacticalView } from "./TacticalView.tsx";
 import { createTeamFeed, takeBatch, takeSnapshot, type TeamBatch } from "./teamStore.ts";
 import type { MissionAction } from "./tactical.ts";
 
+interface GearStand {
+  rifle: number;
+  sidearm: number;
+  rifleMagazines: number;
+  sidearmMagazines: number;
+  medkits: number;
+  rifleReady: boolean;
+  sidearmReady: boolean;
+}
+
+interface BookingStand {
+  runnerId: string;
+  weapon: string;
+  magazines: number;
+  medkits: number;
+  spentMagazines: number;
+  spentMedkits: number;
+}
+
 interface SlotStand {
   runnerId: string;
   name: string;
@@ -15,6 +34,7 @@ interface SlotStand {
   ready: boolean;
   connected: boolean;
   holder?: string;
+  gear: GearStand;
 }
 
 interface UnitStand {
@@ -51,6 +71,13 @@ interface Stand {
   reason: string;
   resultRound: number;
   notice: string;
+  campaignRevision: number;
+  bookedResults: number;
+  lastOutcome: "" | "sieg" | "niederlage";
+  lastReason: string;
+  lastRound: number;
+  resultId: string;
+  booking: BookingStand[];
   commandId?: string;
   phaseSeconds?: number;
   configRevision?: number;
@@ -360,6 +387,9 @@ function Lobby({
       data-ack={stand.ack}
       data-coordinator={stand.coordinator ? "1" : "0"}
       data-notice={stand.notice}
+      data-booked-results={stand.bookedResults}
+      data-campaign-revision={stand.campaignRevision}
+      data-medkits={ownGear(stand)?.medkits ?? 0}
       {...preferenceMarks(prefs)}
     >
       <section className="mission-card" data-panel="briefing">
@@ -380,6 +410,9 @@ function Lobby({
               <span>
                 <strong>{slot.runnerId}</strong>
                 <small>{slotLabel(slot)}</small>
+                <small data-gear={slot.runnerId}>
+                  Gewehr {slot.gear.rifle}, Pistole {slot.gear.sidearm}, Gewehrmagazine {slot.gear.rifleMagazines}, Pistolenmagazine {slot.gear.sidearmMagazines}, Medkit {slot.gear.medkits}
+                </small>
               </span>
               <span>{slot.preset === "sidearm" ? "Pistole" : slot.preset === "rifle" ? "Gewehr" : "—"}</span>
               <span>{slot.ready ? "bereit" : "offen"}</span>
@@ -400,11 +433,31 @@ function Lobby({
             </button>
           ))}
         </div>
+        <p data-booked-results={stand.bookedResults}>
+          Verbuchte Einsätze: {stand.bookedResults}
+          {stand.lastOutcome === "sieg" || stand.lastOutcome === "niederlage"
+            ? `. Letzter Ausgang ${stand.lastOutcome === "sieg" ? "Erfolg" : "Niederlage"}, Runde ${stand.lastRound}.`
+            : "."}
+        </p>
         <div className="mission-actions" data-panel="ausruestung">
-          <button type="button" data-preset="rifle" aria-pressed={ownPreset(stand) === "rifle"} onClick={() => onPreset("rifle")}>
+          <button
+            type="button"
+            data-preset="rifle"
+            data-rifle-ready={ownGear(stand)?.rifleReady ? "1" : "0"}
+            aria-pressed={ownPreset(stand) === "rifle"}
+            disabled={!ownGear(stand)?.rifleReady}
+            onClick={() => onPreset("rifle")}
+          >
             Gewehr
           </button>
-          <button type="button" data-preset="sidearm" aria-pressed={ownPreset(stand) === "sidearm"} onClick={() => onPreset("sidearm")}>
+          <button
+            type="button"
+            data-preset="sidearm"
+            data-sidearm-ready={ownGear(stand)?.sidearmReady ? "1" : "0"}
+            aria-pressed={ownPreset(stand) === "sidearm"}
+            disabled={!ownGear(stand)?.sidearmReady}
+            onClick={() => onPreset("sidearm")}
+          >
             Pistole
           </button>
           <button type="button" data-action="bereit" onClick={onReady}>
@@ -423,6 +476,7 @@ function Lobby({
             <p>Die Koordination startet die Mission.</p>
           )}
         </div>
+        <p>Die Wahl nimmt nur gespeicherten Besitz. Ein Einsatz friert Gewehr oder Pistole, ein Magazin, zwei Reserve und ein Medkit ein.</p>
         <p>Gewehr: Reichweite 10, Magazin 6, zwei Reserve. Pistole: Reichweite 6, Magazin 8, zwei Reserve. Ein Medkit heilt 2 HP. Schuss 3 AP, Treffer 2 HP. Fassung {stand.configRevision ?? 1}.</p>
         <div className="mission-actions">
           <button type="button" data-action="einstellungen" onClick={onSettings}>
@@ -460,6 +514,23 @@ function Result({
         <p>Runde {stand.resultRound}</p>
         <p>{reasonText(stand.reason)}</p>
         <p>Dauer: nicht gemessen</p>
+        <p data-booked={stand.booking.length > 0 ? "1" : "0"} data-booked-results={stand.bookedResults} data-result-id={stand.resultId}>
+          {stand.booking.length > 0 ? `Verbucht: ${stand.bookedResults}` : "Die Buchung ist noch nicht bestätigt."}
+        </p>
+        <ul className="mission-slots" data-booking="1">
+          {stand.booking.map((line) => (
+            <li
+              key={line.runnerId}
+              data-runner={line.runnerId}
+              data-spent-magazines={line.spentMagazines}
+              data-spent-medkits={line.spentMedkits}
+              data-magazines={line.magazines}
+              data-medkits={line.medkits}
+            >
+              {line.runnerId} · {line.weapon === "sidearm" ? "Pistole" : "Gewehr"} · Magazine {line.magazines}, verbraucht {line.spentMagazines} · Medkit {line.medkits}, verbraucht {line.spentMedkits}
+            </li>
+          ))}
+        </ul>
         <ul className="mission-slots">
           {stand.units
             .filter((unit) => unit.team === "crew")
@@ -502,8 +573,50 @@ function isStand(payload: unknown): payload is Stand {
     typeof value.reason === "string" &&
     typeof value.resultRound === "number" &&
     typeof value.notice === "string" &&
+    Number.isInteger(value.campaignRevision) &&
+    Number.isInteger(value.bookedResults) &&
+    (value.lastOutcome === "" || value.lastOutcome === "sieg" || value.lastOutcome === "niederlage") &&
+    typeof value.lastReason === "string" &&
+    Number.isInteger(value.lastRound) &&
+    typeof value.resultId === "string" &&
+    Array.isArray(value.booking) &&
+    value.booking.every(isBooking) &&
     Array.isArray(value.slots) &&
+    value.slots.every(isSlot) &&
     Array.isArray(value.units)
+  );
+}
+
+function isSlot(value: unknown): value is SlotStand {
+  if (!value || typeof value !== "object") return false;
+  const slot = value as Partial<SlotStand>;
+  return typeof slot.runnerId === "string" && typeof slot.preset === "string" && typeof slot.ready === "boolean" && typeof slot.connected === "boolean" && isGear(slot.gear);
+}
+
+function isGear(value: unknown): value is GearStand {
+  if (!value || typeof value !== "object") return false;
+  const gear = value as Partial<GearStand>;
+  return (
+    Number.isInteger(gear.rifle) &&
+    Number.isInteger(gear.sidearm) &&
+    Number.isInteger(gear.rifleMagazines) &&
+    Number.isInteger(gear.sidearmMagazines) &&
+    Number.isInteger(gear.medkits) &&
+    typeof gear.rifleReady === "boolean" &&
+    typeof gear.sidearmReady === "boolean"
+  );
+}
+
+function isBooking(value: unknown): value is BookingStand {
+  if (!value || typeof value !== "object") return false;
+  const line = value as Partial<BookingStand>;
+  return (
+    typeof line.runnerId === "string" &&
+    (line.weapon === "rifle" || line.weapon === "sidearm") &&
+    Number.isInteger(line.magazines) &&
+    Number.isInteger(line.medkits) &&
+    Number.isInteger(line.spentMagazines) &&
+    Number.isInteger(line.spentMedkits)
   );
 }
 
@@ -570,6 +683,10 @@ function clearToken() {
 
 function ownPreset(stand: Stand): string {
   return stand.slots.find((slot) => slot.runnerId === stand.ownRunnerId)?.preset ?? "";
+}
+
+function ownGear(stand: Stand): GearStand | null {
+  return stand.slots.find((slot) => slot.runnerId === stand.ownRunnerId)?.gear ?? null;
 }
 
 function crewSeconds(stand: Stand): 60 | 90 | 120 {

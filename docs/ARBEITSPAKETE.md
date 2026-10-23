@@ -220,6 +220,8 @@ Die zugehörigen Einträge in [MVP_MODULE.md](MVP_MODULE.md), [MVP_SCREENS.md](M
 
 **Abnahme:** Neustart/Laden, eine Migration, doppeltes Resultat und abgebrochene Buchung ohne doppelte Ressourcen.
 
+**Stand 23.10.2026:** Der erste Save hält Besitz, Version 1 und die einmalige Ghost-Floor-Buchung fest; die Migration von Version 0 legt nur das leere Buchungsregister an, zweite Mission und Skills bleiben offen, siehe [0031](decisions/0031-erster-inventar-speicher.md).
+
 ### AP-24 · Runner erstellen, auswählen und speichern
 
 **Größe:** M · **Nach:** AP-23 · **Screens:** S04/S05/S06.
@@ -245,6 +247,8 @@ Die zugehörigen Einträge in [MVP_MODULE.md](MVP_MODULE.md), [MVP_SCREENS.md](M
 **Lieferung:** Iteminstanzen, Slots, eigenes/gemeinsames Lager und eingefrorener Einsatz-Loadout.
 
 **Abnahme:** konkurrierende Entnahme kann keinen Gegenstand duplizieren; keine Ausrüstungsänderung innerhalb des laufenden Einsatzes.
+
+**Stand 23.10.2026:** Eingefroren wird nur vorhandenes Gewehr oder vorhandene Pistole samt den bisherigen Magazinen und dem Medkit; ein laufender Einsatz ändert dieses Lager nicht, siehe [0031](decisions/0031-erster-inventar-speicher.md).
 
 ### AP-27 · Einfacher Hub und zweiter Auftrag
 

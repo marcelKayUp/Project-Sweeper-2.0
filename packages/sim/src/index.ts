@@ -46,6 +46,25 @@ export {
 export { inSector, sectorFacing } from "./geometry.ts";
 export { seesUnit, teamVisibleCells, visibleCells } from "./sight.ts";
 export { previewShot } from "./shot.ts";
+export {
+  CAMPAIGN_ID,
+  LOADOUT_MAGAZINES,
+  LOADOUT_MEDKITS,
+  RUNNER_IDS,
+  SAVE_COUNT_MAX,
+  SAVE_SEED_MAX,
+  SAVE_VERSION,
+  applyMissionResult,
+  bookingFromMission,
+  canField,
+  createCampaign,
+  fieldRejection,
+  freezeLoadout,
+  gearOffer,
+  isCampaignRunner,
+  readCampaign,
+  releaseFreeze,
+} from "./campaign.ts";
 export type { ApBattle, ApMark, MovePreview, MoveQuery, ReachTile } from "./ap.ts";
 export type { FlatActor, FlatStep, FlatWalk } from "./flatWalk.ts";
 export type { PlacedUnit } from "./deckungFixture.ts";
@@ -70,3 +89,19 @@ export type {
   WeaponId,
 } from "./mission.ts";
 export type { BattleMap, Cell, Direction, Impact, LowCover, ShotPreview } from "./types.ts";
+export type {
+  BookedLine,
+  CampaignFreeze,
+  CampaignProgress,
+  CampaignRead,
+  CampaignRejection,
+  CampaignResult,
+  CampaignRunnerId,
+  CampaignState,
+  FrozenKit,
+  GearOffer,
+  LoadoutChoice,
+  MissionBooking,
+  RunnerGear,
+  RunnerReturn,
+} from "./campaign.ts";

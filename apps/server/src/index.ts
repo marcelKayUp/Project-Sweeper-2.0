@@ -1,8 +1,11 @@
 import { Server } from "@colyseus/core";
 import { WebSocketTransport } from "@colyseus/ws-transport";
+import { openCampaignFile } from "./campaignStore.ts";
 import { RasterRoom } from "./rasterRoom.ts";
-import { MissionRoom } from "./room.ts";
+import { DEFAULT_CAMPAIGN_FILE, MissionRoom } from "./room.ts";
 import { SightRoom } from "./sightRoom.ts";
+
+openCampaignFile(process.env.NEON_CAMPAIGN_FILE ?? DEFAULT_CAMPAIGN_FILE);
 
 const port = Number(process.env.PORT ?? 2567);
 const host = process.env.HOST ?? "127.0.0.1";

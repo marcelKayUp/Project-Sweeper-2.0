@@ -156,6 +156,8 @@ Die ersten Kampagnenansichten sind Charaktererstellung/-bogen, Skillliste, Level
 
 Für AP-24/AP-25 dient die [gestufte Charakterentwicklung](CHARAKTERENTWICKLUNG.md) als Entwurfsgrundlage: drei Ausgangsattribute, günstigere Spezialisierungen an Wertschwellen und Vorschläge zu XP/Stufen sowie Aktionsquellen aus Training und Ausrüstung. Kosten, Schwellen und konkrete Inhalte sind noch zu prüfen. M6 beginnt mit wenigen exemplarischen Zweigen und vorhandenen Effekten; ein vollständiger Attribut-/Technikbaum ist kein zusätzliches Abschlusskriterium.
 
+**Stand 23.10.2026:** Die direkte Anweisung beginnt den kleinsten Speicher vor M4 und M5: vier feste Runner, eingefrorener Einsatz-Loadout, genau einmal verbuchtes Ghost-Floor-Ergebnis und lokaler Save; zweite Mission, Skills, Hub und die menschliche M3-Abnahme bleiben offen, siehe [0031](decisions/0031-erster-inventar-speicher.md).
+
 ## 9. M7 · Begrenzte prozedurale Inhaltsvarianten — optionaler Ausbau
 
 **Asset-Formalisierung vom 22.10.2026:** Ein gemeinsamer [Skill](../.agents/skills/asset-families/SKILL.md) und [Familienvertrag](ASSET_FAMILIES.md) beschreiben Geometriewiederverwendung für verschiedene lokale Agenten. Die Laufzeitumstellung des Terminalpiloten und ihre Abnahme bleiben offen; siehe [0023](decisions/0023-wiederverwendbare-assetfamilien.md).
