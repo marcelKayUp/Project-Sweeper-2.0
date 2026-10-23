@@ -8,6 +8,7 @@ import {
   gearOffer,
   LOADOUT_MAGAZINES,
   LOADOUT_MEDKITS,
+  moveGear,
   readCampaign,
   releaseFreeze,
   RUNNER_IDS,
@@ -111,6 +112,7 @@ describe("Kampagnenbuchung", () => {
     expect(frozen.state.revision).toBe(1);
     expect(frozen.state.freeze.resultId).toBe("ghost-floor-1");
     expect(frozen.state.runners.kite).toMatchObject({ rifle: 0, rifleMagazines: 0, medkits: 0, sidearm: 1, sidearmMagazines: LOADOUT_MAGAZINES });
+    expect(frozen.state.lager).toBe(campaign.lager);
     expect(frozen.state.progress.bookedResults).toBe(0);
     expect(gearOffer(frozen.state, "kite").rifleReady).toBe(false);
     expect(fieldRejection(frozen.state, "voss", "sidearm")).toBe("Ein Einsatz ist bereits eingefroren.");
@@ -143,6 +145,7 @@ describe("Kampagnenbuchung", () => {
       lastRound: 1,
     });
     expect(booked.state.runners.kite).toMatchObject({ rifle: 1, rifleMagazines: 1, medkits: 0 });
+    expect(booked.state.lager).toBe(frozen.state.lager);
     expect(booked.state.runners.voss).toMatchObject({ rifleMagazines: LOADOUT_MAGAZINES, medkits: 1 });
     expect(booked.state.runners.nera.rifleMagazines).toBe(LOADOUT_MAGAZINES);
     expect(booked.state.runners.sol.rifleMagazines).toBe(LOADOUT_MAGAZINES - 1);
@@ -212,14 +215,16 @@ describe("Kampagnenbuchung", () => {
     expect(repeat.state).toBe(booked);
   });
 
-  it("migriert Version 0 ohne zusätzlichen Besitz und liest Version 1 wieder", () => {
-    const runners = createCampaign().runners;
+  it("migriert Version 0 und 1 ohne zusätzlichen Besitz", () => {
+    const fresh = createCampaign();
+    const runners = fresh.runners;
     const migrated = readCampaign({ version: 0, runners });
     expect(migrated.ok).toBe(true);
     if (!migrated.ok) return;
     expect(migrated.migrated).toBe(true);
-    expect(migrated.state.version).toBe(1);
+    expect(migrated.state.version).toBe(2);
     expect(migrated.state.runners).toEqual(runners);
+    expect(migrated.state.lager).toEqual(fresh.lager);
     expect(migrated.state.booked).toEqual([]);
     expect(migrated.state.progress.bookedResults).toBe(0);
     const again = readCampaign(migrated.state);
@@ -227,6 +232,28 @@ describe("Kampagnenbuchung", () => {
     if (!again.ok) return;
     expect(again.migrated).toBe(false);
     expect(again.state.runners.kite).toEqual(runners.kite);
+
+    const versionOne = {
+      version: 1,
+      id: fresh.id,
+      revision: 3,
+      runners: {
+        ...runners,
+        kite: { ...runners.kite, rifle: 4, medkits: 2 },
+      },
+      freeze: null,
+      booked: [],
+      progress: fresh.progress,
+    };
+    const fromOne = readCampaign(versionOne);
+    expect(fromOne.ok).toBe(true);
+    if (!fromOne.ok) return;
+    expect(fromOne.migrated).toBe(true);
+    expect(fromOne.state.version).toBe(2);
+    expect(fromOne.state.revision).toBe(3);
+    expect(fromOne.state.runners.kite).toMatchObject({ rifle: 1, medkits: 1 });
+    expect(fromOne.state.lager).toEqual({ rifle: 3, sidearm: 0, rifleMagazines: 0, sidearmMagazines: 0, medkits: 1 });
+    expect(readCampaign(fromOne.state).ok).toBe(true);
 
     const roundtrip = readCampaign(JSON.parse(JSON.stringify(defeat("sidearm"))));
     expect(roundtrip.ok).toBe(true);
@@ -237,5 +264,70 @@ describe("Kampagnenbuchung", () => {
     expect(readCampaign({ version: 0, runners, booked: ["ghost-floor-1"] }).ok).toBe(false);
     expect(readCampaign({ version: 2, runners }).ok).toBe(false);
     expect(readCampaign({ version: 0, runners: { ...runners, kite: { ...runners.kite, medkits: 1.5 } } }).ok).toBe(false);
+    const overCap = createCampaign();
+    expect(readCampaign({ ...overCap, runners: { ...overCap.runners, kite: { ...overCap.runners.kite, rifle: 2 } } }).ok).toBe(false);
+  });
+
+  it("bewegt nur vorhandenen Besitz zwischen Slot und Lager und friert das Lager nicht an", () => {
+    const campaign = createCampaign();
+    const before = JSON.stringify(campaign);
+    const emptyTake = moveGear(campaign, "kite", "rifle", "nehmen");
+    expect(emptyTake).toMatchObject({ ok: false, rejection: "Lager reicht nicht." });
+    expect(emptyTake.state).toBe(campaign);
+
+    const stored = moveGear(campaign, "kite", "medkits", "legen");
+    expect(stored.ok).toBe(true);
+    if (!stored.ok) return;
+    expect(JSON.stringify(campaign)).toBe(before);
+    expect(stored.state.runners.kite.medkits).toBe(0);
+    expect(stored.state.lager.medkits).toBe(1);
+    const full = moveGear(stored.state, "voss", "medkits", "nehmen");
+    expect(full).toMatchObject({ ok: false, rejection: "Slot ist voll." });
+    expect(full.state).toBe(stored.state);
+    const returned = moveGear(stored.state, "kite", "medkits", "nehmen");
+    expect(returned.ok).toBe(true);
+    if (!returned.ok) return;
+    const duplicate = moveGear(returned.state, "kite", "medkits", "nehmen");
+    expect(duplicate).toMatchObject({ ok: false, rejection: "Lager reicht nicht." });
+    expect(duplicate.state).toBe(returned.state);
+    expect(returned.state.runners.kite.medkits).toBe(1);
+    expect(returned.state.lager.medkits).toBe(0);
+
+    const aside = moveGear(campaign, "kite", "rifle", "legen");
+    if (!aside.ok) throw new Error(aside.rejection);
+    const missing = freezeLoadout(aside.state, rifles, 1);
+    expect(missing).toMatchObject({ ok: false, rejection: "Ausrüstung fehlt." });
+    expect(missing.state).toBe(aside.state);
+    expect(aside.state.lager.rifle).toBe(1);
+
+    const sidearmAside = moveGear(campaign, "kite", "sidearm", "legen");
+    if (!sidearmAside.ok) throw new Error(sidearmAside.rejection);
+    const frozen = freezeLoadout(sidearmAside.state, rifles, 1);
+    expect(frozen.ok).toBe(true);
+    if (!frozen.ok) return;
+    expect(frozen.state.lager).toBe(sidearmAside.state.lager);
+    const during = moveGear(frozen.state, "voss", "sidearm", "legen");
+    expect(during).toMatchObject({ ok: false, rejection: "Ein Einsatz ist bereits eingefroren." });
+    expect(during.state).toBe(frozen.state);
+
+    const parked = freezeLoadout(campaign, rifles, 1);
+    if (!parked.ok) throw new Error(parked.rejection);
+    const versionOne = {
+      version: 1,
+      id: parked.state.id,
+      revision: parked.state.revision,
+      runners: { ...parked.state.runners, kite: { ...parked.state.runners.kite, rifle: 1 } },
+      freeze: parked.state.freeze,
+      booked: parked.state.booked,
+      progress: parked.state.progress,
+    };
+    const migrated = readCampaign(versionOne);
+    expect(migrated.ok).toBe(true);
+    if (!migrated.ok || !migrated.state.freeze) return;
+    const released = releaseFreeze(migrated.state, migrated.state.freeze.resultId);
+    expect(released.released).toBe(true);
+    expect(released.state.runners.kite.rifle).toBe(1);
+    expect(released.state.lager.rifle).toBe(1);
+    expect(released.state.progress.bookedResults).toBe(0);
   });
 });

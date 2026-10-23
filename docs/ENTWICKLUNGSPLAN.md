@@ -158,6 +158,8 @@ Für AP-24/AP-25 dient die [gestufte Charakterentwicklung](CHARAKTERENTWICKLUNG.
 
 **Stand 23.10.2026:** Die direkte Anweisung beginnt den kleinsten Speicher vor M4 und M5: vier feste Runner, eingefrorener Einsatz-Loadout, genau einmal verbuchtes Ghost-Floor-Ergebnis und lokaler Save; zweite Mission, Skills, Hub und die menschliche M3-Abnahme bleiben offen, siehe [0031](decisions/0031-erster-inventar-speicher.md).
 
+**Stand 23.10.2026, Lager und Stadtkarte:** Save-Version 2 ergänzt ein gemeinsames Lager und begrenzte Slots. Die abstrakte Rhein-Ruhr-Übersicht liegt unter `?stueck=stadt` und setzt keine Deckung, Sichtlinie oder Missionsregel. Händler, Fraktionen, Hub, zweite Mission und die menschliche M3-Abnahme bleiben offen, siehe [0032](decisions/0032-lager-slots-und-stadtkarte.md).
+
 ## 9. M7 · Begrenzte prozedurale Inhaltsvarianten — optionaler Ausbau
 
 **Asset-Formalisierung vom 22.10.2026:** Ein gemeinsamer [Skill](../.agents/skills/asset-families/SKILL.md) und [Familienvertrag](ASSET_FAMILIES.md) beschreiben Geometriewiederverwendung für verschiedene lokale Agenten. Die Laufzeitumstellung des Terminalpiloten und ihre Abnahme bleiben offen; siehe [0023](decisions/0023-wiederverwendbare-assetfamilien.md).

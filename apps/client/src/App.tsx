@@ -4,6 +4,7 @@ import { queryDeckungFrame } from "./battle/frame.ts";
 import { ActionBar } from "./hud/ActionBar.tsx";
 import { createGame } from "./phaser/createGame.ts";
 import { IsoWalkScreen } from "./iso/IsoWalkScreen.tsx";
+import { CityScreen } from "./city/CityScreen.tsx";
 import { MissionScreen } from "./mission/MissionScreen.tsx";
 import { SchussScreen } from "./SchussScreen.tsx";
 import { SightScreen } from "./sight/SightScreen.tsx";
@@ -15,6 +16,7 @@ export function App() {
   if (piece === "aktionspunkte") return <ApScreen />;
   if (piece === "schuss") return <SchussScreen />;
   if (piece === "mission") return <MissionScreen />;
+  if (piece === "stadt") return <CityScreen />;
   if (piece === "raster") return <IsoWalkScreen />;
   if (piece === "deckung") return <DeckungScreen />;
   return <SightScreen />;

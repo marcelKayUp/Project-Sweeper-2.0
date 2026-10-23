@@ -1,7 +1,7 @@
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { MISSION_ID, PROTOCOL_VERSION, applyMissionResult, createCampaign, freezeLoadout, RUNNER_IDS } from "@neon/sim";
+import { MISSION_ID, PROTOCOL_VERSION, applyMissionResult, createCampaign, freezeLoadout, moveGear, RUNNER_IDS } from "@neon/sim";
 import { afterEach, describe, expect, it } from "vitest";
 import { createFileCampaignStore, createMemoryCampaignStore, recoverUnbooked, type CampaignStore } from "./campaignStore.ts";
 import { createMissionAuthority, type AuthorityStand } from "./missionAuthority.ts";
@@ -186,5 +186,83 @@ describe("Persistenter Einsatz", () => {
     blocked.lobby(blocked.ids[1], { kind: "preset", preset: "sidearm" });
     expect(blocked.authority.stand(blocked.ids[1]).notice).toBe("");
     expect(gear(blocked.authority.stand(blocked.ids[1]), "voss")?.sidearmReady).toBe(true);
+  });
+
+  it("migriert alte Saves und lässt eine zweite Entnahme leer ausgehen", () => {
+    const directory = mkdtempSync(join(tmpdir(), "neon-campaign-"));
+    directories.push(directory);
+    const file = join(directory, "campaign.json");
+    const fresh = createCampaign();
+    writeFileSync(file, JSON.stringify({ version: 0, runners: fresh.runners }));
+    const migrated = createFileCampaignStore(file);
+    expect(migrated.read().version).toBe(2);
+    expect(migrated.read().lager).toEqual(fresh.lager);
+    expect(migrated.read().runners).toEqual(fresh.runners);
+    const disk = JSON.parse(readFileSync(file, "utf8")) as { version: number; lager: { rifle: number } };
+    expect(disk.version).toBe(2);
+    expect(disk.lager.rifle).toBe(0);
+
+    const versionOne = join(directory, "alt.json");
+    writeFileSync(
+      versionOne,
+      JSON.stringify({
+        version: 1,
+        id: fresh.id,
+        revision: 4,
+        runners: { ...fresh.runners, kite: { ...fresh.runners.kite, rifle: 4 } },
+        freeze: null,
+        booked: [],
+        progress: fresh.progress,
+      }),
+    );
+    const fromOne = createFileCampaignStore(versionOne);
+    expect(fromOne.read().version).toBe(2);
+    expect(fromOne.read().runners.kite.rifle).toBe(1);
+    expect(fromOne.read().lager.rifle).toBe(3);
+    expect(JSON.parse(readFileSync(versionOne, "utf8")).version).toBe(2);
+
+    const moved = moveGear(createCampaign(), "kite", "medkits", "legen");
+    if (!moved.ok) throw new Error(moved.rejection);
+    const shared = createMemoryCampaignStore(moved.state);
+    const first = room(shared);
+    const second = room(shared);
+    first.joinAll();
+    second.joinAll();
+    first.lobby(first.ids[0], { kind: "preset", preset: "rifle" });
+    first.lobby(first.ids[0], { kind: "bereit", ready: true });
+    first.lobby(first.ids[0], { kind: "lager", richtung: "nehmen", posten: "medkits" });
+    expect(first.authority.stand(first.ids[0]).notice).toBe("");
+    expect(shared.read().runners.kite.medkits).toBe(1);
+    expect(shared.read().lager.medkits).toBe(0);
+    expect(first.authority.stand(first.ids[0]).slots.find((slot) => slot.runnerId === "kite")?.ready).toBe(false);
+    second.lobby(second.ids[0], { kind: "lager", richtung: "nehmen", posten: "medkits" });
+    expect(second.authority.stand(second.ids[0]).notice).toBe("Lager reicht nicht.");
+    expect(shared.read().lager.medkits).toBe(0);
+    expect(shared.read().runners.kite.medkits).toBe(1);
+
+    const reloaded = createFileCampaignStore(file);
+    expect(reloaded.read().lager).toEqual(fresh.lager);
+    const parked = moveGear(reloaded.read(), "kite", "rifle", "legen");
+    if (!parked.ok) throw new Error(parked.rejection);
+    reloaded.write(parked.state);
+    const again = room(reloaded);
+    again.joinAll();
+    again.lobby(again.ids[0], { kind: "preset", preset: "rifle" });
+    expect(again.authority.stand(again.ids[0]).notice).toBe("Ausrüstung fehlt.");
+    expect(again.authority.stand(again.ids[0]).slots.find((slot) => slot.runnerId === "kite")?.preset).toBe("");
+    again.lobby(again.ids[0], { kind: "preset", preset: "sidearm" });
+    expect(again.authority.stand(again.ids[0]).slots.find((slot) => slot.runnerId === "kite")?.preset).toBe("sidearm");
+    again.lobby(again.ids[0], { kind: "lager", richtung: "legen", posten: "sidearm" });
+    expect(again.authority.stand(again.ids[0]).slots.find((slot) => slot.runnerId === "kite")?.preset).toBe("");
+    expect(reloaded.read().lager.sidearm).toBe(1);
+    again.lobby(again.ids[0], { kind: "lager", richtung: "nehmen", posten: "rifle" });
+    expect(reloaded.read().runners.kite.rifle).toBe(1);
+    expect(reloaded.read().lager.rifle).toBe(0);
+    const kept = reloaded.read();
+    const resumed = room(createFileCampaignStore(file));
+    resumed.joinAll();
+    expect(resumed.authority.stand(resumed.ids[0]).lager).toEqual(kept.lager);
+    expect(resumed.authority.stand(resumed.ids[0]).bookedResults).toBe(0);
+    expect(createFileCampaignStore(file).read()).toEqual(kept);
   });
 });

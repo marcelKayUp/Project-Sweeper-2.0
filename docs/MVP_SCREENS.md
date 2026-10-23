@@ -100,6 +100,8 @@ Die Spielerwege und Layoutidee stehen in [SCREENS.md](SCREENS.md), die gemeinsam
 
 **Nachweis:** Presetwechsel setzt eigene Bereitschaft zurück; nach Missionsstart versucht derselbe Client erneut zu wechseln → keine neuen Magazine und kein anderer Einsatz-Loadout.
 
+**Stand 23.10.2026:** Die Lobby zeigt das gemeinsame Lager und die begrenzten Slots. Der Server entscheidet Entnahme und Einlagern. Ein laufender Einsatz friert die Slots ein, siehe [0032](decisions/0032-lager-slots-und-stadtkarte.md).
+
 **Minimum M6:** Itemliste mit zuweisbaren Slots statt aufwendigem Drag-and-drop; der Vergleich erklärt auch hinzugefügte/entfallende Aktionen und benötigte gelernte Techniken. Später Gewichtssystem, frei modifizierbare Waffen und Inventar-Tetris.
 
 ## S08 · Briefing
@@ -226,6 +228,8 @@ Die Spielerwege und Layoutidee stehen in [SCREENS.md](SCREENS.md), die gemeinsam
 
 **Nachweis:** Auftrag von der Karte wählen, abschließen und zurückkehren → Marker und Board zeigen übereinstimmend den neuen Zustand.
 
+**Stand 23.10.2026:** Sichtbar ist bisher nur der abstrakte Graph unter `?stueck=stadt`: blaue Ortblöcke, weiße Korridore, keine Auftragsmarker. Die Karte erzeugt keine Einsatzregel, siehe [0032](decisions/0032-lager-slots-und-stadtkarte.md).
+
 **Später:** prozedurale Megacity, Reisesimulation, animierte Fraktionsfronten oder Open World.
 
 ## S17 · Auftragsboard und Auftragsdetails
@@ -253,6 +257,8 @@ Die Spielerwege und Layoutidee stehen in [SCREENS.md](SCREENS.md), die gemeinsam
 **Daten/Zustände:** serverseitiger Bestand, Eigentum und Revision; Buchung läuft, Bestand geändert, kein Platz beziehungsweise zu wenig Geld.
 
 **Nachweis:** zwei Menschen entnehmen dasselbe Einzelstück → genau eine Entnahme; zweimal derselbe Kaufauftrag → genau eine Buchung.
+
+**Stand 23.10.2026:** Das Lager der Lobby ist die gemeinsame Liste für Waffen, Magazine und Medkits. Händler, Preise und Cyberware fehlen, siehe [0032](decisions/0032-lager-slots-und-stadtkarte.md).
 
 **Später:** Auktionshaus, Crafting, variable Händlerbeziehungen und Inventar-Tetris.
 

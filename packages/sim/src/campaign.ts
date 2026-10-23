@@ -1,12 +1,23 @@
 import { MISSION_ID, RESERVE_MAGAZINES, ROUND_LIMIT, SIDEARM_MAGAZINE, type MissionResult, type MissionState, type OutcomeId, type WeaponId } from "./mission.ts";
 import { RIFLE_MAGAZINE } from "./resolve.ts";
 
-export const SAVE_VERSION = 1;
+export const SAVE_VERSION = 2;
 export const CAMPAIGN_ID = "lokal";
 export const LOADOUT_MEDKITS = 1;
 export const LOADOUT_MAGAZINES = 1 + RESERVE_MAGAZINES;
 export const SAVE_COUNT_MAX = 99;
 export const SAVE_SEED_MAX = 100;
+export const GEAR_POSTS = ["rifle", "sidearm", "rifleMagazines", "sidearmMagazines", "medkits"] as const;
+export type GearPost = (typeof GEAR_POSTS)[number];
+export type StashDirection = "nehmen" | "legen";
+
+export const SLOT_LIMITS: Readonly<Record<GearPost, number>> = {
+  rifle: 1,
+  sidearm: 1,
+  rifleMagazines: LOADOUT_MAGAZINES,
+  sidearmMagazines: LOADOUT_MAGAZINES,
+  medkits: LOADOUT_MEDKITS,
+};
 
 export const RUNNER_IDS = ["kite", "voss", "nera", "sol"] as const;
 export type CampaignRunnerId = (typeof RUNNER_IDS)[number];
@@ -55,6 +66,7 @@ export interface CampaignState {
   readonly id: typeof CAMPAIGN_ID;
   readonly revision: number;
   readonly runners: Readonly<Record<CampaignRunnerId, RunnerGear>>;
+  readonly lager: RunnerGear;
   readonly freeze: CampaignFreeze | null;
   readonly booked: readonly string[];
   readonly progress: CampaignProgress;
@@ -102,7 +114,9 @@ export type CampaignRejection =
   | "Kein eingefrorener Einsatz."
   | "Ergebnis passt nicht zum Einsatz."
   | "Buchung ist unvollständig."
-  | "Einsatz ist ungültig.";
+  | "Einsatz ist ungültig."
+  | "Lager reicht nicht."
+  | "Slot ist voll.";
 
 export type CampaignResult =
   | { readonly ok: true; readonly state: CampaignState }
@@ -118,7 +132,8 @@ const KIT_KEYS = ["weapon", "magazines", "medkits"] as const;
 const LINE_KEYS = ["runnerId", "weapon", "magazines", "medkits", "spentMagazines", "spentMedkits"] as const;
 const PROGRESS_KEYS = ["bookedResults", "lastResultId", "lastOutcome", "lastReason", "lastRound", "lines"] as const;
 const FREEZE_KEYS = ["resultId", "missionId", "seed", "kits"] as const;
-const STATE_KEYS = ["version", "id", "revision", "runners", "freeze", "booked", "progress"] as const;
+const STATE_KEYS = ["version", "id", "revision", "runners", "lager", "freeze", "booked", "progress"] as const;
+const VERSION_ONE_KEYS = ["version", "id", "revision", "runners", "freeze", "booked", "progress"] as const;
 
 export function createCampaign(): CampaignState {
   return {
@@ -131,6 +146,7 @@ export function createCampaign(): CampaignState {
       nera: stock(),
       sol: stock(),
     },
+    lager: emptyGear(),
     freeze: null,
     booked: [],
     progress: emptyProgress(),
@@ -170,6 +186,42 @@ export function fieldRejection(state: CampaignState, runnerId: string, weapon: W
   return null;
 }
 
+export function moveGear(state: CampaignState, runnerId: string, posten: string, direction: string): CampaignResult {
+  if (state.freeze) return rejected(state, "Ein Einsatz ist bereits eingefroren.");
+  if (!isCampaignRunner(runnerId) || !isGearPost(posten) || !isDirection(direction)) return rejected(state, "Einsatz ist ungültig.");
+  const slot = state.runners[runnerId];
+  const held = slot[posten];
+  const stored = state.lager[posten];
+  if (direction === "nehmen") {
+    if (stored < 1) return rejected(state, "Lager reicht nicht.");
+    if (held >= SLOT_LIMITS[posten]) return rejected(state, "Slot ist voll.");
+    return {
+      ok: true,
+      state: nextState(
+        state,
+        { ...state.runners, [runnerId]: withCount(slot, posten, held + 1) },
+        withCount(state.lager, posten, stored - 1),
+        state.freeze,
+        state.booked,
+        state.progress,
+      ),
+    };
+  }
+  if (held < 1) return rejected(state, "Ausrüstung fehlt.");
+  if (stored >= SAVE_COUNT_MAX) return rejected(state, "Lager reicht nicht.");
+  return {
+    ok: true,
+    state: nextState(
+      state,
+      { ...state.runners, [runnerId]: withCount(slot, posten, held - 1) },
+      withCount(state.lager, posten, stored + 1),
+      state.freeze,
+      state.booked,
+      state.progress,
+    ),
+  };
+}
+
 export function freezeLoadout(state: CampaignState, choices: readonly LoadoutChoice[], seed: number): CampaignResult {
   if (state.freeze) return rejected(state, "Ein Einsatz ist bereits eingefroren.");
   if (!Number.isInteger(seed) || seed < 1 || seed > SAVE_SEED_MAX) return rejected(state, "Einsatz ist ungültig.");
@@ -192,11 +244,11 @@ export function freezeLoadout(state: CampaignState, choices: readonly LoadoutCho
     kits[runnerId] = { weapon, magazines: LOADOUT_MAGAZINES, medkits: LOADOUT_MEDKITS };
   }
   const resultId = resultIdFor(state.progress.bookedResults + 1);
-  return {
-    ok: true,
-    state: nextState(state, runners, { resultId, missionId: MISSION_ID, seed, kits }, state.booked, state.progress),
-  };
-}
+    return {
+      ok: true,
+      state: nextState(state, runners, state.lager, { resultId, missionId: MISSION_ID, seed, kits }, state.booked, state.progress),
+    };
+  }
 
 export function applyMissionResult(state: CampaignState, booking: MissionBooking): CampaignResult {
   if (state.booked.includes(booking.resultId)) return rejected(state, "Ergebnis ist bereits verbucht.");
@@ -227,26 +279,28 @@ export function applyMissionResult(state: CampaignState, booking: MissionBooking
   }
   if (returns.size !== RUNNER_IDS.length) return rejected(state, "Buchung ist unvollständig.");
   const runners = { ...state.runners };
+  let lager = state.lager;
   const lines: BookedLine[] = [];
   for (const runnerId of RUNNER_IDS) {
     const back = returns.get(runnerId);
     if (!back) return rejected(state, "Buchung ist unvollständig.");
-    const restored = restore(runners[runnerId], back.weapon, back.magazines, back.medkits);
+    const restored = storeKit(runners[runnerId], lager, back.weapon, back.magazines, back.medkits);
     if (!restored) return rejected(state, "Buchung ist unvollständig.");
-    runners[runnerId] = restored;
+    runners[runnerId] = restored.slot;
+    lager = restored.lager;
     const kit = freeze.kits[runnerId];
     lines.push({
       runnerId,
       weapon: back.weapon,
-      magazines: back.weapon === "rifle" ? restored.rifleMagazines : restored.sidearmMagazines,
-      medkits: restored.medkits,
+      magazines: back.weapon === "rifle" ? restored.slot.rifleMagazines : restored.slot.sidearmMagazines,
+      medkits: restored.slot.medkits,
       spentMagazines: kit.magazines - back.magazines,
       spentMedkits: kit.medkits - back.medkits,
     });
   }
   return {
     ok: true,
-    state: nextState(state, runners, null, [...state.booked, booking.resultId], {
+    state: nextState(state, runners, lager, null, [...state.booked, booking.resultId], {
       bookedResults: state.progress.bookedResults + 1,
       lastResultId: booking.resultId,
       lastOutcome: booking.outcome,
@@ -262,13 +316,15 @@ export function releaseFreeze(state: CampaignState, resultId?: string): { readon
   if (!freeze) return { state, released: false };
   if (resultId !== undefined && freeze.resultId !== resultId) return { state, released: false };
   const runners = { ...state.runners };
+  let lager = state.lager;
   for (const runnerId of RUNNER_IDS) {
     const kit = freeze.kits[runnerId];
-    const restored = restore(runners[runnerId], kit.weapon, kit.magazines, kit.medkits);
+    const restored = storeKit(runners[runnerId], lager, kit.weapon, kit.magazines, kit.medkits);
     if (!restored) return { state, released: false };
-    runners[runnerId] = restored;
+    runners[runnerId] = restored.slot;
+    lager = restored.lager;
   }
-  return { state: nextState(state, runners, null, state.booked, state.progress), released: true };
+  return { state: nextState(state, runners, lager, null, state.booked, state.progress), released: true };
 }
 
 export function bookingFromMission(mission: MissionState, resultId: string): MissionBooking | null {
@@ -305,8 +361,12 @@ export function readCampaign(raw: unknown): CampaignRead {
     const migrated = readVersionZero(body);
     return migrated ? { ok: true, state: migrated, migrated: true } : invalid();
   }
+  if (body.version === 1) {
+    const migrated = readVersionOne(body);
+    return migrated ? { ok: true, state: migrated, migrated: true } : invalid();
+  }
   if (body.version === SAVE_VERSION) {
-    const state = readVersionOne(body);
+    const state = readVersionTwo(body);
     return state ? { ok: true, state, migrated: false } : invalid();
   }
   return invalid();
@@ -334,19 +394,65 @@ function checkout(gear: RunnerGear, weapon: WeaponId): RunnerGear | null {
   return { ...gear, sidearm: gear.sidearm - 1, sidearmMagazines: gear.sidearmMagazines - LOADOUT_MAGAZINES, medkits: gear.medkits - LOADOUT_MEDKITS };
 }
 
-function restore(gear: RunnerGear, weapon: WeaponId, magazines: number, medkits: number): RunnerGear | null {
-  const nextMedkits = gear.medkits + medkits;
-  if (nextMedkits > SAVE_COUNT_MAX) return null;
-  if (weapon === "rifle") {
-    const rifle = gear.rifle + 1;
-    const rifleMagazines = gear.rifleMagazines + magazines;
-    if (rifle > SAVE_COUNT_MAX || rifleMagazines > SAVE_COUNT_MAX) return null;
-    return { ...gear, rifle, rifleMagazines, medkits: nextMedkits };
+function emptyGear(): RunnerGear {
+  return { rifle: 0, sidearm: 0, rifleMagazines: 0, sidearmMagazines: 0, medkits: 0 };
+}
+
+function withCount(gear: RunnerGear, posten: GearPost, value: number): RunnerGear {
+  if (posten === "rifle") return { ...gear, rifle: value };
+  if (posten === "sidearm") return { ...gear, sidearm: value };
+  if (posten === "rifleMagazines") return { ...gear, rifleMagazines: value };
+  if (posten === "sidearmMagazines") return { ...gear, sidearmMagazines: value };
+  return { ...gear, medkits: value };
+}
+
+function kitParts(weapon: WeaponId, magazines: number, medkits: number): readonly (readonly [GearPost, number])[] {
+  const weaponPost: GearPost = weapon === "rifle" ? "rifle" : "sidearm";
+  const magazinePost: GearPost = weapon === "rifle" ? "rifleMagazines" : "sidearmMagazines";
+  return [
+    [weaponPost, 1],
+    [magazinePost, magazines],
+    ["medkits", medkits],
+  ];
+}
+
+function storeKit(
+  slot: RunnerGear,
+  lager: RunnerGear,
+  weapon: WeaponId,
+  magazines: number,
+  medkits: number,
+): { readonly slot: RunnerGear; readonly lager: RunnerGear } | null {
+  let nextSlot = slot;
+  let nextLager = lager;
+  for (const [posten, amount] of kitParts(weapon, magazines, medkits)) {
+    const room = SLOT_LIMITS[posten] - nextSlot[posten];
+    if (room < 0 || amount < 0) return null;
+    const intoSlot = Math.min(room, amount);
+    const intoLager = amount - intoSlot;
+    if (nextLager[posten] + intoLager > SAVE_COUNT_MAX) return null;
+    if (intoSlot > 0) nextSlot = withCount(nextSlot, posten, nextSlot[posten] + intoSlot);
+    if (intoLager > 0) nextLager = withCount(nextLager, posten, nextLager[posten] + intoLager);
   }
-  const sidearm = gear.sidearm + 1;
-  const sidearmMagazines = gear.sidearmMagazines + magazines;
-  if (sidearm > SAVE_COUNT_MAX || sidearmMagazines > SAVE_COUNT_MAX) return null;
-  return { ...gear, sidearm, sidearmMagazines, medkits: nextMedkits };
+  return { slot: nextSlot, lager: nextLager };
+}
+
+function divideRunners(runners: CampaignState["runners"]): { readonly runners: CampaignState["runners"]; readonly lager: RunnerGear } | null {
+  let lager = emptyGear();
+  const slots = {} as Record<CampaignRunnerId, RunnerGear>;
+  for (const runnerId of RUNNER_IDS) {
+    const gear = runners[runnerId];
+    let slot = emptyGear();
+    for (const posten of GEAR_POSTS) {
+      const kept = Math.min(gear[posten], SLOT_LIMITS[posten]);
+      const extra = gear[posten] - kept;
+      if (lager[posten] + extra > SAVE_COUNT_MAX) return null;
+      slot = withCount(slot, posten, kept);
+      if (extra > 0) lager = withCount(lager, posten, lager[posten] + extra);
+    }
+    slots[runnerId] = slot;
+  }
+  return { runners: slots, lager };
 }
 
 function returnedMagazines(end: RunnerReturn, kitMagazines: number): number | null {
@@ -364,6 +470,7 @@ function returnedMagazines(end: RunnerReturn, kitMagazines: number): number | nu
 function nextState(
   state: CampaignState,
   runners: CampaignState["runners"],
+  lager: RunnerGear,
   freeze: CampaignFreeze | null,
   booked: readonly string[],
   progress: CampaignProgress,
@@ -373,6 +480,7 @@ function nextState(
     id: CAMPAIGN_ID,
     revision: state.revision + 1,
     runners,
+    lager,
     freeze,
     booked,
     progress,
@@ -401,52 +509,93 @@ function resultNumber(id: string): number | null {
 
 function readVersionZero(body: Record<string, unknown>): CampaignState | null {
   if (!exactKeys(body, ["version", "runners"])) return null;
-  const runners = readRunners(body.runners);
+  const runners = readRunners(body.runners, SAVE_COUNT_MAX);
   if (!runners) return null;
-  return { ...createCampaign(), runners };
+  const divided = divideRunners(runners);
+  if (!divided) return null;
+  return { ...createCampaign(), runners: divided.runners, lager: divided.lager };
 }
 
 function readVersionOne(body: Record<string, unknown>): CampaignState | null {
-  if (!exactKeys(body, STATE_KEYS) || body.id !== CAMPAIGN_ID) return null;
-  const revision = count(body.revision, 1_000_000_000);
-  const runners = readRunners(body.runners);
-  const booked = readBooked(body.booked);
-  const progress = readProgress(body.progress);
-  if (revision === null || !runners || !booked || !progress) return null;
-  if (progress.bookedResults !== booked.length) return null;
-  if (booked.length === 0) {
-    if (progress.lastResultId !== "" || progress.lastOutcome !== "" || progress.lastReason !== "" || progress.lastRound !== 0 || progress.lines.length !== 0) {
-      return null;
-    }
-  } else if (progress.lastResultId !== booked[booked.length - 1] || progress.lines.length !== RUNNER_IDS.length) {
-    return null;
-  }
-  const freeze = readFreeze(body.freeze, booked);
-  if (freeze === undefined) return null;
-  if (freeze && !freezeFits(runners, freeze)) return null;
-  return { version: SAVE_VERSION, id: CAMPAIGN_ID, revision, runners, freeze, booked, progress };
+  const parsed = readLegacy(body);
+  if (!parsed) return null;
+  const divided = divideRunners(parsed.runners);
+  if (!divided) return null;
+  if (parsed.freeze && !freezeFits(divided.runners, divided.lager, parsed.freeze)) return null;
+  return {
+    version: SAVE_VERSION,
+    id: CAMPAIGN_ID,
+    revision: parsed.revision,
+    runners: divided.runners,
+    lager: divided.lager,
+    freeze: parsed.freeze,
+    booked: parsed.booked,
+    progress: parsed.progress,
+  };
 }
 
-function readRunners(value: unknown): CampaignState["runners"] | null {
+function readVersionTwo(body: Record<string, unknown>): CampaignState | null {
+  if (!exactKeys(body, STATE_KEYS) || body.id !== CAMPAIGN_ID) return null;
+  const revision = count(body.revision, 1_000_000_000);
+  const runners = readRunners(body.runners, null);
+  const lager = readGear(body.lager, SAVE_COUNT_MAX);
+  const booked = readBooked(body.booked);
+  const progress = readProgress(body.progress);
+  if (revision === null || !runners || !lager || !booked || !progress) return null;
+  if (!progressMatches(progress, booked)) return null;
+  const freeze = readFreeze(body.freeze, booked);
+  if (freeze === undefined) return null;
+  if (freeze && !freezeFits(runners, lager, freeze)) return null;
+  return { version: SAVE_VERSION, id: CAMPAIGN_ID, revision, runners, lager, freeze, booked, progress };
+}
+
+function readLegacy(body: Record<string, unknown>): {
+  readonly revision: number;
+  readonly runners: CampaignState["runners"];
+  readonly freeze: CampaignFreeze | null;
+  readonly booked: readonly string[];
+  readonly progress: CampaignProgress;
+} | null {
+  if (!exactKeys(body, VERSION_ONE_KEYS) || body.id !== CAMPAIGN_ID) return null;
+  const revision = count(body.revision, 1_000_000_000);
+  const runners = readRunners(body.runners, SAVE_COUNT_MAX);
+  const booked = readBooked(body.booked);
+  const progress = readProgress(body.progress);
+  if (revision === null || !runners || !booked || !progress || !progressMatches(progress, booked)) return null;
+  const freeze = readFreeze(body.freeze, booked);
+  if (freeze === undefined) return null;
+  if (freeze && !legacyFreezeFits(runners, freeze)) return null;
+  return { revision, runners, freeze, booked, progress };
+}
+
+function progressMatches(progress: CampaignProgress, booked: readonly string[]): boolean {
+  if (progress.bookedResults !== booked.length) return false;
+  if (booked.length === 0) {
+    return progress.lastResultId === "" && progress.lastOutcome === "" && progress.lastReason === "" && progress.lastRound === 0 && progress.lines.length === 0;
+  }
+  return progress.lastResultId === booked[booked.length - 1] && progress.lines.length === RUNNER_IDS.length;
+}
+
+function readRunners(value: unknown, saveMax: number | null): CampaignState["runners"] | null {
   const body = record(value);
   if (!body || !exactKeys(body, RUNNER_IDS)) return null;
   const runners = {} as Record<CampaignRunnerId, RunnerGear>;
   for (const runnerId of RUNNER_IDS) {
-    const gear = readGear(body[runnerId]);
+    const gear = readGear(body[runnerId], saveMax);
     if (!gear) return null;
     runners[runnerId] = gear;
   }
   return runners;
 }
 
-function readGear(value: unknown): RunnerGear | null {
+function readGear(value: unknown, saveMax: number | null): RunnerGear | null {
   const body = record(value);
   if (!body || !exactKeys(body, GEAR_KEYS)) return null;
-  const rifle = count(body.rifle, SAVE_COUNT_MAX);
-  const sidearm = count(body.sidearm, SAVE_COUNT_MAX);
-  const rifleMagazines = count(body.rifleMagazines, SAVE_COUNT_MAX);
-  const sidearmMagazines = count(body.sidearmMagazines, SAVE_COUNT_MAX);
-  const medkits = count(body.medkits, SAVE_COUNT_MAX);
+  const rifle = count(body.rifle, saveMax ?? SLOT_LIMITS.rifle);
+  const sidearm = count(body.sidearm, saveMax ?? SLOT_LIMITS.sidearm);
+  const rifleMagazines = count(body.rifleMagazines, saveMax ?? SLOT_LIMITS.rifleMagazines);
+  const sidearmMagazines = count(body.sidearmMagazines, saveMax ?? SLOT_LIMITS.sidearmMagazines);
+  const medkits = count(body.medkits, saveMax ?? SLOT_LIMITS.medkits);
   if (rifle === null || sidearm === null || rifleMagazines === null || sidearmMagazines === null || medkits === null) return null;
   return { rifle, sidearm, rifleMagazines, sidearmMagazines, medkits };
 }
@@ -525,7 +674,7 @@ function readLine(value: unknown): BookedLine | null {
   return { runnerId: body.runnerId, weapon: body.weapon, magazines, medkits, spentMagazines, spentMedkits };
 }
 
-function freezeFits(runners: CampaignState["runners"], freeze: CampaignFreeze): boolean {
+function legacyFreezeFits(runners: CampaignState["runners"], freeze: CampaignFreeze): boolean {
   for (const runnerId of RUNNER_IDS) {
     const gear = runners[runnerId];
     const kit = freeze.kits[runnerId];
@@ -534,6 +683,25 @@ function freezeFits(runners: CampaignState["runners"], freeze: CampaignFreeze): 
     if (weapons + 1 > SAVE_COUNT_MAX || magazines + kit.magazines > SAVE_COUNT_MAX || gear.medkits + kit.medkits > SAVE_COUNT_MAX) return false;
   }
   return true;
+}
+
+function freezeFits(runners: CampaignState["runners"], lager: RunnerGear, freeze: CampaignFreeze): boolean {
+  let nextLager = lager;
+  for (const runnerId of RUNNER_IDS) {
+    const kit = freeze.kits[runnerId];
+    const stored = storeKit(runners[runnerId], nextLager, kit.weapon, kit.magazines, kit.medkits);
+    if (!stored) return false;
+    nextLager = stored.lager;
+  }
+  return true;
+}
+
+function isGearPost(value: string): value is GearPost {
+  return (GEAR_POSTS as readonly string[]).includes(value);
+}
+
+function isDirection(value: string): value is StashDirection {
+  return value === "nehmen" || value === "legen";
 }
 
 function count(value: unknown, max: number): number | null {

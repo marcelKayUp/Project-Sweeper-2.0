@@ -8,6 +8,7 @@ import {
   fieldRejection,
   freezeLoadout,
   gearOffer,
+  moveGear,
   releaseFreeze,
   projectEvents,
   projectTeam,
@@ -18,6 +19,7 @@ import {
   type MissionSpec,
   type MissionState,
   type PublicUnit,
+  type RunnerGear,
   type WeaponId,
 } from "@neon/sim";
 import { ghostFloorSpec } from "@neon/sim/ghost-floor";
@@ -101,6 +103,8 @@ export interface AuthorityStand {
   readonly lastReason: string;
   readonly lastRound: number;
   readonly resultId: string;
+  readonly lager: RunnerGear;
+  readonly lagerOpen: boolean;
   readonly booking: readonly BookedLine[];
   readonly lastEventId: number;
   readonly width: number;
@@ -336,6 +340,18 @@ export function createMissionAuthority(clock: AuthorityClock, seed = MISSION_SEE
       }
       seat.preset = parsed.message.preset;
       seat.ready = false;
+      note(sessionId, "", "", 0);
+      return;
+    }
+    if (parsed.message.kind === "lager") {
+      const moved = moveGear(campaign.read(), seat.runnerId, parsed.message.posten, parsed.message.richtung);
+      if (!moved.ok) {
+        note(sessionId, "", moved.rejection, 0);
+        return;
+      }
+      campaign.write(moved.state);
+      seat.ready = false;
+      if (seat.preset && fieldRejection(moved.state, seat.runnerId, seat.preset) === "Ausrüstung fehlt.") seat.preset = "";
       note(sessionId, "", "", 0);
       return;
     }
@@ -702,6 +718,8 @@ function hiddenEnemyIds(): readonly string[] {
       lastReason: saved.progress.lastReason,
       lastRound: saved.progress.lastRound,
       resultId: heldResultId,
+      lager: { ...saved.lager },
+      lagerOpen: saved.freeze === null && sim === null,
       booking: saved.progress.lines.map((line) => ({ ...line })),
       lastEventId: teamEvents.length,
       width: view?.width ?? 0,

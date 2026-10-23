@@ -1,12 +1,12 @@
 {
     "schema":  1,
-    "builtAt":  "2026-10-23T06:10:21Z",
+    "builtAt":  "2026-10-23T07:13:33Z",
     "usage":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Tag MOD-03",
     "rebuild":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Build",
     "note":  "Abruf der gekennzeichneten Planungsabschnitte. Bei Abweichungen gilt das Quelldokument.",
     "counts":  {
-                   "chunks":  172,
-                   "tags":  137,
+                   "chunks":  173,
+                   "tags":  138,
                    "subtags":  16
                },
     "sources":  [
@@ -24,7 +24,7 @@
                     },
                     {
                         "path":  "docs/MVP_SCREENS.md",
-                        "sha256":  "6396792e9a63c83b2015a90d07583a1f1d00cc93ed7c5a975502df82566b6973"
+                        "sha256":  "8a5920f5c211ad359517b3a8a5f75061d7a5e93a8e179af490f77b7937493556"
                     },
                     {
                         "path":  "docs/GENERATOREN.md",
@@ -36,11 +36,11 @@
                     },
                     {
                         "path":  "docs/ARBEITSPAKETE.md",
-                        "sha256":  "c54deeababc6b6bd4bb4462e788e2c8e0a34b37d1d30d22750564de345e573c5"
+                        "sha256":  "07a068ceb7a4e64ed8791347557da03622761504ecfef20da6710859620d0d8a"
                     },
                     {
                         "path":  "docs/ENTWICKLUNGSPLAN.md",
-                        "sha256":  "1e8123dbca4a904cc059fe52ee53e0b3007a259c23674295fec13a6f0ba1f155"
+                        "sha256":  "bf2543191ece0f62d76f1b62a3f0f1b5460990a9ced93817d05fb74b8f3b4960"
                     },
                     {
                         "path":  "docs/decisions/0001-modulare-planung.md",
@@ -145,6 +145,10 @@
                     {
                         "path":  "docs/decisions/0031-erster-inventar-speicher.md",
                         "sha256":  "17243c1b7f2d22b0b47fbfe44f23af5b24a094b52328d989768cb032e4571c91"
+                    },
+                    {
+                        "path":  "docs/decisions/0032-lager-slots-und-stadtkarte.md",
+                        "sha256":  "a1e78b855cd1c4c390529c14ea6a730a012253b7016c4aba3f519a9e23082281"
                     }
                 ],
     "tags":  {
@@ -544,6 +548,7 @@
                                                   "docs/ARBEITSPAKETE.md#AP-30",
                                                   "docs/decisions/0002-gestufte-charakterentwicklung.md#DEC-0002",
                                                   "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
+                                                  "docs/decisions/0032-lager-slots-und-stadtkarte.md#DEC-0032",
                                                   "docs/MVP_GENERATOREN.md#GEN-06",
                                                   "docs/MVP_MODULE.md#MOD-13",
                                                   "docs/MVP_SCREENS.md#S07",
@@ -577,6 +582,7 @@
                                            ],
                                "references":  [
                                                   "docs/ARBEITSPAKETE.md#AP-31",
+                                                  "docs/decisions/0032-lager-slots-und-stadtkarte.md#DEC-0032",
                                                   "docs/ENTWICKLUNGSPLAN.md#M6",
                                                   "docs/MVP_GENERATOREN.md#GEN-08",
                                                   "docs/MVP_MODULE.md#MOD-14",
@@ -1036,7 +1042,24 @@
                                   "references":  [
                                                      "docs/ARBEITSPAKETE.md#AP-23",
                                                      "docs/ARBEITSPAKETE.md#AP-26",
+                                                     "docs/decisions/0032-lager-slots-und-stadtkarte.md#DEC-0032",
                                                      "docs/ENTWICKLUNGSPLAN.md#M6"
+                                                 ]
+                              },
+                 "DEC-0032":  {
+                                  "kind":  "DEC",
+                                  "title":  "Lager, Slots und Straßengraph",
+                                  "parent":  "",
+                                  "primary":  [
+                                                  "docs/decisions/0032-lager-slots-und-stadtkarte.md#DEC-0032"
+                                              ],
+                                  "references":  [
+                                                     "docs/ARBEITSPAKETE.md#AP-26",
+                                                     "docs/ARBEITSPAKETE.md#AP-28",
+                                                     "docs/ENTWICKLUNGSPLAN.md#M6",
+                                                     "docs/MVP_SCREENS.md#S07",
+                                                     "docs/MVP_SCREENS.md#S16",
+                                                     "docs/MVP_SCREENS.md#S18"
                                                  ]
                               },
                  "GEN-00":  {
@@ -1463,6 +1486,7 @@
                                                "docs/ARBEITSPAKETE.md#AP-16",
                                                "docs/decisions/0030-gegnerpolicies-und-missionsbot.md#DEC-0030",
                                                "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
+                                               "docs/decisions/0032-lager-slots-und-stadtkarte.md#DEC-0032",
                                                "docs/ENTWICKLUNGSPLAN.md#M2",
                                                "docs/ENTWICKLUNGSPLAN.md#M4",
                                                "docs/ENTWICKLUNGSPLAN.md#M6",
@@ -1482,6 +1506,7 @@
                                         ],
                             "references":  [
                                                "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
+                                               "docs/decisions/0032-lager-slots-und-stadtkarte.md#DEC-0032",
                                                "docs/ENTWICKLUNGSPLAN.md#M5",
                                                "docs/ENTWICKLUNGSPLAN.md#M6",
                                                "docs/MODULE.md#MOD-04",
@@ -1503,6 +1528,7 @@
                                                "docs/decisions/0001-modulare-planung.md#DEC-0001",
                                                "docs/decisions/0009-semantischer-gebaeudegenerator.md#DEC-0009",
                                                "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
+                                               "docs/decisions/0032-lager-slots-und-stadtkarte.md#DEC-0032",
                                                "docs/ENTWICKLUNGSPLAN.md#M6",
                                                "docs/ENTWICKLUNGSPLAN.md#M7",
                                                "docs/MODULE.md#MOD-07"
@@ -1521,6 +1547,7 @@
                                                "docs/decisions/0016-typescript-character-creator.md#DEC-0016",
                                                "docs/decisions/0020-organisationslandschaft-und-lokale-konflikte.md#DEC-0020",
                                                "docs/decisions/0031-erster-inventar-speicher.md#DEC-0031",
+                                               "docs/decisions/0032-lager-slots-und-stadtkarte.md#DEC-0032",
                                                "docs/ENTWICKLUNGSPLAN.md#M7",
                                                "docs/GENERATOREN.md#GEN-07",
                                                "docs/GENERATOREN.md#GEN-08",
@@ -2061,6 +2088,7 @@
                                                 "docs/ARBEITSPAKETE.md#AP-13",
                                                 "docs/ARBEITSPAKETE.md#AP-18",
                                                 "docs/ARBEITSPAKETE.md#AP-26",
+                                                "docs/decisions/0032-lager-slots-und-stadtkarte.md#DEC-0032",
                                                 "docs/MVP_SCREENS.md#S04",
                                                 "docs/SCREENS.md#S06"
                                             ]
@@ -2181,7 +2209,8 @@
                                              "docs/MVP_SCREENS.md#S16"
                                          ],
                              "references":  [
-                                                "docs/ARBEITSPAKETE.md#AP-28"
+                                                "docs/ARBEITSPAKETE.md#AP-28",
+                                                "docs/decisions/0032-lager-slots-und-stadtkarte.md#DEC-0032"
                                             ]
                          },
                  "S17":  {
@@ -2206,7 +2235,8 @@
                                          ],
                              "references":  [
                                                 "docs/ARBEITSPAKETE.md#AP-26",
-                                                "docs/ARBEITSPAKETE.md#AP-29"
+                                                "docs/ARBEITSPAKETE.md#AP-29",
+                                                "docs/decisions/0032-lager-slots-und-stadtkarte.md#DEC-0032"
                                             ]
                          },
                  "S19":  {

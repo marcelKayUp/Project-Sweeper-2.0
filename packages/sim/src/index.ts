@@ -53,7 +53,9 @@ export {
   RUNNER_IDS,
   SAVE_COUNT_MAX,
   SAVE_SEED_MAX,
+  GEAR_POSTS,
   SAVE_VERSION,
+  SLOT_LIMITS,
   applyMissionResult,
   bookingFromMission,
   canField,
@@ -62,9 +64,11 @@ export {
   freezeLoadout,
   gearOffer,
   isCampaignRunner,
+  moveGear,
   readCampaign,
   releaseFreeze,
 } from "./campaign.ts";
+export { RHEIN_RUHR, RHEIN_RUHR_SOURCE, cityNeighbors } from "./city.ts";
 export type { ApBattle, ApMark, MovePreview, MoveQuery, ReachTile } from "./ap.ts";
 export type { FlatActor, FlatStep, FlatWalk } from "./flatWalk.ts";
 export type { PlacedUnit } from "./deckungFixture.ts";
@@ -100,8 +104,11 @@ export type {
   CampaignState,
   FrozenKit,
   GearOffer,
+  GearPost,
   LoadoutChoice,
   MissionBooking,
   RunnerGear,
   RunnerReturn,
+  StashDirection,
 } from "./campaign.ts";
+export type { CityEdge, CityGraph, CityNode } from "./city.ts";

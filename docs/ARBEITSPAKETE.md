@@ -250,6 +250,8 @@ Die zugehörigen Einträge in [MVP_MODULE.md](MVP_MODULE.md), [MVP_SCREENS.md](M
 
 **Stand 23.10.2026:** Eingefroren wird nur vorhandenes Gewehr oder vorhandene Pistole samt den bisherigen Magazinen und dem Medkit; ein laufender Einsatz ändert dieses Lager nicht, siehe [0031](decisions/0031-erster-inventar-speicher.md).
 
+**Stand 23.10.2026, Slots:** Das gemeinsame Lager und die Slots je Runner trennen Waffe, Magazin und Medkit. Ein Slot fasst höchstens ein Gewehr, eine Pistole, drei Magazine je Waffe und ein Medkit. Einfrieren und Buchen lesen nur diese Slots; Überhang aus älteren Saves wandert ins Lager. Keine Itemdatenbank und kein Händler, siehe [0032](decisions/0032-lager-slots-und-stadtkarte.md).
+
 ### AP-27 · Einfacher Hub und zweiter Auftrag
 
 **Größe:** M · **Nach:** AP-23/24/25/26 · **Screens:** S12/S15/S17.
@@ -269,6 +271,8 @@ Diese Pakete sind getrennte Optionen nach M6. Sie sind keine automatische Erweit
 **Lieferung:** handgebauter Bezirksgraph, Auftragsmarker und bekannte Freischaltungen.
 
 **Abnahme:** Karte und Auftragsboard referenzieren dieselben Angebote; keine Open-World-Fortbewegung nötig.
+
+**Stand 23.10.2026:** Die direkte Anweisung liefert nur den abstrakten Straßengraphen, 32 Orte und die groben Korridore, unter `?stueck=stadt`. Auftragsmarker, Freischaltungen, Händler und Fraktionen bleiben offen, siehe [0032](decisions/0032-lager-slots-und-stadtkarte.md).
 
 ### AP-29 · Händler und gemeinsame Ökonomie
 

@@ -33,6 +33,11 @@ export const lobbySchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("start") }),
   z.object({ kind: z.literal("bot") }),
   z.object({ kind: z.literal("zeit"), seconds: z.union([z.literal(60), z.literal(90), z.literal(120)]) }),
+  z.object({
+    kind: z.literal("lager"),
+    richtung: z.enum(["nehmen", "legen"]),
+    posten: z.enum(["rifle", "sidearm", "rifleMagazines", "sidearmMagazines", "medkits"]),
+  }),
 ]);
 
 export type CommandMessage = z.infer<typeof commandSchema>;

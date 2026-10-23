@@ -491,3 +491,83 @@ body,
   min-height: 2.6em;
   color: #d5deea;
 }
+
+.mission[data-screen="lobby"] > .mission-card:last-child {
+  max-height: 1016px;
+  overflow: auto;
+}
+
+.lager-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lager-list li {
+  display: grid;
+  grid-template-columns: 150px 84px 84px 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+  font-size: 15px;
+}
+
+.lager-list button {
+  min-height: 32px;
+}
+
+.stadt {
+  box-sizing: border-box;
+  width: 1920px;
+  height: 1080px;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+  padding: 28px 32px;
+  color: #d7e7ff;
+  background: #070b14;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.stadt h1,
+.stadt p {
+  margin: 0;
+}
+
+.stadt aside {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+
+.stadt ul {
+  margin: 0;
+  padding: 0 0 0 18px;
+  overflow: auto;
+  columns: 2;
+  column-gap: 18px;
+}
+
+.stadt li {
+  break-inside: avoid;
+  margin: 0 0 4px;
+}
+
+.stadt svg {
+  width: 100%;
+  height: 100%;
+  background: #070b14;
+}
+
+.stadt line {
+  stroke: #ffffff;
+  stroke-width: 3;
+}
+
+.stadt rect {
+  fill: #1f6fe5;
+}
+

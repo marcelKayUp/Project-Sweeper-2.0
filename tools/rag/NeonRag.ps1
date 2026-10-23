@@ -466,7 +466,10 @@ function Build-Rag {
     }
 
     $decisionDir = Join-Path $Root 'docs\decisions'
-    $decisionFiles = @(Get-ChildItem -LiteralPath $decisionDir -Filter '*.md' | Sort-Object Name)
+    $decisionFiles = @(Get-ChildItem -LiteralPath $decisionDir -Filter '*.md' | Sort-Object Name | Where-Object {
+        # 0025–0029 bleiben Asset-Scheiben und gehören nicht in diesen Index.
+        $_.Name -notmatch '^002[5-9]-'
+    })
     if ($decisionFiles.Count -eq 0) {
         [void]$problems.Add('Keine Entscheidungsdateien gefunden.')
     }
@@ -520,6 +523,7 @@ function Build-Rag {
             }
         }
         foreach ($link in @($chunk.links)) {
+            if ([string]$link -match '^DEC-002[5-9]$') { continue }
             Add-IndexTag $tagMap ([string]$link) '' ''
             $entry = $tagMap[$link]
             if ($entry.primary.Contains([string]$chunk.id)) { continue }

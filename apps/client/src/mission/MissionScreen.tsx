@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Client } from "@colyseus/sdk";
-import { PROTOCOL_VERSION } from "@neon/sim";
+import { PROTOCOL_VERSION, SLOT_LIMITS, type GearPost } from "@neon/sim";
 import { timeWish } from "./helpCopy.ts";
 import { HelpPanel, SettingsPanel } from "./PrepPanels.tsx";
 import { preferenceMarks, readPreferences, writePreferences, type UiPreferences } from "./preferences.ts";
@@ -25,6 +25,14 @@ interface BookingStand {
   medkits: number;
   spentMagazines: number;
   spentMedkits: number;
+}
+
+interface LagerStand {
+  rifle: number;
+  sidearm: number;
+  rifleMagazines: number;
+  sidearmMagazines: number;
+  medkits: number;
 }
 
 interface SlotStand {
@@ -77,6 +85,8 @@ interface Stand {
   lastReason: string;
   lastRound: number;
   resultId: string;
+  lager: LagerStand;
+  lagerOpen: boolean;
   booking: BookingStand[];
   commandId?: string;
   phaseSeconds?: number;
@@ -279,6 +289,7 @@ export function MissionScreen() {
         prefs={prefs}
         roomId={roomId}
         onPreset={(preset) => roomRef.current?.send("lobby", { kind: "preset", preset })}
+        onLager={(posten, richtung) => roomRef.current?.send("lobby", { kind: "lager", posten, richtung })}
         onReady={() => roomRef.current?.send("lobby", { kind: "bereit", ready: true })}
         onStart={() => roomRef.current?.send("lobby", { kind: "start" })}
         onBot={() => roomRef.current?.send("lobby", { kind: "bot" })}
@@ -357,6 +368,7 @@ function Lobby({
   prefs,
   roomId,
   onPreset,
+  onLager,
   onReady,
   onStart,
   onBot,
@@ -368,6 +380,7 @@ function Lobby({
   prefs: UiPreferences;
   roomId: string;
   onPreset: (preset: "rifle" | "sidearm") => void;
+  onLager: (posten: GearPost, richtung: "nehmen" | "legen") => void;
   onReady: () => void;
   onStart: () => void;
   onBot: () => void;
@@ -419,6 +432,35 @@ function Lobby({
             </li>
           ))}
         </ul>
+        <section data-panel="lager" data-lager-open={stand.lagerOpen ? "1" : "0"} data-lager-rifle={stand.lager.rifle} data-lager-medkits={stand.lager.medkits}>
+          <h2>Lager</h2>
+          <p>Waffen, Magazine und Medkits. Ein Runner trägt höchstens ein Gewehr, eine Pistole, drei Magazine je Waffe und ein Medkit.</p>
+          {LAGER_GROUPS.map((group) => (
+            <div key={group.id}>
+              <p>{group.title}</p>
+              <ul className="lager-list">
+                {group.rows.map((row) => {
+                  const slotCount = ownGear(stand)?.[row.posten] ?? 0;
+                  const lagerCount = stand.lager[row.posten];
+                  const limit = SLOT_LIMITS[row.posten];
+                  return (
+                    <li key={row.posten} data-posten={row.posten} data-slot-count={slotCount} data-lager-count={lagerCount}>
+                      <span>{row.label}</span>
+                      <span>Slot {slotCount}/{limit}</span>
+                      <span>Lager {lagerCount}</span>
+                      <button type="button" data-richtung="nehmen" disabled={!stand.lagerOpen || lagerCount < 1 || slotCount >= limit} onClick={() => onLager(row.posten, "nehmen")}>
+                        nehmen
+                      </button>
+                      <button type="button" data-richtung="legen" disabled={!stand.lagerOpen || slotCount < 1} onClick={() => onLager(row.posten, "legen")}>
+                        ins Lager
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </section>
         <div className="mission-actions" data-panel="zeit">
           {([60, 90, 120] as const).map((seconds) => (
             <button
@@ -476,7 +518,7 @@ function Lobby({
             <p>Die Koordination startet die Mission.</p>
           )}
         </div>
-        <p>Die Wahl nimmt nur gespeicherten Besitz. Ein Einsatz friert Gewehr oder Pistole, ein Magazin, zwei Reserve und ein Medkit ein.</p>
+        <p>Die Wahl nimmt nur den Slot. Ein Einsatz friert Gewehr oder Pistole, ein geladenes Magazin, zwei Reserve und ein Medkit ein. Das Lager bleibt während des Einsatzes stehen.</p>
         <p>Gewehr: Reichweite 10, Magazin 6, zwei Reserve. Pistole: Reichweite 6, Magazin 8, zwei Reserve. Ein Medkit heilt 2 HP. Schuss 3 AP, Treffer 2 HP. Fassung {stand.configRevision ?? 1}.</p>
         <div className="mission-actions">
           <button type="button" data-action="einstellungen" onClick={onSettings}>
@@ -579,6 +621,8 @@ function isStand(payload: unknown): payload is Stand {
     typeof value.lastReason === "string" &&
     Number.isInteger(value.lastRound) &&
     typeof value.resultId === "string" &&
+    isLager(value.lager) &&
+    typeof value.lagerOpen === "boolean" &&
     Array.isArray(value.booking) &&
     value.booking.every(isBooking) &&
     Array.isArray(value.slots) &&
@@ -591,6 +635,12 @@ function isSlot(value: unknown): value is SlotStand {
   if (!value || typeof value !== "object") return false;
   const slot = value as Partial<SlotStand>;
   return typeof slot.runnerId === "string" && typeof slot.preset === "string" && typeof slot.ready === "boolean" && typeof slot.connected === "boolean" && isGear(slot.gear);
+}
+
+function isLager(value: unknown): value is LagerStand {
+  if (!value || typeof value !== "object") return false;
+  const lager = value as Partial<LagerStand>;
+  return Number.isInteger(lager.rifle) && Number.isInteger(lager.sidearm) && Number.isInteger(lager.rifleMagazines) && Number.isInteger(lager.sidearmMagazines) && Number.isInteger(lager.medkits);
 }
 
 function isGear(value: unknown): value is GearStand {
@@ -688,6 +738,30 @@ function ownPreset(stand: Stand): string {
 function ownGear(stand: Stand): GearStand | null {
   return stand.slots.find((slot) => slot.runnerId === stand.ownRunnerId)?.gear ?? null;
 }
+
+const LAGER_GROUPS = [
+  {
+    id: "waffen",
+    title: "Waffen",
+    rows: [
+      { posten: "rifle", label: "Gewehr" },
+      { posten: "sidearm", label: "Pistole" },
+    ],
+  },
+  {
+    id: "magazine",
+    title: "Magazine",
+    rows: [
+      { posten: "rifleMagazines", label: "Gewehrmagazin" },
+      { posten: "sidearmMagazines", label: "Pistolenmagazin" },
+    ],
+  },
+  {
+    id: "medkits",
+    title: "Medkits",
+    rows: [{ posten: "medkits", label: "Medkit" }],
+  },
+] as const satisfies readonly { readonly id: string; readonly title: string; readonly rows: readonly { readonly posten: GearPost; readonly label: string }[] }[];
 
 function crewSeconds(stand: Stand): 60 | 90 | 120 {
   if (stand.phaseSeconds === 60 || stand.phaseSeconds === 120) return stand.phaseSeconds;
