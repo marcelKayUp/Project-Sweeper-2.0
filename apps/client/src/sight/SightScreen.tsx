@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Client } from "@colyseus/sdk";
-import { actionAp, CREW_AP, EXTRACT_AP, INTERACT_AP, type Cell, type Direction } from "@neon/sim";
+import { actionAp, canTreat, CREW_AP, EXTRACT_AP, INTERACT_AP, type Cell, type Direction } from "@neon/sim";
+import { partLabel, WoundList } from "../mission/WoundList.tsx";
 import { mountIsoBoard, type IsoBoardView } from "../iso/mountIsoBoard.ts";
 import { sightBoard } from "../iso/sightBoard.ts";
 import {
@@ -130,7 +131,8 @@ export function SightScreen() {
     canAct && selectedUnit && !selectedUnit.overwatch && selectedUnit.magazine > 0 && selectedUnit.ap >= actionAp("overwatch"),
   );
   const patient = selectedUnit && stand ? healPatient(stand, selectedUnit) : null;
-  const healReady = Boolean(canAct && patient);
+  const patientParts = patient ? patient.parts.filter(canTreat) : [];
+  const healReady = Boolean(canAct && patientParts.length > 0);
   connectedRef.current = connected;
 
   function select(unitId: string) {
@@ -379,6 +381,7 @@ export function SightScreen() {
         <p>{selectedUnit ? `Feld ${selectedUnit.x}, ${selectedUnit.y}` : "Feld —"}</p>
         <p>{selectedUnit ? `AP ${selectedUnit.ap} von ${CREW_AP}` : "AP —"}</p>
         <p>{selectedUnit ? `Leben ${selectedUnit.hp} von ${selectedUnit.maxHp}` : "Leben —"}</p>
+        {selectedUnit ? <WoundList parts={selectedUnit.parts} /> : null}
         <p>{selectedUnit ? `Magazin ${selectedUnit.magazine} von ${selectedUnit.magazineSize}${selectedUnit.overwatch ? " · 1 reserviert" : ""}` : "Magazin —"}</p>
         <p>{selectedUnit ? `Medkit ${selectedUnit.medkits}` : "Medkit —"}</p>
         <p>{selectedUnit?.aiming ? "Gezielt." : selectedUnit?.overwatch ? `Overwatch ${directionName(selectedUnit.overwatch)}.` : "Keine Haltung."}</p>
@@ -430,9 +433,18 @@ export function SightScreen() {
         <button type="button" disabled={!reloadReady} onClick={() => selectedUnit && sendWish((commandId) => sightReload(commandId, selectedUnit.id))}>
           Nachladen
         </button>
-        <button type="button" disabled={!healReady} onClick={() => selectedUnit && patient && sendWish((commandId) => sightHeal(commandId, selectedUnit.id, patient.id))}>
-          {patient && patient.id !== selectedUnit?.id ? `Medkit · ${patient.name}` : "Medkit"}
-        </button>
+        {patientParts.map((part) => (
+          <button
+            key={part.id}
+            type="button"
+            disabled={!healReady}
+            onClick={() => selectedUnit && patient && sendWish((commandId) => sightHeal(commandId, selectedUnit.id, patient.id, part.id))}
+          >
+            {patient && patient.id !== selectedUnit?.id
+              ? `Medkit · ${patient.name} ${partLabel(part.id)}`
+              : `Medkit · ${partLabel(part.id)}`}
+          </button>
+        ))}
         {(["n", "e", "s", "w"] as const).map((direction) => (
           <button
             key={direction}
@@ -601,9 +613,9 @@ function directionName(direction: Direction): string {
 
 function healPatient(stand: SightStand, actor: SightUnit): SightUnit | null {
   if (actor.status !== "active" || actor.medkits < 1 || actor.ap < actionAp("heal")) return null;
-  if (actor.hp < actor.maxHp) return actor;
+  if (actor.parts.some(canTreat)) return actor;
   const allies = stand.units
-    .filter((unit) => unit.team === "crew" && unit.status === "active" && unit.id !== actor.id && unit.hp < unit.maxHp && adjacent(actor, unit))
+    .filter((unit) => unit.team === "crew" && unit.status === "active" && unit.id !== actor.id && unit.parts.some(canTreat) && adjacent(actor, unit))
     .slice()
     .sort((left, right) => (left.id < right.id ? -1 : left.id > right.id ? 1 : 0));
   return allies[0] ?? null;

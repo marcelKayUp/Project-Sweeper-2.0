@@ -61,7 +61,7 @@ describe("variable floorplans", () => {
         expect(layout.candidate).toBeLessThanOrEqual(LAYOUT_CANDIDATE_LIMIT);
         expect(layout.searchNodes).toBeLessThanOrEqual(EMBEDDING_NODE_LIMIT);
         expect(layout.rejected).toHaveLength(layout.candidate - 1);
-        expect(result.package.formatVersion).toBe(5);
+        expect(result.package.formatVersion).toBe(6);
       }
       expect(geometries.size).toBeGreaterThan(80);
       expect(nonGrid).toBeGreaterThan(50);

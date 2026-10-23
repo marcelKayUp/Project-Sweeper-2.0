@@ -72,7 +72,7 @@ try {
     const result = JSON.parse(await readFile(await file.path(), "utf8"));
     const expected = await generateBuilding({ seed: 42, family: "office", size: "standard", corporation, siteRole: "headquarters" });
     assert(expected.ok); assert.equal(canonical(result), canonical(expected.package));
-    assert.equal(result.formatVersion, 5);
+    assert.equal(result.formatVersion, 6);
     assert(result.report.metrics.executiveSanitaryDistance > 0 && result.report.metrics.executiveSanitaryDistance <= 16);
     assert.equal(await page.locator(".corridor-floor rect").count(), result.building.circulation.length);
     assert(result.building.rooms.some((room) => room.type === "executive"));
@@ -105,7 +105,7 @@ try {
     const expected = await generateBuilding({ seed: 42, family, size: "compact" });
     assert(expected.ok);
     assert.equal(canonical(result), canonical(expected.package));
-    assert.equal(result.formatVersion, 5);
+    assert.equal(result.formatVersion, 6);
     assert.equal(result.building.layout.method, "circulation");
     await file.saveAs(path.join(output, file.suggestedFilename()));
     await page.getByRole("button", { name: "Grundriss", exact: true }).click();

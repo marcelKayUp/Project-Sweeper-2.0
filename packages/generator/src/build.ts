@@ -1,4 +1,4 @@
-import type { Cell, LowCover, MissionSpec } from "@neon/sim";
+import type { Cell, LowCover, MissionSpec, VerticalLink } from "@neon/sim";
 import { ROOM_RULES, SIZE_DIMENSIONS } from "./catalog.ts";
 import { cellKey, center, roomPath } from "./graph.ts";
 import { createLayout } from "./layout/index.ts";
@@ -48,6 +48,15 @@ export function buildCandidate(config: GeneratorConfig, seeds: BuildingPackage["
       reserved.add(cellKey(position));
     }
   }
+  const linkBlocked = new Set<string>([
+    cellKey(terminal),
+    cellKey(door),
+    ...crew.map((spawn) => cellKey(spawn)),
+    ...enemies.flatMap((enemy) => enemy.patrol.map((cell) => cellKey(cell))),
+    ...lowCover.map((cover) => cellKey(cover)),
+  ]);
+  const links = placeVerticalLinks(config.family, circulation, linkBlocked);
+  for (const link of links) reserved.add(cellKey({ x: link.fromX, y: link.fromY }));
   const dressingRng = random(seeds.dressing);
   const dressing: Dressing[] = [];
   for (const room of rooms) {
@@ -77,9 +86,25 @@ export function buildCandidate(config: GeneratorConfig, seeds: BuildingPackage["
     ],
     routes: layout.routes,
   };
-  const building: Building = { identity: demand.identity, relationships: demand.relationships, demand: demand.summary, layout: layout.info, rooms, circulation, program: demand.program, connections, entries, infrastructure: buildServices(rooms, connections), missionGraph, dressing };
-  const mission: MissionSpec = { id: `generated-${config.instanceId}`, hash: "", ...dimensions, walls, lowCover, terminal, door, extraction, spawns: [...crew, ...enemies] };
+  const levels = [
+    { z: 0, walls, lowCover },
+    { z: 1, walls: walls.map((cell) => ({ x: cell.x, y: cell.y })), lowCover: [] },
+  ];
+  const building: Building = { identity: demand.identity, relationships: demand.relationships, demand: demand.summary, layout: layout.info, rooms, circulation, program: demand.program, connections, entries, infrastructure: buildServices(rooms, connections), missionGraph, dressing, links };
+  const mission: MissionSpec = { id: `generated-${config.instanceId}`, hash: "", ...dimensions, walls, lowCover, terminal, door, extraction, spawns: [...crew, ...enemies], levels, links };
   return { building, mission };
+}
+
+function placeVerticalLinks(family: GeneratorConfig["family"], circulation: readonly Cell[], reserved: ReadonlySet<string>): VerticalLink[] {
+  const open = circulation.filter((cell) => !reserved.has(cellKey(cell))).sort((a, b) => a.y - b.y || a.x - b.x);
+  const stair = open[0];
+  const lift = open[1];
+  if (!stair || !lift) return [];
+  const kind = family === "factory" ? "freight" : "passenger";
+  return [
+    { id: "stair", kind: "stair", fromZ: 0, fromX: stair.x, fromY: stair.y, toZ: 1, toX: stair.x, toY: stair.y },
+    { id: kind, kind, fromZ: 0, fromX: lift.x, fromY: lift.y, toZ: 1, toX: lift.x, toY: lift.y },
+  ];
 }
 
 function buildServices(rooms: readonly Room[], connections: readonly Connection[]): ServiceGraph[] {

@@ -200,6 +200,28 @@ describe("Semantic Building Generator", () => {
     expect(applyCommand(refreshed, spec, { kind: "interact", unitId: runner.id, targetId: spec.terminal.id }).state.copies).toBe(2);
     expect(initial.copies).toBe(0);
   });
+
+  it("legt zwei Ebenen und die familieneigene Erschließung an", async () => {
+    for (const family of ["office", "laboratory", "factory"] as const) {
+      const item = await generated(7, family);
+      const lift = family === "factory" ? "freight" : "passenger";
+      expect(item.mission.levels?.map((floor) => floor.z)).toEqual([0, 1]);
+      expect(item.mission.levels?.[0]?.walls).toEqual(item.mission.walls);
+      expect(item.mission.levels?.[1]?.lowCover).toEqual([]);
+      expect(item.building.links.map((link) => link.kind).sort()).toEqual(["stair", lift].sort());
+      expect(item.building.links).toEqual(item.mission.links);
+      const halls = new Set(item.building.circulation.map(cellKey));
+      const dressed = new Set(item.building.dressing.map(cellKey));
+      for (const link of item.building.links) {
+        expect(halls.has(cellKey({ x: link.fromX, y: link.fromY }))).toBe(true);
+        expect(dressed.has(cellKey({ x: link.fromX, y: link.fromY }))).toBe(false);
+        expect(link.fromX).toBe(link.toX);
+        expect(link.fromY).toBe(link.toY);
+        expect(link.fromZ).toBe(0);
+        expect(link.toZ).toBe(1);
+      }
+    }
+  });
 });
 
 function walkable(map: BattleMap, cell: Cell): boolean {

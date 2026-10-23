@@ -12,6 +12,7 @@ import type { AbstractMesh } from "@babylonjs/core/Meshes/abstractMesh.js";
 import { Scene } from "@babylonjs/core/scene.js";
 import { flatReachable, type FlatWalk } from "@neon/sim";
 import type { Cell } from "@neon/sim";
+import { stagePointer } from "./stagePointer.ts";
 
 export const ISO_TILT = Math.PI / 4;
 export const ISO_YAW = [0, Math.PI / 2, Math.PI, (3 * Math.PI) / 2] as const;
@@ -85,8 +86,10 @@ export function mountIsoWalk(host: HTMLElement, onCell: (cell: Cell) => void): I
     applyZoom();
   };
 
-  scene.onPointerDown = (event, pick) => {
+  scene.onPointerDown = (event) => {
     if (disposed || (event.button !== undefined && event.button !== 0)) return;
+    const point = stagePointer(canvas, event);
+    const pick = scene.pick(point.x, point.y, scene.pointerDownPredicate, scene.pointerDownFastCheck, scene.cameraToUseForPointers);
     const mesh = pick.pickedMesh;
     if (!mesh) return;
     const cell = cells.get(mesh);

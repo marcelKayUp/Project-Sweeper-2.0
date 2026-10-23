@@ -6,6 +6,10 @@ Kooperatives Cyberpunk-Taktikspiel für 4–8 Spieler: ein Runner pro Person, ge
 
 Dies ist kein kommerzielles Projekt. Es ist die Testwiese eines Vibe-Coders, um seine Grenzen und die der KI auszuloten, und ein Gelegenheitsspiel für ihn und seine Freundesgruppe.
 
+## Manuell testen
+
+`http://127.0.0.1:5173/` zeigt die Sitemap aus [NAVIGATION.md](docs/NAVIGATION.md) als Prüfliste. Vorhandene Flächen sind verlinkt. Geplante Flächen stehen ohne Sprung. Die Testmission bleibt unter `?stueck=sicht`. Zugang, Lobby und diese Testmission brauchen den Spielserver. Siehe [0039](docs/decisions/0039-testeinstieg-aus-der-sitemap.md).
+
 ## Direkt auf GitHub sichtbar
 
 GitHub zeigt diese Bilder selbst. Die Testmission und der Spielserver laufen dort nicht.
@@ -20,6 +24,25 @@ GitHub zeigt Kontaktbögen und die Terminalvorschau ebenfalls als Bilder. Die da
 
 - [Figuren](artifacts/asset-inspection/contact-characters.png), [Waffen](artifacts/asset-inspection/contact-weapons.png), [Bauteile](artifacts/asset-inspection/contact-components.png)
 - [Terminals](artifacts/terminals/contact-sheet.png), [Werkstattbild](artifacts/terminals/workshop.png)
+
+## Windows einrichten
+
+Voraussetzung ist Node.js 24.14.0 von [nodejs.org](https://nodejs.org/). Im Projektordner einmal:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/setup-windows.ps1
+```
+
+Das Skript prüft Node.js, aktiviert Corepack und pnpm und installiert die Arbeitsbereiche von Spiel, Server, Client und Generatoren. Eine Python-Abhängigkeit wird nur installiert, wenn der Gebäude- oder Missionsgenerator eine Requirements-Datei hat. Fehlt Python, meldet das Skript das und richtet den Rest trotzdem ein.
+
+Danach Spielserver und Client in zwei Fenstern:
+
+```powershell
+corepack pnpm --filter @neon/server start
+corepack pnpm --filter @neon/client dev
+```
+
+Die Einstiegsseite ist [http://127.0.0.1:5173/](http://127.0.0.1:5173/). Ohne Parameter liegen dort die Links zu Mission, Stadtkarte und den übrigen Teststücken. Die Testmission selbst bleibt unter `?stueck=sicht`.
 
 ## Pakete
 
@@ -81,7 +104,7 @@ Die bisherigen Konzernentwürfe KASANE, CONCORD, PARALLAX und VERDANT sind auf N
 
 `corepack pnpm dev:generator` öffnet die Werkstatt unter `http://127.0.0.1:5174/generator.html`: Konzernbüro, Forschungslabor oder Fabrik/Lager mit bedarfsabhängigen Raumzahlen, vier Runnern, Datenraubziel, harten Prüfungen, Graph-/3D-Vorschau und JSON-Export. Anleitung und Nachweise: [GEBAEUDEGENERATOR.md](docs/GEBAEUDEGENERATOR.md). Mehrere spielbare Stockwerke, WFC und Laden im normalen Missionsbildschirm sind noch offen.
 
-`corepack pnpm dev` startet Spielserver und Client und öffnet `http://127.0.0.1:5173/`. Das ist dieselbe Testmission wie `?stueck=sicht`: der Server erzeugt die kompakte Karte mit `generateBuilding` und sendet nur bekanntes Gelände, sichtbare Gegner und gerichtete Deckung. `?stueck=deckung` behält die ältere Phaser-Ansicht. Das 8×8-Raster bleibt unter `?stueck=raster`. Siehe [0024](docs/decisions/0024-ein-start-fuer-die-testmission.md).
+`corepack pnpm dev` startet Spielserver und Client und öffnet `http://127.0.0.1:5173/`. Ohne Parameter ist das die Einstiegsseite. Die Testmission bleibt `?stueck=sicht`: der Server erzeugt die kompakte Karte mit `generateBuilding` und sendet nur bekanntes Gelände, sichtbare Gegner und gerichtete Deckung. `?stueck=deckung` behält die ältere Phaser-Ansicht. Das 8×8-Raster bleibt unter `?stueck=raster`. Siehe [0024](docs/decisions/0024-ein-start-fuer-die-testmission.md).
 
 Version 3 leitet Raumzahlen und Mindestflächen aus Belegung, Arbeitsplätzen, Prozessplätzen und Lagerbedarf ab. Der Bericht erklärt Kapazitäten und trennt örtliche Funktionen vom übrigen Gebäude. Beispiel: 24 Büroarbeitsplätze ergeben sechs Büros; ein Missionsgeschoss kann Empfang/Anlieferung außerhalb ausweisen. Das sind versionierte Spielannahmen in Rasterfeldern, keine baurechtliche Planung. Siehe [0011](docs/decisions/0011-bedarfsbasiertes-raumprogramm.md). Variable BSP-Grundrisse, Graph-Einbettung und MIT-Herkunft bestehen fort; siehe [0010](docs/decisions/0010-bsp-und-graph-grundrisse.md).
 

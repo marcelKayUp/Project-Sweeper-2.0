@@ -17,9 +17,14 @@ describe("defensiver Ausfallbot", () => {
     const hurt = structuredClone(view);
     const kite = hurt.units.find((unit) => unit.id === "kite");
     if (!kite) throw new Error("kite fehlt");
-    kite.hp = 1;
-    expect(defensiveIntent(hurt, "kite")).toEqual({ kind: "heal", unitId: "kite", targetId: "kite" });
-    kite.hp = Math.ceil(kite.maxHp / 2);
+    kite.parts = kite.parts.map((part) => (part.id === "head" ? { ...part, hp: 0, wound: "bleed" } : part));
+    kite.hp = kite.parts.reduce((sum, part) => sum + part.hp, 0);
+    expect(defensiveIntent(hurt, "kite")).toEqual({ kind: "heal", unitId: "kite", targetId: "kite", part: "head" });
+    kite.parts = kite.parts.map((part) =>
+      part.id === "head" || part.id === "torso" ? { ...part, hp: part.maxHp - 1, wound: "graze" } : part,
+    );
+    kite.hp = kite.parts.reduce((sum, part) => sum + part.hp, 0);
+    expect(kite.hp * 2).toBeGreaterThanOrEqual(kite.maxHp);
     expect(defensiveIntent(hurt, "kite")?.kind).toBe("ready");
     kite.hp = 1;
     kite.medkits = 0;

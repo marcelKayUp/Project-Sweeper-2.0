@@ -1,0 +1,225 @@
+.mission[data-screen="lobby"] {
+  align-items: center;
+  overflow: hidden;
+}
+
+.mission-lobby {
+  min-height: 0;
+  justify-content: start;
+  align-content: start;
+  gap: 8px;
+}
+
+.mission[data-screen="lobby"] > .mission-card.mission-lobby {
+  max-height: 1016px;
+  overflow: auto;
+}
+
+.doll {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: #f6f3ec;
+}
+
+.doll-stage {
+  display: grid;
+  grid-template-columns: 132px 160px 132px;
+  gap: 8px;
+  align-items: center;
+}
+
+.doll-slot,
+.doll-cell,
+.doll-stash article {
+  box-sizing: border-box;
+  min-height: 52px;
+  padding: 6px;
+  background: #121820;
+  border: 1px solid #314056;
+}
+
+.doll-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.doll-slot p,
+.doll-pack > p,
+.doll-stash > p,
+.doll-fallback p,
+.doll-note {
+  margin: 0;
+  color: #9eabbd;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.doll-figure {
+  position: relative;
+  width: 150px;
+  height: 220px;
+  justify-self: center;
+}
+
+.doll-figure svg {
+  display: block;
+  width: 150px;
+  height: 220px;
+}
+
+.doll-worn {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  color: #141910;
+  background: #d7c07a;
+  border: 1px solid #f2c14e;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.doll-worn-rifle {
+  left: 2px;
+  right: 2px;
+  top: 124px;
+  height: 18px;
+}
+
+.doll-worn-pistol-right {
+  left: 4px;
+  top: 130px;
+  width: 36px;
+  height: 22px;
+}
+
+.doll-worn-pistol-left {
+  right: 4px;
+  top: 130px;
+  width: 36px;
+  height: 22px;
+}
+
+.doll-worn-medkit {
+  left: 90px;
+  top: 136px;
+  width: 30px;
+  height: 20px;
+  background: #8fd0b0;
+  border-color: #d7fff0;
+}
+
+.doll-hands {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-height: 44px;
+}
+
+.doll-pack,
+.doll-stash,
+.doll-fallback {
+  width: min(100%, 560px);
+}
+
+.doll-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 64px);
+  gap: 6px;
+  justify-content: center;
+}
+
+.doll-cell {
+  min-height: 52px;
+  padding: 4px;
+}
+
+.doll-cell[data-span="2"] {
+  grid-column: span 2;
+}
+
+.doll-stash {
+  display: grid;
+  gap: 6px;
+}
+
+.doll-stash-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.doll-stash article {
+  min-height: 64px;
+}
+
+.doll-token,
+.doll button {
+  min-height: 28px;
+  padding: 0 8px;
+  font-size: 13px;
+}
+
+.doll-token {
+  display: grid;
+  place-items: center;
+  color: #f6f3ec;
+  background: #1a2433;
+  border: 1px solid #3d4e68;
+  cursor: grab;
+}
+
+.doll-token[data-kind="rifle"] {
+  background: #3c3420;
+}
+
+.doll-token[data-kind="sidearm"] {
+  background: #243044;
+}
+
+.doll-token[data-kind="medkit"] {
+  background: #1d332c;
+}
+
+.doll-token[aria-pressed="true"] {
+  border-color: #f2c14e;
+}
+
+.doll-fallback {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+.doll-note {
+  max-width: 560px;
+  text-align: center;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.doll-reject {
+  margin: 0;
+  color: #ffd0d0;
+  font-size: 15px;
+}
+
+.mission-lobby .mission-slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.mission-lobby .mission-slots small[data-gear] {
+  display: none;
+}
+
+.mission-lobby h2 {
+  font-size: 22px;
+}

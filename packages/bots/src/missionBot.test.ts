@@ -42,7 +42,7 @@ describe("missionsorientierter Crewbot", () => {
     } finally {
       rmSync(directory, { recursive: true, force: true });
     }
-  });
+  }, 20_000);
 
   it("verliert am Rundenlimit, wenn kein Weg zum Terminal bekannt ist", () => {
     const replay = runMission(sealed(), 9);

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CREW_AP } from "@neon/sim";
+import { CREW_AP, PROTOCOL_VERSION } from "@neon/sim";
 import { createRasterSession } from "./rasterSession.ts";
 import { readRasterWish } from "./rasterValidate.ts";
 
@@ -137,16 +137,16 @@ describe("Raster-Sitzung", () => {
 
 describe("Raster-Befehl", () => {
   it("nimmt einen Schritt und eine Rücksetzung an", () => {
-    expect(readRasterWish({ protocol: 1, area: "raster", commandId: "m-1", kind: "reset" })).toEqual({
+    expect(readRasterWish({ protocol: PROTOCOL_VERSION, area: "raster", commandId: "m-1", kind: "reset" })).toEqual({
       ok: true,
-      wish: { protocol: 1, area: "raster", commandId: "m-1", kind: "reset" },
+      wish: { protocol: PROTOCOL_VERSION, area: "raster", commandId: "m-1", kind: "reset" },
     });
-    expect(readRasterWish({ protocol: 1, area: "raster", commandId: "m-3", kind: "end" })).toEqual({
+    expect(readRasterWish({ protocol: PROTOCOL_VERSION, area: "raster", commandId: "m-3", kind: "end" })).toEqual({
       ok: true,
-      wish: { protocol: 1, area: "raster", commandId: "m-3", kind: "end" },
+      wish: { protocol: PROTOCOL_VERSION, area: "raster", commandId: "m-3", kind: "end" },
     });
     const parsed = readRasterWish({
-      protocol: 1,
+      protocol: PROTOCOL_VERSION,
       area: "raster",
       commandId: "m-2",
       kind: "move",
@@ -156,14 +156,14 @@ describe("Raster-Befehl", () => {
   });
 
   it("weist fremde, leere und übergroße Nachrichten ab", () => {
-    const broken = readRasterWish({ protocol: 1, area: "ghost-floor", commandId: "abc", kind: "reset" });
+    const broken = readRasterWish({ protocol: PROTOCOL_VERSION, area: "ghost-floor", commandId: "abc", kind: "reset" });
     expect(broken).toEqual({ ok: false, commandId: "abc", notice: "Befehl ist ungültig." });
-    expect(readRasterWish({ protocol: 1, area: "raster", commandId: "abc", kind: "move", path: [] })).toMatchObject({
+    expect(readRasterWish({ protocol: PROTOCOL_VERSION, area: "raster", commandId: "abc", kind: "move", path: [] })).toMatchObject({
       ok: false,
       notice: "Befehl ist ungültig.",
     });
     const huge = readRasterWish({
-      protocol: 1,
+      protocol: PROTOCOL_VERSION,
       area: "raster",
       commandId: "abc",
       kind: "reset",

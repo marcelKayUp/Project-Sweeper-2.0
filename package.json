@@ -30,6 +30,7 @@
     "generate:building": "node tools/generate-building.mjs",
     "check:buildings": "node tools/check-buildings.mjs",
     "check:corporations": "node tools/check-corporations.mjs",
+    "check:weapon-classification": "node tools/weapons/check-classification.mjs",
     "check:generator-ui": "corepack pnpm --filter @neon/client check:generator-ui",
     "capture:deckung": "corepack pnpm --filter @neon/client capture",
     "capture:aktionspunkte": "corepack pnpm --filter @neon/client capture:aktionspunkte",

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   applyMissionResult,
   bookingFromMission,
+  carriedGear,
   createCampaign,
   fieldRejection,
   freezeLoadout,
@@ -9,11 +10,15 @@ import {
   LOADOUT_MAGAZINES,
   LOADOUT_MEDKITS,
   moveGear,
+  movePiece,
   readCampaign,
   releaseFreeze,
   RUNNER_IDS,
+  SAVE_VERSION,
+  type CampaignRunnerId,
   type CampaignState,
   type MissionBooking,
+  type RunnerGear,
   type RunnerReturn,
 } from "./campaign.ts";
 import { ghostFloorSpec } from "./ghostFloor.ts";
@@ -21,6 +26,19 @@ import { applyCommand, createMissionState, RESERVE_MAGAZINES, type WeaponId } fr
 import { RIFLE_MAGAZINE } from "./resolve.ts";
 
 const rifles = RUNNER_IDS.map((runnerId) => ({ runnerId, weapon: "rifle" as const }));
+
+function counts(state: CampaignState, runnerId: CampaignRunnerId): RunnerGear {
+  return carriedGear(state.runners[runnerId]);
+}
+
+function countTable(state: CampaignState): Record<CampaignRunnerId, RunnerGear> {
+  return {
+    kite: counts(state, "kite"),
+    voss: counts(state, "voss"),
+    nera: counts(state, "nera"),
+    sol: counts(state, "sol"),
+  };
+}
 
 function end(runnerId: string, patch: Partial<RunnerReturn> = {}): RunnerReturn {
   return {
@@ -111,7 +129,7 @@ describe("Kampagnenbuchung", () => {
     expect(JSON.stringify(rifles)).toBe(choices);
     expect(frozen.state.revision).toBe(1);
     expect(frozen.state.freeze.resultId).toBe("ghost-floor-1");
-    expect(frozen.state.runners.kite).toMatchObject({ rifle: 0, rifleMagazines: 0, medkits: 0, sidearm: 1, sidearmMagazines: LOADOUT_MAGAZINES });
+    expect(counts(frozen.state, "kite")).toMatchObject({ rifle: 0, rifleMagazines: 0, medkits: 0, sidearm: 1, sidearmMagazines: LOADOUT_MAGAZINES });
     expect(frozen.state.lager).toBe(campaign.lager);
     expect(frozen.state.progress.bookedResults).toBe(0);
     expect(gearOffer(frozen.state, "kite").rifleReady).toBe(false);
@@ -144,11 +162,11 @@ describe("Kampagnenbuchung", () => {
       lastReason: "keine-handlungsfaehigen",
       lastRound: 1,
     });
-    expect(booked.state.runners.kite).toMatchObject({ rifle: 1, rifleMagazines: 1, medkits: 0 });
+    expect(counts(booked.state, "kite")).toMatchObject({ rifle: 1, rifleMagazines: 1, medkits: 0 });
     expect(booked.state.lager).toBe(frozen.state.lager);
-    expect(booked.state.runners.voss).toMatchObject({ rifleMagazines: LOADOUT_MAGAZINES, medkits: 1 });
-    expect(booked.state.runners.nera.rifleMagazines).toBe(LOADOUT_MAGAZINES);
-    expect(booked.state.runners.sol.rifleMagazines).toBe(LOADOUT_MAGAZINES - 1);
+    expect(counts(booked.state, "voss")).toMatchObject({ rifleMagazines: LOADOUT_MAGAZINES, medkits: 1 });
+    expect(counts(booked.state, "nera").rifleMagazines).toBe(LOADOUT_MAGAZINES);
+    expect(counts(booked.state, "sol").rifleMagazines).toBe(LOADOUT_MAGAZINES - 1);
     expect(booked.state.progress.lines.map((line) => [line.runnerId, line.spentMagazines, line.spentMedkits])).toEqual([
       ["kite", 2, 1],
       ["voss", 0, 0],
@@ -163,7 +181,7 @@ describe("Kampagnenbuchung", () => {
     });
     expect(duplicate).toMatchObject({ ok: false, rejection: "Ergebnis ist bereits verbucht." });
     expect(duplicate.state).toBe(booked.state);
-    expect(booked.state.runners.kite.medkits).toBe(0);
+    expect(counts(booked.state, "kite").medkits).toBe(0);
     expect(booked.state.progress.bookedResults).toBe(1);
 
     const blocked = freezeLoadout(
@@ -217,13 +235,14 @@ describe("Kampagnenbuchung", () => {
 
   it("migriert Version 0 und 1 ohne zusätzlichen Besitz", () => {
     const fresh = createCampaign();
-    const runners = fresh.runners;
+    const runners = countTable(fresh);
     const migrated = readCampaign({ version: 0, runners });
     expect(migrated.ok).toBe(true);
     if (!migrated.ok) return;
     expect(migrated.migrated).toBe(true);
-    expect(migrated.state.version).toBe(2);
-    expect(migrated.state.runners).toEqual(runners);
+    expect(SAVE_VERSION).toBe(3);
+    expect(migrated.state.version).toBe(3);
+    expect(migrated.state.runners).toEqual(fresh.runners);
     expect(migrated.state.lager).toEqual(fresh.lager);
     expect(migrated.state.booked).toEqual([]);
     expect(migrated.state.progress.bookedResults).toBe(0);
@@ -231,7 +250,7 @@ describe("Kampagnenbuchung", () => {
     expect(again.ok).toBe(true);
     if (!again.ok) return;
     expect(again.migrated).toBe(false);
-    expect(again.state.runners.kite).toEqual(runners.kite);
+    expect(again.state.runners.kite).toEqual(fresh.runners.kite);
 
     const versionOne = {
       version: 1,
@@ -249,9 +268,9 @@ describe("Kampagnenbuchung", () => {
     expect(fromOne.ok).toBe(true);
     if (!fromOne.ok) return;
     expect(fromOne.migrated).toBe(true);
-    expect(fromOne.state.version).toBe(2);
+    expect(fromOne.state.version).toBe(3);
     expect(fromOne.state.revision).toBe(3);
-    expect(fromOne.state.runners.kite).toMatchObject({ rifle: 1, medkits: 1 });
+    expect(counts(fromOne.state, "kite")).toMatchObject({ rifle: 1, medkits: 1 });
     expect(fromOne.state.lager).toEqual({ rifle: 3, sidearm: 0, rifleMagazines: 0, sidearmMagazines: 0, medkits: 1 });
     expect(readCampaign(fromOne.state).ok).toBe(true);
 
@@ -259,13 +278,14 @@ describe("Kampagnenbuchung", () => {
     expect(roundtrip.ok).toBe(true);
     if (!roundtrip.ok) return;
     expect(roundtrip.state.progress.bookedResults).toBe(1);
-    expect(roundtrip.state.runners.kite.sidearmMagazines).toBe(LOADOUT_MAGAZINES);
+    expect(counts(roundtrip.state, "kite").sidearmMagazines).toBe(LOADOUT_MAGAZINES);
 
     expect(readCampaign({ version: 0, runners, booked: ["ghost-floor-1"] }).ok).toBe(false);
     expect(readCampaign({ version: 2, runners }).ok).toBe(false);
     expect(readCampaign({ version: 0, runners: { ...runners, kite: { ...runners.kite, medkits: 1.5 } } }).ok).toBe(false);
     const overCap = createCampaign();
-    expect(readCampaign({ ...overCap, runners: { ...overCap.runners, kite: { ...overCap.runners.kite, rifle: 2 } } }).ok).toBe(false);
+    const capped = countTable(overCap);
+    expect(readCampaign({ ...overCap, version: 2, runners: { ...capped, kite: { ...capped.kite, rifle: 2 } } }).ok).toBe(false);
   });
 
   it("bewegt nur vorhandenen Besitz zwischen Slot und Lager und friert das Lager nicht an", () => {
@@ -279,7 +299,7 @@ describe("Kampagnenbuchung", () => {
     expect(stored.ok).toBe(true);
     if (!stored.ok) return;
     expect(JSON.stringify(campaign)).toBe(before);
-    expect(stored.state.runners.kite.medkits).toBe(0);
+    expect(counts(stored.state, "kite").medkits).toBe(0);
     expect(stored.state.lager.medkits).toBe(1);
     const full = moveGear(stored.state, "voss", "medkits", "nehmen");
     expect(full).toMatchObject({ ok: false, rejection: "Slot ist voll." });
@@ -290,7 +310,7 @@ describe("Kampagnenbuchung", () => {
     const duplicate = moveGear(returned.state, "kite", "medkits", "nehmen");
     expect(duplicate).toMatchObject({ ok: false, rejection: "Lager reicht nicht." });
     expect(duplicate.state).toBe(returned.state);
-    expect(returned.state.runners.kite.medkits).toBe(1);
+    expect(counts(returned.state, "kite").medkits).toBe(1);
     expect(returned.state.lager.medkits).toBe(0);
 
     const aside = moveGear(campaign, "kite", "rifle", "legen");
@@ -312,11 +332,12 @@ describe("Kampagnenbuchung", () => {
 
     const parked = freezeLoadout(campaign, rifles, 1);
     if (!parked.ok) throw new Error(parked.rejection);
+    const parkedCounts = countTable(parked.state);
     const versionOne = {
       version: 1,
       id: parked.state.id,
       revision: parked.state.revision,
-      runners: { ...parked.state.runners, kite: { ...parked.state.runners.kite, rifle: 1 } },
+      runners: { ...parkedCounts, kite: { ...parkedCounts.kite, rifle: 1 } },
       freeze: parked.state.freeze,
       booked: parked.state.booked,
       progress: parked.state.progress,
@@ -326,8 +347,104 @@ describe("Kampagnenbuchung", () => {
     if (!migrated.ok || !migrated.state.freeze) return;
     const released = releaseFreeze(migrated.state, migrated.state.freeze.resultId);
     expect(released.released).toBe(true);
-    expect(released.state.runners.kite.rifle).toBe(1);
+    expect(counts(released.state, "kite").rifle).toBe(1);
     expect(released.state.lager.rifle).toBe(1);
     expect(released.state.progress.bookedResults).toBe(0);
   });
+
+  it("belegt Hände und weist einen Zug auf ein volles oder leeres Ziel ab", () => {
+    const campaign = createCampaign();
+    const before = JSON.stringify(campaign);
+    expect(campaign.runners.kite.hands).toEqual({ left: "rifle", right: "rifle" });
+    expect(counts(campaign, "kite")).toEqual({ rifle: 1, sidearm: 1, rifleMagazines: LOADOUT_MAGAZINES, sidearmMagazines: LOADOUT_MAGAZINES, medkits: 1 });
+
+    const ontoOneHand = movePiece(campaign, "kite", { area: "hands" }, { area: "hand", hand: "right" });
+    expect(ontoOneHand).toMatchObject({ ok: false, rejection: "Ziel passt nicht." });
+    expect(ontoOneHand.state).toBe(campaign);
+    expect(JSON.stringify(campaign)).toBe(before);
+
+    const parked = movePiece(campaign, "kite", { area: "hands" }, { area: "stash", post: "rifle" });
+    expect(parked.ok).toBe(true);
+    if (!parked.ok) return;
+    expect(parked.state.lager.rifle).toBe(1);
+    expect(parked.state.runners.kite.hands).toEqual({ left: "empty", right: "empty" });
+    const stillOneHand = movePiece(parked.state, "kite", { area: "stash", post: "rifle" }, { area: "hand", hand: "left" });
+    expect(stillOneHand).toMatchObject({ ok: false, rejection: "Ziel passt nicht." });
+    expect(stillOneHand.state).toBe(parked.state);
+
+    const both = movePiece(parked.state, "kite", { area: "stash", post: "rifle" }, { area: "hands" });
+    expect(both.ok).toBe(true);
+    if (!both.ok) return;
+    expect(both.state.runners.kite.hands).toEqual({ left: "rifle", right: "rifle" });
+    expect(both.state.lager.rifle).toBe(0);
+    expect(counts(both.state, "kite").rifle).toBe(1);
+
+    const pistolBlocked = movePiece(both.state, "kite", { area: "pack", index: 0 }, { area: "hand", hand: "right" });
+    expect(pistolBlocked).toMatchObject({ ok: false, rejection: "Slot ist voll." });
+    expect(pistolBlocked.state).toBe(both.state);
+
+    const aside = movePiece(both.state, "kite", { area: "hands" }, { area: "stash", post: "rifle" });
+    if (!aside.ok) throw new Error(aside.rejection);
+    const pistol = movePiece(aside.state, "kite", { area: "pack", index: 0 }, { area: "hand", hand: "left" });
+    expect(pistol.ok).toBe(true);
+    if (!pistol.ok) return;
+    expect(pistol.state.runners.kite.hands).toEqual({ left: "sidearm", right: "empty" });
+    expect(counts(pistol.state, "kite").sidearm).toBe(1);
+    const rifleBlocked = movePiece(pistol.state, "kite", { area: "stash", post: "rifle" }, { area: "hands" });
+    expect(rifleBlocked).toMatchObject({ ok: false, rejection: "Slot ist voll." });
+    expect(rifleBlocked.state.lager.rifle).toBe(1);
+
+    const stored = moveGear(campaign, "voss", "medkits", "legen");
+    if (!stored.ok) throw new Error(stored.rejection);
+    const beltFull = movePiece(stored.state, "kite", { area: "stash", post: "medkits" }, { area: "belt" });
+    expect(beltFull).toMatchObject({ ok: false, rejection: "Slot ist voll." });
+    expect(beltFull.state).toBe(stored.state);
+    const taken = movePiece(stored.state, "voss", { area: "stash", post: "medkits" }, { area: "belt" });
+    expect(taken.ok).toBe(true);
+    if (!taken.ok) return;
+    const emptyLager = movePiece(taken.state, "kite", { area: "stash", post: "medkits" }, { area: "belt" });
+    expect(emptyLager).toMatchObject({ ok: false, rejection: "Lager reicht nicht." });
+    expect(emptyLager.state).toBe(taken.state);
+    expect(counts(taken.state, "kite").medkits).toBe(1);
+    expect(taken.state.lager.medkits).toBe(0);
+
+    const magazineOnBelt = movePiece(campaign, "kite", { area: "pack", index: 1 }, { area: "belt" });
+    expect(magazineOnBelt).toMatchObject({ ok: false, rejection: "Ziel passt nicht." });
+    expect(magazineOnBelt.state).toBe(campaign);
+
+    const raw = {
+      version: 2,
+      id: campaign.id,
+      revision: 4,
+      runners: {
+        ...countTable(campaign),
+        kite: { ...counts(campaign, "kite"), sidearm: 0, rifleMagazines: 1 },
+      },
+      lager: { rifle: 2, sidearm: 1, rifleMagazines: 4, sidearmMagazines: 0, medkits: 3 },
+      freeze: null,
+      booked: [],
+      progress: campaign.progress,
+    };
+    const read = readCampaign(raw);
+    expect(read.ok).toBe(true);
+    if (!read.ok) return;
+    expect(read.migrated).toBe(true);
+    const beforeTotals = totalPieces(raw.runners as Record<CampaignRunnerId, RunnerGear>, raw.lager);
+    const afterTotals = totalPieces(countTable(read.state), read.state.lager);
+    expect(afterTotals).toEqual(beforeTotals);
+    expect(read.state.runners.kite.hands).toEqual({ left: "rifle", right: "rifle" });
+    expect(counts(read.state, "kite")).toMatchObject({ rifle: 1, sidearm: 0, rifleMagazines: 1, medkits: 1 });
+  });
 });
+
+function totalPieces(runners: Record<CampaignRunnerId, RunnerGear>, lager: RunnerGear): RunnerGear {
+  const sum = { rifle: lager.rifle, sidearm: lager.sidearm, rifleMagazines: lager.rifleMagazines, sidearmMagazines: lager.sidearmMagazines, medkits: lager.medkits };
+  for (const runnerId of RUNNER_IDS) {
+    sum.rifle += runners[runnerId].rifle;
+    sum.sidearm += runners[runnerId].sidearm;
+    sum.rifleMagazines += runners[runnerId].rifleMagazines;
+    sum.sidearmMagazines += runners[runnerId].sidearmMagazines;
+    sum.medkits += runners[runnerId].medkits;
+  }
+  return sum;
+}

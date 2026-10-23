@@ -2,11 +2,13 @@ import {
   applyCommand,
   projectTeam,
   createMissionState,
+  type BodyPartId,
   type Cell,
   type MissionEvent,
   type MissionSpec,
   type MissionState,
   type OutcomeId,
+  type PartState,
   type PhaseId,
   type StepResult,
   type UnitStatus,
@@ -40,6 +42,7 @@ export interface SightUnit {
   readonly weapon: WeaponId;
   readonly aiming: boolean;
   readonly medkits: number;
+  readonly parts: readonly PartState[];
   readonly overwatch: "n" | "e" | "s" | "w" | null;
 }
 
@@ -90,7 +93,7 @@ export type SightWish =
   | { readonly commandId: string; readonly kind: "extract"; readonly unitId: string }
   | { readonly commandId: string; readonly kind: "reload"; readonly unitId: string }
   | { readonly commandId: string; readonly kind: "aim"; readonly unitId: string }
-  | { readonly commandId: string; readonly kind: "heal"; readonly unitId: string; readonly targetId: string }
+  | { readonly commandId: string; readonly kind: "heal"; readonly unitId: string; readonly targetId: string; readonly part: BodyPartId }
   | { readonly commandId: string; readonly kind: "overwatch"; readonly unitId: string; readonly direction: "n" | "e" | "s" | "w" }
   | { readonly commandId: string; readonly kind: "end" }
   | { readonly commandId: string; readonly kind: "reset" };
@@ -151,6 +154,7 @@ export function createSightSession(
         weapon: unit.weapon,
         aiming: unit.aiming,
         medkits: unit.medkits,
+        parts: unit.parts.map((part) => ({ id: part.id, hp: part.hp, maxHp: part.maxHp, wound: part.wound })),
         overwatch: unit.overwatch,
       })),
       copies: view.copies,
@@ -202,7 +206,9 @@ export function createSightSession(
     }
     if (wish.kind === "extract") return applyCommand(mission, spec, { kind: "extract", unitId: wish.unitId });
     if (wish.kind === "aim") return applyCommand(mission, spec, { kind: "aim", unitId: wish.unitId });
-    if (wish.kind === "heal") return applyCommand(mission, spec, { kind: "heal", unitId: wish.unitId, targetId: wish.targetId });
+    if (wish.kind === "heal") {
+      return applyCommand(mission, spec, { kind: "heal", unitId: wish.unitId, targetId: wish.targetId, part: wish.part });
+    }
     if (wish.kind === "overwatch") {
       return applyCommand(mission, spec, { kind: "overwatch", unitId: wish.unitId, direction: wish.direction });
     }

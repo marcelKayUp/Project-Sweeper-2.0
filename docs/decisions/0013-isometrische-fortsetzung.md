@@ -11,7 +11,7 @@ Datum: 21.10.2026
 
 Die Fortsetzung der Taktikansicht ist die orthografische Babylon-Fassung.
 
-- Einstiege: `http://127.0.0.1:5173/?stueck=raster` und `http://127.0.0.1:5173/?stueck=sicht`. Seit [0024](0024-ein-start-fuer-die-testmission.md) öffnet `corepack pnpm dev` die Testmission ohne Parameter.
+- Einstiege: `http://127.0.0.1:5173/?stueck=raster` und `http://127.0.0.1:5173/?stueck=sicht`. Seit [0039](0039-testeinstieg-aus-der-sitemap.md) öffnet die Adresse ohne Parameter die Prüfliste. Die Testmission bleibt `?stueck=sicht`.
 - Kamera, Nordmarke, Zoom und 90-Grad-Drehung bleiben die aus `?stueck=raster`. Eine Drehung ändert weder logisch Nord noch Deckung oder Sichtlinie.
 - Der Spielserver bestätigt Bewegung, Schuss, Interaktion und Missionsfortschritt. Der Client zeichnet nur den gefilterten Stand.
 - Neue taktische Darstellung, Eingabe und serverbestätigte Kartenarbeit erweitern diese Fassung. Dazu gehören die Szenen in `apps/client/src/iso` und die Räume `raster` und `sicht`.

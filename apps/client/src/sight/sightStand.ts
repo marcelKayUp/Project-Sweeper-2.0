@@ -6,10 +6,14 @@ import {
   previewShot,
   RULES_VERSION,
   PROTOCOL_VERSION,
+  stepAp,
   type BattleMap,
+  type BodyPartId,
   type Cell,
   type Direction,
+  type PartState,
 } from "@neon/sim";
+import { readParts } from "../mission/WoundList.tsx";
 
 const COMMAND_ID = /^[A-Za-z0-9-]{1,40}$/;
 const OBJECT_ID = /^[a-z0-9-]{1,48}$/;
@@ -40,6 +44,7 @@ export interface SightUnit {
   readonly status: "active" | "down" | "extracted";
   readonly aiming: boolean;
   readonly medkits: number;
+  readonly parts: readonly PartState[];
   readonly overwatch: Direction | null;
 }
 
@@ -110,6 +115,7 @@ export interface SightHealBody extends WishBase {
   readonly kind: "heal";
   readonly unitId: string;
   readonly targetId: string;
+  readonly part: BodyPartId;
 }
 
 export interface SightOverwatchBody extends WishBase {
@@ -155,8 +161,8 @@ export function sightAim(commandId: string, unitId: string): SightUnitBody {
   return { protocol: PROTOCOL_VERSION, area: "sicht", commandId, kind: "aim", unitId };
 }
 
-export function sightHeal(commandId: string, unitId: string, targetId: string): SightHealBody {
-  return { protocol: PROTOCOL_VERSION, area: "sicht", commandId, kind: "heal", unitId, targetId };
+export function sightHeal(commandId: string, unitId: string, targetId: string, part: BodyPartId): SightHealBody {
+  return { protocol: PROTOCOL_VERSION, area: "sicht", commandId, kind: "heal", unitId, targetId, part };
 }
 
 export function sightOverwatch(commandId: string, unitId: string, direction: Direction): SightOverwatchBody {
@@ -255,12 +261,15 @@ export function readSightStand(payload: unknown): SightStand | null {
 export function sightPath(stand: SightStand, unitId: string, goal: Cell): readonly Cell[] | null {
   const unit = activeCrew(stand, unitId);
   if (!unit) return null;
-  return pathTo(previewMap(stand), blockers(stand, unitId), { x: unit.x, y: unit.y }, goal, unit.ap);
+  const stride = stepAp(unit.parts);
+  if (unit.ap < stride) return null;
+  return pathTo(previewMap(stand), blockers(stand, unitId), { x: unit.x, y: unit.y }, goal, Math.floor(unit.ap / stride));
 }
 
 export function sightReach(stand: SightStand, unitId: string): Cell[] {
   const unit = activeCrew(stand, unitId);
-  if (!unit || unit.ap < actionAp("move")) return [];
+  const stride = unit ? stepAp(unit.parts) : 0;
+  if (!unit || unit.ap < stride) return [];
   const map = previewMap(stand);
   const walls = new Set(map.walls.map(key));
   const blocked = new Set(blockers(stand, unitId).map(key));
@@ -277,7 +286,7 @@ export function sightReach(stand: SightStand, unitId: string): Cell[] {
   while (head < queue.length) {
     const current = queue[head];
     head += 1;
-    if (!current || current.cost >= unit.ap) continue;
+    if (!current || current.cost + stride > unit.ap) continue;
     for (const step of steps) {
       const next = { x: current.x + step.x, y: current.y + step.y };
       const id = key(next);
@@ -286,7 +295,7 @@ export function sightReach(stand: SightStand, unitId: string): Cell[] {
       if (next.x < 0 || next.y < 0 || next.x >= map.width || next.y >= map.height) continue;
       if (walls.has(id) || blocked.has(id)) continue;
       found.push(next);
-      queue.push({ x: next.x, y: next.y, cost: current.cost + actionAp("move") });
+      queue.push({ x: next.x, y: next.y, cost: current.cost + stride });
     }
   }
   found.sort((left, right) => left.y - right.y || left.x - right.x);
@@ -400,8 +409,9 @@ function unitsOf(value: unknown, width: number, height: number): SightUnit[] | n
     const record = entry as Record<string, unknown>;
     const x = bounded(record.x, 0, width - 1);
     const y = bounded(record.y, 0, height - 1);
-    const hp = bounded(record.hp, 0, 12);
-    const maxHp = bounded(record.maxHp, 1, 12);
+    const hp = bounded(record.hp, 0, 99);
+    const maxHp = bounded(record.maxHp, 1, 99);
+    const parts = readParts(record.parts);
     const ap = bounded(record.ap, 0, 8);
     const range = bounded(record.range, 1, 20);
     const magazine = bounded(record.magazine, 0, 12);
@@ -417,6 +427,7 @@ function unitsOf(value: unknown, width: number, height: number): SightUnit[] | n
       magazine === null ||
       magazineSize === null ||
       reserveMagazines === null ||
+      parts === null ||
       hp > maxHp ||
       magazine > magazineSize ||
       record.aiming !== true && record.aiming !== false ||
@@ -449,6 +460,7 @@ function unitsOf(value: unknown, width: number, height: number): SightUnit[] | n
       status: record.status,
       aiming: record.aiming,
       medkits: record.medkits,
+      parts,
       overwatch: record.overwatch,
     });
   }

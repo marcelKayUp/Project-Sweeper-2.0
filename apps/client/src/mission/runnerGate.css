@@ -1,0 +1,180 @@
+.runner-gate [data-field="password"] {
+  letter-spacing: 0.08em;
+}
+
+.mission.mission-create {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  align-content: stretch;
+  justify-content: stretch;
+  padding: 16px 22px 12px;
+  overflow: hidden;
+}
+
+.create-board {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  height: 100%;
+  min-height: 0;
+}
+
+.create-head,
+.create-foot {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  min-width: 0;
+}
+
+.create-head h1,
+.mission.mission-create h2 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.create-head p,
+.create-foot p,
+.create-note,
+.create-point small {
+  margin: 0;
+  color: #c9d3e2;
+  font-size: 14px;
+}
+
+.create-columns {
+  display: grid;
+  grid-template-columns: 390px minmax(0, 1fr) 390px;
+  gap: 16px;
+  min-height: 0;
+}
+
+.create-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.create-column h2 {
+  font-size: 18px;
+}
+
+.mission.mission-create select,
+.mission.mission-create input[type="range"] {
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  color: #f6f3ec;
+  background: #121820;
+  border: 1px solid #314056;
+  font: inherit;
+}
+
+.mission.mission-create label {
+  gap: 2px;
+  font-size: 13px;
+}
+
+.create-range,
+.create-color,
+.create-point,
+.create-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.create-range output,
+.create-point strong {
+  min-width: 2.2em;
+  font-family: Consolas, "Cascadia Mono", monospace;
+}
+
+.create-colors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 12px;
+}
+
+.create-color input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.create-color input[type="color"] {
+  width: 36px;
+  height: 24px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.create-color span {
+  flex: 1;
+}
+
+.create-stage-column {
+  min-height: 0;
+}
+
+.create-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  border: 1px solid #314056;
+  background: #171c22;
+}
+
+.create-preview,
+.create-preview canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.create-preview-note {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  margin: 0;
+  padding: 8px 10px;
+  background: rgba(8, 12, 18, 0.92);
+  border: 1px solid #314056;
+}
+
+.create-point {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 8px;
+  align-items: center;
+}
+
+.create-point small {
+  grid-column: 1 / -1;
+}
+
+.create-stepper button {
+  min-width: 32px;
+  min-height: 32px;
+  padding: 0;
+}
+
+.create-foot {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.create-foot .mission-actions {
+  flex: none;
+}
+
+.create-foot [data-error] {
+  flex: 1;
+  text-align: right;
+}

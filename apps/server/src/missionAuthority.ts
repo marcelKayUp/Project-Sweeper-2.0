@@ -3,13 +3,20 @@ import {
   applyCommand,
   applyMissionResult,
   bookingFromMission,
+  carriedGear,
   closeTeamPhase,
+  countReturnedMagazines,
   createMissionState,
   fieldRejection,
   freezeLoadout,
   gearOffer,
+  LOADOUT_MAGAZINES,
+  LOADOUT_MEDKITS,
   moveGear,
+  movePiece,
   releaseFreeze,
+  returnFieldKit,
+  takeFieldKit,
   projectEvents,
   projectTeam,
   type BookedLine,
@@ -18,12 +25,14 @@ import {
   type MissionEvent,
   type MissionSpec,
   type MissionState,
+  type FloorView,
   type PublicUnit,
   type RunnerGear,
   type WeaponId,
 } from "@neon/sim";
 import { ghostFloorSpec } from "@neon/sim/ghost-floor";
 import { createMemoryCampaignStore, type CampaignStore } from "./campaignStore.ts";
+import { bookHeld, holdKit, nextResultId, projectAccount, releaseHold, saveGear, type RunnerStore } from "./runnerAccount.ts";
 import { parseCommand, parseLobby, type CommandMessage } from "./validate.ts";
 
 const ORDER = ["kite", "voss", "nera", "sol"] as const;
@@ -72,6 +81,7 @@ export interface AuthoritySlot {
   readonly ready: boolean;
   readonly connected: boolean;
   readonly holder: SlotHolder;
+  readonly account: boolean;
   readonly gear: GearOffer;
 }
 
@@ -118,6 +128,8 @@ export interface AuthorityStand {
   readonly extraction: readonly { readonly x: number; readonly y: number }[];
   readonly slots: readonly AuthoritySlot[];
   readonly units: readonly PublicUnit[];
+  readonly levelCount: number;
+  readonly floors: readonly FloorView[];
 }
 
 export interface SharedMission {
@@ -146,6 +158,7 @@ export interface TeamBatch {
 interface Seat {
   runnerId: RunnerId;
   name: string;
+  accountKey: string;
   preset: "" | WeaponId;
   ready: boolean;
   connected: boolean;
@@ -168,7 +181,7 @@ interface SessionNote {
 }
 
 export interface MissionAuthority {
-  join(sessionId: string, name: unknown): JoinResult;
+  join(sessionId: string, name: unknown, accountKey?: unknown): JoinResult;
   submit(events: readonly AuthorityEvent[]): void;
   stamp(): void;
   stand(sessionId: string): AuthorityStand;
@@ -180,7 +193,7 @@ export interface MissionAuthority {
   shared(): SharedMission;
 }
 
-export function createMissionAuthority(clock: AuthorityClock, seed = MISSION_SEED, store?: CampaignStore): MissionAuthority {
+export function createMissionAuthority(clock: AuthorityClock, seed = MISSION_SEED, store?: CampaignStore, accounts?: RunnerStore): MissionAuthority {
   const campaign = store ?? createMemoryCampaignStore();
   if (!Number.isInteger(seed) || seed < 1 || seed > 100) throw new Error("Seed ist ungültig.");
   const missionSeed = seed;
@@ -202,15 +215,23 @@ export function createMissionAuthority(clock: AuthorityClock, seed = MISSION_SEE
   let draining = false;
   let batch: TeamBatch | null = null;
 
-  function join(sessionId: string, name: unknown): JoinResult {
+  function join(sessionId: string, name: unknown, accountKey?: unknown): JoinResult {
     drain();
     if (seats.has(sessionId)) return { ok: true };
     if (sim) return { ok: false, rejection: "Die Mission läuft bereits." };
+    const bound = resolveAccount(accountKey);
+    if (!bound.ok) return bound;
+    if (bound.key && [...seats.values()].some((seat) => seat.accountKey === bound.key)) {
+      return { ok: false, rejection: "Dieser Runner ist bereits im Raum." };
+    }
     const runnerId = ORDER.find((id) => ![...seats.values()].some((seat) => seat.runnerId === id));
     if (!runnerId) return { ok: false, rejection: "Der Raum ist voll." };
+    const account = bound.key ? accounts?.read().runners[bound.key] : undefined;
+    if (bound.key && !account) return { ok: false, rejection: "Anmeldung abgelehnt." };
     seats.set(sessionId, {
       runnerId,
-      name: cleanName(name),
+      name: account ? account.name : cleanName(name),
+      accountKey: bound.key,
       preset: "",
       ready: false,
       connected: true,
@@ -333,7 +354,7 @@ export function createMissionAuthority(clock: AuthorityClock, seed = MISSION_SEE
       return;
     }
     if (parsed.message.kind === "preset") {
-      const rejection = fieldRejection(campaign.read(), seat.runnerId, parsed.message.preset);
+      const rejection = fieldRejection(viewFor(seat.runnerId), seat.runnerId, parsed.message.preset);
       if (rejection) {
         note(sessionId, "", rejection, 0);
         return;
@@ -343,15 +364,32 @@ export function createMissionAuthority(clock: AuthorityClock, seed = MISSION_SEE
       note(sessionId, "", "", 0);
       return;
     }
-    if (parsed.message.kind === "lager") {
-      const moved = moveGear(campaign.read(), seat.runnerId, parsed.message.posten, parsed.message.richtung);
+    if (parsed.message.kind === "lager" || parsed.message.kind === "ziehen") {
+      const source = viewFor(seat.runnerId);
+      const moved = parsed.message.kind === "lager"
+        ? moveGear(source, seat.runnerId, parsed.message.posten, parsed.message.richtung)
+        : movePiece(source, seat.runnerId, parsed.message.von, parsed.message.nach);
       if (!moved.ok) {
         note(sessionId, "", moved.rejection, 0);
         return;
       }
-      campaign.write(moved.state);
+      if (seat.accountKey) {
+        if (!accounts) {
+          note(sessionId, "", "Einsatz ist ungültig.", 0);
+          return;
+        }
+        const saved = saveGear(accounts.read(), seat.accountKey, moved.state.runners[seat.runnerId], moved.state.lager);
+        if (!saved) {
+          note(sessionId, "", "Einsatz ist ungültig.", 0);
+          return;
+        }
+        accounts.write(saved);
+      } else {
+        campaign.write(moved.state);
+      }
       seat.ready = false;
-      if (seat.preset && fieldRejection(moved.state, seat.runnerId, seat.preset) === "Ausrüstung fehlt.") seat.preset = "";
+      const next = viewFor(seat.runnerId);
+      if (seat.preset && fieldRejection(next, seat.runnerId, seat.preset) === "Ausrüstung fehlt.") seat.preset = "";
       note(sessionId, "", "", 0);
       return;
     }
@@ -393,6 +431,7 @@ export function createMissionAuthority(clock: AuthorityClock, seed = MISSION_SEE
     seats.set(`bot:${runnerId}`, {
       runnerId,
       name: "Bot",
+      accountKey: "",
       preset: "rifle",
       ready: true,
       connected: true,
@@ -454,13 +493,17 @@ export function createMissionAuthority(clock: AuthorityClock, seed = MISSION_SEE
       presets[seat.runnerId] = seat.preset;
       choices.push({ runnerId: seat.runnerId, weapon: seat.preset });
     }
-    const frozen = freezeLoadout(campaign.read(), choices, missionSeed);
-    if (!frozen.ok || !frozen.state.freeze) {
-      note(sessionId, "", frozen.ok ? "Einsatz ist ungültig." : frozen.rejection, 0);
-      return;
+    if (all.some((seat) => seat.accountKey !== "")) {
+      if (!holdAccounts(sessionId, all)) return;
+    } else {
+      const frozen = freezeLoadout(campaign.read(), choices, missionSeed);
+      if (!frozen.ok || !frozen.state.freeze) {
+        note(sessionId, "", frozen.ok ? "Einsatz ist ungültig." : frozen.rejection, 0);
+        return;
+      }
+      campaign.write(frozen.state);
+      heldResultId = frozen.state.freeze.resultId;
     }
-    campaign.write(frozen.state);
-    heldResultId = frozen.state.freeze.resultId;
     bookedLocal = false;
     spec = ghostFloorSpec(presets);
     adopt(createMissionState(spec, missionSeed));
@@ -472,6 +515,10 @@ export function createMissionAuthority(clock: AuthorityClock, seed = MISSION_SEE
   function adopt(state: MissionState): void {
     sim = state;
     if (!state.result || bookedLocal || heldResultId === "") return;
+    if ([...seats.values()].some((seat) => seat.accountKey !== "")) {
+      bookAccounts(state);
+      return;
+    }
     const payload = bookingFromMission(state, heldResultId);
     if (!payload) return;
     const applied = applyMissionResult(campaign.read(), payload);
@@ -485,6 +532,19 @@ export function createMissionAuthority(clock: AuthorityClock, seed = MISSION_SEE
 
   function abort(): void {
     if (bookedLocal || heldResultId === "") return;
+    if ([...seats.values()].some((seat) => seat.accountKey !== "")) {
+      if (!accounts) return;
+      let file = accounts.read();
+      for (const seat of seats.values()) {
+        if (!seat.accountKey) continue;
+        const released = releaseHold(file, seat.accountKey, heldResultId);
+        if (!released) return;
+        file = released;
+      }
+      accounts.write(file);
+      heldResultId = "";
+      return;
+    }
     const released = releaseFreeze(campaign.read(), heldResultId);
     if (!released.released) return;
     campaign.write(released.state);
@@ -684,12 +744,119 @@ function hiddenEnemyIds(): readonly string[] {
     return null;
   }
 
+  function resolveAccount(accountKey: unknown): { readonly ok: true; readonly key: string } | { readonly ok: false; readonly rejection: string } {
+    if (accountKey === undefined || accountKey === "") return { ok: true, key: "" };
+    if (typeof accountKey !== "string" || !accounts || !accounts.read().runners[accountKey]) return { ok: false, rejection: "Anmeldung abgelehnt." };
+    return { ok: true, key: accountKey };
+  }
+
+  function accountSeat(runnerId: RunnerId): Seat | null {
+    const found = [...seats.values()].find((seat) => seat.runnerId === runnerId && seat.accountKey !== "");
+    return found ?? null;
+  }
+
+  function viewFor(runnerId: RunnerId) {
+    const bound = accountSeat(runnerId);
+    const account = bound?.accountKey ? accounts?.read().runners[bound.accountKey] : undefined;
+    if (bound && account) return projectAccount(account, runnerId);
+    return campaign.read();
+  }
+
+  function holdAccounts(sessionId: string, all: readonly Seat[]): boolean {
+    if (!accounts) {
+      note(sessionId, "", "Einsatz ist ungültig.", 0);
+      return false;
+    }
+    for (const seat of all) {
+      if (seat.preset !== "rifle" && seat.preset !== "sidearm") {
+        note(sessionId, "", "Alle müssen Ausrüstung und Bereit bestätigen.", 0);
+        return false;
+      }
+      const rejection = fieldRejection(viewFor(seat.runnerId), seat.runnerId, seat.preset);
+      if (rejection) {
+        note(sessionId, "", rejection, 0);
+        return false;
+      }
+    }
+    const keys = all.flatMap((seat) => (seat.accountKey ? [seat.accountKey] : []));
+    const resultId = nextResultId(accounts.read(), keys);
+    if (!resultId) {
+      note(sessionId, "", "Einsatz ist ungültig.", 0);
+      return false;
+    }
+    let file = accounts.read();
+    for (const seat of all) {
+      if (!seat.accountKey || (seat.preset !== "rifle" && seat.preset !== "sidearm")) continue;
+      const account = file.runners[seat.accountKey];
+      if (!account?.body || account.hold) {
+        note(sessionId, "", "Einsatz ist ungültig.", 0);
+        return false;
+      }
+      const peeled = takeFieldKit(account.body, seat.preset);
+      if (!peeled) {
+        note(sessionId, "", "Ausrüstung fehlt.", 0);
+        return false;
+      }
+      const held = holdKit(file, seat.accountKey, peeled, {
+        resultId,
+        slotId: seat.runnerId,
+        weapon: seat.preset,
+        magazines: LOADOUT_MAGAZINES,
+        medkits: LOADOUT_MEDKITS,
+      });
+      if (!held) {
+        note(sessionId, "", "Einsatz ist ungültig.", 0);
+        return false;
+      }
+      file = held;
+    }
+    accounts.write(file);
+    heldResultId = resultId;
+    return true;
+  }
+
+  function bookAccounts(state: MissionState): void {
+    if (!accounts) return;
+    const payload = bookingFromMission(state, heldResultId);
+    if (!payload) return;
+    let file = accounts.read();
+    for (const seat of seats.values()) {
+      if (!seat.accountKey) continue;
+      const back = payload.runners.find((runner) => runner.runnerId === seat.runnerId);
+      const account = file.runners[seat.accountKey];
+      if (!back || !account?.hold || account.hold.resultId !== heldResultId || back.weapon !== account.hold.weapon) return;
+      const magazines = countReturnedMagazines(back, account.hold.magazines);
+      if (magazines === null || !Number.isInteger(back.medkits) || back.medkits < 0 || back.medkits > account.hold.medkits) return;
+      const restored = returnFieldKit(account.body, account.lager, back.weapon, magazines, back.medkits);
+      if (!restored) return;
+      const gear = carriedGear(restored.body);
+      const booked = bookHeld(file, seat.accountKey, restored.body, restored.lager, {
+        runnerId: seat.runnerId,
+        weapon: back.weapon,
+        magazines: back.weapon === "rifle" ? gear.rifleMagazines : gear.sidearmMagazines,
+        medkits: gear.medkits,
+        spentMagazines: account.hold.magazines - magazines,
+        spentMedkits: account.hold.medkits - back.medkits,
+      }, {
+        resultId: payload.resultId,
+        outcome: payload.outcome,
+        reason: payload.reason,
+        round: payload.round,
+      });
+      if (!booked) return;
+      file = booked;
+    }
+    accounts.write(file);
+    bookedLocal = true;
+  }
+
   function stand(sessionId: string): AuthorityStand {
     const seat = seats.get(sessionId);
     const view = sim && spec ? projectTeam(sim, spec) : null;
     const receipt = views.get(sessionId) ?? emptyNote();
     const due = deadlineAt();
     const saved = campaign.read();
+    const mine = seat?.accountKey ? accounts?.read().runners[seat.accountKey] : undefined;
     return {
       ack,
       seed: missionSeed,
@@ -712,15 +879,15 @@ function hiddenEnemyIds(): readonly string[] {
       phaseSeconds,
       configRevision,
       deadlineAt: due ?? 0,
-      campaignRevision: saved.revision,
-      bookedResults: saved.progress.bookedResults,
-      lastOutcome: saved.progress.lastOutcome,
-      lastReason: saved.progress.lastReason,
-      lastRound: saved.progress.lastRound,
+      campaignRevision: mine ? mine.revision : saved.revision,
+      bookedResults: mine ? mine.progress.bookedResults : saved.progress.bookedResults,
+      lastOutcome: mine ? mine.progress.lastOutcome : saved.progress.lastOutcome,
+      lastReason: mine ? mine.progress.lastReason : saved.progress.lastReason,
+      lastRound: mine ? mine.progress.lastRound : saved.progress.lastRound,
       resultId: heldResultId,
-      lager: { ...saved.lager },
-      lagerOpen: saved.freeze === null && sim === null,
-      booking: saved.progress.lines.map((line) => ({ ...line })),
+      lager: mine ? { ...mine.lager } : { ...saved.lager },
+      lagerOpen: (mine ? mine.hold === null : saved.freeze === null) && sim === null,
+      booking: (mine ? mine.progress.lines : saved.progress.lines).map((line) => ({ ...line })),
       lastEventId: teamEvents.length,
       width: view?.width ?? 0,
       height: view?.height ?? 0,
@@ -740,10 +907,20 @@ function hiddenEnemyIds(): readonly string[] {
           ready: found?.ready ?? false,
           connected: found?.connected ?? false,
           holder: holderOf(found),
-          gear: gearOffer(saved, runnerId),
+          account: Boolean(found?.accountKey),
+          gear: gearOffer(viewFor(runnerId), runnerId),
         };
       }),
       units: view?.units ?? [],
+      levelCount: view?.levelCount ?? 1,
+      floors: view?.floors.map((floor) => ({
+        z: floor.z,
+        knownCells: floor.knownCells.map(copyPoint),
+        visibleCells: floor.visibleCells.map(copyPoint),
+        walls: floor.walls.map(copyPoint),
+        lowCover: floor.lowCover.map((cover) => ({ id: cover.id, x: cover.x, y: cover.y, protects: cover.protects })),
+        links: floor.links.map((link) => ({ id: link.id, kind: link.kind, x: link.x, y: link.y, toZ: link.toZ, toX: link.toX, toY: link.toY })),
+      })) ?? [],
     };
   }
 
@@ -805,7 +982,9 @@ export function scrubHiddenNotice(notice: string, hiddenIds: readonly string[]):
 function toCrew(unitId: string, action: CommandMessage["action"]): CrewCommand {
   switch (action.kind) {
     case "move":
-      return { kind: "move", unitId, x: action.x, y: action.y };
+      return action.z === undefined
+        ? { kind: "move", unitId, x: action.x, y: action.y }
+        : { kind: "move", unitId, x: action.x, y: action.y, z: action.z };
     case "interact":
       return { kind: "interact", unitId, targetId: action.targetId };
     case "extract":
@@ -817,7 +996,7 @@ function toCrew(unitId: string, action: CommandMessage["action"]): CrewCommand {
     case "aim":
       return { kind: "aim", unitId };
     case "heal":
-      return { kind: "heal", unitId, targetId: action.targetId };
+      return { kind: "heal", unitId, targetId: action.targetId, part: action.part };
     case "overwatch":
       return { kind: "overwatch", unitId, direction: action.direction };
     case "ready":

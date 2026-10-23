@@ -149,7 +149,7 @@ describe("Ghost Floor", () => {
     expect(guard.ap).toBe(2);
     expect(guard.overwatch).not.toBeNull();
     expect(state.combatRng).not.toEqual(createMissionState(floor, 1).combatRng);
-    expect(unit(state, "kite").hp).toBeLessThanOrEqual(6);
+    expect(unit(state, "kite").hp).toBeLessThan(unit(state, "kite").maxHp);
     expect(["kite", "nera", "sol", "voss"].every((id) => unit(state, id).status === "active")).toBe(true);
   });
 
@@ -193,9 +193,8 @@ describe("Ghost Floor", () => {
     state = readyAll(state);
     state = apply(state, { kind: "extract", unitId: "kite" }).state;
     expect(state.result).toBeNull();
-    for (let round = 0; round < 12 && !state.result; round += 1) {
-      state = apply(state, { kind: "ready", unitId: "voss" }).state;
-    }
+    state = leaveBleeding(state, "voss");
+    state = apply(state, { kind: "ready", unitId: "voss" }).state;
     expect(state.result?.outcome).toBe("sieg");
     expect(unit(state, "voss").status).toBe("down");
     expect(unit(state, "kite").status).toBe("extracted");
@@ -266,6 +265,19 @@ function unit(state: MissionState, id: string) {
   const found = state.units.find((item) => item.id === id);
   if (!found) throw new Error(`fehlt ${id}`);
   return found;
+}
+
+function leaveBleeding(state: MissionState, id: string): MissionState {
+  return {
+    ...state,
+    units: state.units.map((item) => {
+      if (item.id !== id) return item;
+      const parts = item.parts.map((part, index) =>
+        index === 0 ? { ...part, hp: 1, wound: "bleed" as const } : { ...part, hp: 0, wound: null },
+      );
+      return { ...item, parts, hp: 1, status: "active" as const };
+    }),
+  };
 }
 
 function doorSpec(): MissionSpec {

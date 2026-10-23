@@ -1,4 +1,4 @@
-import { PROTOCOL_VERSION } from "@neon/sim";
+import { BODY_PARTS, PROTOCOL_VERSION } from "@neon/sim";
 import { z } from "zod";
 import type { SightWish } from "./sightSession.ts";
 
@@ -64,6 +64,7 @@ const sightWishSchema = z.discriminatedUnion("kind", [
     kind: z.literal("heal"),
     unitId,
     targetId: unitId,
+    part: z.enum(BODY_PARTS),
   }),
   z.strictObject({
     protocol: z.literal(PROTOCOL_VERSION),

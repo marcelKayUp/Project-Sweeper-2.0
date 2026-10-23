@@ -1,5 +1,5 @@
 import { SIZE_DIMENSIONS } from "@neon/generator";
-import { RULES_VERSION } from "@neon/sim";
+import { PROTOCOL_VERSION, RULES_VERSION } from "@neon/sim";
 import { Client } from "@colyseus/sdk";
 import { Server } from "@colyseus/core";
 import { WebSocketTransport } from "@colyseus/ws-transport";
@@ -17,11 +17,11 @@ interface WireRoom {
 }
 
 function move(commandId: string, unitId: string, x: number, y: number) {
-  return { protocol: 1, area: "sicht", commandId, kind: "move", unitId, path: [{ x, y }] };
+  return { protocol: PROTOCOL_VERSION, area: "sicht", commandId, kind: "move", unitId, path: [{ x, y }] };
 }
 
 function reset(commandId: string) {
-  return { protocol: 1, area: "sicht", commandId, kind: "reset" };
+  return { protocol: PROTOCOL_VERSION, area: "sicht", commandId, kind: "reset" };
 }
 
 function collect(room: WireRoom) {

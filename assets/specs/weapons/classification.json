@@ -1,0 +1,641 @@
+{
+  "schemaVersion": 1,
+  "id": "waffen-klassifikation",
+  "title": "Fernkampf-Familien und Steckplätze",
+  "grenzen": {
+    "aendertKampfwerte": false,
+    "kopiertMeshes": false,
+    "neueKampfIds": false,
+    "text": "Inhaltliche Klassifikation. Keine Reichweite, kein Schaden, keine Aktionspunkte und keine Trefferformel. rifle und sidearm bleiben die einzigen Kampf-IDs."
+  },
+  "quellen": [
+    {
+      "id": "cod-bo6",
+      "art": "herstellerblog",
+      "giltAlsRegel": false,
+      "satz": "Black Ops 6 trennt Optik, Mündung, Lauf, Unterlauf, Magazin, Hintergriff und Schaft; Laser und Feuermodi sind dort Werte und hier keine Slots."
+    },
+    {
+      "id": "cod-mwii",
+      "art": "herstellerblog",
+      "giltAlsRegel": false,
+      "satz": "Modern Warfare II führt Munition als eigene Kategorie und setzt Mündung sowie Unterlauf neben einen eigenen Hintergriff."
+    },
+    {
+      "id": "cyberpunk-red",
+      "art": "wiki",
+      "giltAlsRegel": false,
+      "satz": "Wiki- und Forenbeschreibungen, keine gültige Regel: wenige gemeinsame Aufsätze statt getrennter Mündung und Optik, die Munition gehört zur Waffenfamilie."
+    },
+    {
+      "id": "cyberpunk-2077",
+      "art": "wiki",
+      "giltAlsRegel": false,
+      "satz": "Fandom-Wiki, keine gültige Regel: getrennte Plätze für Mündung und Visier plus ein Modulplatz, Munition bleibt an der Waffenklasse."
+    }
+  ],
+  "bewusstNicht": ["laser", "feuermodus", "kamm", "schaftpolster", "modul", "nahkampf"],
+  "kaliberklassen": ["pistole", "gewehr", "schrot", "schwer", "bolzen"],
+  "laengen": ["kurz", "lang"],
+  "slots": [
+    { "id": "munition", "leerErlaubt": false, "teilfamilien": ["patrone-pistole", "patrone-gewehr", "schrotpatrone", "granate", "bolzen"] },
+    { "id": "muendung", "leerErlaubt": true, "teilfamilien": ["daempfer"] },
+    { "id": "unterlauf", "leerErlaubt": true, "laengen": ["kurz", "lang"], "teilfamilien": ["lampe", "bajonett", "zweibein", "dreibein"] },
+    { "id": "aufsatz", "leerErlaubt": true, "teilfamilien": ["visier", "zielfernrohr"] },
+    { "id": "hintergriff", "leerErlaubt": true, "teilfamilien": ["hintergriff-pistole", "hintergriff-smg", "hintergriff-sturmgewehr", "hintergriff-scharf", "hintergriff-granate"] },
+    { "id": "vordergriff", "leerErlaubt": true, "teilfamilien": ["vordergriff"] },
+    { "id": "lauf", "leerErlaubt": true, "teilfamilien": ["lauf-pistole", "lauf-sturmgewehr", "lauf-scharf", "lauf-granate", "lauf-einzel"] },
+    { "id": "koerper", "leerErlaubt": false, "teilfamilien": ["koerper-pistole", "koerper-smg", "koerper-sturmgewehr", "koerper-scharf", "vorderkoerper-scharf", "koerper-armbrust", "koerper-granate"] },
+    { "id": "trommel", "leerErlaubt": false, "teilfamilien": ["trommel-revolver"] },
+    { "id": "magazin", "leerErlaubt": true, "teilfamilien": ["magazin-smg", "magazin-sturmgewehr", "magazin-scharf"] },
+    { "id": "schaft", "leerErlaubt": true, "teilfamilien": ["schaft-pistole", "schaft-smg", "schaft-sturmgewehr", "schaft-scharf", "schaft-granate", "schaft-generisch"] },
+    { "id": "handschutz", "leerErlaubt": true, "teilfamilien": ["handschutz-pistole"] }
+  ],
+  "teilfamilien": [
+    {
+      "id": "patrone-pistole",
+      "slot": "munition",
+      "kaliberklasse": "pistole",
+      "waffenarten": ["pistole", "revolver", "maschinenpistole"],
+      "praefixe": []
+    },
+    {
+      "id": "patrone-gewehr",
+      "slot": "munition",
+      "kaliberklasse": "gewehr",
+      "waffenarten": ["sturmgewehr", "bullpup", "scharfschuetzengewehr"],
+      "praefixe": []
+    },
+    {
+      "id": "schrotpatrone",
+      "slot": "munition",
+      "kaliberklasse": "schrot",
+      "waffenarten": ["schrotflinte"],
+      "praefixe": []
+    },
+    {
+      "id": "granate",
+      "slot": "munition",
+      "kaliberklasse": "schwer",
+      "waffenarten": ["granatwerfer"],
+      "praefixe": []
+    },
+    {
+      "id": "bolzen",
+      "slot": "munition",
+      "kaliberklasse": "bolzen",
+      "waffenarten": ["armbrust"],
+      "praefixe": []
+    },
+    {
+      "id": "daempfer",
+      "slot": "muendung",
+      "waffenarten": ["pistole", "maschinenpistole", "sturmgewehr", "bullpup", "scharfschuetzengewehr"],
+      "kaliberklassen": ["pistole", "gewehr"],
+      "passung": [
+        { "waffenart": "pistole", "kaliberklasse": "pistole" },
+        { "waffenart": "maschinenpistole", "kaliberklasse": "pistole" },
+        { "waffenart": "sturmgewehr", "kaliberklasse": "gewehr" },
+        { "waffenart": "bullpup", "kaliberklasse": "gewehr" },
+        { "waffenart": "scharfschuetzengewehr", "kaliberklasse": "gewehr" }
+      ],
+      "praefixe": [
+        { "ordner": "zubehoer", "praefix": "Silencer_", "beispiele": ["Silencer_1.blend", "Silencer_Short.blend", "Silencer_long.blend"] }
+      ]
+    },
+    {
+      "id": "lampe",
+      "slot": "unterlauf",
+      "laenge": "kurz",
+      "waffenarten": ["maschinenpistole", "sturmgewehr", "bullpup", "schrotflinte", "scharfschuetzengewehr"],
+      "praefixe": [
+        { "ordner": "zubehoer", "praefix": "Flashlight", "beispiele": ["Flashlight.blend"] }
+      ]
+    },
+    {
+      "id": "bajonett",
+      "slot": "unterlauf",
+      "laenge": "kurz",
+      "waffenarten": ["sturmgewehr", "bullpup", "schrotflinte"],
+      "praefixe": [
+        { "ordner": "zubehoer", "praefix": "Bayonet", "beispiele": ["Bayonet.blend", "Bayonet_2.blend"] }
+      ]
+    },
+    {
+      "id": "zweibein",
+      "slot": "unterlauf",
+      "laenge": "lang",
+      "waffenarten": ["sturmgewehr", "bullpup", "schrotflinte", "scharfschuetzengewehr", "granatwerfer"],
+      "praefixe": [
+        { "ordner": "zubehoer", "praefix": "Bipod", "beispiele": ["Bipod.blend"] }
+      ]
+    },
+    {
+      "id": "dreibein",
+      "slot": "unterlauf",
+      "laenge": "lang",
+      "waffenarten": ["scharfschuetzengewehr", "granatwerfer"],
+      "praefixe": [
+        { "ordner": "zubehoer", "praefix": "Tripod", "beispiele": ["Tripod.blend"] }
+      ]
+    },
+    {
+      "id": "visier",
+      "slot": "aufsatz",
+      "waffenarten": ["pistole", "maschinenpistole", "sturmgewehr", "bullpup", "schrotflinte", "scharfschuetzengewehr", "armbrust"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Sight_", "beispiele": ["Sight_1.blend", "Sight_3.blend"] }
+      ]
+    },
+    {
+      "id": "zielfernrohr",
+      "slot": "aufsatz",
+      "waffenarten": ["maschinenpistole", "sturmgewehr", "bullpup", "schrotflinte", "scharfschuetzengewehr", "armbrust"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Scope_", "beispiele": ["Scope_1.blend", "Scope_2.blend"] },
+        { "ordner": "zubehoer", "praefix": "Scope_", "beispiele": ["Scope_1.blend", "Scope_3.blend"] }
+      ]
+    },
+    {
+      "id": "hintergriff-pistole",
+      "slot": "hintergriff",
+      "waffenarten": ["pistole"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Grip_Pistol_", "beispiele": ["Grip_Pistol_1.blend", "Grip_Pistol_2.blend"] }
+      ]
+    },
+    {
+      "id": "hintergriff-smg",
+      "slot": "hintergriff",
+      "waffenarten": ["maschinenpistole"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Grip_SMG_", "beispiele": ["Grip_SMG_1.blend"] }
+      ]
+    },
+    {
+      "id": "hintergriff-sturmgewehr",
+      "slot": "hintergriff",
+      "waffenarten": ["sturmgewehr"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Grip_AR_", "beispiele": ["Grip_AR_1.blend", "Grip_AR_6.blend"] }
+      ]
+    },
+    {
+      "id": "hintergriff-scharf",
+      "slot": "hintergriff",
+      "waffenarten": ["scharfschuetzengewehr"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Grip_Sniper_", "beispiele": ["Grip_Sniper_1.blend", "Grip_Sniper_2.blend"] }
+      ]
+    },
+    {
+      "id": "hintergriff-granate",
+      "slot": "hintergriff",
+      "waffenarten": ["granatwerfer"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Grip_Grenade_", "beispiele": ["Grip_Grenade_1.blend", "Grip_Grenade_3.blend"] }
+      ]
+    },
+    {
+      "id": "vordergriff",
+      "slot": "vordergriff",
+      "waffenarten": ["maschinenpistole", "sturmgewehr", "bullpup", "schrotflinte", "scharfschuetzengewehr"],
+      "praefixe": [
+        { "ordner": "zubehoer", "praefix": "Grip", "beispiele": ["Grip.blend"] }
+      ]
+    },
+    {
+      "id": "lauf-pistole",
+      "slot": "lauf",
+      "waffenarten": ["pistole"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Barrel_Pistol_", "beispiele": ["Barrel_Pistol_1.blend", "Barrel_Pistol_2.blend"] }
+      ]
+    },
+    {
+      "id": "lauf-sturmgewehr",
+      "slot": "lauf",
+      "waffenarten": ["sturmgewehr"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Barrel_AR_", "beispiele": ["Barrel_AR_1.blend", "Barrel_AR_3.blend"] }
+      ]
+    },
+    {
+      "id": "lauf-scharf",
+      "slot": "lauf",
+      "waffenarten": ["scharfschuetzengewehr"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Barrel_Sniper_", "beispiele": ["Barrel_Sniper_1.blend", "Barrel_Sniper_2.blend"] }
+      ]
+    },
+    {
+      "id": "lauf-granate",
+      "slot": "lauf",
+      "waffenarten": ["granatwerfer"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Barrel_Grenade_", "beispiele": ["Barrel_Grenade_1.blend"] }
+      ]
+    },
+    {
+      "id": "lauf-einzel",
+      "slot": "lauf",
+      "waffenarten": ["pistole", "sturmgewehr", "scharfschuetzengewehr"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Barrel_Single", "beispiele": ["Barrel_Single.blend"] }
+      ]
+    },
+    {
+      "id": "koerper-pistole",
+      "slot": "koerper",
+      "waffenarten": ["pistole"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Body_Pistol_", "beispiele": ["Body_Pistol_1.blend", "Body_Pistol_3.blend"] }
+      ]
+    },
+    {
+      "id": "koerper-smg",
+      "slot": "koerper",
+      "waffenarten": ["maschinenpistole"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Body_SMG_", "beispiele": ["Body_SMG_1.blend", "Body_SMG_2.blend"] }
+      ]
+    },
+    {
+      "id": "koerper-sturmgewehr",
+      "slot": "koerper",
+      "waffenarten": ["sturmgewehr"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Body_AR_", "beispiele": ["Body_AR_1.blend", "Body_AR_6.blend"] },
+        { "ordner": "modular", "praefix": "Body_AR4", "beispiele": ["Body_AR4.blend"] }
+      ]
+    },
+    {
+      "id": "koerper-scharf",
+      "slot": "koerper",
+      "waffenarten": ["scharfschuetzengewehr"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Body_Sniper_", "beispiele": ["Body_Sniper_1.blend", "Body_Sniper_3.blend"] }
+      ]
+    },
+    {
+      "id": "vorderkoerper-scharf",
+      "slot": "koerper",
+      "waffenarten": ["scharfschuetzengewehr"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Body_Front_", "beispiele": ["Body_Front_Sniper_1.blend", "Body_Front_Sniper_3.blend"] }
+      ]
+    },
+    {
+      "id": "koerper-armbrust",
+      "slot": "koerper",
+      "waffenarten": ["armbrust"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Body_Crossbow_", "beispiele": ["Body_Crossbow_1.blend", "Body_Crossbow_2.blend"] }
+      ]
+    },
+    {
+      "id": "koerper-granate",
+      "slot": "koerper",
+      "waffenarten": ["granatwerfer"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Body_Grenade_", "beispiele": ["Body_Grenade_1.blend", "Body_Grenade_3.blend"] }
+      ]
+    },
+    {
+      "id": "trommel-revolver",
+      "slot": "trommel",
+      "waffenarten": ["revolver"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Cylinder_", "beispiele": ["Cylinder_Pistol_1.blend"] }
+      ]
+    },
+    {
+      "id": "magazin-smg",
+      "slot": "magazin",
+      "waffenarten": ["maschinenpistole"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Magazine_SMG_", "beispiele": ["Magazine_SMG_1.blend"] }
+      ]
+    },
+    {
+      "id": "magazin-sturmgewehr",
+      "slot": "magazin",
+      "waffenarten": ["sturmgewehr"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Magazine_AR", "beispiele": ["Magazine_AR.blend"] }
+      ]
+    },
+    {
+      "id": "magazin-scharf",
+      "slot": "magazin",
+      "waffenarten": ["scharfschuetzengewehr"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Magazine_Sniper_", "beispiele": ["Magazine_Sniper_1.blend"] }
+      ]
+    },
+    {
+      "id": "schaft-pistole",
+      "slot": "schaft",
+      "waffenarten": ["pistole"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Stock_Pistol_", "beispiele": ["Stock_Pistol_3.blend"] }
+      ]
+    },
+    {
+      "id": "schaft-smg",
+      "slot": "schaft",
+      "waffenarten": ["maschinenpistole"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Stock_SMG_", "beispiele": ["Stock_SMG_1.blend"] }
+      ]
+    },
+    {
+      "id": "schaft-sturmgewehr",
+      "slot": "schaft",
+      "waffenarten": ["sturmgewehr"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Stock_AR_", "beispiele": ["Stock_AR_1.blend", "Stock_AR_6.blend"] }
+      ]
+    },
+    {
+      "id": "schaft-scharf",
+      "slot": "schaft",
+      "waffenarten": ["scharfschuetzengewehr"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Stock_Sniper_", "beispiele": ["Stock_Sniper_1.blend", "Stock_Sniper_3.blend"] }
+      ]
+    },
+    {
+      "id": "schaft-granate",
+      "slot": "schaft",
+      "waffenarten": ["granatwerfer"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Stock_Grenade_", "beispiele": ["Stock_Grenade_1.blend", "Stock_Grenade_2.blend"] }
+      ]
+    },
+    {
+      "id": "schaft-generisch",
+      "slot": "schaft",
+      "waffenarten": ["pistole", "maschinenpistole", "sturmgewehr", "scharfschuetzengewehr", "granatwerfer"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Stock_2", "beispiele": ["Stock_2.blend"] },
+        { "ordner": "zubehoer", "praefix": "Stock", "beispiele": ["Stock.blend"] }
+      ]
+    },
+    {
+      "id": "handschutz-pistole",
+      "slot": "handschutz",
+      "waffenarten": ["pistole"],
+      "praefixe": [
+        { "ordner": "modular", "praefix": "Handguard_", "beispiele": ["Handguard_Pistol_3.blend"] }
+      ]
+    }
+  ],
+  "familien": [
+    {
+      "id": "pistole",
+      "kampfIdHeute": "sidearm",
+      "laenge": "kurz",
+      "kaliberklasse": "pistole",
+      "munition": "patrone-pistole",
+      "fertigPraefixe": ["Pistol"],
+      "fertigBeispiele": { "Pistol": ["Pistol_1.blend", "Pistol_6.blend"] },
+      "slots": [
+        { "id": "munition", "teilfamilien": ["patrone-pistole"] },
+        { "id": "koerper", "teilfamilien": ["koerper-pistole"] },
+        { "id": "lauf", "teilfamilien": ["lauf-pistole", "lauf-einzel"] },
+        { "id": "hintergriff", "teilfamilien": ["hintergriff-pistole"] },
+        { "id": "handschutz", "teilfamilien": ["handschutz-pistole"] },
+        { "id": "schaft", "teilfamilien": ["schaft-pistole", "schaft-generisch"] },
+        { "id": "muendung", "teilfamilien": ["daempfer"] },
+        { "id": "aufsatz", "teilfamilien": ["visier"] }
+      ]
+    },
+    {
+      "id": "revolver",
+      "kampfIdHeute": "keine",
+      "laenge": "kurz",
+      "kaliberklasse": "pistole",
+      "munition": "patrone-pistole",
+      "fertigPraefixe": ["Revolver"],
+      "fertigBeispiele": { "Revolver": ["Revolver_1.blend", "Revolver_5.blend"] },
+      "hinweis": "Die einzige Trommeldatei heißt Cylinder_Pistol_1 und trägt keinen Revolver-Präfix.",
+      "slots": [
+        { "id": "munition", "teilfamilien": ["patrone-pistole"] },
+        { "id": "trommel", "teilfamilien": ["trommel-revolver"] }
+      ]
+    },
+    {
+      "id": "maschinenpistole",
+      "kampfIdHeute": "keine",
+      "laenge": "kurz",
+      "kaliberklasse": "pistole",
+      "munition": "patrone-pistole",
+      "fertigPraefixe": ["SMG", "SubmachineGun"],
+      "fertigBeispiele": {
+        "SMG": ["SMG_1.blend", "SMG_2.blend"],
+        "SubmachineGun": ["SubmachineGun_1.blend", "SubmachineGun_5.blend"]
+      },
+      "slots": [
+        { "id": "munition", "teilfamilien": ["patrone-pistole"] },
+        { "id": "koerper", "teilfamilien": ["koerper-smg"] },
+        { "id": "hintergriff", "teilfamilien": ["hintergriff-smg"] },
+        { "id": "magazin", "teilfamilien": ["magazin-smg"] },
+        { "id": "schaft", "teilfamilien": ["schaft-smg", "schaft-generisch"] },
+        { "id": "muendung", "teilfamilien": ["daempfer"] },
+        { "id": "aufsatz", "teilfamilien": ["visier", "zielfernrohr"] },
+        { "id": "unterlauf", "teilfamilien": ["lampe"] },
+        { "id": "vordergriff", "teilfamilien": ["vordergriff"] }
+      ]
+    },
+    {
+      "id": "sturmgewehr",
+      "kampfIdHeute": "rifle",
+      "laenge": "lang",
+      "kaliberklasse": "gewehr",
+      "munition": "patrone-gewehr",
+      "fertigPraefixe": ["AR", "AssaultRifle", "AssaultRifle2"],
+      "fertigBeispiele": {
+        "AR": ["AR_1.blend", "AR_6.blend"],
+        "AssaultRifle": ["AssaultRifle_1.blend", "AssaultRifle_5.blend"],
+        "AssaultRifle2": ["AssaultRifle2_1.blend", "AssaultRifle2_4.blend"]
+      },
+      "hinweis": "Body_AR4.blend setzt die Nummer ohne Unterstrich.",
+      "slots": [
+        { "id": "munition", "teilfamilien": ["patrone-gewehr"] },
+        { "id": "koerper", "teilfamilien": ["koerper-sturmgewehr"] },
+        { "id": "lauf", "teilfamilien": ["lauf-sturmgewehr", "lauf-einzel"] },
+        { "id": "hintergriff", "teilfamilien": ["hintergriff-sturmgewehr"] },
+        { "id": "magazin", "teilfamilien": ["magazin-sturmgewehr"] },
+        { "id": "schaft", "teilfamilien": ["schaft-sturmgewehr", "schaft-generisch"] },
+        { "id": "muendung", "teilfamilien": ["daempfer"] },
+        { "id": "aufsatz", "teilfamilien": ["visier", "zielfernrohr"] },
+        { "id": "unterlauf", "teilfamilien": ["lampe", "bajonett", "zweibein"] },
+        { "id": "vordergriff", "teilfamilien": ["vordergriff"] }
+      ]
+    },
+    {
+      "id": "bullpup",
+      "kampfIdHeute": "keine",
+      "laenge": "lang",
+      "kaliberklasse": "gewehr",
+      "munition": "patrone-gewehr",
+      "fertigPraefixe": ["Bullpup"],
+      "fertigBeispiele": { "Bullpup": ["Bullpup_1.blend", "Bullpup_3.blend"] },
+      "hinweis": "Nur fertige Waffen, keine modularen Bullpup-Teile. Mündung, Optik, Unterlauf und Vordergriff sind die generischen Anbauten.",
+      "slots": [
+        { "id": "munition", "teilfamilien": ["patrone-gewehr"] },
+        { "id": "muendung", "teilfamilien": ["daempfer"] },
+        { "id": "aufsatz", "teilfamilien": ["visier", "zielfernrohr"] },
+        { "id": "unterlauf", "teilfamilien": ["lampe", "bajonett", "zweibein"] },
+        { "id": "vordergriff", "teilfamilien": ["vordergriff"] }
+      ]
+    },
+    {
+      "id": "schrotflinte",
+      "kampfIdHeute": "keine",
+      "laenge": "lang",
+      "kaliberklasse": "schrot",
+      "munition": "schrotpatrone",
+      "fertigPraefixe": ["Shotgun"],
+      "fertigBeispiele": { "Shotgun": ["Shotgun_1.blend", "Shotgun_SawedOff.blend", "Shotgun_ShortStock.blend"] },
+      "hinweis": "Shotgun_SawedOff und Shotgun_ShortStock sind fertige Waffen, keine Schaft- oder Laufmodule.",
+      "varianten": [
+        { "id": "standard", "laenge": "lang", "beispiele": ["Shotgun_1.blend", "Shotgun_4.blend"] },
+        { "id": "kurzschaft", "laenge": "lang", "beispiele": ["Shotgun_ShortStock.blend"] },
+        { "id": "abgesaegt", "laenge": "kurz", "beispiele": ["Shotgun_SawedOff.blend"], "erlaubteUnterlaufLaengen": ["kurz"], "ohneTeilfamilien": ["vordergriff"] }
+      ],
+      "slots": [
+        { "id": "munition", "teilfamilien": ["schrotpatrone"] },
+        { "id": "aufsatz", "teilfamilien": ["visier", "zielfernrohr"] },
+        { "id": "unterlauf", "teilfamilien": ["lampe", "bajonett", "zweibein"] },
+        { "id": "vordergriff", "teilfamilien": ["vordergriff"] }
+      ]
+    },
+    {
+      "id": "scharfschuetzengewehr",
+      "kampfIdHeute": "keine",
+      "laenge": "lang",
+      "kaliberklasse": "gewehr",
+      "munition": "patrone-gewehr",
+      "fertigPraefixe": ["Sniper", "SniperRifle"],
+      "fertigBeispiele": {
+        "Sniper": ["Sniper_1.blend", "Sniper_3.blend"],
+        "SniperRifle": ["SniperRifle_1.blend", "SniperRifle_6.blend"]
+      },
+      "slots": [
+        { "id": "munition", "teilfamilien": ["patrone-gewehr"] },
+        { "id": "koerper", "teilfamilien": ["koerper-scharf", "vorderkoerper-scharf"] },
+        { "id": "lauf", "teilfamilien": ["lauf-scharf", "lauf-einzel"] },
+        { "id": "hintergriff", "teilfamilien": ["hintergriff-scharf"] },
+        { "id": "magazin", "teilfamilien": ["magazin-scharf"] },
+        { "id": "schaft", "teilfamilien": ["schaft-scharf", "schaft-generisch"] },
+        { "id": "muendung", "teilfamilien": ["daempfer"] },
+        { "id": "aufsatz", "teilfamilien": ["visier", "zielfernrohr"] },
+        { "id": "unterlauf", "teilfamilien": ["lampe", "zweibein", "dreibein"] },
+        { "id": "vordergriff", "teilfamilien": ["vordergriff"] }
+      ]
+    },
+    {
+      "id": "armbrust",
+      "kampfIdHeute": "keine",
+      "laenge": "lang",
+      "kaliberklasse": "bolzen",
+      "munition": "bolzen",
+      "fertigPraefixe": ["Crossbow"],
+      "fertigBeispiele": { "Crossbow": ["Crossbow_1.blend", "Crossbow_2.blend"] },
+      "hinweis": "Kein Magazinpräfix. Die Munition ist der Bolzen, keine der vier Schussklassen.",
+      "slots": [
+        { "id": "munition", "teilfamilien": ["bolzen"] },
+        { "id": "koerper", "teilfamilien": ["koerper-armbrust"] },
+        { "id": "aufsatz", "teilfamilien": ["visier", "zielfernrohr"] }
+      ]
+    },
+    {
+      "id": "granatwerfer",
+      "kampfIdHeute": "keine",
+      "laenge": "lang",
+      "kaliberklasse": "schwer",
+      "munition": "granate",
+      "fertigPraefixe": ["Grenade"],
+      "fertigBeispiele": { "Grenade": ["Grenade.blend", "Grenade_1.blend"] },
+      "hinweis": "Grenade.blend teilt den Präfix ohne Index. Körper, Lauf, Griff und Schaft mit demselben Präfix zählen als Werfer.",
+      "slots": [
+        { "id": "munition", "teilfamilien": ["granate"] },
+        { "id": "koerper", "teilfamilien": ["koerper-granate"] },
+        { "id": "lauf", "teilfamilien": ["lauf-granate"] },
+        { "id": "hintergriff", "teilfamilien": ["hintergriff-granate"] },
+        { "id": "schaft", "teilfamilien": ["schaft-granate", "schaft-generisch"] },
+        { "id": "unterlauf", "teilfamilien": ["zweibein", "dreibein"] }
+      ]
+    }
+  ],
+  "kompatibilitaet": [
+    {
+      "id": "munition-an-familie",
+      "text": "Die Munitionsart ist an die Familie und ihre Kaliberklasse gebunden."
+    },
+    {
+      "id": "muendung-nach-art-und-kaliber",
+      "text": "Eine Mündung nennt Waffenarten und Kaliberklassen und passt nur in dieser Paarung."
+    },
+    {
+      "id": "unterlauf-nicht-laenger-als-waffe",
+      "text": "Ein Unterlauf der Länge lang passt nicht an eine kurze Familie oder an eine kurze Variante."
+    },
+    {
+      "id": "eine-unterseite",
+      "slots": ["vordergriff", "unterlauf"],
+      "gleichzeitig": false,
+      "text": "Vordergriff und Unterlauf sitzen an derselben Unterseite und sind nicht zugleich besetzt."
+    }
+  ],
+  "dateifund": {
+    "gelesenAm": "2026-10-23",
+    "nurEndung": ".blend",
+    "lizenzdatei": false,
+    "nahkampfdatei": false,
+    "beispieleSindDateinamen": true,
+    "ordner": {
+      "fertig": ".",
+      "modular": "modular Weapons",
+      "zubehoer": "Accessories"
+    },
+    "fertig": {
+      "AR": 6,
+      "AssaultRifle": 5,
+      "AssaultRifle2": 4,
+      "Bullpup": 3,
+      "Crossbow": 2,
+      "Grenade": 4,
+      "Pistol": 6,
+      "Revolver": 5,
+      "Shotgun": 6,
+      "SMG": 2,
+      "Sniper": 3,
+      "SniperRifle": 6,
+      "SubmachineGun": 5
+    },
+    "modular": {
+      "Barrel": 8,
+      "Body": 20,
+      "Cylinder": 1,
+      "Grip": 10,
+      "Handguard": 1,
+      "Magazine": 3,
+      "Scope": 2,
+      "Sight": 3,
+      "Stock": 10
+    },
+    "zubehoer": {
+      "Bayonet": 2,
+      "Bipod": 1,
+      "Flashlight": 1,
+      "Grip": 1,
+      "Scope": 3,
+      "Silencer": 5,
+      "Stock": 1,
+      "Tripod": 1
+    }
+  }
+}

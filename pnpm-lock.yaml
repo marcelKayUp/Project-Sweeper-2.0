@@ -235,6 +235,9 @@ importers:
       '@neon/bots':
         specifier: workspace:*
         version: link:../../packages/bots
+      '@neon/characters':
+        specifier: workspace:*
+        version: link:../../packages/characters
       '@neon/generator':
         specifier: workspace:*
         version: link:../../packages/generator

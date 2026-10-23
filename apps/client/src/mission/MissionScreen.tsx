@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Client } from "@colyseus/sdk";
-import { PROTOCOL_VERSION, SLOT_LIMITS, type GearPost } from "@neon/sim";
+import type { ModularCharacterSpec } from "@neon/characters";
+import { PROTOCOL_VERSION, type InventoryPlace, type RunnerBody, type RunnerSheet } from "@neon/sim";
 import { timeWish } from "./helpCopy.ts";
+import { PaperDoll } from "./PaperDoll.tsx";
+import { RunnerGate } from "./RunnerGate.tsx";
 import { HelpPanel, SettingsPanel } from "./PrepPanels.tsx";
 import { preferenceMarks, readPreferences, writePreferences, type UiPreferences } from "./preferences.ts";
 import { TacticalView } from "./TacticalView.tsx";
@@ -16,6 +19,7 @@ interface GearStand {
   medkits: number;
   rifleReady: boolean;
   sidearmReady: boolean;
+  body?: RunnerBody;
 }
 
 interface BookingStand {
@@ -42,6 +46,7 @@ interface SlotStand {
   ready: boolean;
   connected: boolean;
   holder?: string;
+  account?: boolean;
   gear: GearStand;
 }
 
@@ -109,6 +114,7 @@ interface JoinRequest {
   name: string;
   code: string;
   token: string;
+  ticket: string;
 }
 
 const RESUME_KEY = "neon-mission-resume";
@@ -125,9 +131,10 @@ interface JoinedRoom {
 
 export function MissionScreen() {
   const serverUrl = new URLSearchParams(window.location.search).get("server") ?? "ws://127.0.0.1:2567";
-  const [name, setName] = useState("Runner");
+  const [name, setName] = useState("");
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
   const [join, setJoin] = useState<JoinRequest | null>(null);
   const [roomId, setRoomId] = useState("");
   const [stand, setStand] = useState<Stand | null>(null);
@@ -139,6 +146,7 @@ export function MissionScreen() {
   const [panel, setPanel] = useState<"none" | "settings" | "help">("none");
   const roomRef = useRef<JoinedRoom | null>(null);
   const releaseRef = useRef(true);
+  const sessionGen = useRef(0);
   const commandNo = useRef(0);
   if (pendingId && stand?.commandId === pendingId) setPendingId(null);
 
@@ -155,8 +163,8 @@ export function MissionScreen() {
       join.mode === "resume"
         ? client.reconnect(join.token)
         : join.mode === "create"
-          ? client.create("mission", createOptions(join.name))
-          : client.joinById(join.code, { name: join.name });
+          ? client.create("mission", createOptions(join.name, join.ticket))
+          : client.joinById(join.code, join.ticket ? { name: join.name, ticket: join.ticket } : { name: join.name });
     void Promise.resolve(pending)
       .then((joined) => {
         const room = joined as unknown as JoinedRoom;
@@ -193,9 +201,11 @@ export function MissionScreen() {
         room.onError((_code, message) => {
           setError(safeText(message) ?? "Verbindung unterbrochen.");
         });
+        const generation = sessionGen.current;
         room.onLeave(() => {
           setLinked(false);
           setPendingId(null);
+          if (generation !== sessionGen.current) return;
           setError((current) => current || "Verbindung verloren.");
         });
       })
@@ -232,15 +242,56 @@ export function MissionScreen() {
     });
   }
 
+  async function enter(
+    intent: "anlegen" | "anmelden",
+    password: string,
+    draft?: { readonly look: ModularCharacterSpec; readonly sheet: RunnerSheet },
+  ): Promise<void> {
+    setError("");
+    setBusy(true);
+    try {
+      const response = await fetch(`${httpBase(serverUrl)}/runner`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          absicht: intent,
+          name: name.trim(),
+          password,
+          ...(draft ? { aussehen: draft.look, punkte: draft.sheet } : {}),
+        }),
+      });
+      const payload: unknown = await response.json();
+      const parsed = readAuth(payload);
+      if (!parsed.ok) {
+        setError(safeText(parsed.rejection) ?? "Anmeldung abgelehnt.");
+        return;
+      }
+      const trimmedCode = code.trim();
+      setName(parsed.name);
+      setJoin({
+        mode: trimmedCode ? "join" : "create",
+        name: parsed.name,
+        code: trimmedCode,
+        token: "",
+        ticket: parsed.ticket,
+      });
+    } catch {
+      setError("Server nicht erreichbar.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   function retry(): void {
     const token = readToken();
     if (!token) return;
     releaseRef.current = false;
     setError("");
-    setJoin({ mode: "resume", name: name.trim() || "Runner", code: "", token });
+    setJoin({ mode: "resume", name: name.trim() || "Runner", code: "", token, ticket: "" });
   }
 
   function leaveToGate(): void {
+    sessionGen.current += 1;
     releaseRef.current = true;
     clearToken();
     setJoin(null);
@@ -289,7 +340,7 @@ export function MissionScreen() {
         prefs={prefs}
         roomId={roomId}
         onPreset={(preset) => roomRef.current?.send("lobby", { kind: "preset", preset })}
-        onLager={(posten, richtung) => roomRef.current?.send("lobby", { kind: "lager", posten, richtung })}
+        onMove={(von, nach) => roomRef.current?.send("lobby", { kind: "ziehen", von, nach })}
         onReady={() => roomRef.current?.send("lobby", { kind: "bereit", ready: true })}
         onStart={() => roomRef.current?.send("lobby", { kind: "start" })}
         onBot={() => roomRef.current?.send("lobby", { kind: "bot" })}
@@ -298,68 +349,37 @@ export function MissionScreen() {
         }}
         onHelp={() => setPanel("help")}
         onSettings={() => setPanel("settings")}
+        onLeave={leaveToGate}
       />
     );
   }
   return (
-    <main className="mission mission-gate" data-menu="1" {...preferenceMarks(prefs)}>
-      <form
-        className="mission-card"
-        data-screen="zugang"
-        onSubmit={(event) => {
-          event.preventDefault();
-          setError("");
-          setJoin({ mode: "create", name: name.trim() || "Runner", code: "", token: "" });
-        }}
-      >
-        <p className="kicker">Neon Contract</p>
-        <h1>Ghost Floor</h1>
-        <label>
-          Anzeigename
-          <input data-field="name" value={name} maxLength={16} onChange={(event) => setName(event.target.value)} />
-        </label>
-        <label>
-          Einladungscode
-          <input data-field="code" value={code} onChange={(event) => setCode(event.target.value)} />
-        </label>
-        <div className="mission-actions">
-          <button type="submit" data-action="erstellen" disabled={join !== null && !error}>
-            Raum erstellen
-          </button>
-          <button
-            type="button"
-            data-action="beitreten"
-            disabled={code.trim().length === 0 || (join !== null && !error)}
-            onClick={() => {
-              setError("");
-              setJoin({ mode: "join", name: name.trim() || "Runner", code: code.trim(), token: "" });
-            }}
-          >
-            Beitreten
-          </button>
-          {readToken() ? (
-            <button
-              type="button"
-              data-action="erneut"
-              disabled={join !== null && !error}
-              onClick={() => {
-                setError("");
-                setJoin({ mode: "resume", name: name.trim() || "Runner", code: "", token: readToken() ?? "" });
-              }}
-            >
-              Wieder aufnehmen
-            </button>
-          ) : null}
-          <button type="button" data-action="einstellungen" onClick={() => setPanel("settings")}>
-            Einstellungen
-          </button>
-          <button type="button" data-action="hilfe" onClick={() => setPanel("help")}>
-            Hilfe
-          </button>
-        </div>
-        <p data-error={error ? "1" : "0"}>{error || (join ? "Verbinden …" : "Privater Raum, vier Plätze.")}</p>
-      </form>
-    </main>
+    <RunnerGate
+      prefs={prefs}
+      name={name}
+      code={code}
+      busy={busy}
+      error={error}
+      pending={join !== null && !error}
+      canResume={readToken() !== null}
+      onName={setName}
+      onCode={setCode}
+      onReset={() => setError("")}
+      onCreate={(password, look, sheet) => {
+        void enter("anlegen", password, { look, sheet });
+      }}
+      onLogin={(password) => {
+        void enter("anmelden", password);
+      }}
+      onResume={() => {
+        const token = readToken();
+        if (!token) return;
+        setError("");
+        setJoin({ mode: "resume", name: name.trim() || "Runner", code: "", token, ticket: "" });
+      }}
+      onSettings={() => setPanel("settings")}
+      onHelp={() => setPanel("help")}
+    />
   );
 }
 
@@ -368,25 +388,27 @@ function Lobby({
   prefs,
   roomId,
   onPreset,
-  onLager,
+  onMove,
   onReady,
   onStart,
   onBot,
   onTime,
   onHelp,
   onSettings,
+  onLeave,
 }: {
   stand: Stand;
   prefs: UiPreferences;
   roomId: string;
   onPreset: (preset: "rifle" | "sidearm") => void;
-  onLager: (posten: GearPost, richtung: "nehmen" | "legen") => void;
+  onMove: (von: InventoryPlace, nach: InventoryPlace) => void;
   onReady: () => void;
   onStart: () => void;
   onBot: () => void;
   onTime: (seconds: 60 | 90 | 120) => void;
   onHelp: () => void;
   onSettings: () => void;
+  onLeave: () => void;
 }) {
   const ready = stand.slots.every((slot) => slotPresent(slot) && slot.ready && (slot.preset === "rifle" || slot.preset === "sidearm"));
   const openSlot = stand.slots.some((slot) => !slotPresent(slot));
@@ -402,6 +424,7 @@ function Lobby({
       data-notice={stand.notice}
       data-booked-results={stand.bookedResults}
       data-campaign-revision={stand.campaignRevision}
+      data-account={ownAccountName(stand)}
       data-medkits={ownGear(stand)?.medkits ?? 0}
       {...preferenceMarks(prefs)}
     >
@@ -414,15 +437,20 @@ function Lobby({
           Einladung <strong data-invite-code={roomId}>{roomId}</strong>
         </p>
       </section>
-      <section className="mission-card">
+      <section className="mission-card mission-lobby">
+        {ownGear(stand) ? (
+          <PaperDoll runnerId={stand.ownRunnerId} label={ownAccountName(stand) || undefined} stashLabel={ownAccountName(stand) ? "Eigenes Lager" : undefined} gear={ownGear(stand) as GearStand} lager={stand.lager} open={stand.lagerOpen} notice={stand.notice} onMove={onMove} />
+        ) : (
+          <p>Der Platz ist noch offen.</p>
+        )}
         <h2>Crew</h2>
         <ul className="mission-slots">
           {stand.slots.map((slot) => (
             <li key={slot.runnerId} data-slot={slot.runnerId} data-preset={slot.preset} data-ready={slot.ready ? "1" : "0"} data-connected={slot.connected ? "1" : "0"} data-holder={slot.holder ?? "offen"}>
               <span className="shape runner-mark">{mark(slot.runnerId)}</span>
               <span>
-                <strong>{slot.runnerId}</strong>
-                <small>{slotLabel(slot)}</small>
+                <strong>{slot.account && slot.name ? slot.name : slot.runnerId}</strong>
+                <small>{slot.account ? `${slot.runnerId} · ${slotLabel(slot)}` : slotLabel(slot)}</small>
                 <small data-gear={slot.runnerId}>
                   Gewehr {slot.gear.rifle}, Pistole {slot.gear.sidearm}, Gewehrmagazine {slot.gear.rifleMagazines}, Pistolenmagazine {slot.gear.sidearmMagazines}, Medkit {slot.gear.medkits}
                 </small>
@@ -432,35 +460,6 @@ function Lobby({
             </li>
           ))}
         </ul>
-        <section data-panel="lager" data-lager-open={stand.lagerOpen ? "1" : "0"} data-lager-rifle={stand.lager.rifle} data-lager-medkits={stand.lager.medkits}>
-          <h2>Lager</h2>
-          <p>Waffen, Magazine und Medkits. Ein Runner trägt höchstens ein Gewehr, eine Pistole, drei Magazine je Waffe und ein Medkit.</p>
-          {LAGER_GROUPS.map((group) => (
-            <div key={group.id}>
-              <p>{group.title}</p>
-              <ul className="lager-list">
-                {group.rows.map((row) => {
-                  const slotCount = ownGear(stand)?.[row.posten] ?? 0;
-                  const lagerCount = stand.lager[row.posten];
-                  const limit = SLOT_LIMITS[row.posten];
-                  return (
-                    <li key={row.posten} data-posten={row.posten} data-slot-count={slotCount} data-lager-count={lagerCount}>
-                      <span>{row.label}</span>
-                      <span>Slot {slotCount}/{limit}</span>
-                      <span>Lager {lagerCount}</span>
-                      <button type="button" data-richtung="nehmen" disabled={!stand.lagerOpen || lagerCount < 1 || slotCount >= limit} onClick={() => onLager(row.posten, "nehmen")}>
-                        nehmen
-                      </button>
-                      <button type="button" data-richtung="legen" disabled={!stand.lagerOpen || slotCount < 1} onClick={() => onLager(row.posten, "legen")}>
-                        ins Lager
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ))}
-        </section>
         <div className="mission-actions" data-panel="zeit">
           {([60, 90, 120] as const).map((seconds) => (
             <button
@@ -519,8 +518,11 @@ function Lobby({
           )}
         </div>
         <p>Die Wahl nimmt nur den Slot. Ein Einsatz friert Gewehr oder Pistole, ein geladenes Magazin, zwei Reserve und ein Medkit ein. Das Lager bleibt während des Einsatzes stehen.</p>
-        <p>Gewehr: Reichweite 10, Magazin 6, zwei Reserve. Pistole: Reichweite 6, Magazin 8, zwei Reserve. Ein Medkit heilt 2 HP. Schuss 3 AP, Treffer 2 HP. Fassung {stand.configRevision ?? 1}.</p>
+        <p>Gewehr: Reichweite 10, Magazin 6, zwei Reserve. Pistole: Reichweite 6, Magazin 8, zwei Reserve. Ein Medkit versorgt ein Körperteil und stellt dort 1 Punkt her. Schuss 3 AP. Fassung {stand.configRevision ?? 1}.</p>
         <div className="mission-actions">
+          <button type="button" data-action="abmelden" onClick={onLeave}>
+            Abmelden
+          </button>
           <button type="button" data-action="einstellungen" onClick={onSettings}>
             Einstellungen
           </button>
@@ -634,7 +636,7 @@ function isStand(payload: unknown): payload is Stand {
 function isSlot(value: unknown): value is SlotStand {
   if (!value || typeof value !== "object") return false;
   const slot = value as Partial<SlotStand>;
-  return typeof slot.runnerId === "string" && typeof slot.preset === "string" && typeof slot.ready === "boolean" && typeof slot.connected === "boolean" && isGear(slot.gear);
+  return typeof slot.runnerId === "string" && typeof slot.preset === "string" && typeof slot.ready === "boolean" && typeof slot.connected === "boolean" && (slot.account === undefined || typeof slot.account === "boolean") && (slot.name === undefined || typeof slot.name === "string") && isGear(slot.gear);
 }
 
 function isLager(value: unknown): value is LagerStand {
@@ -653,8 +655,19 @@ function isGear(value: unknown): value is GearStand {
     Number.isInteger(gear.sidearmMagazines) &&
     Number.isInteger(gear.medkits) &&
     typeof gear.rifleReady === "boolean" &&
-    typeof gear.sidearmReady === "boolean"
+    typeof gear.sidearmReady === "boolean" &&
+    (gear.body === undefined || isBody(gear.body))
   );
+}
+
+function isBody(value: unknown): value is RunnerBody {
+  if (!value || typeof value !== "object") return false;
+  const body = value as Partial<RunnerBody>;
+  const hands = body.hands;
+  if (!hands || (hands.left !== "empty" && hands.left !== "sidearm" && hands.left !== "rifle")) return false;
+  if (hands.right !== "empty" && hands.right !== "sidearm" && hands.right !== "rifle") return false;
+  if (body.belt !== "empty" && body.belt !== "medkit") return false;
+  return Array.isArray(body.pack) && body.pack.length === 12 && body.pack.every((cell) => cell === "empty" || cell === "sidearm" || cell === "rifle" || cell === "rifleRest" || cell === "rifleMagazine" || cell === "sidearmMagazine");
 }
 
 function isBooking(value: unknown): value is BookingStand {
@@ -675,9 +688,30 @@ function safeText(value: string | undefined): string | null {
   return /^[\p{L}\p{N} .,:!?()\-]{1,140}$/u.test(value) ? value : null;
 }
 
-function createOptions(name: string): { name: string; seed?: number } {
+function createOptions(name: string, ticket: string): { name: string; ticket?: string; seed?: number } {
   const seed = querySeed();
-  return seed === null ? { name } : { name, seed };
+  const base = ticket ? { name, ticket } : { name };
+  return seed === null ? base : { ...base, seed };
+}
+
+function ownAccountName(stand: Stand): string {
+  const slot = stand.slots.find((item) => item.runnerId === stand.ownRunnerId);
+  return slot?.account && slot.name ? slot.name : "";
+}
+
+function httpBase(serverUrl: string): string {
+  if (serverUrl.startsWith("ws://")) return `http://${serverUrl.slice(5)}`;
+  if (serverUrl.startsWith("wss://")) return `https://${serverUrl.slice(6)}`;
+  return serverUrl;
+}
+
+function readAuth(payload: unknown): { readonly ok: true; readonly name: string; readonly ticket: string } | { readonly ok: false; readonly rejection: string } {
+  if (!payload || typeof payload !== "object") return { ok: false, rejection: "Anmeldung abgelehnt." };
+  const body = payload as Record<string, unknown>;
+  if (body.ok === true && typeof body.name === "string" && typeof body.ticket === "string" && /^[a-f0-9]{64}$/.test(body.ticket)) {
+    return { ok: true, name: body.name, ticket: body.ticket };
+  }
+  return { ok: false, rejection: typeof body.rejection === "string" ? body.rejection : "Anmeldung abgelehnt." };
 }
 
 function querySeed(): number | null {
@@ -738,30 +772,6 @@ function ownPreset(stand: Stand): string {
 function ownGear(stand: Stand): GearStand | null {
   return stand.slots.find((slot) => slot.runnerId === stand.ownRunnerId)?.gear ?? null;
 }
-
-const LAGER_GROUPS = [
-  {
-    id: "waffen",
-    title: "Waffen",
-    rows: [
-      { posten: "rifle", label: "Gewehr" },
-      { posten: "sidearm", label: "Pistole" },
-    ],
-  },
-  {
-    id: "magazine",
-    title: "Magazine",
-    rows: [
-      { posten: "rifleMagazines", label: "Gewehrmagazin" },
-      { posten: "sidearmMagazines", label: "Pistolenmagazin" },
-    ],
-  },
-  {
-    id: "medkits",
-    title: "Medkits",
-    rows: [{ posten: "medkits", label: "Medkit" }],
-  },
-] as const satisfies readonly { readonly id: string; readonly title: string; readonly rows: readonly { readonly posten: GearPost; readonly label: string }[] }[];
 
 function crewSeconds(stand: Stand): 60 | 90 | 120 {
   if (stand.phaseSeconds === 60 || stand.phaseSeconds === 120) return stand.phaseSeconds;

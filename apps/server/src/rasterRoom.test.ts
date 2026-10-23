@@ -1,6 +1,7 @@
 import { Client } from "@colyseus/sdk";
 import { Server } from "@colyseus/core";
 import { WebSocketTransport } from "@colyseus/ws-transport";
+import { PROTOCOL_VERSION } from "@neon/sim";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { RasterRoom } from "./rasterRoom.ts";
 
@@ -28,15 +29,15 @@ interface WireRoom {
 }
 
 function move(commandId: string, x: number, y: number) {
-  return { protocol: 1, area: "raster", commandId, kind: "move", path: [{ x, y }] };
+  return { protocol: PROTOCOL_VERSION, area: "raster", commandId, kind: "move", path: [{ x, y }] };
 }
 
 function reset(commandId: string) {
-  return { protocol: 1, area: "raster", commandId, kind: "reset" };
+  return { protocol: PROTOCOL_VERSION, area: "raster", commandId, kind: "reset" };
 }
 
 function endRound(commandId: string) {
-  return { protocol: 1, area: "raster", commandId, kind: "end" };
+  return { protocol: PROTOCOL_VERSION, area: "raster", commandId, kind: "end" };
 }
 
 function collect(room: WireRoom) {

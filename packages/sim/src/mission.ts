@@ -1,18 +1,34 @@
 import { actionAp, CREW_AP, pathTo } from "./ap.ts";
 import { coverPenalty, inSector, manhattan, sectorFacing } from "./geometry.ts";
+import { assertMissionLevels, floorsOf, linkAp, linksOf, resolveLink, type FloorPlate, type VerticalKind, type VerticalLink } from "./levels.ts";
 import { AIM_BONUS, CREW_HP, GUARD_HP, resolveShot, RIFLE_MAGAZINE, RIFLE_RANGE, type ShotStatus } from "./resolve.ts";
 import { createRng, type RngState } from "./rng.ts";
 import { seesUnit, teamVisibleCells, unionCells } from "./sight.ts";
 import { DIRECTIONS, type BattleMap, type Cell, type Direction, type LowCover } from "./types.ts";
+import {
+  derivedHp,
+  freshParts,
+  isBodyPart,
+  PART_HEAL,
+  rifleBlocked,
+  shotPenalty,
+  stepAp,
+  tickBleed,
+  treatPart,
+  type BodyPartId,
+  type PartState,
+  type WoundKind,
+} from "./wounds.ts";
 
-export const RULES_VERSION = 2;
-export const PROTOCOL_VERSION = 1;
+export const RULES_VERSION = 3;
+export const PROTOCOL_VERSION = 2;
 export const MISSION_ID = "ghost-floor";
 export const SIGHT_RANGE = 10;
 export const ROUND_LIMIT = 24;
 export const INTERACT_AP = 4;
 export const EXTRACT_AP = 1;
-export const HEAL_HP = 2;
+/** Punkte, die ein Medkit an einem einzelnen Teil herstellt. */
+export const HEAL_HP = PART_HEAL;
 export const SIDEARM_RANGE = 6;
 export const SIDEARM_MAGAZINE = 8;
 export const RESERVE_MAGAZINES = 2;
@@ -32,6 +48,7 @@ export interface MissionSpawn {
   readonly weapon: WeaponId;
   readonly x: number;
   readonly y: number;
+  readonly z?: number;
   readonly patrol: readonly Cell[];
 }
 
@@ -46,6 +63,9 @@ export interface MissionSpec {
   readonly door: { readonly id: string; readonly x: number; readonly y: number };
   readonly extraction: readonly Cell[];
   readonly spawns: readonly MissionSpawn[];
+  /** Fehlt die Liste, ist die Mission genau eine Ebene: die Felder oben, z = 0. */
+  readonly levels?: readonly FloorPlate[];
+  readonly links?: readonly VerticalLink[];
 }
 
 export interface UnitState {
@@ -55,8 +75,10 @@ export interface UnitState {
   readonly weapon: WeaponId;
   readonly x: number;
   readonly y: number;
+  readonly z: number;
   readonly hp: number;
   readonly maxHp: number;
+  readonly parts: readonly PartState[];
   readonly ap: number;
   readonly range: number;
   readonly magazine: number;
@@ -87,6 +109,11 @@ export interface Contact {
   readonly y: number;
 }
 
+export interface KnownLevel {
+  readonly z: number;
+  readonly cells: readonly Cell[];
+}
+
 export interface MissionState {
   readonly missionId: string;
   readonly rulesVersion: number;
@@ -102,23 +129,24 @@ export interface MissionState {
   readonly doorOpen: boolean;
   readonly contacts: readonly Contact[];
   readonly knownCells: readonly Cell[];
+  readonly knownLevels: readonly KnownLevel[];
   readonly units: readonly UnitState[];
   readonly result: MissionResult | null;
 }
 
 export type CrewCommand =
-  | { readonly kind: "move"; readonly unitId: string; readonly x: number; readonly y: number }
+  | { readonly kind: "move"; readonly unitId: string; readonly x: number; readonly y: number; readonly z?: number }
   | { readonly kind: "interact"; readonly unitId: string; readonly targetId: string }
   | { readonly kind: "extract"; readonly unitId: string }
   | { readonly kind: "shoot"; readonly unitId: string; readonly targetId: string }
   | { readonly kind: "reload"; readonly unitId: string }
   | { readonly kind: "aim"; readonly unitId: string }
-  | { readonly kind: "heal"; readonly unitId: string; readonly targetId: string }
+  | { readonly kind: "heal"; readonly unitId: string; readonly targetId: string; readonly part: BodyPartId }
   | { readonly kind: "overwatch"; readonly unitId: string; readonly direction: Direction }
   | { readonly kind: "ready"; readonly unitId: string };
 
 export type MissionEvent =
-  | { readonly type: "UnitMoved"; readonly unitId: string; readonly x: number; readonly y: number }
+  | { readonly type: "UnitMoved"; readonly unitId: string; readonly x: number; readonly y: number; readonly z?: number }
   | { readonly type: "ObjectiveChanged"; readonly copies: number; readonly doorOpen: boolean }
   | {
       readonly type: "ShotResolved";
@@ -126,6 +154,8 @@ export type MissionEvent =
       readonly targetId: string;
       readonly status: ShotStatus;
       readonly damage: number;
+      readonly part: BodyPartId | null;
+      readonly wound: WoundKind | null;
       readonly reaction: boolean;
     }
   | { readonly type: "PhaseChanged"; readonly phase: PhaseId; readonly round: number }
@@ -137,6 +167,25 @@ export interface StepResult {
   readonly rejection: string | null;
 }
 
+export interface FloorLink {
+  readonly id: string;
+  readonly kind: VerticalKind;
+  readonly x: number;
+  readonly y: number;
+  readonly toZ: number;
+  readonly toX: number;
+  readonly toY: number;
+}
+
+export interface FloorView {
+  readonly z: number;
+  readonly knownCells: readonly Cell[];
+  readonly visibleCells: readonly Cell[];
+  readonly walls: readonly Cell[];
+  readonly lowCover: readonly LowCover[];
+  readonly links: readonly FloorLink[];
+}
+
 export interface PublicUnit {
   readonly id: string;
   readonly name: string;
@@ -144,8 +193,10 @@ export interface PublicUnit {
   readonly weapon: WeaponId;
   readonly x: number;
   readonly y: number;
+  readonly z: number;
   readonly hp: number;
   readonly maxHp: number;
+  readonly parts: readonly PartState[];
   readonly ap: number;
   readonly range: number;
   readonly magazine: number;
@@ -176,22 +227,30 @@ export interface TeamView {
   readonly door: { readonly id: string; readonly x: number; readonly y: number } | null;
   readonly extraction: readonly Cell[];
   readonly units: readonly PublicUnit[];
+  readonly levelCount: number;
+  readonly floors: readonly FloorView[];
 }
 
 export function createMissionState(spec: MissionSpec, seed: number): MissionState {
   if (!Number.isInteger(seed)) throw new Error("Seed muss ganzzahlig sein");
+  assertMissionLevels(spec);
+  const floors = floorsOf(spec);
   const seen = new Set<string>();
   const units: UnitState[] = [];
   for (const spawn of spec.spawns) {
     if (seen.has(spawn.id)) throw new Error("Spawn-Id ist doppelt");
     seen.add(spawn.id);
     const weapon = weaponStats(spawn.weapon);
-    const maxHp = spawn.team === "crew" ? RUNNER_HP : ENEMY_HP;
+    const parts = freshParts();
+    // Abgeleitete HP sind die Summe der Teilpunkte. 0 bleibt kampfunfähig.
+    const maxHp = derivedHp(parts);
     const patrol = spawn.patrol.map((cell) => ({ x: cell.x, y: cell.y }));
     const first = patrol[0];
     if (spawn.team === "enemy" && (!first || first.x !== spawn.x || first.y !== spawn.y)) {
       throw new Error("Patrouille beginnt nicht auf dem Gegner");
     }
+    const z = spawn.z ?? 0;
+    if (!floors.some((floor) => floor.z === z)) throw new Error("Spawn-Etage ist ungültig");
     units.push({
       id: spawn.id,
       name: spawn.name,
@@ -199,8 +258,10 @@ export function createMissionState(spec: MissionSpec, seed: number): MissionStat
       weapon: spawn.weapon,
       x: spawn.x,
       y: spawn.y,
+      z,
       hp: maxHp,
       maxHp,
+      parts,
       ap: spawn.team === "crew" ? CREW_AP : 0,
       range: weapon.range,
       magazine: weapon.magazine,
@@ -232,6 +293,7 @@ export function createMissionState(spec: MissionSpec, seed: number): MissionStat
       doorOpen: false,
       contacts: [],
       knownCells: [],
+      knownLevels: [],
       units,
       result: null,
     },
@@ -265,20 +327,20 @@ function applyCrewCommand(state: MissionState, spec: MissionSpec, command: CrewC
   if (unit.status !== "active") return { state, events: [], rejection: "Dieser Runner ist nicht handlungsfähig." };
 
   if (command.kind === "ready") return markReady(state, spec, unit.id);
-  if (command.kind === "move") return moveUnit(state, spec, unit, command.x, command.y);
+  if (command.kind === "move") return moveUnit(state, spec, unit, command.x, command.y, command.z);
   if (command.kind === "interact") return interact(state, spec, unit, command.targetId);
   if (command.kind === "extract") return extract(state, spec, unit);
   if (command.kind === "shoot") return shoot(state, spec, unit, command.targetId);
   if (command.kind === "aim") return aim(state, unit);
-  if (command.kind === "heal") return heal(state, unit, command.targetId);
+  if (command.kind === "heal") return heal(state, unit, command.targetId, command.part);
   if (command.kind === "overwatch") return overwatch(state, unit, command.direction);
   return reload(state, unit);
 }
 
 export function projectTeam(state: MissionState, spec: MissionSpec): TeamView {
-  const visibleCells = crewVisible(state, spec);
-  const known = new Set(state.knownCells.map(cellKey));
-  const map = battleMapOf(spec, state.doorOpen);
+  const floors = projectFloors(state, spec);
+  const ground = floors[0] ?? { z: 0, knownCells: [], visibleCells: [], walls: [], lowCover: [], links: [] };
+  const known = new Set(ground.knownCells.map(cellKey));
   const units: PublicUnit[] = [];
   for (const unit of state.units) {
     if (unit.team === "enemy" && !teamSees(state, spec, "crew", unit)) continue;
@@ -294,16 +356,16 @@ export function projectTeam(state: MissionState, spec: MissionSpec): TeamView {
     result: state.result,
     width: spec.width,
     height: spec.height,
-    knownCells: state.knownCells.map(copyCell),
-    visibleCells,
-    walls: map.walls.filter((wall) => known.has(cellKey(wall)) && !sameCell(wall, spec.door)).map(copyCell),
-    lowCover: spec.lowCover
-      .filter((cover) => known.has(cellKey(cover)))
-      .map((cover) => ({ id: cover.id, x: cover.x, y: cover.y, protects: cover.protects })),
+    knownCells: ground.knownCells,
+    visibleCells: ground.visibleCells,
+    walls: ground.walls,
+    lowCover: ground.lowCover,
     terminal: known.has(cellKey(spec.terminal)) ? { id: spec.terminal.id, x: spec.terminal.x, y: spec.terminal.y } : null,
     door: known.has(cellKey(spec.door)) ? { id: spec.door.id, x: spec.door.x, y: spec.door.y } : null,
     extraction: spec.extraction.filter((cell) => known.has(cellKey(cell))).map(copyCell),
     units,
+    levelCount: floors.length,
+    floors,
   };
 }
 
@@ -331,9 +393,16 @@ export function stableHash(text: string): string {
   return (hash >>> 0).toString(16).padStart(8, "0");
 }
 
-export function battleMapOf(spec: MissionSpec, doorOpen: boolean): BattleMap {
-  const walls = doorOpen ? spec.walls : [...spec.walls, { x: spec.door.x, y: spec.door.y }];
-  return { width: spec.width, height: spec.height, walls, lowCover: spec.lowCover };
+export function battleMapOf(spec: MissionSpec, doorOpen: boolean, z = 0): BattleMap {
+  const floor = floorsOf(spec).find((item) => item.z === z);
+  if (!floor) {
+    const walls: Cell[] = [];
+    for (let y = 0; y < spec.height; y += 1) for (let x = 0; x < spec.width; x += 1) walls.push({ x, y });
+    return { width: spec.width, height: spec.height, walls, lowCover: [] };
+  }
+  if (z === 0 && doorOpen) return { width: spec.width, height: spec.height, walls: floor.walls, lowCover: floor.lowCover };
+  const walls = z === 0 ? [...floor.walls, { x: spec.door.x, y: spec.door.y }] : [...floor.walls];
+  return { width: spec.width, height: spec.height, walls, lowCover: floor.lowCover };
 }
 
 function markReady(state: MissionState, spec: MissionSpec, unitId: string): StepResult {
@@ -343,14 +412,25 @@ function markReady(state: MissionState, spec: MissionSpec, unitId: string): Step
   return finishCrewPhase(readyState, spec);
 }
 
-function moveUnit(state: MissionState, spec: MissionSpec, unit: UnitState, x: number, y: number): StepResult {
+function moveUnit(state: MissionState, spec: MissionSpec, unit: UnitState, x: number, y: number, z?: number): StepResult {
   if (!Number.isInteger(x) || !Number.isInteger(y)) return { state, events: [], rejection: "Ziel ist kein Feld." };
-  const to = { x, y };
-  if (!orthogonal(unit, to)) return { state, events: [], rejection: "Nur ein orthogonales Nachbarfeld." };
-  if (unit.ap < actionAp("move")) return { state, events: [], rejection: "Zu wenig Aktionspunkte." };
-  if (!cellFree(state, spec, x, y, unit.id)) return { state, events: [], rejection: "Feld ist blockiert." };
-  const next = updateUnit(state, unit.id, { x, y, ap: unit.ap - actionAp("move"), ...dropStance(unit) });
-  return finishStep(next, spec, unit.id, [{ type: "UnitMoved", unitId: unit.id, x, y }]);
+  const toZ = z === undefined ? unit.z : z;
+  if (!Number.isInteger(toZ)) return { state, events: [], rejection: "Ziel ist kein Feld." };
+  if (toZ === unit.z) {
+    if (!orthogonal(unit, { x, y })) return { state, events: [], rejection: "Nur ein orthogonales Nachbarfeld." };
+    const cost = stepAp(unit.parts);
+    if (unit.ap < cost) return { state, events: [], rejection: "Zu wenig Aktionspunkte." };
+    if (!cellFree(state, spec, x, y, unit.id, unit.z)) return { state, events: [], rejection: "Feld ist blockiert." };
+    const next = updateUnit(state, unit.id, { x, y, ap: unit.ap - cost, ...dropStance(unit) });
+    return finishStep(next, spec, unit.id, [{ type: "UnitMoved", unitId: unit.id, x, y, z: unit.z }]);
+  }
+  const link = resolveLink(spec, { z: unit.z, x: unit.x, y: unit.y }, { z: toZ, x, y });
+  if (!link) return { state, events: [], rejection: "Kein Übergang zu diesem Feld." };
+  const cost = linkAp(link.kind);
+  if (unit.ap < cost) return { state, events: [], rejection: "Zu wenig Aktionspunkte." };
+  if (!cellFree(state, spec, x, y, unit.id, toZ)) return { state, events: [], rejection: "Feld ist blockiert." };
+  const next = updateUnit(state, unit.id, { x, y, z: toZ, ap: unit.ap - cost, ...dropStance(unit) });
+  return finishStep(next, spec, unit.id, [{ type: "UnitMoved", unitId: unit.id, x, y, z: toZ }]);
 }
 
 function aim(state: MissionState, unit: UnitState): StepResult {
@@ -360,22 +440,24 @@ function aim(state: MissionState, unit: UnitState): StepResult {
   return { state: next, events: [], rejection: null };
 }
 
-function heal(state: MissionState, unit: UnitState, targetId: string): StepResult {
+function heal(state: MissionState, unit: UnitState, targetId: string, part: BodyPartId): StepResult {
+  if (!isBodyPart(part)) return { state, events: [], rejection: "Körperteil ist ungültig." };
   if (unit.medkits < 1) return { state, events: [], rejection: "Kein Medkit." };
   if (unit.ap < actionAp("heal")) return { state, events: [], rejection: "Zu wenig Aktionspunkte." };
   const target = findUnit(state, targetId);
   if (!target || target.team !== "crew") return { state, events: [], rejection: "Kein gültiges Ziel." };
   if (target.status !== "active") return { state, events: [], rejection: "Ziel ist nicht handlungsfähig." };
   if (target.id !== unit.id && !orthogonal(unit, target)) return { state, events: [], rejection: "Nicht in Reichweite." };
-  if (target.hp >= target.maxHp) return { state, events: [], rejection: "Leben ist voll." };
-  const healed = Math.min(target.maxHp, target.hp + HEAL_HP);
+  const treated = treatPart(target.parts, part);
+  if (!treated) return { state, events: [], rejection: "Dieses Teil braucht kein Medkit." };
+  const hp = derivedHp(treated.parts);
   const spent = updateUnit(state, unit.id, {
     ap: unit.ap - actionAp("heal"),
     medkits: unit.medkits - 1,
     ...dropStance(unit),
-    ...(target.id === unit.id ? { hp: healed } : {}),
+    ...(target.id === unit.id ? { hp, parts: treated.parts } : {}),
   });
-  const next = target.id === unit.id ? spent : updateUnit(spent, target.id, { hp: healed });
+  const next = target.id === unit.id ? spent : updateUnit(spent, target.id, { hp, parts: treated.parts });
   return { state: next, events: [], rejection: null };
 }
 
@@ -396,7 +478,7 @@ function overwatch(state: MissionState, unit: UnitState, direction: Direction): 
 function interact(state: MissionState, spec: MissionSpec, unit: UnitState, targetId: string): StepResult {
   if (unit.ap < INTERACT_AP) return { state, events: [], rejection: "Zu wenig Aktionspunkte." };
   if (targetId === spec.terminal.id) {
-    if (!orthogonal(unit, spec.terminal)) return { state, events: [], rejection: "Nicht am Terminal." };
+    if (unit.z !== 0 || !orthogonal(unit, spec.terminal)) return { state, events: [], rejection: "Nicht am Terminal." };
     if (state.copies >= 2) return { state, events: [], rejection: "Die Daten sind bereits kopiert." };
     const copies = state.copies + 1;
     const spent = updateUnit({ ...state, copies }, unit.id, { ap: unit.ap - INTERACT_AP, ...dropStance(unit) });
@@ -408,7 +490,7 @@ function interact(state: MissionState, spec: MissionSpec, unit: UnitState, targe
     };
   }
   if (targetId === spec.door.id) {
-    if (!orthogonal(unit, spec.door)) return { state, events: [], rejection: "Nicht an der Tür." };
+    if (unit.z !== 0 || !orthogonal(unit, spec.door)) return { state, events: [], rejection: "Nicht an der Tür." };
     if (state.doorOpen) return { state, events: [], rejection: "Die Tür ist bereits offen." };
     const spent = updateUnit({ ...state, doorOpen: true }, unit.id, { ap: unit.ap - INTERACT_AP, ...dropStance(unit) });
     const judged = judge(spent);
@@ -423,7 +505,7 @@ function interact(state: MissionState, spec: MissionSpec, unit: UnitState, targe
 
 function extract(state: MissionState, spec: MissionSpec, unit: UnitState): StepResult {
   if (unit.ap < EXTRACT_AP) return { state, events: [], rejection: "Zu wenig Aktionspunkte." };
-  if (!spec.extraction.some((cell) => cell.x === unit.x && cell.y === unit.y)) {
+  if (unit.z !== 0 || !spec.extraction.some((cell) => cell.x === unit.x && cell.y === unit.y)) {
     return { state, events: [], rejection: "Nicht in der Extraktionszone." };
   }
   const spent = updateUnit(state, unit.id, {
@@ -468,6 +550,10 @@ function reload(state: MissionState, unit: UnitState): StepResult {
 function finishCrewPhase(state: MissionState, spec: MissionSpec): StepResult {
   const events: MissionEvent[] = [{ type: "PhaseChanged", phase: "enemy", round: state.round }];
   let current: MissionState = releaseTeam({ ...state, phase: "enemy", revision: state.revision + 1 }, "enemy");
+  const bled = bleedUnits(current);
+  current = bled.state;
+  events.push(...bled.events);
+  if (current.result) return { state: current, events, rejection: null };
   const order = current.units
     .filter((unit) => unit.team === "enemy" && unit.status === "active")
     .map((unit) => unit.id)
@@ -558,15 +644,15 @@ function enemyRole(unit: UnitState): "guard" | "flanker" {
 
 function guardCoverStep(state: MissionState, spec: MissionSpec, unit: UnitState): StepResult {
   const idle = { state, events: [] as const, rejection: null };
-  if (unit.ap < actionAp("move")) return idle;
+  if (unit.ap < stepAp(unit.parts)) return idle;
   const target = visibleCrew(state, spec, unit)[0];
   if (!target) return idle;
-  const map = battleMapOf(spec, state.doorOpen);
+  const map = battleMapOf(spec, state.doorOpen, unit.z);
   if (coverPenalty(map, target, unit) === 25) return idle;
   for (const direction of DIRECTIONS) {
     const delta = STEP_DELTA[direction];
     const next = { x: unit.x + delta.x, y: unit.y + delta.y };
-    if (!cellFree(state, spec, next.x, next.y, unit.id)) continue;
+    if (!cellFree(state, spec, next.x, next.y, unit.id, unit.z)) continue;
     if (coverPenalty(map, target, next) !== 25) continue;
     if (!seesUnit(map, next, target, SIGHT_RANGE)) continue;
     return stepOnto(state, spec, unit, next.x, next.y);
@@ -576,16 +662,16 @@ function guardCoverStep(state: MissionState, spec: MissionSpec, unit: UnitState)
 
 function flankStep(state: MissionState, spec: MissionSpec, unit: UnitState): StepResult {
   const idle = { state, events: [] as const, rejection: null };
-  if (unit.ap < actionAp("move")) return idle;
+  if (unit.ap < stepAp(unit.parts)) return idle;
   const target = visibleCrew(state, spec, unit)[0];
   if (!target) return idle;
-  const map = battleMapOf(spec, state.doorOpen);
+  const map = battleMapOf(spec, state.doorOpen, unit.z);
   const currentPenalty = coverPenalty(map, unit, target);
   let best: Cell | null = null;
   for (const direction of DIRECTIONS) {
     const delta = STEP_DELTA[direction];
     const next = { x: unit.x + delta.x, y: unit.y + delta.y };
-    if (!cellFree(state, spec, next.x, next.y, unit.id)) continue;
+    if (!cellFree(state, spec, next.x, next.y, unit.id, unit.z)) continue;
     if (!seesUnit(map, next, target, SIGHT_RANGE) || manhattan(next, target) > unit.range) continue;
     if (coverPenalty(map, next, target) >= currentPenalty) continue;
     best = next;
@@ -597,11 +683,11 @@ function flankStep(state: MissionState, spec: MissionSpec, unit: UnitState): Ste
 
 function pursueStep(state: MissionState, spec: MissionSpec, unit: UnitState): StepResult {
   const idle = { state, events: [] as const, rejection: null };
-  if (unit.ap < actionAp("move")) return idle;
+  if (unit.ap < stepAp(unit.parts)) return idle;
   const contact = nearestContact(state, unit);
   if (!contact || (contact.x === unit.x && contact.y === unit.y)) return idle;
-  const map = battleMapOf(spec, state.doorOpen);
-  const blocks = occupied(state, spec, unit.id);
+  const map = battleMapOf(spec, state.doorOpen, unit.z);
+  const blocks = occupied(state, spec, unit.id, unit.z);
   const horizon = spec.width * spec.height;
   const goals: Cell[] = [{ x: contact.x, y: contact.y }];
   for (const direction of DIRECTIONS) {
@@ -621,20 +707,20 @@ function pursueStep(state: MissionState, spec: MissionSpec, unit: UnitState): St
 }
 
 function stepOnto(state: MissionState, spec: MissionSpec, unit: UnitState, x: number, y: number): StepResult {
-  if (!cellFree(state, spec, x, y, unit.id)) return { state, events: [], rejection: null };
+  if (!cellFree(state, spec, x, y, unit.id, unit.z)) return { state, events: [], rejection: null };
   const moved = updateUnit(state, unit.id, {
     x,
     y,
-    ap: unit.ap - actionAp("move"),
+    ap: unit.ap - stepAp(unit.parts),
     ...dropStance(unit),
   });
-  return finishStep(moved, spec, unit.id, [{ type: "UnitMoved", unitId: unit.id, x, y }]);
+  return finishStep(moved, spec, unit.id, [{ type: "UnitMoved", unitId: unit.id, x, y, z: unit.z }]);
 }
 
 function visibleCrew(state: MissionState, spec: MissionSpec, unit: UnitState): readonly UnitState[] {
-  const map = battleMapOf(spec, state.doorOpen);
+  const map = battleMapOf(spec, state.doorOpen, unit.z);
   return state.units
-    .filter((other) => other.team === "crew" && other.status === "active" && seesUnit(map, unit, other, SIGHT_RANGE))
+    .filter((other) => other.team === "crew" && other.status === "active" && other.z === unit.z && seesUnit(map, unit, other, SIGHT_RANGE))
     .slice()
     .sort((left, right) => manhattan(unit, left) - manhattan(unit, right) || compareId(left.id, right.id));
 }
@@ -694,10 +780,11 @@ function sameContacts(left: readonly Contact[], right: readonly Contact[]): bool
   return true;
 }
 
-function occupied(state: MissionState, spec: MissionSpec, selfId: string): Cell[] {
-  const cells: Cell[] = [{ x: spec.terminal.x, y: spec.terminal.y }];
+function occupied(state: MissionState, spec: MissionSpec, selfId: string, z = 0): Cell[] {
+  const cells: Cell[] = [];
+  if (z === 0) cells.push({ x: spec.terminal.x, y: spec.terminal.y });
   for (const unit of state.units) {
-    if (unit.id === selfId || unit.status === "extracted") continue;
+    if (unit.id === selfId || unit.status === "extracted" || unit.z !== z) continue;
     cells.push({ x: unit.x, y: unit.y });
   }
   return cells;
@@ -705,9 +792,9 @@ function occupied(state: MissionState, spec: MissionSpec, selfId: string): Cell[
 
 function holdContact(state: MissionState, spec: MissionSpec, unit: UnitState): StepResult | null {
   if (unit.overwatch || unit.ap < actionAp("overwatch") || unit.magazine < 1) return null;
-  const map = battleMapOf(spec, state.doorOpen);
+  const map = battleMapOf(spec, state.doorOpen, unit.z);
   const seen = state.units
-    .filter((other) => other.team === "crew" && other.status === "active" && seesUnit(map, unit, other, SIGHT_RANGE))
+    .filter((other) => other.team === "crew" && other.status === "active" && other.z === unit.z && seesUnit(map, unit, other, SIGHT_RANGE))
     .slice()
     .sort((left, right) => manhattan(unit, left) - manhattan(unit, right) || compareId(left.id, right.id));
   const target = seen[0];
@@ -728,20 +815,20 @@ function holdContact(state: MissionState, spec: MissionSpec, unit: UnitState): S
 function enemyStep(state: MissionState, spec: MissionSpec, unitId: string): StepResult {
   const unit = findUnit(state, unitId);
   if (!unit || unit.status !== "active" || unit.patrol.length === 0) return { state, events: [], rejection: null };
-  if (unit.ap < actionAp("move")) return { state, events: [], rejection: null };
+  if (unit.ap < stepAp(unit.parts)) return { state, events: [], rejection: null };
   const nextIndex = (unit.patrolIndex + 1) % unit.patrol.length;
   const next = unit.patrol[nextIndex];
-  if (!next || !orthogonal(unit, next) || !cellFree(state, spec, next.x, next.y, unit.id)) {
+  if (!next || !orthogonal(unit, next) || !cellFree(state, spec, next.x, next.y, unit.id, unit.z)) {
     return { state, events: [], rejection: null };
   }
   const moved = updateUnit(state, unit.id, {
     x: next.x,
     y: next.y,
-    ap: unit.ap - actionAp("move"),
+    ap: unit.ap - stepAp(unit.parts),
     patrolIndex: nextIndex,
     ...dropStance(unit),
   });
-  return finishStep(moved, spec, unit.id, [{ type: "UnitMoved", unitId: unit.id, x: next.x, y: next.y }]);
+  return finishStep(moved, spec, unit.id, [{ type: "UnitMoved", unitId: unit.id, x: next.x, y: next.y, z: unit.z }]);
 }
 
 function resolveFire(
@@ -755,15 +842,19 @@ function resolveFire(
   if (!teamSees(state, spec, shooter.team, target)) return { state, events: [], rejection: "Kein Sichtkontakt." };
   if (!lineOfSight(spec, state.doorOpen, shooter, target)) return { state, events: [], rejection: "Keine Schusslinie." };
   if (manhattan(shooter, target) > shooter.range) return { state, events: [], rejection: "Außer Reichweite." };
+  if (shooter.weapon === "rifle" && rifleBlocked(shooter.parts)) {
+    return { state, events: [], rejection: "Beide Arme sind ausgefallen." };
+  }
   const resolution = resolveShot(
-    battleMapOf(spec, state.doorOpen),
+    battleMapOf(spec, state.doorOpen, shooter.z),
     shooter,
     target,
     aimBonus,
     { hp: shooter.hp, ap: shooter.ap, magazine: shooter.magazine, range: shooter.range },
-    target.hp,
+    target.parts,
     state.combatRng,
     reaction ? "reaction" : "action",
+    shotPenalty(shooter.parts),
   );
   if (resolution.roll === null) {
     if (resolution.status === "no-ap") return { state, events: [], rejection: "Zu wenig Aktionspunkte." };
@@ -778,7 +869,7 @@ function resolveFire(
     aiming: false,
   });
   const wounded = findUnit(next, target.id) ?? target;
-  next = updateUnit(next, target.id, wound(wounded, resolution.targetHp));
+  next = updateUnit(next, target.id, wound(wounded, resolution.targetHp, resolution.parts));
   const judged = judge(next);
   const shotEvent: MissionEvent = {
     type: "ShotResolved",
@@ -786,6 +877,8 @@ function resolveFire(
     targetId: target.id,
     status: resolution.status,
     damage: resolution.damage,
+    part: resolution.part,
+    wound: resolution.wound,
     reaction,
   };
   return { state: judged, events: endedEvents(next, judged, [shotEvent]), rejection: null };
@@ -836,10 +929,11 @@ function dropStance(unit: UnitState): Pick<UnitState, "aiming" | "magazine" | "o
   return { aiming: false, overwatch: null, magazine: unit.magazine + (unit.overwatch ? 1 : 0) };
 }
 
-function wound(unit: UnitState, hp: number): Partial<UnitState> {
+function wound(unit: UnitState, hp: number, parts: readonly PartState[]): Partial<UnitState> {
   const dead = hp <= 0;
   return {
     hp,
+    parts,
     status: dead ? "down" : unit.status,
     ap: dead ? 0 : unit.ap,
     ready: dead ? false : unit.ready,
@@ -849,11 +943,27 @@ function wound(unit: UnitState, hp: number): Partial<UnitState> {
   };
 }
 
+function bleedUnits(state: MissionState): { readonly state: MissionState; readonly events: MissionEvent[] } {
+  let changed = false;
+  const units = state.units.map((unit) => {
+    if (unit.status !== "active") return unit;
+    const ticked = tickBleed(unit.parts);
+    if (ticked.damage === 0) return unit;
+    changed = true;
+    return { ...unit, ...wound(unit, derivedHp(ticked.parts), ticked.parts) };
+  });
+  if (!changed) return { state, events: [] };
+  const next = { ...state, units, revision: state.revision + 1 };
+  const judged = judge(next);
+  return { state: judged, events: endedEvents(next, judged, []) };
+}
+
 function isDirection(value: string): value is Direction {
   return DIRECTIONS.some((direction) => direction === value);
 }
 
 function canFire(state: MissionState, spec: MissionSpec, shooter: UnitState, target: UnitState): boolean {
+  if (shooter.weapon === "rifle" && rifleBlocked(shooter.parts)) return false;
   if (shooter.ap < actionAp("shot") || shooter.magazine < 1) return false;
   if (target.status !== "active" || target.team === shooter.team) return false;
   if (!teamSees(state, spec, shooter.team, target)) return false;
@@ -861,28 +971,85 @@ function canFire(state: MissionState, spec: MissionSpec, shooter: UnitState, tar
   return manhattan(shooter, target) <= shooter.range;
 }
 
-function teamSees(state: MissionState, spec: MissionSpec, team: TeamId, target: Cell): boolean {
+function teamSees(state: MissionState, spec: MissionSpec, team: TeamId, target: Cell & { readonly z?: number }): boolean {
   return state.units.some(
     (unit) => unit.team === team && unit.status === "active" && lineOfSight(spec, state.doorOpen, unit, target),
   );
 }
 
-function lineOfSight(spec: MissionSpec, doorOpen: boolean, from: Cell, to: Cell): boolean {
-  return seesUnit(battleMapOf(spec, doorOpen), from, to, SIGHT_RANGE);
+function lineOfSight(spec: MissionSpec, doorOpen: boolean, from: Cell & { readonly z?: number }, to: Cell & { readonly z?: number }): boolean {
+  const fromZ = from.z ?? 0;
+  const toZ = to.z ?? 0;
+  if (fromZ !== toZ) return false;
+  return seesUnit(battleMapOf(spec, doorOpen, fromZ), from, to, SIGHT_RANGE);
 }
 
 function absorbSight(state: MissionState, spec: MissionSpec): MissionState {
-  const knownCells = unionCells(state.knownCells, crewVisible(state, spec));
-  if (knownCells === state.knownCells) return state;
-  return { ...state, knownCells };
+  const knownCells = unionCells(state.knownCells, crewVisible(state, spec, 0));
+  let knownLevels = state.knownLevels;
+  let levelsChanged = false;
+  for (const floor of floorsOf(spec)) {
+    if (floor.z === 0) continue;
+    const prior = knownLevels.find((item) => item.z === floor.z)?.cells ?? [];
+    const seen = unionCells(prior, crewVisible(state, spec, floor.z));
+    if (seen === prior) continue;
+    levelsChanged = true;
+    knownLevels = knownLevels
+      .filter((item) => item.z !== floor.z)
+      .concat({ z: floor.z, cells: seen })
+      .sort((left, right) => left.z - right.z);
+  }
+  if (knownCells === state.knownCells && !levelsChanged) return state;
+  return { ...state, knownCells, knownLevels };
 }
 
-function crewVisible(state: MissionState, spec: MissionSpec): Cell[] {
+function crewVisible(state: MissionState, spec: MissionSpec, z = 0): Cell[] {
   const origins: Cell[] = [];
   for (const unit of state.units) {
-    if (unit.team === "crew" && unit.status === "active") origins.push({ x: unit.x, y: unit.y });
+    if (unit.team === "crew" && unit.status === "active" && unit.z === z) origins.push({ x: unit.x, y: unit.y });
   }
-  return teamVisibleCells(battleMapOf(spec, state.doorOpen), origins, SIGHT_RANGE);
+  return teamVisibleCells(battleMapOf(spec, state.doorOpen, z), origins, SIGHT_RANGE);
+}
+
+function knownOn(state: MissionState, z: number): readonly Cell[] {
+  if (z === 0) return state.knownCells;
+  return state.knownLevels.find((item) => item.z === z)?.cells ?? [];
+}
+
+function linksOn(spec: MissionSpec, z: number, known: ReadonlySet<string>): FloorLink[] {
+  const links: FloorLink[] = [];
+  for (const link of linksOf(spec)) {
+    const ends = [
+      { z: link.fromZ, x: link.fromX, y: link.fromY, toZ: link.toZ, toX: link.toX, toY: link.toY },
+      { z: link.toZ, x: link.toX, y: link.toY, toZ: link.fromZ, toX: link.fromX, toY: link.fromY },
+    ];
+    for (const end of ends) {
+      if (end.z !== z || !known.has(cellKey(end))) continue;
+      links.push({ id: link.id, kind: link.kind, x: end.x, y: end.y, toZ: end.toZ, toX: end.toX, toY: end.toY });
+    }
+  }
+  links.sort((left, right) => left.y - right.y || left.x - right.x || compareId(left.id, right.id));
+  return links;
+}
+
+function projectFloors(state: MissionState, spec: MissionSpec): FloorView[] {
+  return floorsOf(spec).map((floor) => {
+    const knownCells = knownOn(state, floor.z).map(copyCell);
+    const known = new Set(knownCells.map(cellKey));
+    const map = battleMapOf(spec, state.doorOpen, floor.z);
+    return {
+      z: floor.z,
+      knownCells,
+      visibleCells: crewVisible(state, spec, floor.z).map(copyCell),
+      walls: map.walls
+        .filter((wall) => known.has(cellKey(wall)) && (floor.z !== 0 || !sameCell(wall, spec.door)))
+        .map(copyCell),
+      lowCover: floor.lowCover
+        .filter((cover) => known.has(cellKey(cover)))
+        .map((cover) => ({ id: cover.id, x: cover.x, y: cover.y, protects: cover.protects })),
+      links: linksOn(spec, floor.z, known),
+    };
+  });
 }
 
 function copyCell(cell: Cell): Cell {
@@ -942,13 +1109,14 @@ function endedEvents(before: MissionState, after: MissionState, events: MissionE
   return events;
 }
 
-function cellFree(state: MissionState, spec: MissionSpec, x: number, y: number, ignoreId: string): boolean {
-  if (!Number.isInteger(x) || !Number.isInteger(y)) return false;
+function cellFree(state: MissionState, spec: MissionSpec, x: number, y: number, ignoreId: string, z = 0): boolean {
+  if (!Number.isInteger(x) || !Number.isInteger(y) || !Number.isInteger(z)) return false;
   if (x < 0 || y < 0 || x >= spec.width || y >= spec.height) return false;
-  if (spec.terminal.x === x && spec.terminal.y === y) return false;
-  const map = battleMapOf(spec, state.doorOpen);
+  if (!floorsOf(spec).some((floor) => floor.z === z)) return false;
+  if (z === 0 && spec.terminal.x === x && spec.terminal.y === y) return false;
+  const map = battleMapOf(spec, state.doorOpen, z);
   if (map.walls.some((wall) => wall.x === x && wall.y === y)) return false;
-  return !state.units.some((unit) => unit.id !== ignoreId && unit.status !== "extracted" && unit.x === x && unit.y === y);
+  return !state.units.some((unit) => unit.id !== ignoreId && unit.status !== "extracted" && unit.z === z && unit.x === x && unit.y === y);
 }
 
 function updateUnit(state: MissionState, id: string, patch: Partial<UnitState>): MissionState {
@@ -975,8 +1143,10 @@ function toPublic(unit: UnitState): PublicUnit {
     weapon: unit.weapon,
     x: unit.x,
     y: unit.y,
+    z: unit.z,
     hp: unit.hp,
     maxHp: unit.maxHp,
+    parts: unit.parts.map((part) => ({ id: part.id, hp: part.hp, maxHp: part.maxHp, wound: part.wound })),
     ap: unit.ap,
     range: unit.range,
     magazine: unit.magazine,

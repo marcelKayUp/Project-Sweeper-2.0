@@ -2,6 +2,8 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { Room, ServerError, type Client } from "@colyseus/core";
 import { campaignStore } from "./campaignStore.ts";
+import { accountKeyForTicket } from "./runnerAccount.ts";
+import { runnerStore } from "./runnerStore.ts";
 import { createMissionAuthority, RESUME_SECONDS, type MissionAuthority } from "./missionAuthority.ts";
 import { MissionSync } from "./schema.ts";
 
@@ -28,14 +30,16 @@ export class MissionRoom extends Room<{ state: MissionSync }> {
   };
 
   override async onCreate(options?: { seed?: unknown }): Promise<void> {
-    this.authority = createMissionAuthority({ now: () => Date.now() }, readRoomSeed(options?.seed), campaignStore());
+    this.authority = createMissionAuthority({ now: () => Date.now() }, readRoomSeed(options?.seed), campaignStore(), runnerStore());
     this.maxClients = 4;
     this.setState(new MissionSync());
     await this.setPrivate(true);
   }
 
-  override onJoin(client: Client, options?: { name?: unknown }): void {
-    const joined = this.authority.join(client.sessionId, options?.name);
+  override onJoin(client: Client, options?: { name?: unknown; ticket?: unknown }): void {
+    const bound = bindAccount(options);
+    if (!bound.ok) throw new ServerError(403, bound.rejection);
+    const joined = this.authority.join(client.sessionId, bound.name, bound.accountKey);
     if (!joined.ok) throw new ServerError(403, joined.rejection);
     this.publish();
   }
@@ -103,6 +107,15 @@ export class MissionRoom extends Room<{ state: MissionSync }> {
     }, delay);
     this.timer.unref();
   }
+}
+
+function bindAccount(options?: { name?: unknown; ticket?: unknown }): { readonly ok: true; readonly name: unknown; readonly accountKey: string } | { readonly ok: false; readonly rejection: string } {
+  if (!options || options.ticket === undefined || options.ticket === "") return { ok: true, name: options?.name, accountKey: "" };
+  if (typeof options.ticket !== "string") return { ok: false, rejection: "Anmeldung abgelehnt." };
+  const key = accountKeyForTicket(options.ticket);
+  const account = key ? runnerStore().read().runners[key] : undefined;
+  if (!key || !account) return { ok: false, rejection: "Anmeldung abgelehnt." };
+  return { ok: true, name: account.name, accountKey: key };
 }
 
 function readRoomSeed(value: unknown): number {

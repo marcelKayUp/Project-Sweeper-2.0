@@ -13,6 +13,7 @@ import { Scene } from "@babylonjs/core/scene.js";
 import type { Cell, Direction } from "@neon/sim";
 import { createMissionFigures } from "./missionFigures.ts";
 import { ISO_TILT, ISO_YAW } from "./mountIsoWalk.ts";
+import { stagePointer } from "./stagePointer.ts";
 
 export interface IsoFloor extends Cell {
   readonly lit: boolean;
@@ -35,6 +36,10 @@ export interface IsoUnit extends Cell {
   readonly route?: readonly Cell[];
 }
 
+export interface IsoLink extends Cell {
+  readonly kind: "stair" | "passenger" | "freight";
+}
+
 export interface IsoBoard {
   readonly width: number;
   readonly height: number;
@@ -45,6 +50,7 @@ export interface IsoBoard {
   readonly terminal: Cell | null;
   readonly extraction: readonly Cell[];
   readonly cover: readonly IsoCover[];
+  readonly links?: readonly IsoLink[];
   readonly units: readonly IsoUnit[];
   readonly reachable: readonly Cell[];
   readonly watch: readonly Cell[];
@@ -104,6 +110,11 @@ export function mountIsoBoard(host: HTMLElement, onCell: (cell: Cell) => void): 
   terminalMat.emissiveColor = Color3.FromHexString("#6a4a12");
   const extractMat = material(scene, "extract", "#1c6b4a");
   const coverMat = material(scene, "cover", "#8fb4d8");
+  const stairMat = material(scene, "stair", "#d7c4a1");
+  const passengerMat = material(scene, "passenger", "#3ec6e0");
+  passengerMat.emissiveColor = Color3.FromHexString("#145866");
+  const freightMat = material(scene, "freight", "#e07a3a");
+  freightMat.emissiveColor = Color3.FromHexString("#6a3010");
   const selectMat = material(scene, "select", "#f2c14e");
   selectMat.emissiveColor = Color3.FromHexString("#8a5a00");
   const targetMat = material(scene, "target", "#e07a7a");
@@ -142,8 +153,10 @@ export function mountIsoBoard(host: HTMLElement, onCell: (cell: Cell) => void): 
     applyZoom();
   };
 
-  scene.onPointerDown = (event, pick) => {
+  scene.onPointerDown = (event) => {
     if (disposed || (event.button !== undefined && event.button !== 0)) return;
+    const point = stagePointer(canvas, event);
+    const pick = scene.pick(point.x, point.y, scene.pointerDownPredicate, scene.pointerDownFastCheck, scene.cameraToUseForPointers);
     const mesh = pick.pickedMesh;
     if (!mesh) return;
     const cell = cells.get(mesh);
@@ -226,6 +239,27 @@ export function mountIsoBoard(host: HTMLElement, onCell: (cell: Cell) => void): 
       north.isPickable = false;
     }
     north.position.set((box.minX + box.maxX + 1) / 2, 0.16, box.minY - 0.35);
+  }
+
+  function linkMesh(kind: IsoLink["kind"], meshKey: string): AbstractMesh {
+    if (kind === "passenger") {
+      const mesh = CreateBox(meshKey, { width: 0.28, height: 0.92, depth: 0.28 }, scene);
+      mesh.material = passengerMat;
+      return mesh;
+    }
+    if (kind === "freight") {
+      const mesh = CreateBox(meshKey, { width: 0.78, height: 0.4, depth: 0.78 }, scene);
+      mesh.material = freightMat;
+      return mesh;
+    }
+    const mesh = CreateBox(meshKey, { width: 0.74, height: 0.12, depth: 0.74 }, scene);
+    mesh.material = stairMat;
+    const step = CreateBox(`${meshKey}-step`, { width: 0.36, height: 0.1, depth: 0.36 }, scene);
+    step.material = stairMat;
+    step.position.set(0.12, 0.12, -0.1);
+    step.parent = mesh;
+    step.isPickable = false;
+    return mesh;
   }
 
   function sync(board: IsoBoard) {
@@ -319,6 +353,14 @@ export function mountIsoBoard(host: HTMLElement, onCell: (cell: Cell) => void): 
           mesh.position.set(x, 0.34, z);
           return mesh;
         });
+      }
+
+      for (const link of board.links ?? []) {
+        const linkKey = `link-${link.kind}-${link.x},${link.y}`;
+        const mesh = put(linkKey, () => linkMesh(link.kind, linkKey));
+        const lift = link.kind === "passenger" ? 0.54 : link.kind === "freight" ? 0.28 : 0.16;
+        mesh.position.set(link.x + 0.5, lift, link.y + 0.5);
+        cells.set(mesh, { x: link.x, y: link.y });
       }
 
       releaseFigurePicks();

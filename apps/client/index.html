@@ -2,9 +2,22 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1920, height=1080" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="data:," />
     <title>NEON CONTRACT</title>
+    <script>
+      (function () {
+        var stageWidth = 1920;
+        var stageHeight = 1080;
+        function fitStage() {
+          var scale = Math.min(window.innerWidth / stageWidth, window.innerHeight / stageHeight);
+          if (!Number.isFinite(scale) || scale <= 0) scale = 1;
+          document.documentElement.style.setProperty("--stage-scale", String(scale));
+        }
+        fitStage();
+        window.addEventListener("resize", fitStage);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

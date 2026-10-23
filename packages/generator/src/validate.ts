@@ -1,4 +1,4 @@
-import type { Cell, MissionSpec } from "@neon/sim";
+import { floorsOf, linksOf, type Cell, type MissionSpec } from "@neon/sim";
 import { ROOM_RULES, SIZE_DIMENSIONS } from "./catalog.ts";
 import { cellKey, contains, flood, independentRoomRoutes, neighbors, roomPath, sameCell } from "./graph.ts";
 import { preferenceScore } from "./build.ts";
@@ -238,8 +238,35 @@ export function validateBuilding(building: Building, mission: MissionSpec, confi
     const room = rooms.get(item.roomId);
     if (!room || !contains(room, item) || blocked.has(cellKey(item)) || mission.spawns.some((spawn) => sameCell(spawn, item))) fail("dressing", "Dekoration belegt einen reservierten Anker", item.id);
   }
+  const plates = floorsOf(mission);
+  const ground = plates[0];
+  const upper = plates[1];
+  if (!ground || !upper || !mission.levels || plates.length !== 2 || ground.z !== 0 || upper.z !== 1) fail("levels", "Gebäude braucht genau zwei Ebenen");
+  else if (cellSet(ground.walls) !== cellSet(mission.walls) || coverSet(ground.lowCover) !== coverSet(mission.lowCover) || cellSet(upper.walls) !== cellSet(mission.walls) || upper.lowCover.length !== 0) {
+    fail("levels", "Ebene 0 bleibt die Geschossplatte, Ebene 1 übernimmt die Wände ohne zusätzliche Deckung");
+  }
+  const vertical = linksOf(mission);
+  const liftKind = config.family === "factory" ? "freight" : "passenger";
+  if (vertical.length !== 2 || !vertical.some((link) => link.kind === "stair") || !vertical.some((link) => link.kind === liftKind)) fail("vertical-links", "Treppe oder familieneigener Aufzug fehlt");
+  if (vertical.some((link) => link.kind !== "stair" && link.kind !== liftKind)) fail("vertical-links", "Aufzugtyp passt nicht zur Gebäudefamilie");
+  if (canonical(building.links) !== canonical(mission.links ?? [])) fail("vertical-links", "Erschließung und Mission nennen verschiedene Übergänge");
+  const halls = new Set(building.circulation.map(cellKey));
+  const dressed = new Set(building.dressing.map(cellKey));
+  for (const link of vertical) {
+    const from = cellKey({ x: link.fromX, y: link.fromY });
+    const to = cellKey({ x: link.toX, y: link.toY });
+    if (link.fromZ !== 0 || link.toZ !== 1 || from !== to || !halls.has(from) || dressed.has(from) || walls.has(from)) fail("vertical-links", "Übergang liegt nicht auf einem freien Flurfeld beider Ebenen", link.id);
+  }
   warnings.push({ code: "playtest-open", message: "Geometrie und Semantik geprüft; taktische Fairness, Botlauf und menschliche Spielabnahme offen.", ids: [] });
   warnings.push({ code: "infrastructure-abstract", message: "Versorgung folgt Raumverbindungen; physische Leitungen und Sabotageaktionen sind noch nicht implementiert.", ids: [] });
   warnings.push({ code: "demand-game-model", message: "Kapazitäten und Rasterflächen sind versionierte Spielannahmen, keine baurechtliche oder ASR-konforme Planung. Außenfunktionen sind Kontext, keine begehbaren Räume.", ids: [] });
   return { errors, warnings, metrics: { roomCount: building.rooms.length, walkableCells: mission.width * mission.height - walls.size, targetDistance, independentRoutes: routeCount, coverCount: mission.lowCover.length, preferenceScore: errors.length ? 0 : preferenceScore(building, mission), corridorCells: hallCells.size, executiveSanitaryDistance } };
+}
+
+function cellSet(cells: readonly Cell[]): string {
+  return cells.map((cell) => `${cell.x},${cell.y}`).sort().join("|");
+}
+
+function coverSet(covers: readonly { readonly id: string; readonly x: number; readonly y: number; readonly protects: string }[]): string {
+  return covers.map((cover) => `${cover.id}:${cover.x},${cover.y}:${cover.protects}`).sort().join("|");
 }

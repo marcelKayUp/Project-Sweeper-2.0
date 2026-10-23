@@ -420,6 +420,22 @@ describe("Missionsraum", () => {
     expect(JSON.stringify(room.authority.stand(room.ids[0])).includes("wache-haupt")).toBe(false);
   });
 
+  it("weist einen Etagenwechsel ohne Übergang ab und behält eine Ebene", () => {
+    const room = openRoom();
+    room.joinAll();
+    room.start();
+    const before = room.authority.stand(room.ids[0]);
+    expect(before.levelCount).toBe(1);
+    expect(before.floors.map((floor) => floor.z)).toEqual([0]);
+    room.command(room.ids[0], wish("hoch", "kite", 1, { kind: "move", x: 1, y: 9, z: 1 }));
+    const denied = room.authority.stand(room.ids[0]);
+    expect(denied.notice).toBe("Kein Übergang zu diesem Feld.");
+    expect(unit(denied, "kite")).toMatchObject({ x: 1, y: 9, z: 0, ap: 8 });
+    room.command(room.ids[0], wish("bruch", "kite", 1, { kind: "move", x: 1, y: 8, z: 1.5 }));
+    expect(room.authority.stand(room.ids[0]).notice).toBe("Befehl ist ungültig.");
+    expect(unit(room.authority.stand(room.ids[0]), "kite").ap).toBe(8);
+  });
+
   it("merkt sich einen festen Seed und weist einen ungültigen zurück", () => {
     const room = openRoom();
     expect(room.authority.stand(room.ids[0]).seed).toBe(1);

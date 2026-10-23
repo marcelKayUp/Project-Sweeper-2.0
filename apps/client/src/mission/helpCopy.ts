@@ -1,3 +1,5 @@
+import { FREIGHT_AP, PASSENGER_AP, STAIR_AP } from "@neon/sim";
+
 export interface HelpSection {
   readonly id: string;
   readonly title: string;
@@ -8,7 +10,7 @@ export const helpSections: readonly HelpSection[] = [
   {
     id: "steuerung",
     title: "Steuerung",
-    body: "Die Karte ist orthografisch und um 45 Grad geneigt. Drehen erfolgt in 90-Grad-Schritten und ändert Norden nicht. Die Ansicht sendet Bewegung, Zielen, Schuss, Nachladen, Overwatch, Medkit, Terminal, Tür, Extraktion und Bereit. Nur der Server verändert HP, AP und den Auftrag. Die Vorschau ist unverbindlich. Animation überspringen zeigt den bestätigten Stand.",
+    body: "Die Karte ist orthografisch und um 45 Grad geneigt. Drehen erfolgt in 90-Grad-Schritten und ändert Norden nicht. Etage hoch und Etage runter zeigen nur die bestätigte Ebene. Die Ansicht sendet Bewegung, Zielen, Schuss, Nachladen, Overwatch, Medkit, Terminal, Tür, Extraktion und Bereit. Nur der Server verändert HP, AP und den Auftrag. Die Vorschau ist unverbindlich. Animation überspringen zeigt den bestätigten Stand.",
   },
   {
     id: "ziel",
@@ -18,7 +20,7 @@ export const helpSections: readonly HelpSection[] = [
   {
     id: "ap",
     title: "Aktionspunkte",
-    body: "Bewegung kostet 1 AP, Zielen 1, Nachladen 2, Schuss 3, Heilung 3 und Overwatch 3. Ein Medkit heilt 2 HP. Ungenutzte AP verfallen mit der Crewphase.",
+    body: `Ein Schritt kostet 1 AP, mit gebrochenem oder leerem Bein 2. Eine Treppe kostet ${STAIR_AP} AP, ein Personenaufzug ${PASSENGER_AP} AP und ein Lastenaufzug ${FREIGHT_AP} AP. Zielen 1, Nachladen 2, Schuss 3, Heilung 3 und Overwatch 3. Ein Medkit stillt die Blutung an einem Teil und stellt dort 1 Punkt her. Ungenutzte AP verfallen mit der Crewphase.`,
   },
   {
     id: "deckung",

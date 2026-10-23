@@ -78,7 +78,7 @@ export async function generateBuilding(input: unknown): Promise<GenerationResult
     if (report.errors.length) continue;
     const { hash: _unused, ...missionBody } = candidate.mission;
     const mission = { ...missionBody, hash: await contentHash(missionBody) };
-    const body: Omit<BuildingPackage, "hash"> = { formatVersion: 5, generatorVersion: GENERATOR_VERSION, contentVersion: CONTENT_VERSION, stageVersions: STAGE_VERSIONS, config, attempt, seeds, building: candidate.building, mission, report, attempts };
+    const body: Omit<BuildingPackage, "hash"> = { formatVersion: 6, generatorVersion: GENERATOR_VERSION, contentVersion: CONTENT_VERSION, stageVersions: STAGE_VERSIONS, config, attempt, seeds, building: candidate.building, mission, report, attempts };
     return { ok: true, package: freeze({ ...body, hash: await contentHash(body) }) };
   }
   const errors: Finding[] = [{ code: "attempt-budget", message: `${demand.instances.length} Räume mit mindestens ${demand.summary.minimumArea} Raumfeldern konnten nach ${config.maxAttempts} Versuchen nicht gültig angeordnet werden (${demand.summary.availableArea} Innenfelder). Größere Fläche oder kleineren Bedarf/Ausschnitt wählen. Kein Rückfall und kein halbfertiger Export.`, ids: [] }];

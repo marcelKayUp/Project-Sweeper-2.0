@@ -8,12 +8,14 @@ import {
   deckungFixture,
   GUARD_HP,
   nextUint32,
+  freshParts,
   resolveShot,
   RIFLE_MAGAZINE,
   RIFLE_RANGE,
   SCHUSS_MISS_SEED,
   SCHUSS_VIEW_SEED,
   schussView,
+  strikeDamage,
 } from "./index.ts";
 import type { BattleMap, Cell, Combatant } from "./index.ts";
 
@@ -32,7 +34,7 @@ function guard(patch: Partial<Combatant> = {}): Combatant {
 function resolveOpen(seed: number, patch: Partial<Combatant> = {}, aimBonus: 0 | 15 = 0) {
   const from: Cell = { x: 1, y: 1 };
   const to: Cell = { x: 5, y: 1 };
-  return resolveShot(openMap, from, to, aimBonus, guard(patch), CREW_HP, createRng(seed, "combat"));
+  return resolveShot(openMap, from, to, aimBonus, guard(patch), freshParts(), createRng(seed, "combat"));
 }
 
 describe("Schussauflösung", () => {
@@ -62,7 +64,7 @@ describe("Schussauflösung", () => {
       deckungFixture.blockedTarget,
       0,
       shooter,
-      CREW_HP,
+      freshParts(),
       rng,
     );
     const fresh = resolveOpen(SCHUSS_VIEW_SEED);
@@ -72,7 +74,7 @@ describe("Schussauflösung", () => {
       { x: 5, y: 1 },
       0,
       shooter,
-      CREW_HP,
+      freshParts(),
       blocked.rng,
     );
 
@@ -90,7 +92,7 @@ describe("Schussauflösung", () => {
     expect(afterBlocked.rng.state).toBe(fresh.rng.state);
   });
 
-  it("verbraucht Patrone und 3 AP auch beim Fehlschuss und zieht bei einem Treffer 2 HP ab", () => {
+  it("verbraucht Patrone und 3 AP auch beim Fehlschuss und zieht den Treffer nur am getroffenen Teil ab", () => {
     const miss = schussView(SCHUSS_MISS_SEED).resolution;
     const hit = schussView(SCHUSS_VIEW_SEED).resolution;
 
@@ -104,9 +106,12 @@ describe("Schussauflösung", () => {
     expect(miss.shooterMagazine).toBe(RIFLE_MAGAZINE - 1);
 
     expect(hit.status).toBe("hit");
-    expect(hit.damage).toBe(2);
+    expect(hit.part).not.toBeNull();
+    expect(hit.wound).not.toBeNull();
+    if (!hit.part || !hit.wound) throw new Error("Treffer ohne Ort");
+    expect(hit.damage).toBe(strikeDamage(hit.part, hit.wound));
     expect(Number.isInteger(hit.damage)).toBe(true);
-    expect(hit.targetHp).toBe(CREW_HP - 2);
+    expect(hit.targetHp).toBe(CREW_HP - hit.damage);
     expect(Number.isInteger(hit.targetHp)).toBe(true);
     expect(hit.apSpent).toBe(3);
     expect(hit.ammoSpent).toBe(1);
@@ -129,9 +134,9 @@ describe("Schussauflösung", () => {
     const shooter = guard();
     const from: Cell = { x: 0, y: 0 };
     const cases = [
-      resolveShot(openMap, from, { x: 0, y: 11 }, 0, shooter, CREW_HP, rng),
-      resolveShot(openMap, from, { x: 4, y: 0 }, 0, guard({ ap: 2 }), CREW_HP, rng),
-      resolveShot(openMap, from, { x: 4, y: 0 }, 0, guard({ magazine: 0 }), CREW_HP, rng),
+      resolveShot(openMap, from, { x: 0, y: 11 }, 0, shooter, freshParts(), rng),
+      resolveShot(openMap, from, { x: 4, y: 0 }, 0, guard({ ap: 2 }), freshParts(), rng),
+      resolveShot(openMap, from, { x: 4, y: 0 }, 0, guard({ magazine: 0 }), freshParts(), rng),
     ];
     expect(cases.map((item) => item.status)).toEqual(["out-of-range", "no-ap", "no-ammo"]);
     for (const item of cases) {
@@ -151,7 +156,7 @@ describe("Schussauflösung", () => {
       deckungFixture.runner,
       0,
       guard({ ap: first.shooterAp, magazine: first.shooterMagazine }),
-      first.targetHp,
+      first.parts,
       first.rng,
     );
     expect(first.rng.state).not.toBe(createRng(SCHUSS_MISS_SEED, "combat").state);
@@ -171,13 +176,15 @@ describe("Schussauflösung", () => {
       { x: 5, y: 1 },
       0,
       guard(),
-      1,
+      freshParts().map((part) => (part.id === wounded.part ? { ...part, hp: wounded.damage } : { ...part, hp: 0, wound: null })),
       createRng(SCHUSS_VIEW_SEED, "combat"),
     );
     expect(wounded.preview.chance).toBe(65);
     expect(finished.status).toBe("hit");
+    expect(finished.part).toBe(wounded.part);
+    expect(finished.damage).toBe(wounded.damage);
     expect(finished.targetHp).toBe(0);
-    expect(finished.damage).toBe(2);
+    expect(finished.parts.every((part) => part.hp >= 0)).toBe(true);
 
     const aimed = resolveOpen(SCHUSS_VIEW_SEED, {}, AIM_BONUS);
     expect(aimed.preview.aimBonus).toBe(15);
@@ -185,7 +192,7 @@ describe("Schussauflösung", () => {
     expect((aimed.preview.chance ?? 0) - (wounded.preview.chance ?? 0)).toBe(15);
     expect(aimed.apSpent).toBe(3);
     expect(() =>
-      resolveShot(openMap, { x: 1, y: 1 }, { x: 5, y: 1 }, 30, guard(), CREW_HP, createRng(SCHUSS_VIEW_SEED, "combat")),
+      resolveShot(openMap, { x: 1, y: 1 }, { x: 5, y: 1 }, 30, guard(), freshParts(), createRng(SCHUSS_VIEW_SEED, "combat")),
     ).toThrow(/Zielbonus/);
   });
 
@@ -196,7 +203,7 @@ describe("Schussauflösung", () => {
     expect(bot.rng.stream).toBe("bot");
     expect(combat.value).not.toBe(bot.value);
     expect(() =>
-      resolveShot(openMap, { x: 1, y: 1 }, { x: 2, y: 1 }, 0, guard(), CREW_HP, createRng(7, "bot")),
+      resolveShot(openMap, { x: 1, y: 1 }, { x: 2, y: 1 }, 0, guard(), freshParts(), createRng(7, "bot")),
     ).toThrow(/Kampf-RNG/);
   });
 
@@ -207,7 +214,7 @@ describe("Schussauflösung", () => {
     const shooter = guard();
     const rng = createRng(SCHUSS_VIEW_SEED, "combat");
     const before = JSON.stringify({ map, from, to, shooter, rng });
-    resolveShot(map, from, to, 0, shooter, CREW_HP, rng);
+    resolveShot(map, from, to, 0, shooter, freshParts(), rng);
     expect(JSON.stringify({ map, from, to, shooter, rng })).toBe(before);
   });
 
@@ -226,8 +233,9 @@ describe("Schussauflösung", () => {
     expect(view.resolution.preview.blocked).toBe(false);
     expect(view.resolution.preview.chance).toBe(40);
     expect(view.resolution.status).toBe("hit");
-    expect(view.targetMaxHp).toBe(6);
-    expect(view.resolution.targetHp).toBe(4);
+    expect(view.targetMaxHp).toBe(CREW_HP);
+    expect(view.resolution.damage).toBeGreaterThan(0);
+    expect(view.resolution.targetHp).toBe(CREW_HP - view.resolution.damage);
     expect(view.maxAp).toBe(8);
     expect(view.resolution.shooterAp).toBe(5);
     expect(view.magazineSize).toBe(6);

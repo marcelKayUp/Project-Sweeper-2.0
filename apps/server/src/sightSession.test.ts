@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { generateBuilding } from "@neon/generator";
-import type { Cell, MissionSpec } from "@neon/sim";
+import { PROTOCOL_VERSION, type Cell, type MissionSpec } from "@neon/sim";
 import { createSightSession, type SightMeta, type SightStand, type SightWish } from "./sightSession.ts";
 import { readSightOptions, readSightWish } from "./sightValidate.ts";
 
@@ -113,18 +113,18 @@ describe("Sicht-Sitzung", () => {
     expect(opened.units.find((unit) => unit.id === "kite")?.ap).toBe(4);
 
     const shot = session.receive({ commandId: "schuss", kind: "shoot", unitId: "kite", targetId: "nahe" });
-    expect(shot.notice === "Kite trifft Nahe, 2 Schaden." || shot.notice === "Schuss auf Nahe verfehlt.").toBe(true);
+    expect(shot.notice === "Schuss auf Nahe verfehlt." || /^Kite trifft Nahe, \d+ Schaden\.$/.test(shot.notice)).toBe(true);
     expect(shot.units.find((unit) => unit.id === "kite")?.ap).toBe(1);
   });
 
-  it("behält den gelaufenen Teil, wenn Overwatch den restlichen Weg abbricht", () => {
+  it("geht den restlichen Weg, wenn der Overwatch-Treffer nicht kampfunfähig macht", () => {
     let tick = 0;
     const session = createSightSession(alley(), 3, META, () => (tick += 1000));
     session.receive({ commandId: "runde-1", kind: "end" });
     const armed = session.receive({ commandId: "runde-2", kind: "end" });
-    expect(armed.units.find((unit) => unit.id === "kite")).toMatchObject({ hp: 2, x: 1, y: 1 });
+    expect(armed.units.find((unit) => unit.id === "kite")).toMatchObject({ hp: 10, x: 1, y: 1 });
     expect(armed.units.find((unit) => unit.id === "wache")?.overwatch).not.toBeNull();
-    const stopped = session.receive({
+    const walked = session.receive({
       commandId: "lauf",
       kind: "move",
       unitId: "kite",
@@ -133,9 +133,9 @@ describe("Sicht-Sitzung", () => {
         { x: 3, y: 1 },
       ],
     });
-    expect(stopped.units.find((unit) => unit.id === "kite")).toMatchObject({ x: 2, y: 1, status: "down", hp: 0 });
-    expect(stopped.notice).toContain("Overwatch.");
-    const guard = stopped.units.find((unit) => unit.id === "wache");
+    expect(walked.units.find((unit) => unit.id === "kite")).toMatchObject({ x: 3, y: 1, status: "active", hp: 8 });
+    expect(walked.notice).toContain("Overwatch.");
+    const guard = walked.units.find((unit) => unit.id === "wache");
     if (guard) expect(guard.overwatch).toBeNull();
   });
 
@@ -186,7 +186,7 @@ describe("Sicht-Sitzung", () => {
     expect(() => readSightOptions({ seed: 1, family: "lab" })).toThrow(/Gebäudefamilie/);
     expect(
       readSightWish({
-        protocol: 1,
+        protocol: PROTOCOL_VERSION,
         area: "sicht",
         commandId: "a",
         kind: "move",
@@ -194,7 +194,7 @@ describe("Sicht-Sitzung", () => {
         path: [{ x: 2, y: 1 }],
       }).ok,
     ).toBe(true);
-    const foreign = readSightWish({ protocol: 1, area: "raster", commandId: "a", kind: "reset" });
+    const foreign = readSightWish({ protocol: PROTOCOL_VERSION, area: "raster", commandId: "a", kind: "reset" });
     expect(foreign.ok).toBe(false);
     if (!foreign.ok) expect(foreign.notice).toBe("Befehl ist ungültig.");
   });

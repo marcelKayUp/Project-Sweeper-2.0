@@ -31,7 +31,7 @@ for (const corporation of ["kasane", "concord", "parallax", "verdant"]) for (con
   const result = await generateBuilding(config);
   variants.push({ config, ok: result.ok, rooms: result.ok ? result.package.building.rooms.length : null, errors: result.ok ? [] : result.errors });
 }
-const report = { generatorVersion: GENERATOR_VERSION, seeds: 300, accepted: suites.reduce((sum, suite) => sum + suite.accepted, 0), failed: suites.reduce((sum, suite) => sum + suite.failed, 0), fallback: 0, suites, variants, limitations: ["Geometric, capacity and identity validation", "No full bot mission or human playtest", "Existing single-floor MissionSpec only"] };
+const report = { generatorVersion: GENERATOR_VERSION, seeds: 300, accepted: suites.reduce((sum, suite) => sum + suite.accepted, 0), failed: suites.reduce((sum, suite) => sum + suite.failed, 0), fallback: 0, suites, variants, limitations: ["Geometric, capacity and identity validation", "No full bot mission or human playtest", "Two stacked tactical floors with stair and one lift; no second floorplan search"] };
 await mkdir(new URL("../artifacts/generator/", import.meta.url), { recursive: true });
 await writeFile(new URL("../artifacts/generator/corporate-suite.json", import.meta.url), JSON.stringify(report, null, 2) + "\n");
 console.log(JSON.stringify({ generatorVersion: report.generatorVersion, seeds: report.seeds, accepted: report.accepted, failed: report.failed, variants: variants.length, failedVariants: variants.filter((variant) => !variant.ok), suites }, null, 2));

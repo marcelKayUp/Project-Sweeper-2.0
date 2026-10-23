@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { PROTOCOL_VERSION } from "@neon/sim";
+import { BODY_PARTS, PACK_CELLS, PROTOCOL_VERSION } from "@neon/sim";
 
 const field = z.number().int().min(0).max(19);
 
@@ -15,17 +15,28 @@ export const commandSchema = z.object({
   epoch: z.number().int().min(1).max(99),
   unitId: z.string().regex(/^[a-z-]{1,24}$/),
   action: z.discriminatedUnion("kind", [
-    z.object({ kind: z.literal("move"), x: field, y: field }),
+    z.object({ kind: z.literal("move"), x: field, y: field, z: z.number().int().min(0).max(7).optional() }),
     z.object({ kind: z.literal("interact"), targetId: z.enum(["terminal", "shortcut"]) }),
     z.object({ kind: z.literal("extract") }),
     z.object({ kind: z.literal("shoot"), targetId }),
     z.object({ kind: z.literal("reload") }),
     z.object({ kind: z.literal("aim") }),
-    z.object({ kind: z.literal("heal"), targetId }),
+    z.object({ kind: z.literal("heal"), targetId, part: z.enum(BODY_PARTS) }),
     z.object({ kind: z.literal("overwatch"), direction: z.enum(["n", "e", "s", "w"]) }),
     z.object({ kind: z.literal("ready") }),
   ]),
 });
+
+const inventoryPlace = z.discriminatedUnion("area", [
+  z.object({ area: z.literal("hands") }),
+  z.object({ area: z.literal("hand"), hand: z.enum(["left", "right"]) }),
+  z.object({ area: z.literal("belt") }),
+  z.object({ area: z.literal("pack"), index: z.number().int().min(0).max(PACK_CELLS - 1) }),
+  z.object({
+    area: z.literal("stash"),
+    post: z.enum(["rifle", "sidearm", "rifleMagazines", "sidearmMagazines", "medkits"]),
+  }),
+]);
 
 export const lobbySchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("preset"), preset: z.enum(["rifle", "sidearm"]) }),
@@ -37,6 +48,11 @@ export const lobbySchema = z.discriminatedUnion("kind", [
     kind: z.literal("lager"),
     richtung: z.enum(["nehmen", "legen"]),
     posten: z.enum(["rifle", "sidearm", "rifleMagazines", "sidearmMagazines", "medkits"]),
+  }),
+  z.object({
+    kind: z.literal("ziehen"),
+    von: inventoryPlace,
+    nach: inventoryPlace,
   }),
 ]);
 

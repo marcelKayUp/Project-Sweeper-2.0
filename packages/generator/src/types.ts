@@ -1,6 +1,6 @@
-import type { Cell, MissionSpec } from "@neon/sim";
+import type { Cell, MissionSpec, VerticalLink } from "@neon/sim";
 
-export const GENERATOR_VERSION = "semantic-building/5";
+export const GENERATOR_VERSION = "semantic-building/6";
 export const CONTENT_VERSION = "building-catalog/4";
 export const STAGE_VERSIONS = { program: 5, floorplan: 5, topology: 5, tactics: 1, encounters: 1, dressing: 2 } as const;
 export const CORPORATIONS = ["neutral", "kasane", "concord", "parallax", "verdant"] as const;
@@ -184,6 +184,7 @@ export interface Building {
   readonly infrastructure: readonly ServiceGraph[];
   readonly missionGraph: MissionGraph;
   readonly dressing: readonly Dressing[];
+  readonly links: readonly VerticalLink[];
 }
 export interface LayoutInfo {
   readonly method: "bsp" | "graph" | "circulation";
@@ -220,7 +221,7 @@ export interface AttemptReport {
   readonly errors: readonly Finding[];
 }
 export interface BuildingPackage {
-  readonly formatVersion: 5;
+  readonly formatVersion: 6;
   readonly generatorVersion: typeof GENERATOR_VERSION;
   readonly contentVersion: typeof CONTENT_VERSION;
   readonly stageVersions: typeof STAGE_VERSIONS;

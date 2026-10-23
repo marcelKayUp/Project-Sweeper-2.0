@@ -25,11 +25,11 @@ describe("Zielen, Medkit und Overwatch", () => {
     expect(hit.rejection).toBeNull();
     expect(hit.events).toContainEqual(expect.objectContaining({ type: "ShotResolved", status: "hit", reaction: false }));
     expect(unit(hit.state, "kite").aiming).toBe(false);
-    expect(unit(hit.state, "nahe").hp).toBe(2);
+    expect(unit(hit.state, "nahe").hp).toBeLessThan(unit(hit.state, "nahe").maxHp);
 
     const plain = apply(createMissionState(spec, 5), { kind: "shoot", unitId: "kite", targetId: "nahe" });
     expect(plain.events).toContainEqual(expect.objectContaining({ type: "ShotResolved", status: "miss" }));
-    expect(unit(plain.state, "nahe").hp).toBe(4);
+    expect(unit(plain.state, "nahe").hp).toBe(unit(plain.state, "nahe").maxHp);
 
     const moved = apply(aimed.state, { kind: "move", unitId: "kite", x: 2, y: 1 });
     expect(unit(moved.state, "kite").aiming).toBe(false);
@@ -38,28 +38,30 @@ describe("Zielen, Medkit und Overwatch", () => {
   it("heilt sich oder den Nachbarn einmal und bucht ungültige Heilung nicht", () => {
     const spec = lane();
     const missed = apply(createMissionState(spec, 5), { kind: "shoot", unitId: "kite", targetId: "nahe" });
-    expect(unit(missed.state, "nahe").hp).toBe(4);
-    const full = apply(missed.state, { kind: "heal", unitId: "kite", targetId: "kite" });
-    expect(full.rejection).toBe("Leben ist voll.");
+    expect(unit(missed.state, "nahe").hp).toBe(unit(missed.state, "nahe").maxHp);
+    const full = apply(missed.state, { kind: "heal", unitId: "kite", targetId: "kite", part: "head" });
+    expect(full.rejection).toBe("Dieses Teil braucht kein Medkit.");
     expect(full.state).toBe(missed.state);
 
     const wounded = readyAll(missed.state);
-    expect(unit(wounded, "kite").hp).toBe(4);
-    const self = apply(wounded, { kind: "heal", unitId: "kite", targetId: "kite" });
+    expect(unit(wounded, "kite").hp).toBeLessThan(unit(wounded, "kite").maxHp);
+    const hurt = unit(wounded, "kite").parts.find((part) => part.hp < part.maxHp || part.wound === "bleed");
+    if (!hurt) throw new Error("Kite ist unverletzt");
+    const self = apply(wounded, { kind: "heal", unitId: "kite", targetId: "kite", part: hurt.id });
     expect(self.rejection).toBeNull();
-    expect(unit(self.state, "kite")).toMatchObject({ hp: 4 + HEAL_HP, ap: 5, medkits: 0 });
-    const spent = apply(self.state, { kind: "heal", unitId: "kite", targetId: "kite" });
+    expect(unit(self.state, "kite")).toMatchObject({ hp: unit(wounded, "kite").hp + HEAL_HP, ap: 5, medkits: 0 });
+    const spent = apply(self.state, { kind: "heal", unitId: "kite", targetId: "kite", part: hurt.id });
     expect(spent.rejection).toBe("Kein Medkit.");
     expect(spent.state).toBe(self.state);
 
-    const ally = apply(wounded, { kind: "heal", unitId: "voss", targetId: "kite" });
+    const ally = apply(wounded, { kind: "heal", unitId: "voss", targetId: "kite", part: hurt.id });
     expect(ally.rejection).toBeNull();
-    expect(unit(ally.state, "kite").hp).toBe(6);
-    expect(unit(ally.state, "voss")).toMatchObject({ ap: 5, medkits: 0, hp: 6 });
-    const far = apply(wounded, { kind: "heal", unitId: "voss", targetId: "nahe" });
+    expect(unit(ally.state, "kite").hp).toBe(unit(wounded, "kite").hp + HEAL_HP);
+    expect(unit(ally.state, "voss")).toMatchObject({ ap: 5, medkits: 0, hp: unit(wounded, "voss").hp });
+    const far = apply(wounded, { kind: "heal", unitId: "voss", targetId: "nahe", part: "head" });
     expect(far.rejection).toBe("Kein gültiges Ziel.");
     expect(far.state).toBe(wounded);
-    const diagonal = apply(createMissionState(corner(), 1), { kind: "heal", unitId: "voss", targetId: "kite" });
+    const diagonal = apply(createMissionState(corner(), 1), { kind: "heal", unitId: "voss", targetId: "kite", part: "head" });
     expect(diagonal.rejection).toBe("Nicht in Reichweite.");
   });
 
@@ -76,21 +78,25 @@ describe("Zielen, Medkit und Overwatch", () => {
     expect(missionChecksum(state)).toBe(before);
 
     state = readyAll(held.state);
-    expect(unit(state, "nahe")).toMatchObject({ x: 4, y: 1, hp: 4, status: "active" });
-    expect(unit(state, "kite")).toMatchObject({ overwatch: null, magazine: 6, ap: 8, hp: 4 });
+    expect(unit(state, "nahe")).toMatchObject({ x: 4, y: 1, hp: unit(state, "nahe").maxHp, status: "active" });
+    expect(unit(state, "kite").hp).toBe(unit(state, "kite").maxHp - 1);
+    expect(unit(state, "kite").parts.filter((part) => part.hp < part.maxHp)).toHaveLength(1);
+    expect(unit(state, "kite")).toMatchObject({ overwatch: null, magazine: 6, ap: 8 });
   });
 
   it("bricht den restlichen Weg ab, wenn Overwatch den Läufer ausschaltet", () => {
     const spec = alley();
     let state = createMissionState(spec, 3);
     state = readyAll(state);
-    expect(unit(state, "kite").hp).toBe(4);
+    expect(unit(state, "kite").hp).toBe(unit(state, "kite").maxHp - 1);
+    expect(unit(state, "kite").parts.find((part) => part.id === "leg-l")).toMatchObject({ hp: 1, wound: "bleed" });
     expect(unit(state, "wache").overwatch).not.toBeNull();
     state = readyAll(state);
-    expect(unit(state, "kite").hp).toBe(2);
+    expect(unit(state, "kite").hp).toBe(10);
+    state = leaveOnly(state, "kite", "head", 2);
     const first = apply(state, { kind: "move", unitId: "kite", x: 2, y: 1 });
     expect(first.rejection).toBeNull();
-    expect(first.events).toContainEqual(expect.objectContaining({ type: "ShotResolved", reaction: true, shooterId: "wache", status: "hit" }));
+    expect(first.events).toContainEqual(expect.objectContaining({ type: "ShotResolved", reaction: true, shooterId: "wache", status: "hit", part: "head", damage: 2 }));
     expect(unit(first.state, "kite")).toMatchObject({ x: 2, y: 1, status: "down", hp: 0 });
     expect(unit(first.state, "wache").overwatch).toBeNull();
     const second = apply(first.state, { kind: "move", unitId: "kite", x: 3, y: 1 });
@@ -101,9 +107,10 @@ describe("Zielen, Medkit und Overwatch", () => {
   it("lässt den zweiten Beobachter stehen, wenn der erste das Ziel ausschaltet", () => {
     let state = createMissionState(pair(), 3);
     state = readyAll(state);
-    expect(unit(state, "kite").hp).toBe(2);
+    expect(unit(state, "kite").hp).toBe(11);
     expect(unit(state, "a").overwatch).toBe("w");
     expect(unit(state, "b").overwatch).toBe("w");
+    state = leaveOnly(state, "kite", "head", 2);
     const stepped = apply(state, { kind: "move", unitId: "kite", x: 2, y: 1 });
     expect(stepped.rejection).toBeNull();
     expect(unit(stepped.state, "kite")).toMatchObject({ status: "down", hp: 0, x: 2, y: 1 });
@@ -143,6 +150,17 @@ function unit(state: MissionState, id: string) {
   const found = state.units.find((item) => item.id === id);
   if (!found) throw new Error(id);
   return found;
+}
+
+function leaveOnly(state: MissionState, id: string, partId: string, hp: number): MissionState {
+  return {
+    ...state,
+    units: state.units.map((item) => {
+      if (item.id !== id) return item;
+      const parts = item.parts.map((part) => (part.id === partId ? { ...part, hp } : { ...part, hp: 0 }));
+      return { ...item, parts, hp: parts.reduce((sum, part) => sum + part.hp, 0) };
+    }),
+  };
 }
 
 function readyAll(state: MissionState): MissionState {

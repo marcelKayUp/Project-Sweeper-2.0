@@ -160,6 +160,12 @@ Für AP-24/AP-25 dient die [gestufte Charakterentwicklung](CHARAKTERENTWICKLUNG.
 
 **Stand 23.10.2026, Lager und Stadtkarte:** Save-Version 2 ergänzt ein gemeinsames Lager und begrenzte Slots. Die abstrakte Rhein-Ruhr-Übersicht liegt unter `?stueck=stadt` und setzt keine Deckung, Sichtlinie oder Missionsregel. Händler, Fraktionen, Hub, zweite Mission und die menschliche M3-Abnahme bleiben offen, siehe [0032](decisions/0032-lager-slots-und-stadtkarte.md).
 
+**Stand 23.10.2026, Papierpuppe:** Save-Version 3 legt dieselben Stücke auf Hände, Gürtel und einen kleinen Rücken. Ein Gewehr belegt beide Hände. Die Lobby zeigt eine Silhouette, weil die Modulfigur diese Anker nicht trägt. Die Stadtkarte bleibt unverändert, siehe [0033](decisions/0033-papierpuppen-inventar.md).
+
+**Stand 23.10.2026, Runner-Einträge:** Der Schlüssel ist der normalisierte Name. Das Passwort liegt nur als scrypt-Hash mit Salt in `apps/server/data/runners.json`. Ausrüstung und Buchungsregister gehören dem Runner, die vier Slots bleiben die Missionsplätze. Aussehen, Skillbaum, Händler und die Stadtkarte bleiben offen, siehe [0035](decisions/0035-persistente-runner-eintraege.md).
+
+**Stand 23.10.2026, Charaktererstellung am Zugang:** „Runner anlegen“ speichert die kosmetische Modul-Spec und wirkungslose Platzhalter für Physisch, Sozial und Mental sowie drei Fertigkeiten. Alte Runner ohne diese Felder bleiben ladbar. Treffer und AP lesen die Punkte nicht, siehe [0037](decisions/0037-kosmetik-und-platzhalter-am-runner.md).
+
 ## 9. M7 · Begrenzte prozedurale Inhaltsvarianten — optionaler Ausbau
 
 **Asset-Formalisierung vom 22.10.2026:** Ein gemeinsamer [Skill](../.agents/skills/asset-families/SKILL.md) und [Familienvertrag](ASSET_FAMILIES.md) beschreiben Geometriewiederverwendung für verschiedene lokale Agenten. Die Laufzeitumstellung des Terminalpiloten und ihre Abnahme bleiben offen; siehe [0023](decisions/0023-wiederverwendbare-assetfamilien.md).

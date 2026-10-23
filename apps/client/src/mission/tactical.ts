@@ -1,15 +1,23 @@
 import {
   actionAp,
   AIM_BONUS,
+  appliedChance,
+  canTreat,
   EXTRACT_AP,
   inSector,
   INTERACT_AP,
   pathTo,
   previewShot,
+  rifleBlocked,
+  shotPenalty,
+  stepAp,
   type BattleMap,
+  type BodyPartId,
   type Cell,
   type Direction,
+  type PartState,
 } from "@neon/sim";
+import { readParts } from "./WoundList.tsx";
 
 const DIRECTIONS = ["n", "e", "s", "w"] as const;
 const STEPS: readonly Cell[] = [
@@ -20,13 +28,13 @@ const STEPS: readonly Cell[] = [
 ];
 
 export type MissionAction =
-  | { readonly kind: "move"; readonly x: number; readonly y: number }
+  | { readonly kind: "move"; readonly x: number; readonly y: number; readonly z?: number }
   | { readonly kind: "interact"; readonly targetId: "terminal" | "shortcut" }
   | { readonly kind: "extract" }
   | { readonly kind: "shoot"; readonly targetId: string }
   | { readonly kind: "reload" }
   | { readonly kind: "aim" }
-  | { readonly kind: "heal"; readonly targetId: string }
+  | { readonly kind: "heal"; readonly targetId: string; readonly part: BodyPartId }
   | { readonly kind: "overwatch"; readonly direction: Direction }
   | { readonly kind: "ready" };
 
@@ -37,8 +45,10 @@ export interface TacticalUnit {
   readonly weapon: "rifle" | "sidearm";
   readonly x: number;
   readonly y: number;
+  readonly z: number;
   readonly hp: number;
   readonly maxHp: number;
+  readonly parts: readonly PartState[];
   readonly ap: number;
   readonly range: number;
   readonly magazine: number;
@@ -64,6 +74,25 @@ export interface TacticalPlace {
   readonly y: number;
 }
 
+export interface TacticalLink {
+  readonly id: string;
+  readonly kind: "stair" | "passenger" | "freight";
+  readonly x: number;
+  readonly y: number;
+  readonly toZ: number;
+  readonly toX: number;
+  readonly toY: number;
+}
+
+export interface TacticalFloor {
+  readonly z: number;
+  readonly knownCells: readonly Cell[];
+  readonly visibleCells: readonly Cell[];
+  readonly walls: readonly Cell[];
+  readonly lowCover: readonly TacticalCover[];
+  readonly links: readonly TacticalLink[];
+}
+
 export interface TacticalStand {
   readonly ownRunnerId: string;
   readonly round: number;
@@ -82,6 +111,9 @@ export interface TacticalStand {
   readonly door: TacticalPlace | null;
   readonly extraction: readonly Cell[];
   readonly units: readonly TacticalUnit[];
+  readonly levelCount: number;
+  readonly floors: readonly TacticalFloor[];
+  readonly links: readonly TacticalLink[];
 }
 
 export interface TacticalSelection {
@@ -91,7 +123,7 @@ export interface TacticalSelection {
 }
 
 export interface OverviewCell extends Cell {
-  readonly kind: "floor" | "wall" | "cover" | "terminal" | "door" | "door-open" | "extract" | "runner" | "enemy";
+  readonly kind: "floor" | "wall" | "cover" | "terminal" | "door" | "door-open" | "extract" | "runner" | "enemy" | "stair" | "passenger" | "freight";
   readonly unitId: string;
 }
 
@@ -112,7 +144,7 @@ export interface ActionOffers {
   readonly door: boolean;
   readonly extract: boolean;
   readonly ready: boolean;
-  readonly heal: readonly { readonly id: string; readonly name: string }[];
+  readonly heal: readonly { readonly id: string; readonly name: string; readonly part: BodyPartId }[];
 }
 
 export function readTacticalStand(payload: unknown): TacticalStand | null {
@@ -155,10 +187,11 @@ export function readTacticalStand(payload: unknown): TacticalStand | null {
   if (terminal && !known.has(key(terminal))) return null;
   if (door && !known.has(key(door))) return null;
   if (lowCover.some((cover) => !known.has(key(cover)))) return null;
-  const shown = units.filter((unit) => {
-    if (unit.team === "enemy") return visible.has(key(unit));
-    return unit.status === "extracted" || known.has(key(unit));
-  });
+  const floors = readFloors(value.floors, width, height, { knownCells, visibleCells, walls, lowCover });
+  if (!floors) return null;
+  const declared = value.levelCount === undefined ? floors.length : bounded(value.levelCount, 1, 8);
+  if (declared === null || declared !== floors.length) return null;
+  const shown = units.filter((unit) => confirmedOn(unit, floors));
   return {
     ownRunnerId: value.ownRunnerId,
     round,
@@ -177,7 +210,45 @@ export function readTacticalStand(payload: unknown): TacticalStand | null {
     door,
     extraction,
     units: shown,
+    levelCount: floors.length,
+    floors,
+    links: floors.find((floor) => floor.z === 0)?.links ?? [],
   };
+}
+
+export function floorLabel(count: number, z: number): string {
+  if (!Number.isInteger(count) || count <= 1) return "eine Ebene";
+  const index = Number.isInteger(z) && z >= 0 && z < count ? z + 1 : 1;
+  return `Ebene ${index} von ${count}`;
+}
+
+export function shownFloor(stand: TacticalStand, z: number): TacticalStand {
+  const floor = stand.floors.find((item) => item.z === z) ?? stand.floors[0];
+  if (!floor) return { ...stand, units: stand.units.filter((unit) => unit.z === 0), links: [] };
+  const units = stand.units.filter((unit) => unit.z === floor.z);
+  const sameGround = floor.z === 0 && sameCells(floor.knownCells, stand.knownCells) && sameCells(floor.visibleCells, stand.visibleCells) && sameCells(floor.walls, stand.walls) && sameCovers(floor.lowCover, stand.lowCover);
+  if (sameGround) return { ...stand, units, links: floor.links };
+  return {
+    ...stand,
+    knownCells: floor.knownCells,
+    visibleCells: floor.visibleCells,
+    walls: floor.walls,
+    lowCover: floor.lowCover,
+    links: floor.links,
+    terminal: floor.z === 0 ? stand.terminal : null,
+    door: floor.z === 0 ? stand.door : null,
+    extraction: floor.z === 0 ? stand.extraction : [],
+    units,
+  };
+}
+
+export function moveWish(stand: TacticalStand, unitId: string, cell: Cell): MissionAction | null {
+  const unit = stand.units.find((item) => item.id === unitId && item.team === "crew" && item.status === "active");
+  if (!unit) return null;
+  const here = stand.links.find((link) => link.x === unit.x && link.y === unit.y);
+  if (here && sameCell(cell, unit)) return { kind: "move", x: here.toX, y: here.toY, z: here.toZ };
+  if (!stepTargets(stand, unitId).some((step) => sameCell(step, cell))) return null;
+  return { kind: "move", x: cell.x, y: cell.y };
 }
 
 export function confirmedPose(stand: TacticalStand): Pose[] {
@@ -196,13 +267,13 @@ export function remainingSeconds(deadlineAt: number, now: number): number | null
 
 export function stepTargets(stand: TacticalStand, unitId: string): Cell[] {
   const unit = activeCrew(stand, unitId);
-  if (!unit || stand.phase !== "crew" || unit.ap < actionAp("move")) return [];
+  if (!unit || stand.phase !== "crew" || unit.ap < stepAp(unit.parts)) return [];
   const map = previewMap(stand);
   const blocked = blockers(stand, unit.id);
   const found: Cell[] = [];
   for (const step of STEPS) {
     const goal = { x: unit.x + step.x, y: unit.y + step.y };
-    const path = pathTo(map, blocked, unit, goal, actionAp("move"));
+    const path = pathTo(map, blocked, unit, goal, stepAp(unit.parts));
     if (path && path.length === 1) found.push({ x: goal.x, y: goal.y });
   }
   found.sort((left, right) => left.y - right.y || left.x - right.x);
@@ -216,9 +287,12 @@ export function shotPreview(stand: TacticalStand, unitId: string, targetId: stri
   try {
     const preview = previewShot(previewMap(stand), from, to, from.aiming ? AIM_BONUS : 0);
     if (preview.blocked || preview.chance === null) return "Keine Schusslinie.";
+    const penalty = shotPenalty(from.parts);
+    const chance = appliedChance(preview.chance, penalty);
     const cover = preview.protectedEdgeCrossed ? `Deckung ${preview.coverPenalty}.` : "Ohne Deckungsabzug.";
+    const arm = penalty > 0 ? ` Armabzug ${penalty}.` : "";
     const range = preview.distance > from.range ? " Außer Reichweite." : "";
-    return `Vorschau ${preview.chance} Prozent. ${cover}${range}`;
+    return `Vorschau ${chance} Prozent.${arm} ${cover}${range}`;
   } catch {
     return "";
   }
@@ -229,19 +303,27 @@ export function actionOffers(stand: TacticalStand, targetId: string): ActionOffe
   const crewPhase = stand.phase === "crew" && unit !== null;
   const target = stand.units.find((item) => item.id === targetId);
   const beside = (cell: Cell | null) => Boolean(unit && cell && orthogonal(unit, cell));
-  const heal = crewPhase && unit && unit.medkits > 0 && unit.ap >= actionAp("heal")
-    ? stand.units
-        .filter((target) => {
-          if (target.team !== "crew" || target.status !== "active" || target.hp >= target.maxHp) return false;
-          return target.id === unit.id || orthogonal(unit, target);
+  const heal =
+    crewPhase && unit && unit.medkits > 0 && unit.ap >= actionAp("heal")
+      ? stand.units.flatMap((target) => {
+          if (target.team !== "crew" || target.status !== "active") return [];
+          if (target.id !== unit.id && !orthogonal(unit, target)) return [];
+          return target.parts.filter(canTreat).map((part) => ({ id: target.id, name: target.name, part: part.id }));
         })
-        .map((target) => ({ id: target.id, name: target.name }))
-    : [];
+      : [];
   const held = unit?.overwatch ? 1 : 0;
   return {
-    move: Boolean(crewPhase && unit && unit.ap >= actionAp("move")),
+    move: Boolean(crewPhase && unit && unit.ap >= stepAp(unit.parts)),
     aim: Boolean(crewPhase && unit && !unit.aiming && unit.ap >= actionAp("aim")),
-    shoot: Boolean(crewPhase && unit && unit.magazine > 0 && unit.ap >= actionAp("shot") && target?.team === "enemy" && target.status === "active"),
+    shoot: Boolean(
+      crewPhase &&
+        unit &&
+        unit.magazine > 0 &&
+        unit.ap >= actionAp("shot") &&
+        !(unit.weapon === "rifle" && rifleBlocked(unit.parts)) &&
+        target?.team === "enemy" &&
+        target.status === "active",
+    ),
     reload: Boolean(
       crewPhase &&
         unit &&
@@ -301,6 +383,7 @@ export function tacticalBoard(stand: TacticalStand, selection: TacticalSelection
     terminal: stand.terminal ? { x: stand.terminal.x, y: stand.terminal.y } : null,
     extraction: stand.extraction.filter((cell) => floorKeys.has(key(cell))).map((cell) => ({ x: cell.x, y: cell.y })),
     cover: stand.lowCover.map((cover) => ({ x: cover.x, y: cover.y, protects: cover.protects })),
+    links: stand.links.map((link) => ({ x: link.x, y: link.y, kind: link.kind })),
     units: stand.units
       .filter((unit) => unit.status !== "extracted")
       .map((unit) => ({
@@ -324,14 +407,17 @@ export function overviewCells(stand: TacticalStand): OverviewCell[] {
   const walls = new Set(stand.walls.map(key));
   const cover = new Set(stand.lowCover.map(key));
   const extraction = new Set(stand.extraction.map(key));
+  const links = new Map(stand.links.map((link) => [key(link), link.kind]));
   const cells = stand.knownCells.map((cell) => {
     const id = key(cell);
     const unit = occupied.get(id);
+    const link = links.get(id);
     let kind: OverviewCell["kind"] = "floor";
     if (unit?.team === "crew") kind = "runner";
     else if (unit?.team === "enemy") kind = "enemy";
     else if (stand.terminal && key(stand.terminal) === id) kind = "terminal";
     else if (stand.door && key(stand.door) === id) kind = stand.doorOpen ? "door-open" : "door";
+    else if (link) kind = link;
     else if (walls.has(id)) kind = "wall";
     else if (extraction.has(id)) kind = "extract";
     else if (cover.has(id)) kind = "cover";
@@ -428,6 +514,7 @@ function unitOf(value: unknown, width: number, height: number): TacticalUnit | n
   if (!value || typeof value !== "object") return null;
   const record = value as Record<string, unknown>;
   const cell = cellOf(record, width, height);
+  const level = record.z === undefined ? 0 : bounded(record.z, 0, 7);
   const hp = bounded(record.hp, 0, 99);
   const maxHp = bounded(record.maxHp, 1, 99);
   const ap = bounded(record.ap, 0, 8);
@@ -436,8 +523,10 @@ function unitOf(value: unknown, width: number, height: number): TacticalUnit | n
   const magazineSize = bounded(record.magazineSize, 1, 20);
   const reserveMagazines = bounded(record.reserveMagazines, 0, 8);
   const medkits = bounded(record.medkits, 0, 4);
+  const parts = readParts(record.parts);
   if (
     !cell ||
+    level === null ||
     hp === null ||
     maxHp === null ||
     ap === null ||
@@ -446,6 +535,7 @@ function unitOf(value: unknown, width: number, height: number): TacticalUnit | n
     magazineSize === null ||
     reserveMagazines === null ||
     medkits === null ||
+    parts === null ||
     hp > maxHp ||
     typeof record.id !== "string" ||
     !/^[a-z0-9-]{1,24}$/.test(record.id) ||
@@ -467,8 +557,10 @@ function unitOf(value: unknown, width: number, height: number): TacticalUnit | n
     weapon: record.weapon,
     x: cell.x,
     y: cell.y,
+    z: level,
     hp,
     maxHp,
+    parts,
     ap,
     range,
     magazine,
@@ -511,4 +603,85 @@ function isDirection(value: unknown): value is Direction {
 
 function key(cell: Cell): string {
   return `${cell.x},${cell.y}`;
+}
+
+function confirmedOn(unit: TacticalUnit, floors: readonly TacticalFloor[]): boolean {
+  const floor = floors.find((item) => item.z === unit.z);
+  if (!floor) return false;
+  const known = new Set(floor.knownCells.map(key));
+  const visible = new Set(floor.visibleCells.map(key));
+  if (unit.team === "enemy") return visible.has(key(unit));
+  return unit.status === "extracted" || known.has(key(unit));
+}
+
+function readFloors(
+  value: unknown,
+  width: number,
+  height: number,
+  root: { knownCells: readonly Cell[]; visibleCells: readonly Cell[]; walls: readonly Cell[]; lowCover: readonly TacticalCover[] },
+): TacticalFloor[] | null {
+  if (value === undefined || (Array.isArray(value) && value.length === 0)) {
+    return [{ z: 0, knownCells: root.knownCells, visibleCells: root.visibleCells, walls: root.walls, lowCover: root.lowCover, links: [] }];
+  }
+  if (!Array.isArray(value) || value.length > 8) return null;
+  const floors: TacticalFloor[] = [];
+  const seen = new Set<number>();
+  for (const entry of value) {
+    const floor = floorOf(entry, width, height);
+    if (!floor || seen.has(floor.z)) return null;
+    seen.add(floor.z);
+    floors.push(floor);
+  }
+  floors.sort((left, right) => left.z - right.z);
+  const ground = floors.find((floor) => floor.z === 0);
+  if (!ground) return null;
+  if (!sameCells(ground.knownCells, root.knownCells) || !sameCells(ground.visibleCells, root.visibleCells) || !sameCells(ground.walls, root.walls) || !sameCovers(ground.lowCover, root.lowCover)) return null;
+  return floors;
+}
+
+function floorOf(value: unknown, width: number, height: number): TacticalFloor | null {
+  if (!value || typeof value !== "object") return null;
+  const record = value as Record<string, unknown>;
+  const z = bounded(record.z, 0, 7);
+  const knownCells = cellsOf(record.knownCells, width, height, width * height);
+  const visibleCells = cellsOf(record.visibleCells, width, height, width * height);
+  const walls = cellsOf(record.walls, width, height, width * height);
+  const lowCover = coverOf(record.lowCover, width, height);
+  const links = linksOf(record.links, width, height);
+  if (z === null || !knownCells || !visibleCells || !walls || !lowCover || !links) return null;
+  const known = new Set(knownCells.map(key));
+  if (![...visibleCells].every((cell) => known.has(key(cell)))) return null;
+  if (!walls.every((cell) => known.has(key(cell)))) return null;
+  if (lowCover.some((cover) => !known.has(key(cover)))) return null;
+  if (links.some((link) => !known.has(key(link)))) return null;
+  return { z, knownCells, visibleCells, walls, lowCover, links };
+}
+
+function linksOf(value: unknown, width: number, height: number): TacticalLink[] | null {
+  if (!Array.isArray(value) || value.length > 32) return null;
+  const links: TacticalLink[] = [];
+  const seen = new Set<string>();
+  for (const entry of value) {
+    if (!entry || typeof entry !== "object") return null;
+    const record = entry as Record<string, unknown>;
+    const cell = cellOf(record, width, height);
+    const toX = bounded(record.toX, 0, width - 1);
+    const toY = bounded(record.toY, 0, height - 1);
+    const toZ = bounded(record.toZ, 0, 7);
+    if (!cell || toX === null || toY === null || toZ === null || typeof record.id !== "string" || !/^[a-z0-9-]{1,24}$/.test(record.id)) return null;
+    if (record.kind !== "stair" && record.kind !== "passenger" && record.kind !== "freight") return null;
+    const id = `${record.id}:${cell.x},${cell.y}`;
+    if (seen.has(id)) return null;
+    seen.add(id);
+    links.push({ id: record.id, kind: record.kind, x: cell.x, y: cell.y, toZ, toX, toY });
+  }
+  return links;
+}
+
+function sameCells(left: readonly Cell[], right: readonly Cell[]): boolean {
+  return left.length === right.length && left.every((cell, index) => cell.x === right[index]?.x && cell.y === right[index]?.y);
+}
+
+function sameCovers(left: readonly TacticalCover[], right: readonly TacticalCover[]): boolean {
+  return left.length === right.length && left.every((cover, index) => cover.id === right[index]?.id && cover.x === right[index]?.x && cover.y === right[index]?.y && cover.protects === right[index]?.protects);
 }

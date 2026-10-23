@@ -2,10 +2,33 @@ html,
 body,
 #root {
   margin: 0;
-  width: 1920px;
-  height: 1080px;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   background: #090c11;
+}
+
+#root {
+  display: grid;
+  place-items: center;
+}
+
+.stage-slot {
+  position: relative;
+  width: calc(1920px * var(--stage-scale, 1));
+  height: calc(1080px * var(--stage-scale, 1));
+  overflow: hidden;
+}
+
+.stage-slot > .frame,
+.stage-slot > .mission,
+.stage-slot > .stadt,
+.stage-slot > .einstieg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  transform: scale(var(--stage-scale, 1));
 }
 
 .frame {
@@ -318,6 +341,24 @@ body,
   box-shadow: inset 4px 0 0 #8fb4d8;
 }
 
+.kind-stair {
+  background: #3a3224;
+  box-shadow: inset 0 0 0 2px #d7c4a1;
+  font-weight: 700;
+}
+
+.kind-passenger {
+  background: #123038;
+  box-shadow: inset 0 0 0 2px #3ec6e0;
+  font-weight: 700;
+}
+
+.kind-freight {
+  background: #3a2414;
+  box-shadow: inset 0 0 0 2px #e07a3a;
+  font-weight: 700;
+}
+
 .kind-runner {
   border-radius: 50%;
   background: #204060;
@@ -518,6 +559,107 @@ body,
   min-height: 32px;
 }
 
+.einstieg {
+  box-sizing: border-box;
+  width: 1920px;
+  height: 1080px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-rows: auto auto;
+  align-content: center;
+  gap: 16px 28px;
+  padding: 28px 36px 24px;
+  color: #f6f3ec;
+  background: #090c11;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.einstieg header {
+  grid-column: 1 / -1;
+}
+
+.einstieg h1,
+.einstieg h2,
+.einstieg p {
+  margin: 0;
+}
+
+.einstieg h1 {
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+.einstieg h2 {
+  margin-bottom: 8px;
+  font-size: 22px;
+}
+
+.einstieg section {
+  min-height: 0;
+  overflow: auto;
+}
+
+.einstieg-kicker {
+  color: #8ec8ff;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+}
+
+.einstieg header p:last-child {
+  max-width: 1280px;
+  margin-top: 8px;
+  color: #c5d0df;
+}
+
+.einstieg ol,
+.einstieg ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.einstieg li {
+  display: grid;
+  grid-template-columns: 250px 110px minmax(0, 1fr) 92px;
+  gap: 12px;
+  align-items: center;
+  min-height: 52px;
+  border-top: 1px solid #243044;
+  font-size: 16px;
+}
+
+.einstieg section:last-child li {
+  grid-template-columns: 210px 110px minmax(0, 1fr) 92px;
+}
+
+.einstieg a {
+  color: #9fd7ff;
+}
+
+.einstieg-da {
+  color: #b7f0c8;
+}
+
+.einstieg-offen {
+  color: #8d97a8;
+}
+
+.zur-uebersicht {
+  position: absolute;
+  z-index: 8;
+  top: 10px;
+  left: 12px;
+  padding: 6px 10px;
+  color: #f6f3ec;
+  background: rgba(7, 9, 13, 0.9);
+  border: 1px solid #314056;
+  font: 14px "Segoe UI", Arial, sans-serif;
+  text-decoration: none;
+}
+
 .stadt {
   box-sizing: border-box;
   width: 1920px;
@@ -527,7 +669,10 @@ body,
   gap: 24px;
   padding: 28px 32px;
   color: #d7e7ff;
-  background: #070b14;
+  background:
+    radial-gradient(ellipse at 68% 58%, rgba(18, 78, 122, 0.42), transparent 46%),
+    radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.55), transparent 42%),
+    #04060c;
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
@@ -556,18 +701,134 @@ body,
   margin: 0 0 4px;
 }
 
+.stadt-turn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stadt-turn button {
+  min-height: 40px;
+  padding: 0 14px;
+  font: inherit;
+  color: #d7e7ff;
+  background: #102033;
+  border: 1px solid #3d6d88;
+  cursor: pointer;
+}
+
+.stadt-turn button:hover {
+  background: #173044;
+}
+
+.stadt-turn button:focus-visible {
+  outline: 2px solid #9ee7ff;
+  outline-offset: 2px;
+}
+
+.stadt-map {
+  min-width: 0;
+  min-height: 0;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.stadt-map:active {
+  cursor: grabbing;
+}
+
+.stadt-map:focus-visible {
+  outline: 2px solid #9ee7ff;
+  outline-offset: -6px;
+}
+
 .stadt svg {
   width: 100%;
   height: 100%;
-  background: #070b14;
+  background: transparent;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.stadt svg:active {
+  cursor: grabbing;
+}
+
+.stadt svg:focus-visible {
+  outline: 2px solid #9ee7ff;
+  outline-offset: -6px;
+}
+
+.stadt-plate {
+  fill: rgba(28, 120, 170, 0.14);
+  stroke: rgba(170, 236, 255, 0.38);
+  stroke-width: 1.6;
+}
+
+.stadt-grid {
+  fill: none;
+  stroke: rgba(126, 214, 255, 0.2);
+  stroke-width: 1;
 }
 
 .stadt line {
   stroke: #ffffff;
-  stroke-width: 3;
+  stroke-width: 2.6;
+  stroke-linecap: round;
 }
 
-.stadt rect {
-  fill: #1f6fe5;
+.stadt-block {
+  filter: drop-shadow(0 0 4px rgba(120, 230, 255, 0.72));
+}
+
+.stadt-side,
+.stadt-front,
+.stadt-roof {
+  stroke-linejoin: round;
+}
+
+.stadt-side {
+  stroke: #7ecfff;
+  stroke-width: 0.8;
+}
+
+.stadt-front {
+  stroke: #b7ecff;
+  stroke-width: 0.9;
+}
+
+.stadt-roof {
+  stroke: #f4feff;
+  stroke-width: 1.15;
+}
+
+.stadt-cell {
+  fill-opacity: 0.82;
+  stroke: rgba(186, 236, 255, 0.46);
+  stroke-width: 1.05;
+  stroke-linejoin: round;
+}
+
+.stadt-frame {
+  fill: none;
+  stroke: rgba(170, 236, 255, 0.38);
+  stroke-width: 1.6;
+}
+
+.zur-uebersicht {
+  position: absolute;
+  z-index: 40;
+  top: 12px;
+  right: 14px;
+  padding: 8px 12px;
+  color: #f6f3ec;
+  background: rgba(7, 9, 13, 0.92);
+  border: 1px solid #8fb4d8;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.2;
+  text-decoration: none;
 }
 

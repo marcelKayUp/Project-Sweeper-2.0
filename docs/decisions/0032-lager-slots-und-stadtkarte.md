@@ -1,6 +1,6 @@
 # 0032 · Lager, Slots und Straßengraph
 
-Datum: 23.10.2026 · Status: durch die direkte Nutzeranweisung begonnen. M4, M5 und die menschliche M3-Abnahme bleiben offen.
+Datum: 23.10.2026 · Status: durch die direkte Nutzeranweisung begonnen. M4, M5 und die menschliche M3-Abnahme bleiben offen. Die Belegung der Slots ist in [0033](0033-papierpuppen-inventar.md) fortgeschrieben.
 
 ## Anlass
 

@@ -20,6 +20,9 @@ export interface CityGraph {
   readonly edges: readonly CityEdge[];
 }
 
+export { CITY_CELL_MARGIN, cityCellOwner, cityCells } from "./cityCells.ts";
+export type { CityCell, CityCellPoint } from "./cityCells.ts";
+
 export function cityNeighbors(graph: CityGraph, nodeId: string): readonly string[] {
   const neighbors: string[] = [];
   for (const edge of graph.edges) {

@@ -2,17 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import type { Cell, Direction } from "@neon/sim";
 import { actionAp } from "@neon/sim";
 import { mountIsoBoard, type IsoBoardView } from "../iso/mountIsoBoard.ts";
+import { partLabel, WoundList } from "./WoundList.tsx";
 import type { UiPreferences } from "./preferences.ts";
 import { preferenceMarks } from "./preferences.ts";
 import {
   actionOffers,
+  floorLabel,
+  moveWish,
   overviewCells,
   poseAfterSkip,
   readTacticalStand,
   remainingSeconds,
   sameCell,
   shotPreview,
-  stepTargets,
+  shownFloor,
   tacticalBoard,
   type MissionAction,
   type TacticalStand,
@@ -60,11 +63,17 @@ export function TacticalView({
   const [snap, setSnap] = useState(prefs.reduceMotion);
   const [hint, setHint] = useState("");
   const [now, setNow] = useState(() => Date.now());
+  const [viewZ, setViewZ] = useState(0);
+  const ownZ = stand?.units.find((unit) => unit.id === stand.ownRunnerId)?.z ?? 0;
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    setViewZ(ownZ);
+  }, [ownZ]);
 
   useEffect(() => {
     const host = hostRef.current;
@@ -83,9 +92,10 @@ export function TacticalView({
     };
   }, []);
 
+  const shown = stand ? shownFloor(stand, viewZ) : null;
   const selected = stand?.units.find((unit) => unit.id === selectedId) ?? stand?.units.find((unit) => unit.id === stand.ownRunnerId) ?? null;
-  const board = stand
-    ? tacticalBoard(stand, { selectedId: selected?.id ?? "", targetId, showSteps: moveMode && linked && !pending })
+  const board = shown
+    ? tacticalBoard(shown, { selectedId: selected?.id ?? "", targetId, showSteps: moveMode && linked && !pending })
     : null;
 
   useEffect(() => {
@@ -94,7 +104,7 @@ export function TacticalView({
     if (snap) viewRef.current?.settle();
   }, [board, snap]);
 
-  if (!stand || !board) {
+  if (!stand || !shown || !board) {
     return (
       <main className="mission mission-tactical" data-screen="einsatz" {...preferenceMarks(prefs)}>
         <p>Stand ist unvollständig.</p>
@@ -102,21 +112,22 @@ export function TacticalView({
     );
   }
 
-  const offers = actionOffers(stand, targetId);
+  const active = shown;
+  const offers = actionOffers(active, targetId);
   const own = stand.units.find((unit) => unit.id === stand.ownRunnerId) ?? null;
   const locked = !linked || pending || held || stand.phase !== "crew";
   const seconds = remainingSeconds(stand.deadlineAt, now);
-  const preview = shotPreview(stand, stand.ownRunnerId, targetId);
-  const cells = overviewCells(stand);
+  const preview = shotPreview(active, stand.ownRunnerId, targetId);
+  const cells = overviewCells(active);
   const pose = poseAfterSkip(stand.units.map((unit) => ({ id: unit.id, x: unit.x, y: unit.y, hp: unit.hp })));
   const sheet = selected ?? own;
 
-  chooseRef.current = (cell) => pick(stand, cell, moveMode, linked && !held, pending, offers.move, setSelectedId, setTargetId, setHint, onCommand, (focus) => viewRef.current?.focus(focus));
+  chooseRef.current = (cell) => pick(active, cell, moveMode, linked && !held, pending, offers.move, setSelectedId, setTargetId, setHint, onCommand, (focus) => viewRef.current?.focus(focus));
 
   function skipAnimation() {
     setSnap(true);
     viewRef.current?.settle();
-    viewRef.current?.sync(tacticalBoard(stand as TacticalStand, { selectedId: selected?.id ?? "", targetId, showSteps: false }));
+    viewRef.current?.sync(tacticalBoard(active, { selectedId: selected?.id ?? "", targetId, showSteps: false }));
   }
 
   return (
@@ -150,6 +161,15 @@ export function TacticalView({
           Kopie {stand.copies}/2 · Tür {stand.doorOpen ? "offen" : "zu"} · Frist {stand.phaseSeconds} s
           {seconds === null ? "" : ` · ${seconds} s`}
         </p>
+        <div className="mission-actions" data-panel="etagen">
+          <p data-floors={stand.levelCount} data-floor={viewZ}>{floorLabel(stand.levelCount, viewZ)}</p>
+          <button type="button" data-action="etage-runter" disabled={viewZ <= 0} onClick={() => setViewZ((value) => Math.max(0, value - 1))}>
+            Etage runter
+          </button>
+          <button type="button" data-action="etage-hoch" disabled={viewZ >= stand.levelCount - 1} onClick={() => setViewZ((value) => Math.min(stand.levelCount - 1, value + 1))}>
+            Etage hoch
+          </button>
+        </div>
         <div className="mission-actions" data-panel="aktionen">
           <button type="button" data-action="bewegen" aria-pressed={moveMode} disabled={locked || !offers.move} onClick={onMoveMode}>
             Bewegen
@@ -165,8 +185,16 @@ export function TacticalView({
           </button>
           {DIRECTIONS(offers.overwatch, locked, onCommand)}
           {offers.heal.map((target) => (
-            <button key={target.id} type="button" data-action="heilen" data-target={target.id} disabled={locked} onClick={() => onCommand({ kind: "heal", targetId: target.id })}>
-              Medkit {target.name} · {actionAp("heal")} AP
+            <button
+              key={`${target.id}-${target.part}`}
+              type="button"
+              data-action="heilen"
+              data-target={target.id}
+              data-part={target.part}
+              disabled={locked}
+              onClick={() => onCommand({ kind: "heal", targetId: target.id, part: target.part })}
+            >
+              Medkit {target.name} · {partLabel(target.part)} · {actionAp("heal")} AP
             </button>
           ))}
           <button type="button" data-action="terminal" disabled={locked || !offers.terminal} onClick={() => onCommand({ kind: "interact", targetId: "terminal" })}>
@@ -228,6 +256,7 @@ export function TacticalView({
                   data-ap={unit.ap}
                   data-x={unit.x}
                   data-y={unit.y}
+                  data-z={unit.z}
                   data-holder={slotHolder(payload, unit.id)}
                   onClick={() => setSelectedId(unit.id)}
                 >
@@ -285,6 +314,7 @@ function Sheet({
         {unit.aiming ? " · gezielt" : ""}
         {unit.overwatch ? ` · Overwatch ${DIRECTION_LABEL[unit.overwatch]}` : ""}
       </p>
+      <WoundList parts={unit.parts} />
     </section>
   );
 }
@@ -311,6 +341,14 @@ function pick(
   focus: (cell: Cell) => void,
 ) {
   focus(cell);
+  if (moveMode && linked && !pending && canMove) {
+    const wish = moveWish(stand, stand.ownRunnerId, cell);
+    if (wish) {
+      hint("");
+      command(wish);
+      return;
+    }
+  }
   const crew = stand.units.find((unit) => unit.team === "crew" && unit.status !== "extracted" && sameCell(unit, cell));
   if (crew) {
     select(crew.id);
@@ -325,13 +363,7 @@ function pick(
   }
   if (!moveMode) return;
   if (!linked || pending || !canMove) return;
-  const step = stepTargets(stand, stand.ownRunnerId).some((target) => sameCell(target, cell));
-  if (!step) {
-    hint("Feld ist nicht erreichbar.");
-    return;
-  }
-  hint("");
-  command({ kind: "move", x: cell.x, y: cell.y });
+  hint("Feld ist nicht erreichbar.");
 }
 
 function slotHolder(payload: unknown, runnerId: string): string {
@@ -385,5 +417,8 @@ function cellLabel(kind: string, unitId: string): string {
   if (kind === "door" || kind === "door-open") return "D";
   if (kind === "extract") return "X";
   if (kind === "cover") return "C";
+  if (kind === "stair") return "S";
+  if (kind === "passenger") return "P";
+  if (kind === "freight") return "L";
   return "";
 }

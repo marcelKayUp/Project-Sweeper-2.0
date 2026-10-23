@@ -23,6 +23,27 @@ export {
   schussView,
 } from "./resolve.ts";
 export {
+  ARM_SHOT_PENALTY,
+  BLEED_TICK,
+  BODY_HP,
+  BODY_PARTS,
+  HURT_LEG_STEP_AP,
+  PART_HEAL,
+  appliedChance,
+  applyStrike,
+  canTreat,
+  derivedHp,
+  freshParts,
+  isBodyPart,
+  rifleBlocked,
+  shotPenalty,
+  stepAp,
+  strikeDamage,
+  tickBleed,
+  treatPart,
+  treatmentTarget,
+} from "./wounds.ts";
+export {
   EXTRACT_AP,
   HEAL_HP,
   INTERACT_AP,
@@ -43,6 +64,7 @@ export {
   projectTeam,
   stableHash,
 } from "./mission.ts";
+export { FREIGHT_AP, PASSENGER_AP, STAIR_AP, floorsOf, linkAp, linksOf } from "./levels.ts";
 export { inSector, sectorFacing } from "./geometry.ts";
 export { seesUnit, teamVisibleCells, visibleCells } from "./sight.ts";
 export { previewShot } from "./shot.ts";
@@ -54,26 +76,37 @@ export {
   SAVE_COUNT_MAX,
   SAVE_SEED_MAX,
   GEAR_POSTS,
+  PACK_CELLS,
+  PACK_COLUMNS,
+  PACK_ROWS,
   SAVE_VERSION,
   SLOT_LIMITS,
   applyMissionResult,
+  bodyFromCounts,
   bookingFromMission,
   canField,
+  carriedGear,
   createCampaign,
   fieldRejection,
   freezeLoadout,
   gearOffer,
   isCampaignRunner,
+  countReturnedMagazines,
   moveGear,
+  movePiece,
   readCampaign,
   releaseFreeze,
+  returnFieldKit,
+  takeFieldKit,
 } from "./campaign.ts";
-export { RHEIN_RUHR, RHEIN_RUHR_SOURCE, cityNeighbors } from "./city.ts";
+export { CITY_CELL_MARGIN, RHEIN_RUHR, RHEIN_RUHR_SOURCE, cityCellOwner, cityCells, cityNeighbors } from "./city.ts";
+export type { FloorPlate, VerticalKind, VerticalLink } from "./levels.ts";
 export type { ApBattle, ApMark, MovePreview, MoveQuery, ReachTile } from "./ap.ts";
 export type { FlatActor, FlatStep, FlatWalk } from "./flatWalk.ts";
 export type { PlacedUnit } from "./deckungFixture.ts";
 export type { RngState, RngStream } from "./rng.ts";
 export type { Combatant, SchussView, ShotResolution, ShotStatus } from "./resolve.ts";
+export type { BodyPartId, PartState, WoundKind } from "./wounds.ts";
 export type {
   Contact,
   CrewCommand,
@@ -84,6 +117,9 @@ export type {
   MissionState,
   OutcomeId,
   PhaseId,
+  FloorLink,
+  FloorView,
+  KnownLevel,
   PublicUnit,
   StepResult,
   TeamId,
@@ -94,6 +130,7 @@ export type {
 } from "./mission.ts";
 export type { BattleMap, Cell, Direction, Impact, LowCover, ShotPreview } from "./types.ts";
 export type {
+  BeltFill,
   BookedLine,
   CampaignFreeze,
   CampaignProgress,
@@ -105,10 +142,29 @@ export type {
   FrozenKit,
   GearOffer,
   GearPost,
+  HandFill,
+  HandId,
+  InventoryPlace,
   LoadoutChoice,
   MissionBooking,
+  PackFill,
+  PieceKind,
+  RunnerBody,
   RunnerGear,
   RunnerReturn,
   StashDirection,
 } from "./campaign.ts";
-export type { CityEdge, CityGraph, CityNode } from "./city.ts";
+export type { CityCell, CityCellPoint, CityEdge, CityGraph, CityNode } from "./city.ts";
+export {
+  ATTRIBUTE_IDS,
+  ATTRIBUTE_MAX,
+  ATTRIBUTE_MIN,
+  ATTRIBUTE_POOL,
+  SKILL_IDS,
+  SKILL_MAX,
+  SKILL_MIN,
+  SKILL_POOL,
+  balancedSheet,
+  validateRunnerSheet,
+} from "./runnerSheet.ts";
+export type { AttributeId, RunnerSheet, SkillId } from "./runnerSheet.ts";

@@ -1,4 +1,4 @@
-import { actionAp, EXTRACT_AP, INTERACT_AP, pathTo, previewShot, SIGHT_RANGE } from "@neon/sim";
+import { actionAp, EXTRACT_AP, INTERACT_AP, pathTo, previewShot, rifleBlocked, SIGHT_RANGE, stepAp, treatmentTarget } from "@neon/sim";
 import type { Cell, CrewCommand, PublicUnit, TeamView } from "@neon/sim";
 
 const NEIGHBORS: readonly Cell[] = [
@@ -23,8 +23,10 @@ export function missionIntent(view: TeamView): CrewCommand | null {
 }
 
 function act(view: TeamView, runner: PublicUnit): CrewCommand | null {
-  if (runner.medkits > 0 && runner.ap >= actionAp("heal") && runner.hp < runner.maxHp && runner.hp * 2 <= runner.maxHp) {
-    return { kind: "heal", unitId: runner.id, targetId: runner.id };
+  const part = treatmentTarget(runner.parts);
+  const bleeding = runner.parts.some((item) => item.wound === "bleed");
+  if (part && runner.medkits > 0 && runner.ap >= actionAp("heal") && (bleeding || runner.hp * 2 <= runner.maxHp)) {
+    return { kind: "heal", unitId: runner.id, targetId: runner.id, part };
   }
   if (view.copies < 2 && view.terminal) {
     if (runner.ap >= INTERACT_AP && adjacent(runner, view.terminal)) {
@@ -47,6 +49,7 @@ function act(view: TeamView, runner: PublicUnit): CrewCommand | null {
 }
 
 function shotAt(view: TeamView, runner: PublicUnit): CrewCommand | null {
+  if (runner.weapon === "rifle" && rifleBlocked(runner.parts)) return null;
   if (runner.ap < actionAp("shot") || runner.magazine < 1) return null;
   const map = observationMap(view);
   const targets = view.units
@@ -63,7 +66,7 @@ function shotAt(view: TeamView, runner: PublicUnit): CrewCommand | null {
 }
 
 function stepToward(view: TeamView, runner: PublicUnit, goals: readonly Cell[]): CrewCommand | null {
-  if (runner.ap < actionAp("move") || goals.length === 0) return null;
+  if (runner.ap < stepAp(runner.parts) || goals.length === 0) return null;
   const map = observationMap(view);
   const blockers = view.units
     .filter((unit) => unit.id !== runner.id && unit.status !== "extracted")

@@ -6,6 +6,10 @@ Cooperative cyberpunk tactics game for 4–8 players: one runner per person, sha
 
 This is not a commercial project. It is a vibe coder's test bed for probing his own limits and those of the AI, and a casual game for him and his group of friends.
 
+## Manual testing
+
+`http://127.0.0.1:5173/` shows the sitemap from [NAVIGATION.md](docs/NAVIGATION.md) as a checklist. Surfaces that exist are linked. Planned surfaces have no jump. The test mission stays at `?stueck=sicht`. Gate, lobby, and that test mission need the game server. See [0039](docs/decisions/0039-testeinstieg-aus-der-sitemap.md).
+
 ## Visible directly on GitHub
 
 GitHub shows these images itself. The test mission and the game server do not run there.
@@ -77,7 +81,7 @@ The earlier corporation designs KASANE, CONCORD, PARALLAX, and VERDANT were disc
 
 `corepack pnpm dev:generator` opens the workshop at `http://127.0.0.1:5174/generator.html`: corporate office, research laboratory, or factory/warehouse with demand-based room counts, four runners, a data-theft objective, hard checks, graph/3D preview, and JSON export. Guide and evidence: [GEBAEUDEGENERATOR.md](docs/GEBAEUDEGENERATOR.md). Several playable floors, WFC, and loading in the normal mission screen are still open.
 
-`corepack pnpm dev` starts the game server and the client and opens `http://127.0.0.1:5173/`. That is the same test mission as `?stueck=sicht`: the server builds the compact map with `generateBuilding` and sends only known ground, visible enemies, and directional cover. `?stueck=deckung` keeps the older Phaser view. The 8×8 grid stays at `?stueck=raster`. See [0024](docs/decisions/0024-ein-start-fuer-die-testmission.md).
+`corepack pnpm dev` starts the game server and the client and opens `http://127.0.0.1:5173/`. Without parameters that is the entry page. The test mission stays `?stueck=sicht`: the server builds the compact map with `generateBuilding` and sends only known ground, visible enemies, and directional cover. `?stueck=deckung` keeps the older Phaser view. The 8×8 grid stays at `?stueck=raster`. See [0024](docs/decisions/0024-ein-start-fuer-die-testmission.md).
 
 Version 3 derives room counts and minimum areas from occupancy, workplaces, process stations, and storage demand. The report explains capacities and separates on-site functions from the rest of the building. Example: 24 office workplaces produce six offices; a mission floor can declare reception and delivery as off-site. These are versioned game assumptions in grid cells, not building-code planning. See [0011](docs/decisions/0011-bedarfsbasiertes-raumprogramm.md). Variable BSP floor plans, graph embedding, and the MIT provenance continue; see [0010](docs/decisions/0010-bsp-und-graph-grundrisse.md).
 
