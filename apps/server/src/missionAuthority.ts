@@ -65,6 +65,7 @@ export interface AuthoritySlot {
 
 export interface AuthorityStand {
   readonly ack: number;
+  readonly seed: number;
   readonly roomPhase: "lobby" | "mission" | "ended";
   readonly ownRunnerId: string;
   readonly epoch: number;
@@ -157,7 +158,9 @@ export interface MissionAuthority {
   shared(): SharedMission;
 }
 
-export function createMissionAuthority(clock: AuthorityClock): MissionAuthority {
+export function createMissionAuthority(clock: AuthorityClock, seed = MISSION_SEED): MissionAuthority {
+  if (!Number.isInteger(seed) || seed < 1 || seed > 100) throw new Error("Seed ist ungültig.");
+  const missionSeed = seed;
   const seats = new Map<string, Seat>();
   const seen = new Map<string, Map<string, Receipt>>();
   const views = new Map<string, SessionNote>();
@@ -399,7 +402,7 @@ export function createMissionAuthority(clock: AuthorityClock): MissionAuthority 
       if (seat.preset === "rifle" || seat.preset === "sidearm") presets[seat.runnerId] = seat.preset;
     }
     spec = ghostFloorSpec(presets);
-    sim = createMissionState(spec, MISSION_SEED);
+    sim = createMissionState(spec, missionSeed);
     openedAt = clock.now();
     note(sessionId, "", "", sim.revision);
     actBots();
@@ -604,6 +607,7 @@ function hiddenEnemyIds(): readonly string[] {
     const due = deadlineAt();
     return {
       ack,
+      seed: missionSeed,
       roomPhase: sim?.result ? "ended" : sim ? "mission" : "lobby",
       ownRunnerId: seat?.runnerId ?? "",
       epoch: seat?.epoch ?? 0,

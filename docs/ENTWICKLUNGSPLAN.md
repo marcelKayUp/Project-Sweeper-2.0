@@ -89,7 +89,7 @@ Arbeit:
 
 **Menschlicher Test:** Mindestens zwei Viererpartien, dabei Verständlichkeit und Wartezeit aufzeichnen. Wenn derzeit keine Gruppe verfügbar ist, technische Abnahme abschließen und die menschliche Prüfung ausdrücklich offenlassen. Kein Agent darf Spaß oder reale Spielzeit aus Botläufen als bestätigt ausgeben.
 
-**Stand 23.10.2026:** AP-11 bis AP-15 sind umgesetzt. Reconnect behält Ressourcen und Besitz; der defensive Bot übernimmt nur an der Crewphasengrenze und liest nur die Teamsicht. Lobby-Slots können mit diesem Bot besetzt werden. Die Vier-Browser-Prüfung mit Ausfall und die menschliche Abnahme bleiben offen.
+**Stand 23.10.2026:** AP-11 bis AP-16 sind technisch umgesetzt. Vier Browser spielen die Seeds 1 und 2 bis zum Sieg in Runde 2; dieselbe Registerkarte behält nach dem Ausfall HP, AP und Position, ein zweiter Tab bleibt draußen. Der defensive Bot übernimmt an der Crewphasengrenze. Deckung, Munition und Overwatch bleiben in den Regeltests. Der Bogen `docs/M3_TESTBOGEN.md` ist leer; die menschliche Abnahme bleibt offen.
 
 **Entscheidung danach:** Ist die Kernmission verständlich und erzeugen Deckung, AP und Extraktion Entscheidungen? Falls nein, diese Regeln überarbeiten, bevor weiterer Inhalt hinzukommt.
 

@@ -109,11 +109,16 @@ export function MissionScreen() {
     if (!join) return;
     const handle: { cancelled: boolean; room: JoinedRoom | null } = { cancelled: false, room: null };
     const client = new Client(serverUrl);
+    const keepReservation = () => {
+      releaseRef.current = false;
+    };
+    window.addEventListener("pagehide", keepReservation);
+    window.addEventListener("beforeunload", keepReservation);
     const pending =
       join.mode === "resume"
         ? client.reconnect(join.token)
         : join.mode === "create"
-          ? client.create("mission", { name: join.name })
+          ? client.create("mission", createOptions(join.name))
           : client.joinById(join.code, { name: join.name });
     void Promise.resolve(pending)
       .then((joined) => {
@@ -161,6 +166,8 @@ export function MissionScreen() {
         if (!handle.cancelled) setError(safeText(caught instanceof Error ? caught.message : "") ?? "Server nicht erreichbar.");
       });
     return () => {
+      window.removeEventListener("pagehide", keepReservation);
+      window.removeEventListener("beforeunload", keepReservation);
       handle.cancelled = true;
       setLinked(false);
       if (releaseRef.current) handle.room?.leave();
@@ -503,6 +510,19 @@ function isStand(payload: unknown): payload is Stand {
 function safeText(value: string | undefined): string | null {
   if (!value) return null;
   return /^[\p{L}\p{N} .,:!?()\-]{1,140}$/u.test(value) ? value : null;
+}
+
+function createOptions(name: string): { name: string; seed?: number } {
+  const seed = querySeed();
+  return seed === null ? { name } : { name, seed };
+}
+
+function querySeed(): number | null {
+  const raw = new URLSearchParams(window.location.search).get("seed");
+  if (raw === null) return null;
+  if (!/^\d{1,3}$/.test(raw)) return null;
+  const seed = Number(raw);
+  return seed >= 1 && seed <= 100 ? seed : null;
 }
 
 function slotPresent(slot: SlotStand): boolean {

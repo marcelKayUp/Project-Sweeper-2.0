@@ -148,7 +148,7 @@ Die zugehörigen Einträge in [MVP_MODULE.md](MVP_MODULE.md), [MVP_SCREENS.md](M
 
 **Abnahme:** Trennung während Aktion/Phase, Rückkehr, zweiter Tab und abgelaufene Reservierung; keine Ressourcenverdopplung.
 
-**Stand 23.10.2026:** Ein Ausfall während der Mission behält Runner, AP, HP, Position und Besitz. Dieselbe Sitzung kann fünf Minuten wieder aufgenommen werden; ein zweiter Tab übernimmt nicht. An der nächsten Crewphasengrenze übernimmt ein defensiver Bot, wenn die Person weg ist. Er liest nur die Teamsicht, heilt sich unter der Hälfte der HP oder meldet Bereit, und nutzt keinen eigenen Zufall. Die Rückgabe an den Menschen folgt an der nächsten Grenze. Die Koordination kann freie Lobby-Slots mit diesem Bot besetzen. Die Vier-Browser-Prüfung mit Ausfall und die menschliche Abnahme bleiben offen.
+**Stand 23.10.2026:** Ein Ausfall während der Mission behält Runner, AP, HP, Position und Besitz. Dieselbe Sitzung kann fünf Minuten wieder aufgenommen werden; ein zweiter Tab übernimmt nicht. An der nächsten Crewphasengrenze übernimmt ein defensiver Bot, wenn die Person weg ist. Er liest nur die Teamsicht, heilt sich unter der Hälfte der HP oder meldet Bereit, und nutzt keinen eigenen Zufall. Die Rückgabe an den Menschen folgt an der nächsten Grenze. Die Koordination kann freie Lobby-Slots mit diesem Bot besetzen. Die Prüfung mit vier Browsern, Ausfall und Botübernahme steht in AP-16. Die menschliche Abnahme bleibt offen.
 
 ### AP-16 · Vier-Client-Abnahme
 
@@ -157,6 +157,8 @@ Die zugehörigen Einträge in [MVP_MODULE.md](MVP_MODULE.md), [MVP_SCREENS.md](M
 **Lieferung:** Mehrbrowser-End-to-End-Test, dokumentierter lokaler Startweg und menschlicher Testbogen.
 
 **Abnahme:** alle v0.1-Kriterien; technische und menschliche Abnahme separat ausweisen. Fehlende Testpersonen nicht durch simulierte Zustimmung ersetzen.
+
+**Stand 23.10.2026:** `pnpm --filter @neon/client mission:vier` spielt die Seeds 1 und 2 in vier getrennten Browserkontexten bis zum Sieg in Runde 2. Der Lauf nutzt Bewegung, Terminal und Extraktion, sieht die orthografische Karte und beim Start keinen verborgenen Gegner. Dieselbe Registerkarte nimmt die Sitzung nach dem Neuladen wieder auf; HP, AP und Position bleiben. Ein zweiter Tab mit dem Einladungscode bleibt draußen. Nach einem weiteren Ausfall übernimmt der defensive Bot an der Crewphasengrenze; HP und Position bleiben, die Rückkehr zeigt die Bot-Kontrolle. Deckung, Munition und Overwatch bleiben in den Regeltests. Der Bogen [M3_TESTBOGEN.md](M3_TESTBOGEN.md) ist leer. Status: technisch spielbar, menschliche Abnahme offen.
 
 ## 4. Konzept-Slice vervollständigen · M4/M5 · P1
 

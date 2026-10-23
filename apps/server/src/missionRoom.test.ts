@@ -231,6 +231,20 @@ describe("Ghost-Floor-Raum", () => {
       await active.leave().catch(() => undefined);
     }
   }, 20000);
+
+  it("öffnet Seed 2 und weist Seed 0 ab", async () => {
+    const client = new Client(url);
+    const room = (await client.create("mission", { name: "Kite", seed: 2 })) as unknown as WireRoom;
+    try {
+      const stands = collect(room);
+      room.send("hallo", {});
+      const stand = await until(stands, (item) => item.ownRunnerId === "kite", "seed");
+      expect(stand.seed).toBe(2);
+      await expect(client.create("mission", { name: "Kite", seed: 0 })).rejects.toThrow();
+    } finally {
+      await room.leave();
+    }
+  }, 20000);
 });
 
 async function reopen(client: Client, token: string): Promise<WireRoom> {

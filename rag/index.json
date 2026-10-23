@@ -1,6 +1,6 @@
 {
     "schema":  1,
-    "builtAt":  "2026-10-22T23:58:36Z",
+    "builtAt":  "2026-10-23T00:17:37Z",
     "usage":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Tag MOD-03",
     "rebuild":  "powershell -NoProfile -File tools/rag/NeonRag.ps1 -Build",
     "note":  "Abruf der gekennzeichneten Planungsabschnitte. Bei Abweichungen gilt das Quelldokument.",
@@ -36,11 +36,11 @@
                     },
                     {
                         "path":  "docs/ARBEITSPAKETE.md",
-                        "sha256":  "f34f6bb359cb055901f3608c4c341c735a4b54159357e0922e7907ce67a2e3f1"
+                        "sha256":  "023364fe3b3084b74939cb68ac53aeed257a1edb51f2b1bd509cb200cf88299b"
                     },
                     {
                         "path":  "docs/ENTWICKLUNGSPLAN.md",
-                        "sha256":  "ee5a95642b3db30347921f9b4a871905253db4a9d9214e0daf49c9d52b59a060"
+                        "sha256":  "e264037636c73a58bf89851ff93b2923dafeea3710e34179251819cb9378c7be"
                     },
                     {
                         "path":  "docs/decisions/0001-modulare-planung.md",
@@ -375,7 +375,6 @@
                                                   "docs/ARBEITSPAKETE.md#AP-13",
                                                   "docs/ARBEITSPAKETE.md#AP-16",
                                                   "docs/ARBEITSPAKETE.md#AP-21",
-                                                  "docs/ENTWICKLUNGSPLAN.md#M3",
                                                   "docs/MVP_MODULE.md#MOD-07",
                                                   "docs/MVP_MODULE.md#MOD-09",
                                                   "docs/MVP_MODULE.md#MOD-11",
@@ -390,10 +389,12 @@
                                                "docs/ARBEITSPAKETE.md#AP-16"
                                            ],
                                "references":  [
+                                                  "docs/ARBEITSPAKETE.md#AP-15",
                                                   "docs/ARBEITSPAKETE.md#AP-17",
                                                   "docs/ARBEITSPAKETE.md#AP-18",
                                                   "docs/ARBEITSPAKETE.md#AP-19",
                                                   "docs/ARBEITSPAKETE.md#AP-20",
+                                                  "docs/ENTWICKLUNGSPLAN.md#M3",
                                                   "docs/MVP_GENERATOREN.md#GEN-12",
                                                   "docs/MVP_MODULE.md#MOD-12"
                                               ]
@@ -1440,6 +1441,7 @@
                                             "docs/ENTWICKLUNGSPLAN.md#M3"
                                         ],
                             "references":  [
+                                               "docs/ARBEITSPAKETE.md#AP-16",
                                                "docs/decisions/0030-gegnerpolicies-und-missionsbot.md#DEC-0030",
                                                "docs/ENTWICKLUNGSPLAN.md#M2",
                                                "docs/ENTWICKLUNGSPLAN.md#M4",

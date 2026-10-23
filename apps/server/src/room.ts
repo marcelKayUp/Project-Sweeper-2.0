@@ -22,7 +22,8 @@ export class MissionRoom extends Room<{ state: MissionSync }> {
     },
   };
 
-  override async onCreate(): Promise<void> {
+  override async onCreate(options?: { seed?: unknown }): Promise<void> {
+    this.authority = createMissionAuthority({ now: () => Date.now() }, readRoomSeed(options?.seed));
     this.maxClients = 4;
     this.setState(new MissionSync());
     await this.setPrivate(true);
@@ -96,4 +97,10 @@ export class MissionRoom extends Room<{ state: MissionSync }> {
     }, delay);
     this.timer.unref();
   }
+}
+
+function readRoomSeed(value: unknown): number {
+  if (value === undefined) return 1;
+  if (typeof value === "number" && Number.isInteger(value) && value >= 1 && value <= 100) return value;
+  throw new ServerError(400, "Seed ist ungültig.");
 }

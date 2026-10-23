@@ -419,4 +419,12 @@ describe("Missionsraum", () => {
     expect(unit(room.authority.stand(room.ids[0]), "kite")).toMatchObject({ x: 2, y: 8, ap: 7 });
     expect(JSON.stringify(room.authority.stand(room.ids[0])).includes("wache-haupt")).toBe(false);
   });
+
+  it("merkt sich einen festen Seed und weist einen ungültigen zurück", () => {
+    const room = openRoom();
+    expect(room.authority.stand(room.ids[0]).seed).toBe(1);
+    const other = createMissionAuthority({ now: () => 1_000 }, 2);
+    expect(other.stand("").seed).toBe(2);
+    expect(() => createMissionAuthority({ now: () => 1_000 }, 0)).toThrow("Seed ist ungültig.");
+  });
 });

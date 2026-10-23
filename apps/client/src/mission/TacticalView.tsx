@@ -129,6 +129,7 @@ export function TacticalView({
       data-copies={stand.copies}
       data-ack={numberField(payload, "ack")}
       data-own-runner={stand.ownRunnerId}
+      data-seed={numberField(payload, "seed")}
       data-move={moveMode ? "1" : "0"}
       data-gap={gap ? "1" : "0"}
       data-link={linked ? "1" : "0"}
@@ -219,7 +220,17 @@ export function TacticalView({
             .filter((unit) => unit.team === "crew")
             .map((unit) => (
               <li key={unit.id}>
-                <button type="button" data-runner={unit.id} data-status={unit.status} onClick={() => setSelectedId(unit.id)}>
+                <button
+                  type="button"
+                  data-runner={unit.id}
+                  data-status={unit.status}
+                  data-hp={unit.hp}
+                  data-ap={unit.ap}
+                  data-x={unit.x}
+                  data-y={unit.y}
+                  data-holder={slotHolder(payload, unit.id)}
+                  onClick={() => setSelectedId(unit.id)}
+                >
                   {mark(unit.id)} {unit.name} · {statusLabel(unit.status)} · HP {unit.hp} · AP {unit.ap}
                 </button>
               </li>
@@ -321,6 +332,18 @@ function pick(
   }
   hint("");
   command({ kind: "move", x: cell.x, y: cell.y });
+}
+
+function slotHolder(payload: unknown, runnerId: string): string {
+  if (!payload || typeof payload !== "object" || !("slots" in payload)) return "";
+  const slots = (payload as { slots?: unknown }).slots;
+  if (!Array.isArray(slots)) return "";
+  const found = slots.find((slot) => {
+    return Boolean(slot) && typeof slot === "object" && "runnerId" in slot && (slot as { runnerId?: unknown }).runnerId === runnerId;
+  });
+  if (!found || typeof found !== "object" || !("holder" in found)) return "";
+  const holder = (found as { holder?: unknown }).holder;
+  return holder === "human" || holder === "bot" || holder === "reserviert" || holder === "offen" ? holder : "";
 }
 
 function numberField(payload: unknown, field: string): number {
