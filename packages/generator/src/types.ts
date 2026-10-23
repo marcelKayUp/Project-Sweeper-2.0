@@ -1,8 +1,8 @@
 import type { Cell, MissionSpec, VerticalLink } from "@neon/sim";
 
-export const GENERATOR_VERSION = "semantic-building/6";
-export const CONTENT_VERSION = "building-catalog/4";
-export const STAGE_VERSIONS = { program: 5, floorplan: 5, topology: 5, tactics: 1, encounters: 1, dressing: 2 } as const;
+export const GENERATOR_VERSION = "semantic-building/7";
+export const CONTENT_VERSION = "building-catalog/5";
+export const STAGE_VERSIONS = { program: 6, floorplan: 5, topology: 5, tactics: 1, encounters: 1, dressing: 2 } as const;
 export const CORPORATIONS = ["neutral", "kasane", "concord", "parallax", "verdant"] as const;
 export const SITE_ROLES = ["headquarters", "branch", "operations"] as const;
 export const DEPARTMENTS = ["mixed", "finance", "legal", "engineering", "service"] as const;
@@ -88,12 +88,19 @@ export interface ProgramRow {
   readonly minArea: number;
   readonly minimumArea: number;
   readonly reason: string;
+  readonly extent: "building" | "floor";
+}
+export interface BuildingScale {
+  readonly floors: number;
+  readonly plateArea: number;
+  readonly totalArea: number;
 }
 export interface DemandSummary {
-  readonly model: "business-capacity/1";
+  readonly model: "business-capacity/2";
   readonly building: BusinessProfile;
   readonly local: BusinessProfile;
   readonly outside: BusinessProfile;
+  readonly scale: BuildingScale;
   readonly minimumArea: number;
   readonly minimumWallArea: number;
   readonly minimumCirculationArea: number;
@@ -135,6 +142,7 @@ export interface RoomRule {
   readonly zone: Zone;
   readonly minArea: number;
   readonly services: readonly Service[];
+  readonly extent: "building" | "floor";
 }
 export interface Room extends Cell, RoomRequirement {
   readonly zone: Zone;
@@ -221,7 +229,7 @@ export interface AttemptReport {
   readonly errors: readonly Finding[];
 }
 export interface BuildingPackage {
-  readonly formatVersion: 6;
+  readonly formatVersion: 7;
   readonly generatorVersion: typeof GENERATOR_VERSION;
   readonly contentVersion: typeof CONTENT_VERSION;
   readonly stageVersions: typeof STAGE_VERSIONS;

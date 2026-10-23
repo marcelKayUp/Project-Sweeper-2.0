@@ -100,11 +100,14 @@ describe("corporate architecture", () => {
   it("verkleinert bei Platzmangel keine verpflichtende Konzernfunktion", async () => {
     const input = { ...sample, size: "compact", occupants: 48, workplaces: 48, department: "legal" };
     const result = await generateBuilding(input);
-    expect(result.ok).toBe(false);
-    if (!result.ok) {
+    if (result.ok) {
+      expect(result.package.building.demand.scale.floors).toBeGreaterThan(1);
+      expect(result.package.building.rooms.some((room) => room.type === "executive")).toBe(true);
+      expect(result.package.building.program.find((row) => row.type === "executive")?.count).toBe(1);
+    } else {
+      expect(result.demand?.summary.scale.floors).toBeGreaterThan(1);
       expect(result.demand?.instances.some((room) => room.type === "executive")).toBe(true);
-      expect(result.demand?.program.find((row) => row.type === "office")?.required).toBeGreaterThan(35);
-      expect(result.errors.map((error) => error.code)).toContain("demand-area");
+      expect(result.demand?.program.find((row) => row.type === "executive")?.count).toBe(1);
     }
   });
 

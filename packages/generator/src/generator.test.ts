@@ -201,24 +201,26 @@ describe("Semantic Building Generator", () => {
     expect(initial.copies).toBe(0);
   });
 
-  it("legt zwei Ebenen und die familieneigene Erschließung an", async () => {
+  it("leitet Etagen aus Grundfläche und Personal ab", async () => {
     for (const family of ["office", "laboratory", "factory"] as const) {
-      const item = await generated(7, family);
+      const item = await generated(7, family, "compact");
+      expect(item.mission.levels?.map((floor) => floor.z)).toEqual(Array.from({ length: item.building.demand.scale.floors }, (_, z) => z));
+      expect(item.building.links).toHaveLength(Math.max(0, item.building.demand.scale.floors - 1) * 2);
+      const packed = await generateBuilding({ seed: 7, family, size: "compact", occupants: 96, workplaces: family === "office" ? 96 : 24, processUnits: family === "office" ? 0 : 24, storageUnits: 24 });
+      const scale = packed.ok ? packed.package.building.demand.scale : packed.demand?.summary.scale;
+      expect(scale?.floors).toBeGreaterThan(item.building.demand.scale.floors);
+      if (!packed.ok) continue;
       const lift = family === "factory" ? "freight" : "passenger";
-      expect(item.mission.levels?.map((floor) => floor.z)).toEqual([0, 1]);
-      expect(item.mission.levels?.[0]?.walls).toEqual(item.mission.walls);
-      expect(item.mission.levels?.[1]?.lowCover).toEqual([]);
-      expect(item.building.links.map((link) => link.kind).sort()).toEqual(["stair", lift].sort());
-      expect(item.building.links).toEqual(item.mission.links);
-      const halls = new Set(item.building.circulation.map(cellKey));
-      const dressed = new Set(item.building.dressing.map(cellKey));
-      for (const link of item.building.links) {
+      expect(packed.package.mission.levels?.[1]?.lowCover).toEqual([]);
+      expect(packed.package.building.links.filter((link) => link.kind === "stair").length).toBe(scale!.floors - 1);
+      expect(packed.package.building.links.filter((link) => link.kind === lift).length).toBe(scale!.floors - 1);
+      expect(packed.package.building.program.some((row) => row.extent === "building")).toBe(true);
+      expect(packed.package.building.program.some((row) => row.extent === "floor")).toBe(true);
+      const halls = new Set(packed.package.building.circulation.map(cellKey));
+      for (const link of packed.package.building.links) {
         expect(halls.has(cellKey({ x: link.fromX, y: link.fromY }))).toBe(true);
-        expect(dressed.has(cellKey({ x: link.fromX, y: link.fromY }))).toBe(false);
         expect(link.fromX).toBe(link.toX);
-        expect(link.fromY).toBe(link.toY);
-        expect(link.fromZ).toBe(0);
-        expect(link.toZ).toBe(1);
+        expect(link.toZ).toBe(link.fromZ + 1);
       }
     }
   });

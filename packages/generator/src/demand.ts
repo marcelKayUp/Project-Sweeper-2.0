@@ -4,6 +4,7 @@ import { organization, resolveIdentity, roomSemantics } from "./corporate.ts";
 import { planRelationships } from "./relationships.ts";
 
 export const MAX_PROGRAM_ROOMS = 32;
+export const MAX_FLOORS = 4;
 export function defaultBusinessProfile(family: Family, size: Size): BusinessProfile {
   const occupants = { compact: 8, standard: 16, large: 24 }[size];
   return { occupants, workplaces: family === "office" ? occupants : Math.ceil(occupants / 4), processUnits: family === "office" ? 0 : occupants / 2, storageUnits: family === "factory" ? occupants : occupants / 2 };
@@ -14,11 +15,23 @@ export function requirementId(type: RoomType, index = 0): string { return `room-
 // Versioned game assumptions in grid cells, not a building-code calculation.
 // Capacities describe business demand; they never create combatants or AP.
 export function planDemand(config: GeneratorConfig): DemandPlan {
+  const floors = config.scope === "building" ? fittingFloors(config) : 1;
+  return planAt(config, floors);
+}
+
+function fittingFloors(config: GeneratorConfig): number {
+  for (let floors = 1; floors <= MAX_FLOORS; floors += 1) {
+    const plan = planAt(config, floors);
+    if (!plan.errors.some((error) => error.code === "demand-area" || error.code === "demand-room-budget")) return floors;
+  }
+  return MAX_FLOORS;
+}
+
+function planAt(config: GeneratorConfig, floors: number): DemandPlan {
   const identity = resolveIdentity(config);
   const corporate = config.corporation !== "neutral";
   const building: BusinessProfile = { occupants: config.occupants, workplaces: config.workplaces, processUnits: config.processUnits, storageUnits: config.storageUnits };
-  const share = config.scope === "building" ? 100 : config.floorShare;
-  const portion = (value: number) => Math.ceil(value * share / 100);
+  const portion = (value: number) => config.scope === "mission-floor" ? Math.ceil(value * config.floorShare / 100) : Math.ceil(value / floors);
   const local: BusinessProfile = { occupants: portion(building.occupants), workplaces: portion(building.workplaces), processUnits: portion(building.processUnits), storageUnits: portion(building.storageUnits) };
   const outside: BusinessProfile = { occupants: building.occupants - local.occupants, workplaces: building.workplaces - local.workplaces, processUnits: building.processUnits - local.processUnits, storageUnits: building.storageUnits - local.storageUnits };
   const roles = organization(config, local.workplaces);
@@ -35,7 +48,7 @@ export function planDemand(config: GeneratorConfig): DemandPlan {
       minimumArea += minArea;
       instances.push({ id: requirementId(type, index), type, minArea, assignedDemand, capacity: capacityPerRoom, ...roomSemantics(config, type, capacityPerRoom) });
     }
-    program.push({ type, count, outsideCount, totalCount: count + outsideCount, required, outsideRequired, capacityPerRoom, capacity: count * capacityPerRoom, unit, minArea: Math.max(12, ROOM_RULES[type].minArea), minimumArea, reason });
+    program.push({ type, count, outsideCount, totalCount: count + outsideCount, required, outsideRequired, capacityPerRoom, capacity: count * capacityPerRoom, unit, minArea: Math.max(12, ROOM_RULES[type].minArea), minimumArea, reason, extent: ROOM_RULES[type].extent });
   }
   const whole = config.scope === "building";
   add("reception", whole ? 1 : 0, whole ? 0 : 1, 1, "Empfang", "Ein zentraler Empfang; beim Missionsgeschoss außerhalb des Ausschnitts.");
@@ -57,7 +70,7 @@ export function planDemand(config: GeneratorConfig): DemandPlan {
     if (retreat) add("focus", Math.ceil(local.workplaces / 12) * 2, Math.ceil(outside.workplaces / 12) * 2, 2, "Gesprächsplätze", "Ein vertraulicher Zweiergesprächsraum je zwölf Arbeitsplätze bei offener oder vertraulicher Arbeit.");
   }
   if (config.family === "office" || corporate && config.department === "legal") {
-    add("records", local.workplaces, outside.workplaces, 24, "Arbeitsplätze", "Ein Archiv je 24 Büroarbeitsplätze.");
+    add("records", whole ? building.workplaces : local.workplaces, whole ? 0 : outside.workplaces, 24, "Arbeitsplätze", "Ein Archiv je 24 Büroarbeitsplätze des ganzen Betriebs.");
   }
   if (config.family === "laboratory") {
     add("laboratory", local.processUnits, outside.processUnits, 4, "Laborplätze", "Vier Laborplätze je Labor.", (n) => 8 + 2 * n);
@@ -76,12 +89,16 @@ export function planDemand(config: GeneratorConfig): DemandPlan {
   // not a promise that any program below it has a feasible embedding.
   const minimumWallArea = Math.max(0, instances.length - 1) * 3;
   const { width, height } = SIZE_DIMENSIONS[config.size];
+  const plateArea = width * height;
   const availableArea = (width - 2) * (height - 2);
   const hallCount = instances.length > 26 ? 3 : 2;
   const minimumCirculationArea = hallCount * (width - 2) + 20 * (hallCount - 1);
   const errors: DemandPlan["errors"][number][] = [];
   if (instances.length > MAX_PROGRAM_ROOMS) errors.push({ code: "demand-room-budget", message: `Der Bedarf ergibt ${instances.length} örtliche Räume; das Suchbudget unterstützt höchstens ${MAX_PROGRAM_ROOMS}. Belegung verringern oder einen kleineren Missionsausschnitt wählen.`, ids: [] });
+  const rowCount = instances.length > 26 ? 6 : 4;
+  const stripDepth = rowCount / 2 * 3 + (rowCount / 2 - 1) + rowCount * 3;
+  if (height - 2 < stripDepth) errors.push({ code: "demand-area", message: `${instances.length} Räume brauchen ${rowCount} Raumstreifen. Die Grundfläche ist ${height} Felder tief. Personal auf mehr Etagen verteilen oder die Grundfläche vergrößern.`, ids: [] });
   if (minimumArea + minimumWallArea + minimumCirculationArea > availableArea) errors.push({ code: "demand-area", message: `${instances.length} Räume benötigen mindestens ${minimumArea} Raumfelder, ${minimumWallArea} Trennwandfelder und ${minimumCirculationArea} Flurfelder. Verfügbar sind ${availableArea} Innenfelder. Größere Fläche, geringere Belegung oder kleineren Missionsausschnitt wählen.`, ids: [] });
   const entryRoomId = requirementId(whole ? "reception" : "corridor");
-  return { identity, relationships: planRelationships(config, instances, entryRoomId), summary: { model: "business-capacity/1", building, local, outside, minimumArea, minimumWallArea, minimumCirculationArea, availableArea, sanitaryFixtures: Math.ceil(local.occupants / 12), outsideSanitaryFixtures: Math.ceil(outside.occupants / 12) }, program, instances, entryRoomId, secondaryEntryRoomId: requirementId(whole ? "loading" : "corridor", whole ? 0 : 1), targetRoomId: requirementId("server"), errors };
+  return { identity, relationships: planRelationships(config, instances, entryRoomId), summary: { model: "business-capacity/2", building, local, outside, scale: { floors, plateArea, totalArea: plateArea * floors }, minimumArea, minimumWallArea, minimumCirculationArea, availableArea, sanitaryFixtures: Math.ceil(local.occupants / 12), outsideSanitaryFixtures: Math.ceil(outside.occupants / 12) }, program, instances, entryRoomId, secondaryEntryRoomId: requirementId(whole ? "loading" : "corridor", whole ? 0 : 1), targetRoomId: requirementId("server"), errors };
 }

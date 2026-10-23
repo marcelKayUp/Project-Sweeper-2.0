@@ -240,22 +240,24 @@ export function validateBuilding(building: Building, mission: MissionSpec, confi
   }
   const plates = floorsOf(mission);
   const ground = plates[0];
-  const upper = plates[1];
-  if (!ground || !upper || !mission.levels || plates.length !== 2 || ground.z !== 0 || upper.z !== 1) fail("levels", "Gebäude braucht genau zwei Ebenen");
-  else if (cellSet(ground.walls) !== cellSet(mission.walls) || coverSet(ground.lowCover) !== coverSet(mission.lowCover) || cellSet(upper.walls) !== cellSet(mission.walls) || upper.lowCover.length !== 0) {
-    fail("levels", "Ebene 0 bleibt die Geschossplatte, Ebene 1 übernimmt die Wände ohne zusätzliche Deckung");
+  const floorCount = demand.summary.scale.floors;
+  if (!ground || !mission.levels || plates.length !== floorCount || ground.z !== 0 || plates.some((plate, index) => plate.z !== index)) fail("levels", "Etagenzahl folgt Grundfläche und Personal");
+  else if (cellSet(ground.walls) !== cellSet(mission.walls) || coverSet(ground.lowCover) !== coverSet(mission.lowCover) || plates.slice(1).some((plate) => cellSet(plate.walls) !== cellSet(mission.walls) || plate.lowCover.length !== 0)) {
+    fail("levels", "Ebene 0 bleibt die Geschossplatte, weitere Etagen übernehmen die Wände ohne zusätzliche Deckung");
   }
   const vertical = linksOf(mission);
   const liftKind = config.family === "factory" ? "freight" : "passenger";
-  if (vertical.length !== 2 || !vertical.some((link) => link.kind === "stair") || !vertical.some((link) => link.kind === liftKind)) fail("vertical-links", "Treppe oder familieneigener Aufzug fehlt");
+  const expectedLinks = floorCount > 1 ? (floorCount - 1) * 2 : 0;
+  if (vertical.length !== expectedLinks) fail("vertical-links", "Treppe oder familieneigener Aufzug fehlt");
   if (vertical.some((link) => link.kind !== "stair" && link.kind !== liftKind)) fail("vertical-links", "Aufzugtyp passt nicht zur Gebäudefamilie");
+  if (floorCount > 1 && (!vertical.some((link) => link.kind === "stair") || !vertical.some((link) => link.kind === liftKind))) fail("vertical-links", "Treppe oder familieneigener Aufzug fehlt");
   if (canonical(building.links) !== canonical(mission.links ?? [])) fail("vertical-links", "Erschließung und Mission nennen verschiedene Übergänge");
   const halls = new Set(building.circulation.map(cellKey));
   const dressed = new Set(building.dressing.map(cellKey));
   for (const link of vertical) {
     const from = cellKey({ x: link.fromX, y: link.fromY });
     const to = cellKey({ x: link.toX, y: link.toY });
-    if (link.fromZ !== 0 || link.toZ !== 1 || from !== to || !halls.has(from) || dressed.has(from) || walls.has(from)) fail("vertical-links", "Übergang liegt nicht auf einem freien Flurfeld beider Ebenen", link.id);
+    if (link.toZ !== link.fromZ + 1 || from !== to || !halls.has(from) || dressed.has(from) || walls.has(from)) fail("vertical-links", "Übergang liegt nicht auf einem freien Flurfeld beider Ebenen", link.id);
   }
   warnings.push({ code: "playtest-open", message: "Geometrie und Semantik geprüft; taktische Fairness, Botlauf und menschliche Spielabnahme offen.", ids: [] });
   warnings.push({ code: "infrastructure-abstract", message: "Versorgung folgt Raumverbindungen; physische Leitungen und Sabotageaktionen sind noch nicht implementiert.", ids: [] });

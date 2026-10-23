@@ -55,7 +55,8 @@ export function buildCandidate(config: GeneratorConfig, seeds: BuildingPackage["
     ...enemies.flatMap((enemy) => enemy.patrol.map((cell) => cellKey(cell))),
     ...lowCover.map((cover) => cellKey(cover)),
   ]);
-  const links = placeVerticalLinks(config.family, circulation, linkBlocked);
+  const floors = demand.summary.scale.floors;
+  const links = floors > 1 ? placeVerticalLinks(config.family, floors, circulation, linkBlocked) : [];
   for (const link of links) reserved.add(cellKey({ x: link.fromX, y: link.fromY }));
   const dressingRng = random(seeds.dressing);
   const dressing: Dressing[] = [];
@@ -86,25 +87,28 @@ export function buildCandidate(config: GeneratorConfig, seeds: BuildingPackage["
     ],
     routes: layout.routes,
   };
-  const levels = [
-    { z: 0, walls, lowCover },
-    { z: 1, walls: walls.map((cell) => ({ x: cell.x, y: cell.y })), lowCover: [] },
-  ];
+  const levels = Array.from({ length: demand.summary.scale.floors }, (_, z) => ({
+    z,
+    walls: walls.map((cell) => ({ x: cell.x, y: cell.y })),
+    lowCover: z === 0 ? lowCover : [],
+  }));
   const building: Building = { identity: demand.identity, relationships: demand.relationships, demand: demand.summary, layout: layout.info, rooms, circulation, program: demand.program, connections, entries, infrastructure: buildServices(rooms, connections), missionGraph, dressing, links };
   const mission: MissionSpec = { id: `generated-${config.instanceId}`, hash: "", ...dimensions, walls, lowCover, terminal, door, extraction, spawns: [...crew, ...enemies], levels, links };
   return { building, mission };
 }
 
-function placeVerticalLinks(family: GeneratorConfig["family"], circulation: readonly Cell[], reserved: ReadonlySet<string>): VerticalLink[] {
+function placeVerticalLinks(family: GeneratorConfig["family"], floors: number, circulation: readonly Cell[], reserved: ReadonlySet<string>): VerticalLink[] {
   const open = circulation.filter((cell) => !reserved.has(cellKey(cell))).sort((a, b) => a.y - b.y || a.x - b.x);
   const stair = open[0];
   const lift = open[1];
   if (!stair || !lift) return [];
   const kind = family === "factory" ? "freight" : "passenger";
-  return [
-    { id: "stair", kind: "stair", fromZ: 0, fromX: stair.x, fromY: stair.y, toZ: 1, toX: stair.x, toY: stair.y },
-    { id: kind, kind, fromZ: 0, fromX: lift.x, fromY: lift.y, toZ: 1, toX: lift.x, toY: lift.y },
-  ];
+  const links: VerticalLink[] = [];
+  for (let z = 0; z < floors - 1; z += 1) {
+    links.push({ id: `stair-${z}`, kind: "stair", fromZ: z, fromX: stair.x, fromY: stair.y, toZ: z + 1, toX: stair.x, toY: stair.y });
+    links.push({ id: `${kind}-${z}`, kind, fromZ: z, fromX: lift.x, fromY: lift.y, toZ: z + 1, toX: lift.x, toY: lift.y });
+  }
+  return links;
 }
 
 function buildServices(rooms: readonly Room[], connections: readonly Connection[]): ServiceGraph[] {

@@ -63,7 +63,8 @@ describe("capacity-based room program", () => {
     if (result.ok) return;
     expect(result.attempts).toEqual([]);
     expect(result.errors.map((error) => error.code)).toContain("demand-area");
-    expect(result.demand?.program.find((row) => row.type === "office")?.count).toBe(24);
+    expect(result.demand?.summary.scale.floors).toBe(4);
+    expect(result.demand?.program.find((row) => row.type === "office")?.count).toBeGreaterThan(0);
     expect(canonical(result)).toBe(canonical(await generateBuilding(input)));
   });
 
