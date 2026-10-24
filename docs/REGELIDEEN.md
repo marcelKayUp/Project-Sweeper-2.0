@@ -1,6 +1,6 @@
 # Regelideen
 
-Dies ist ein Ideenvorrat. Hier gilt keine Regel, und es gibt keine Decision. Die laufende Kampfregel bleibt Kratzer, Blutung und Bruch an den sechs Zonen Kopf, Torso, Arm links, Arm rechts, Bein links und Bein rechts. Sie steht in [0034](decisions/0034-koerperteile-und-blutung.md). Punkte, Aktionspunkte und Trefferchancen ändern sich durch diese Datei nicht. `rifle` und `sidearm` bleiben die einzigen Kampf-IDs.
+Dies ist ein Ideenvorrat. Die Ableitung einer eigenen Kampfprobe steht in [0043](decisions/0043-eine-kampfprobe-am-regelkern.md). Sie ändert den Regelkern nicht. Hier gilt keine zusätzliche Regel. Die laufende Kampfregel bleibt Kratzer, Blutung und Bruch an den sechs Zonen Kopf, Torso, Arm links, Arm rechts, Bein links und Bein rechts. Sie steht in [0034](decisions/0034-koerperteile-und-blutung.md). Punkte, Aktionspunkte und Trefferchancen ändern sich durch diese Datei nicht. `rifle` und `sidearm` bleiben die einzigen Kampf-IDs.
 
 Die Sätze stammen aus zwei Herkünften vom 23.10.2026: aus der lokalen Datei `regelsystem-cyberpunk.md` und aus dem Gespräch am selben Tag. Nichts davon ist in den Regelkern übernommen.
 
