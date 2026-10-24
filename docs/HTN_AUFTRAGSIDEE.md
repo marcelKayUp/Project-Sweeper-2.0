@@ -18,237 +18,458 @@ Die Planungszeit liegt vor der taktischen Runde. Das Ergebnis der Zerlegung ist 
 
 ## 2. Algorithmus
 
-Grundlage ist das geordnete Aufgabennetz, das [ORGANISATIONEN.md](ORGANISATIONEN.md) bereits auf das SHOP-Muster bezieht: abstrakte Aufgaben, Methoden mit Voraussetzungen und geordneten Teilaufgaben, primitive Aufgaben am Ende. Diese Idee ergänzt die deterministische Auswahl, die Grenze der Suche und die Kante zu dem, was das Spiel schon kann.
+Grundlage ist das geordnete Aufgabennetz aus [ORGANISATIONEN.md](ORGANISATIONEN.md). Abstrakte Aufgaben haben Methoden. Methoden haben Voraussetzungen und geordnete Teilaufgaben. Primitive Operatoren stehen am Ende. Ein Aufruf liest das Wissen eines Planers. Gleiche Bibliothek, gleicher Planer, gleiches Wissen, gleiche bevorzugte Mittel und derselbe Weltzustand ergeben dieselbe Spur. Die Zerlegung würfelt nicht, liest keine Uhr und benutzt keinen Zufallsstrom.
 
 ### 2.1 Zustände
 
-Voraussetzungen und Effekte sind benannte Zustände. Ein Zustand gilt oder er gilt nicht. Freier Text ist kein Effekt. Profilfelder des Katalogs sind Fähigkeiten und Interessen. Sie setzen von sich aus keinen Weltzustand.
-
-Weltzustände dieser Idee:
+Voraussetzungen und Wirkungen sind Tupel aus diesem Verzeichnis. Ein Tupel gilt in einer Menge oder es gilt nicht. Freier Text ist kein Zustand. Profilfelder sind keine Tupel und setzen von sich aus keines.
 
 | Zustand | Argumente | Lesart |
 | --- | --- | --- |
 | `kennt` | Akteur, Gegenstand | Der Akteur verfügt über eine Kopie oder über gesichertes Wissen. |
-| `kontrolliert-zugang` | Akteur, Ressource | Der Akteur kontrolliert einen Zugang. Die Machtbasis im Profil genügt dafür nicht. |
-| `nutzungsrecht` | Akteur, Ressource | Ein benanntes Nutzungsrecht liegt vor. |
-| `abhaengigkeit` | A, B, Ressource | A benötigt die Ressource für ein aktives Ziel, und B kontrolliert einen geeigneten Zugang. Das ist die Definition aus der Organisationslandschaft. |
+| `kontrolliert-zugang` | Akteur, R | Der Akteur kontrolliert einen Zugang zu R. Die Machtbasis im Profil ist dieses Tupel nicht. |
+| `nutzungsrecht` | Akteur, R | Ein benanntes Nutzungsrecht an R liegt vor. |
+| `abhaengigkeit` | A, B, R | A benötigt R für ein aktives Ziel, und B kontrolliert einen geeigneten Zugang. Das ist die Definition aus der Organisationslandschaft. |
 | `beleg-kopie` | Besitzer, Gegenstand | Eine Kopie liegt vor. Der bisherige Besitzer behält das Original. |
-| `angebot-offen` | Von, An, Gegenstand | Ein Angebot ist ausgesprochen und noch ohne Antwort. |
-| `antwort` | Angebot, Wert | Wert ist `angenommen` oder `abgelehnt`. Der Wert kommt von außen. |
-| `auftrag-offen` | Auftrag, Schritte | Ein Runner-Auftrag ist angeboten. Die Schritte sind die geordneten Primitive. |
-| `mission-bestaetigt` | Auftrag, Ergebnis | Ein bestätigtes Missionsergebnis liegt vor. Die Zerlegung erzeugt es nicht. |
-| `neutraler-ort` | Ort, Parteien | Ein Ort, den keine der genannten Parteien kontrolliert. |
-| `archiv-haelt` | Akteur, Gegenstand | Ein Archiv dieses Akteurs hält den Gegenstand. |
+| `angebot-offen` | Von, An, R | Ein Angebot über R ist ausgesprochen. Das Tupel bleibt der Name dieses Angebots und bleibt stehen, wenn `antwort` daneben gilt. |
+| `antwort` | Angebot, Wert | Wert ist `angenommen` oder `abgelehnt`. Das Angebot ist das Tupel `angebot-offen` mit denselben drei Argumenten. Die Zerlegung schreibt `antwort` nicht. |
+| `anspruch` | Akteur, Gegenseite, Gegenstand | Ein benannter Anspruch des Akteurs gegen die Gegenseite über den Gegenstand. Ein Profilwort setzt dieses Tupel nicht. |
+| `unabhaengig` | C, B, R | Der Zugang von C zu R steht nicht unter der Kontrolle von B. Das Tupel wird nicht aus einem fehlenden anderen Tupel gefolgert. |
+| `anbieter-gebunden` | A, C, R | Die Zerlegung hat C als Anbieter von A für R gebunden. |
+| `voraussetzung-gebunden` | Akteur, R | Technologie, Personal und Finanzierung für R sind gebunden. |
+| `zugang-geklaert` | Akteur, R | Der Zugang zu R für den nächsten Schritt steht in der Suchkopie. |
+| `beleg-bereit` | Akteur, R | Eine Kopie von R liegt in der Suchkopie am Terminal bereit. |
+| `erreichbar` | Akteur, Art | Art ist `technologie`, `personal` oder `finanzierung`. Mengen legt diese Idee nicht fest. |
 | `verhandlungsfaehig` | Akteur | Der Akteur kann ein Angebot beantworten. Das steht in keinem Profil. |
-| `erreichbar` | Akteur, Voraussetzung | Technologie, Personal oder Finanzierung ist für diesen Akteur erreichbar. Mengen legt diese Idee nicht fest. |
+| `archiv-haelt` | Akteur, R | Ein Archiv dieses Akteurs hält R. |
+| `neutraler-ort` | Ort, Parteien | Ein Ort, den keine der genannten Parteien kontrolliert. Die Parteien stehen als Paar in aufsteigender Akteur-ID. Der Ort ist keine Akteur-ID. |
+| `ist-information` | Gegenstand | Der Gegenstand ist Information. Der Aufruf übergibt das Tupel. Die Idee durchsucht dafür keine Profile. |
 
-Planmarken sind keine Weltzustände. Sie leben nur in der Suchkopie: `schritt-vorgesehen`, `offen`, `wartet` und `ziel-wartet`. Eine verworfene Suchkopie nimmt ihre Marken mit.
+`angebot-offen` steht in dieser Tabelle und nur dort. Diese Idee führt keine Planmarken.
 
-Die Zerlegung würfelt nicht. Sie liest keine Uhr und zieht keine Zufallszahl. Gleiche Bibliothek, gleicher Ausgangszustand und dieselbe Folge äußerer Antworten ergeben dieselbe Spur. Wenn eine spätere Aufgabe doch eine Wahl auslost, braucht sie einen gespeicherten, seedbaren Zufallsstrom, getrennt vom Kampf-RNG und vom Bot-RNG, dazu eine stabile Sortierung. Diese Idee enthält keinen solchen Strom.
+R ist der Argumentplatz für Ressource und Gegenstand. In `aufgabe.abhaengigkeit-verringern` trägt R die Ressource. In `aufgabe.information-beschaffen` und `aufgabe.anspruch-absichern` trägt R den Gegenstand. `kennt(Akteur, Gegenstand)`, `beleg-kopie(Besitzer, Gegenstand)`, `anspruch(Akteur, Gegenseite, Gegenstand)` und `ist-information(Gegenstand)` verwenden dafür das Argument Gegenstand. Es ist derselbe Platz wie R. Eine Teilaufgabe übergibt ihn unverändert.
 
-### 2.2 Zielauswahl vor der Zerlegung
+Die Suchkopie ist eine Menge von Tupeln. Sie beginnt als Kopie des Wissens des Planers. Operatoren schreiben nur in diese Kopie. Der bestätigte Weltzustand bleibt während der Zerlegung unverändert. Eine Wirkung ist das Hinzufügen oder Entfernen der Tupel, die der Operator nennt. Was schon im Anfangswissen steht, hat kein Operator geschrieben.
 
-Die Zielauswahl bleibt ein eigener Schritt vor dem Netz. Die Zerlegung wählt das Organisationsziel nicht selbst. Ein Kandidat entsteht nur aus einem schon vorliegenden Zustand, im Ausschnitt der Akteure, den ein späterer Aufruf übergibt. Diese Idee durchsucht die 70 Profile nicht von sich aus.
+Eine negierte Voraussetzung ist nur für eigene Tupel des Planers zulässig: fehlendes `kennt(Planer, …)`, fehlendes `nutzungsrecht(Planer, …)` und fehlendes `beleg-kopie(Planer, …)`. Die Wurzelregeln verwenden nur diese Negationen. Ein Zieltest darf lesen, dass die Wirkung eines Operators `abhaengigkeit(A, B, R)` entfernt hat. Ein Tupel über einen anderen Akteur ist nur als positive Voraussetzung zulässig und gilt nur, wenn es in der Suchkopie steht.
 
-Für einen übergebenen Akteur gilt diese Reihenfolge:
+### 2.2 Wissen und Welt
 
-1. Liegt `abhaengigkeit` für ihn vor, ist die Wurzel `aufgabe.abhaengigkeit-verringern`.
-2. Sonst, wenn seine Katalogabhängigkeiten Belege oder Registerzugriff nennen und ein Anspruch gegen einen benannten anderen Akteur vorliegt, ist die Wurzel `aufgabe.anspruch-absichern`.
-3. Sonst, wenn die Ressource Information ist und `kennt` fehlt, ist die Wurzel `aufgabe.information-beschaffen`.
+Der Planer plant aus seinem Wissen. Die Zerlegung liest den Weltzustand nicht.
 
-Mehrere Kandidaten desselben Akteurs behalten diese Klassenreihenfolge. Mehrere Akteure werden nach Akteur-ID sortiert, danach nach Aufgaben-ID. Interessen und bevorzugte Mittel erzeugen keinen Kandidaten. Sie stehen an den Methoden als Vermerk. Die Versuchsordnung bleibt die Priorität, danach die stabile Methoden-ID.
+`kontrolliert-zugang` eines anderen Akteurs erfüllt eine Voraussetzung nur, wenn dieses Tupel im Wissen des Planers steht. Dasselbe gilt für `archiv-haelt`, `unabhaengig`, `verhandlungsfaehig` eines anderen Akteurs, `angebot-offen`, `antwort` und `neutraler-ort`. Ein Weltfakt, den das Wissen nicht enthält, macht keine Methode anwendbar.
 
-Die übrigen Zielklassen der Organisationslandschaft, Marktposition, Verpflichtung, Kapazität, Konkurrenz und Zusammenhalt, behalten dort ihre Namen. Diese Bibliothek gibt ihnen keine Methoden.
+Ein Aufruf übergibt vier Dinge: die Planer-ID, das Wissen, den Weltzustand und die bevorzugten Mittel dieses einen Planers. Die Mittel sind die Katalogeinträge des Feldes „Bevorzugte Mittel“, getrennt an „; “, als ganze Einträge. Hat das Profil dieses Feld nicht, ist die Liste leer. Die Idee liest dafür nicht die übrigen Profile.
 
-### 2.3 Zerlegung
+Nach einem gefundenen Plan prüft der Weltabgleich jedes Tupel aus dem Anfangswissen, das eine angewendete Methode oder ein angewendeter Operator als positive Voraussetzung gelesen hat und das einen anderen Akteur als den Planer nennt. Das Tupel muss im Weltzustand stehen. Wirkungen der Suchkopie zählt der Abgleich nicht als Weltfakten. Fehlt ein solches Tupel, verwirft der Abgleich den Plan. Die Spur nennt `welt-weicht-ab`. Eine weitere Methode wird deshalb nicht versucht, weil der Weltzustand die Methodenwahl nicht steuert. Ohne Plan findet kein Weltabgleich statt.
 
-Eine abstrakte Aufgabe hat Methoden. Eine Methode hat eine Priorität, eine stabile ID, Voraussetzungen, einen optionalen Mittelvermerk und eine geordnete Liste von Teilaufgaben. Eine primitive Aufgabe hat Voraussetzungen und endet. Teilaufgaben einer Methode sind total geordnet. Eine partielle Ordnung verwendet diese Idee nicht.
+### 2.3 Genau eine Wurzel
 
-Passende Methoden sind die, deren Voraussetzungen im aktuellen Suchzustand alle gelten. Ihre Ordnung ist die Priorität aufsteigend, bei gleicher Priorität die Methoden-ID in aufsteigender Unicode-Reihenfolge. Die Reihenfolge im Dokument ist keine zweite Ordnung. Bevorzugte Mittel aus dem Katalog machen eine Methode mit falscher Voraussetzung nicht anwendbar und schieben die Priorität nicht stillschweigend um.
+Ein Aufruf hat genau einen Planer und genau eine Wurzel. Die Wurzel steht fest, bevor `zerlegen` beginnt.
+
+1. Enthält das Wissen mindestens ein Tupel `abhaengigkeit(Planer, B, R)`, ist die Wurzel `aufgabe.abhaengigkeit-verringern`. Gebunden wird das Tupel mit der aufsteigend ersten Akteur-ID von B und bei gleichem B dem aufsteigend ersten Ressourcennamen.
+2. Sonst, enthält das Wissen mindestens ein Tupel `anspruch(Planer, Gegenseite, Gegenstand)` und enthält es `beleg-kopie(Planer, Gegenstand)` nicht, ist die Wurzel `aufgabe.anspruch-absichern`. Gebunden wird das Tupel mit der aufsteigend ersten Akteur-ID der Gegenseite und danach dem aufsteigend ersten Gegenstandsnamen.
+3. Sonst, enthält das Wissen ein Tupel `ist-information(Gegenstand)` und enthält es `kennt(Planer, Gegenstand)` nicht, ist die Wurzel `aufgabe.information-beschaffen`. Gebunden wird der aufsteigend erste solche Gegenstandsname.
+4. Sonst gibt es keine Wurzel. Die Spur nennt `kein-wurzelziel`. Es gibt keinen Plan und keinen Eintritt in `zerlegen`.
+
+Scheitert die Zerlegung dieser Wurzel, beginnt derselbe Aufruf keine andere Regel. Mehrere passende Tupel derselben Regel werden nicht nacheinander gebunden. Mehrere Planer sind mehrere Aufrufe. Deren Reihenfolge ist die aufsteigende Akteur-ID. Jeder Aufruf hat sein eigenes Budget von 32.
+
+Profilfelder erzeugen keine Wurzel. Interessen und bevorzugte Mittel erzeugen keine Wurzel. Das Abhängigkeitsfeld eines Profils ist nicht der Zustand `anspruch` und nicht der Zustand `abhaengigkeit`.
+
+### 2.4 Ordnung der Methoden
+
+Eine abstrakte Aufgabe hat mindestens eine Methode. Eine Methode hat eine Priorität, eine stabile ID, Voraussetzungen, eine Mittel-Liste und eine total geordnete Liste von Teilaufgaben. Jede Teilaufgabe ist eine Aufgaben-ID oder eine Primitive-ID. Eine leere Teilaufgabenliste gibt es nicht. Eine partielle Ordnung verwendet diese Idee nicht.
+
+Passend ist eine Methode, deren Voraussetzungen in der aktuellen Suchkopie alle gelten. Bevorzugte Mittel machen eine unpassende Methode nicht passend.
+
+Die Prüfungsordnung aller Methoden einer Aufgabe ist:
+
+1. Mittelrang 0 vor Mittelrang 1. Mittelrang 0 gilt, wenn die Mittel-Liste der Methode und die bevorzugten Mittel des Planers mindestens einen ganzen Eintrag gemeinsam haben. Mittelrang 1 gilt, wenn die Liste `keines` ist oder kein ganzer Eintrag gemeinsam ist. „Lizenzen“ und „Lizenzalternativen“ sind verschiedene Einträge. Ein Teilstring zählt nicht.
+2. Priorität aufsteigend.
+3. Methoden-ID aufsteigend nach Unicode-Codepunkten.
+
+Die Reihenfolge der Methoden im Dokument ist keine Ordnung. Plankosten sind keine Ordnung. Nach diesen drei Schlüsseln bleibt kein Gleichstand.
+
+### 2.5 Suchbudget
+
+Das Suchbudget ist 32. Es gilt für die ganze Zerlegung dieses einen Aufrufs. Es gibt keine zweite Tiefengrenze.
+
+Jeder Eintritt in eine Aufgabe, jeder Eintritt in eine Primitive, jeder Methodenversuch und jedes Zurücksetzen verbraucht einen Schritt derselben Variablen `rest`. Ein rekursiver Aufruf erhält den schon verminderten Stand. Nach der Rückkehr bleibt dieser Stand. Verbrauchte Schritte kommen nicht zurück. Die nächste Methode beginnt bei dem Stand, den die vorige Methode übrig gelassen hat.
+
+Ist `rest` bei einem geforderten Verbrauch 0, läuft dieser Verbrauch nicht. Die Spur nennt `budget-erschoepft`. Das Ergebnis ist kein Plan. Weitere Methoden derselben Aufgabe werden nicht begonnen. Die übergeordnete Aufgabe versucht danach keine weitere Methode.
+
+Ein Methodenversuch, dessen Voraussetzungen fehlen, verbraucht den Versuch und kein zusätzliches Zurücksetzen. Zurücksetzen verbraucht einen Schritt, wenn eine Methode schon eine Teilaufgabe begonnen hatte oder der Zieltest scheitert.
+
+Der längste Plan dieser Bibliothek verbraucht 13 Schritte. In diesem Pfad enthalten die bevorzugten Mittel einen Eintrag aus der Mittel-Liste von `methode.verbessertes-nutzungsrecht`, diese Methode und `methode.unabhaengige-alternative` scheitern an fehlenden Voraussetzungen, und `methode.eigene-faehigkeit` hat erfüllte Voraussetzungen:
+
+1. Eintritt `aufgabe.abhaengigkeit-verringern`
+2. Versuch `methode.verbessertes-nutzungsrecht`
+3. Versuch `methode.unabhaengige-alternative`
+4. Versuch `methode.eigene-faehigkeit`
+5. Eintritt `aufgabe.voraussetzungen-beschaffen`
+6. Versuch `methode.erreichbares-binden`
+7. Eintritt `prim.voraussetzung-binden`
+8. Eintritt `aufgabe.kapazitaet-aufbauen`
+9. Versuch `methode.eigene-kapazitaet`
+10. Eintritt `prim.kapazitaet-reservieren`
+11. Eintritt `aufgabe.nutzbarkeit-bestaetigen`
+12. Versuch `methode.eigene-nutzung`
+13. Eintritt `prim.nutzung-bestaetigen`
+
+Gelten die Voraussetzungen einer früher geordneten Methode, liefert diese den Plan, und die späteren Methoden beginnen nicht. Der Verbrauch ist dann kürzer. Eine Methode mit erfüllten Voraussetzungen scheitert in dieser Bibliothek nicht in einer Teilaufgabe: jede Voraussetzung einer Teilaufgabe ist schon Voraussetzung der Methode oder Wirkung der vorigen Teilaufgabe. Es gibt deshalb keinen Erfolg, in dem eine passende Methode zurückgesetzt wird und danach eine spätere Methode plant. 13 ist der Höchstverbrauch. 32 liegt darüber. Die Zielauswahl und der Weltabgleich verbrauchen das Budget nicht.
+
+### 2.6 Zerlegung und Zieltest
 
 ```text
-zerlegen(aufgabe, zustand, tiefe, budget, spur):
-  ist das Budget aufgebraucht oder die Tiefe überschritten:
-    spur ergänzen um aufgabe und den Abbruchgrund
-    kein Plan
-  ist die aufgabe primitiv:
-    fehlt eine Voraussetzung:
-      spur ergänzen, kein Plan
-    sonst:
-      Plan aus dieser einen Primitive
-      Suchkopie trägt nur die zugehörige Planmarke
+rest beginnt bei 32
+
+verbrauche(rest, spur, grund):
+  ist rest gleich 0:
+    spur ergänzen um budget-erschoepft und grund
+    gesamte Suche beenden, kein Plan
   sonst:
-    methoden = passende Methoden, sortiert nach Priorität, dann Methoden-ID
-    ist keine Methode passend:
-      spur ergänzen um die fehlenden Zustandsnamen, kein Plan
+    rest um 1 senken
+
+zerlegen(aufgabe, kopie, rest, spur):
+  verbrauche(rest, spur, eintritt der aufgabe)
+  ist die aufgabe primitiv:
+    fehlt eine Voraussetzung in der kopie:
+      spur nennt die Zustandsnamen, an denen die Voraussetzung scheitert
+      kein Plan; rest bleibt auf dem Stand nach diesem Eintritt
+    sonst:
+      kopie um die Wirkung des Operators fortschreiben
+      Plan aus dieser einen Primitive, rest weitergeben
+  sonst:
+    methoden = alle Methoden der Aufgabe in der Ordnung aus 2.4
     für jede methode in dieser Ordnung:
-      kopie = Kopie des zustands
+      verbrauche(rest, spur, versuch der methode)
+      parameter binden, wie unten
+      fehlt eine Voraussetzung:
+        spur nennt die Zustandsnamen, an denen die Voraussetzung scheitert
+        nächste methode
+      zweig = Kopie der kopie
       teilplan = leer
-      methode-gültig = ja
       für jede teilaufgabe in der Methodenreihenfolge:
-        ergebnis = zerlegen(teilaufgabe, kopie, tiefe + 1, budget - 1, spur)
-        hat ergebnis keinen Plan oder trägt es die Marke offen:
-          kopie verwerfen
-          spur ergänzen um aufgabe, methoden-ID und den Fehlgrund
-          methode-gültig = nein
-          diese Methode abbrechen
+        ergebnis, zweig, rest = zerlegen(teilaufgabe, zweig, rest, spur)
+        hat ergebnis keinen Plan:
+          enthält die spur budget-erschoepft:
+            kein Plan, keine weitere Methode
+          verbrauche(rest, spur, zuruecksetzen der methode)
+          spur nennt aufgabe, methoden-ID und den Fehlgrund
+          diese Methode abbrechen und die nächste Methode prüfen
         teilplan an den Plan anhängen
-        kopie = Suchkopie des Ergebnisses
-      ist methode-gültig:
-        diesen teilplan zurückgeben
-    kein Plan
+      gilt der Zielzustand der aufgabe im zweig:
+        teilplan, zweig und rest zurückgeben
+      sonst:
+        verbrauche(rest, spur, zuruecksetzen der methode)
+        spur nennt ziel-nicht-erreicht
+        nächste methode
+    kein Plan, rest weitergeben
 ```
 
-Jeder Eintritt in `zerlegen` verbraucht einen Budgetschritt. Tiefe und Budget sind Parameter eines späteren Laufs. Diese Idee legt die beiden Zahlen nicht fest. Ist das Budget aufgebraucht, endet die Suche mit der Spur und ohne Plan. Es wird keine Ressource nachgetragen, damit eine Methode doch passt. Eine Teilaufgabe wie Zugang klären darf in `prim.zugang` enden. Erst die Marke `offen` verwirft den Versuch und holt die nächste Methode derselben Aufgabe. So bleibt der Datenraub über Zugang und Extraktion erreichbar, nachdem die Variante mit Beobachtung in der Spur steht.
+Jeder Rückweg gibt den aktuellen Stand von `rest` zurück. Ein Abbruch aus `verbrauche` beendet die gesamte Suche.
 
-Backtracking ist das Verwerfen einer Suchkopie und das Probieren der nächsten Methode. Die Spur nennt Aufgabe, Methoden-ID und die fehlenden oder offenen Zustände in der Reihenfolge der Versuche. Der bestätigte Weltzustand bleibt in der ganzen Suche unverändert. Ein Auftrag ist noch kein Erfolg. `kennt` und `beleg-kopie` entstehen in dieser Idee erst als Lesart eines späteren `mission-bestaetigt`, und auch das nur als benannter Folgezustand, nicht als Schreibzugriff auf den Regelkern.
+Der Zieltest liest die Suchkopie nach den Wirkungen der Teilaufgaben. Er akzeptiert die Methode, wenn der Zielzustand dieser Aufgabe dort gilt. Ziele anderer Akteure und der Wert von `antwort` sind keine Wirkungen. [0020](decisions/0020-organisationslandschaft-und-lokale-konflikte.md) verlangt diesen Zieltest nach den Operatoren. Die übergeordnete Aufgabe prüft ihr eigenes Ziel erneut.
 
-Ein anbietbarer Crew-Auftrag enthält nur die Primitive `prim.zugang`, `prim.datenraub` und `prim.extraktion`, und er enthält `prim.datenraub`. Er ist ein Auftrag in der vorhandenen Datenraubform. Zugang und Extraktion sind die Checkliste dieses einen Auftrags. Daraus werden keine drei Missionen und kein zweiter Auftragstyp. Ein Plan, der `prim.beobachtung` enthält, bleibt in der Spur und wird nicht an die Crew ausgegeben. Die nächste Methode darf danach noch einen anbietbaren Plan liefern. Ein Plan, der nur `prim.angebot-vorlegen` und `prim.antwort-abwarten` enthält, ist ein Organisationsschritt und keine Mission.
+Parameter bindet die Methode beim Versuch an das aufsteigend erste Tupel, das jede Voraussetzung der Methode zugleich erfüllt. Die Ordnung ist die Akteur-ID, danach der Ressourcen- oder Gegenstandsname, danach der Ortsname. Erfüllt kein Tupel die ganze Voraussetzung, ist die Methode unpassend. Scheitert die Zerlegung nach dieser Bindung, wird kein weiteres Tupel gebunden.
 
-## 3. Primitive Grenze
+Ablauf eines Aufrufs:
 
-| ID | Planmarke | Was schon vorliegt | Wo die Primitive endet |
-| --- | --- | --- | --- |
-| `prim.zugang` | `schritt-vorgesehen` | In der vorhandenen Datenraubmission öffnet `interact` eine Tür. | Der Auftrag nennt den Zugang. Die Primitive ruft `interact` nicht auf und legt keine Zugangsregel an. |
-| `prim.datenraub` | `schritt-vorgesehen` | Dieselbe Mission kopiert am Terminal über `interact`. Für Spieleroperationen steht bisher diese Datenraubform. | Der Auftrag nennt den Datenraub. Die Primitive ruft `shoot` nicht auf. |
-| `prim.extraktion` | `schritt-vorgesehen` | `extract` kostet im bestehenden Kern 1 AP und kann den Einsatz beenden, sobald die Kopien vorliegen. | Der Auftrag nennt die Extraktion. Eine Belohnung vergibt die Primitive nicht. |
-| `prim.beobachtung` | `offen` | Ein Beobachtungsauftrag ist nicht vorhanden. Die gefilterte Bot-Beobachtung ist keine Spielermission. | Die Zerlegung darf hier enden. Eine Sichtlinie entsteht nicht. Als Crew-Auftrag wird der Plan nicht ausgegeben. |
-| `prim.angebot-vorlegen` | `angebot-offen` in der Suchkopie | Die Organisationslandschaft nennt das Vorlegen als strategischen Schritt. | Es entsteht kein Vertrag und kein taktischer Zug. |
-| `prim.antwort-abwarten` | `wartet` | Antworten sind äußere Entscheidungen. | Die Suche erfindet weder Zusage noch Ablehnung. |
+1. Wurzel nach 2.3 bestimmen. Gibt es keine, endet der Aufruf mit `kein-wurzelziel`.
+2. `zerlegen` mit einer Kopie des Wissens und `rest` = 32.
+3. Gibt es keinen Plan, endet der Aufruf mit der Spur.
+4. Sonst den Weltabgleich aus 2.2 ausführen. Besteht er, ist der Plan das Ergebnis. Scheitert er, gibt es keinen Plan und die Spur nennt `welt-weicht-ab`.
 
-`move`, `aim`, `reload`, `heal` und `overwatch` bleiben taktische Befehle. Sie sind keine Aufgaben dieses Netzes.
+### 2.7 Auftrag an die Missionspipeline
+
+Die Reihenfolge Zugang, Datenraub, Extraktion ist die Teilaufgabenliste von `methode.datenraub-ueber-zugang`: `prim.zugang`, danach `prim.datenraub`, danach `prim.extraktion`. Diese Methode legt die Reihenfolge fest.
+
+Die Pipeline aus [0008](decisions/0008-hierarchischer-missionsgenerator.md) erhält einen Plan genau dann, wenn die expandierte Primitivliste genau diese drei IDs in dieser Reihenfolge ist. Sie erzeugt daraus eine Mission der vorhandenen Datenraubform und verwendet nur bereits vorhandene Aktionen: `interact` für den Zugang, `interact` für das Terminal, `extract` für die Extraktion. Sie erzeugt daraus keine drei Missionen und keine zweite Missionsfamilie. Die HTN ruft `shoot` nicht auf und ruft die Schussauflösung nicht auf. Ihre Planungszeit liegt vor der taktischen Runde. Die Pipeline behält ihre Reihenfolge: zuerst das taktische Problem, danach die Umgebung.
+
+Jeder andere Plan bleibt ein Organisationsergebnis in der Suchkopie und wird keine Missionsanfrage.
+
+## 3. Operatoren
+
+Jeder Operator hat Voraussetzungen, Plankosten, Wirkung und Sichtbarkeit. Plankosten sind für jeden Operator dieser Bibliothek 1. Die Summe der Plankosten eines Plans ist die Anzahl seiner Primitive. Plankosten sind keine Aktionspunkte, keine Würfel und keine Preise. Was `extract` im bestehenden Kern an Aktionspunkten kostet, bleibt außerhalb dieser Idee. Die Methodenordnung liest die Plankosten nicht.
+
+Die Sichtbarkeit ist eine Liste aus `planer`, `gegenpartei`, `besitzer` und `anbieter`. Die Suchkopie des Planers erhält jede Wirkung seiner eigenen Operatoren. Die Liste nennt, wer sonst zu informieren wäre. Dieser Aufruf schreibt Wissensstände anderer Akteure nicht fort.
+
+| ID | Voraussetzung | Plankosten | Wirkung in der Suchkopie | Sichtbarkeit | Grenze |
+| --- | --- | --- | --- | --- | --- |
+| `prim.anbieter-festlegen` | `kontrolliert-zugang(C, R)` und `unabhaengig(C, B, R)` | 1 | setzt `anbieter-gebunden(A, C, R)` | `planer`, `anbieter` | Organisationsschritt. Keine Mission. |
+| `prim.nutzungsrecht-schreiben` | `angebot-offen(A, Gegenpartei, R)`, `antwort` dieses Angebots mit Wert `angenommen`, `verhandlungsfaehig(Gegenpartei)` | 1 | setzt `nutzungsrecht(A, R)` | `planer`, `gegenpartei` | Schreibt `antwort` nicht und `angebot-offen` nicht. Keine Mission. |
+| `prim.abhaengigkeit-loesen` | `nutzungsrecht(A, R)` und `abhaengigkeit(A, B, R)` | 1 | entfernt `abhaengigkeit(A, B, R)` | `planer` | Entfernt keinen Zugang der Gegenseite. Keine Mission. |
+| `prim.voraussetzung-binden` | `erreichbar(A, technologie)`, `erreichbar(A, personal)` und `erreichbar(A, finanzierung)` | 1 | setzt `voraussetzung-gebunden(A, R)` | `planer` | Keine Mission. |
+| `prim.kapazitaet-reservieren` | `voraussetzung-gebunden(A, R)` | 1 | setzt `kontrolliert-zugang(A, R)` | `planer` | Strategisches Reservieren aus der Landschaft. Keine Mission. |
+| `prim.nutzung-bestaetigen` | `kontrolliert-zugang(A, R)` und `abhaengigkeit(A, B, R)` | 1 | setzt `nutzungsrecht(A, R)` und entfernt `abhaengigkeit(A, B, R)` | `planer` | Keine Mission. |
+| `prim.information-uebernehmen` | `angebot-offen(Besitzer, A, R)` und `antwort` dieses Angebots mit Wert `angenommen` | 1 | setzt `kennt(A, Gegenstand)` und `beleg-kopie(A, Gegenstand)` | `planer`, `besitzer` | Entfernt `kennt` des Besitzers nicht. Keine Mission. R ist der Gegenstand. |
+| `prim.zugang` | `nutzungsrecht(A, R)` gilt nicht | 1 | setzt `zugang-geklaert(A, R)` | `planer` | Benennt das vorhandene `interact` an einer Tür. Ruft es nicht auf. R ist der Gegenstand. |
+| `prim.datenraub` | `zugang-geklaert(A, R)` | 1 | setzt `beleg-bereit(A, R)` | `planer` | Benennt das vorhandene `interact` am Terminal. Ruft `shoot` nicht auf. |
+| `prim.extraktion` | `beleg-bereit(A, R)` | 1 | setzt `kennt(A, Gegenstand)` und `beleg-kopie(A, Gegenstand)` | `planer` | Benennt das vorhandene `extract`. Ruft es nicht auf, vergibt keine Belohnung und entfernt den Zugang des Halters nicht. |
+
+`angebot-offen`, `antwort` und `nutzungsrecht` sind drei verschiedene Zustände. `angebot-offen` bleibt neben `antwort` stehen. Eine angenommene Antwort ist noch kein Nutzungsrecht. `prim.nutzungsrecht-schreiben` setzt das Nutzungsrecht, das vorher nicht galt, und löscht `angebot-offen` nicht. `prim.abhaengigkeit-loesen` liest dieses Nutzungsrecht und entfernt erst danach die Abhängigkeit.
+
+`prim.zugang` schreibt `zugang-geklaert`. `prim.datenraub` liest dieses Tupel und schreibt `beleg-bereit`. `prim.extraktion` liest `beleg-bereit` und schreibt `kennt` und `beleg-kopie`. Der Zieltest liest diese Tupel in der Suchkopie.
 
 ## 4. Aufgabenbibliothek
 
-Ressourcenfamilien, Abhängigkeiten und Interessen stammen aus der Organisationslandschaft und aus den Profilfeldern. Die Bibliothek wiederholt die 70 Profile nicht.
+Ressourcenfamilien, Abhängigkeiten und Interessen stammen aus der Organisationslandschaft und aus den Profilfeldern. Die Bibliothek wiederholt die 70 Profile nicht. Jede abstrakte Aufgabe hat mindestens eine Methode. Jede Teilaufgabe ist eine ID aus diesem Abschnitt oder aus Abschnitt 3.
 
-### 4.1 Aufgaben
+### 4.1 `aufgabe.abhaengigkeit-verringern(A, B, R)`
 
-| ID | Art | Erfolg, sobald er später bestätigt wäre |
-| --- | --- | --- |
-| `aufgabe.abhaengigkeit-verringern` | Wurzel | Die benannte Abhängigkeit ist durch eine Alternative, eine eigene Fähigkeit oder ein Nutzungsrecht abgelöst. Welche der drei Lesarten gilt, entscheidet die Methode, die tatsächlich einen Plan geliefert hat. |
-| `aufgabe.information-beschaffen` | Aufgabe | `kennt` für den suchenden Akteur und den Gegenstand. Bis `mission-bestaetigt` trägt der Plan nur `ziel-wartet`. |
-| `aufgabe.zugang-klaeren` | Aufgabe | Ein Nutzungsrecht liegt vor, oder der Auftrag sieht `prim.zugang` vor. |
-| `aufgabe.anspruch-absichern` | Wurzel | Eine `beleg-kopie` des Gegenstands liegt beim suchenden Akteur. Die Forderung selbst bleibt unverändert. |
-| `aufgabe.vereinbarung-erreichen` | Aufgabe | `antwort` mit dem Wert `angenommen`. Die Suche selbst setzt diesen Wert nicht. |
-| `aufgabe.kapazitaet-sichern` | Aufgabe | Diese Bibliothek gibt der Aufgabe keine Methode. |
+Zieltest: `nutzungsrecht(A, R)` gilt, und `abhaengigkeit(A, B, R)` gilt nicht.
 
-### 4.2 Methoden
+`methode.unabhaengige-alternative`. Priorität 10. Mittel: `keines`.
 
-| ID | Aufgabe | Priorität | Mittelvermerk, wörtlich aus Profilen | Voraussetzung | Teilaufgaben in dieser Reihenfolge |
-| --- | --- | --- | --- | --- | --- |
-| `methode.unabhaengige-alternative` | Abhängigkeit verringern | 10 | keiner | Es gibt ein C ungleich B mit `kontrolliert-zugang` auf dieselbe Ressource, und B kontrolliert C nicht. | Zugang klären, Vereinbarung erreichen, `aufgabe.kapazitaet-sichern` |
-| `methode.eigene-faehigkeit` | Abhängigkeit verringern | 20 | keiner | `erreichbar` für Technologie, Personal und Finanzierung desselben Akteurs. | Die drei Namen aus der Domänenskizze: Voraussetzungen beschaffen, Kapazität aufbauen, Nutzbarkeit bestätigen. Dafür gibt es hier keine Methoden. |
-| `methode.verbessertes-nutzungsrecht` | Abhängigkeit verringern | 30 | Lizenzen; Partnerschaften; Kooperation; Lizenzalternativen | `verhandlungsfaehig` für B. | `aufgabe.vereinbarung-erreichen` |
-| `methode.freiwilliger-austausch` | Information beschaffen | 10 | Informationshandel | `angebot-offen` vom Besitzer an den suchenden Akteur über den Gegenstand. | `prim.antwort-abwarten` |
-| `methode.datenraub-mit-beobachtung` | Information beschaffen | 20 | Informationshandel | `kennt` fehlt, und ein anderer Akteur hat `kontrolliert-zugang` auf den Gegenstand. | Zugang klären, `prim.beobachtung`, `prim.datenraub`, `prim.extraktion` |
-| `methode.datenraub-ueber-zugang` | Information beschaffen | 30 | Informationshandel | Dieselbe Voraussetzung wie bei der Beobachtungsvariante. | Zugang klären, `prim.datenraub`, `prim.extraktion` |
-| `methode.zugang-aus-recht` | Zugang klären | 10 | keiner | `nutzungsrecht` des suchenden Akteurs. | keine Teilaufgabe |
-| `methode.zugang-offen` | Zugang klären | 20 | keiner | `nutzungsrecht` fehlt. | `prim.zugang` |
-| `methode.druckmittel-ueber-archiv` | Anspruch absichern | 10 | keiner | `archiv-haelt` für einen Halter, der nicht die Gegenseite ist. Der suchende Akteur nennt im Katalog Belege oder Registerzugriff. | `aufgabe.information-beschaffen` für denselben Gegenstand |
-| `methode.direktes-angebot` | Vereinbarung erreichen | 10 | Partnerschaften; Kooperation | `verhandlungsfaehig` für beide Parteien. | `prim.angebot-vorlegen`, `prim.antwort-abwarten` |
-| `methode.treffen-neutraler-ort` | Vereinbarung erreichen | 20 | Kooperation | `neutraler-ort` für beide Parteien. Der Halter des Orts ist keine der beiden Parteien. | `prim.zugang`, `prim.beobachtung`, `prim.angebot-vorlegen`, `prim.antwort-abwarten` |
+- Voraussetzung: `abhaengigkeit(A, B, R)`. Dazu ein C ungleich A und ungleich B mit `kontrolliert-zugang(C, R)` und `unabhaengig(C, B, R)` im Wissen. Dazu `verhandlungsfaehig(C)`, `angebot-offen(A, C, R)` und `antwort` dieses Angebots mit Wert `angenommen`.
+- Teilaufgaben: `aufgabe.anbieter-binden(A, C, B, R)`, danach `aufgabe.vereinbarung-mit-anbieter(A, C, R)`, danach `aufgabe.kapazitaet-sichern(A, B, R)`.
+- Kette: `prim.anbieter-festlegen` setzt `anbieter-gebunden(A, C, R)`. `aufgabe.vereinbarung-mit-anbieter` liest dieses Tupel und setzt `nutzungsrecht(A, R)`. `prim.abhaengigkeit-loesen` liest das Nutzungsrecht und entfernt `abhaengigkeit(A, B, R)`.
 
-Ein Mittelvermerk ist die wörtliche Katalogphrase. Er dokumentiert die Nähe zu einem Profil. Er ist kein Sortierschlüssel.
+`methode.eigene-faehigkeit`. Priorität 20. Mittel: `keines`.
 
-### 4.3 Das Netz in einer Ansicht
+- Voraussetzung: `abhaengigkeit(A, B, R)`, `erreichbar(A, technologie)`, `erreichbar(A, personal)`, `erreichbar(A, finanzierung)`.
+- Teilaufgaben: `aufgabe.voraussetzungen-beschaffen(A, R)`, danach `aufgabe.kapazitaet-aufbauen(A, R)`, danach `aufgabe.nutzbarkeit-bestaetigen(A, B, R)`.
+- Kette: `prim.voraussetzung-binden` setzt `voraussetzung-gebunden(A, R)`. `prim.kapazitaet-reservieren` liest es und setzt `kontrolliert-zugang(A, R)`. `prim.nutzung-bestaetigen` liest diesen Zugang, setzt `nutzungsrecht(A, R)` und entfernt `abhaengigkeit(A, B, R)`.
+
+`methode.verbessertes-nutzungsrecht`. Priorität 30. Mittel: `Lizenzen`, `Partnerschaften`, `Kooperation`, `Lizenzalternativen`.
+
+- Voraussetzung: `abhaengigkeit(A, B, R)`, `verhandlungsfaehig(A)`, `verhandlungsfaehig(B)`, `angebot-offen(A, B, R)`, `antwort` dieses Angebots mit Wert `angenommen`.
+- Teilaufgaben: `aufgabe.vereinbarung-erreichen(A, B, R)`, danach `aufgabe.kapazitaet-sichern(A, B, R)`.
+- Kette: `prim.nutzungsrecht-schreiben` setzt `nutzungsrecht(A, R)`. `prim.abhaengigkeit-loesen` liest es und entfernt `abhaengigkeit(A, B, R)`.
+
+Ohne gemeinsamen Mitteleintrag ist die Ordnung `methode.unabhaengige-alternative`, danach `methode.eigene-faehigkeit`, danach `methode.verbessertes-nutzungsrecht`. Ein gemeinsamer Eintrag setzt `methode.verbessertes-nutzungsrecht` an die erste Stelle, vor die Priorität 10.
+
+### 4.2 Aufgaben unter der unabhängigen Alternative
+
+`aufgabe.anbieter-binden(A, C, B, R)`. Zieltest: `anbieter-gebunden(A, C, R)` gilt.
+
+`methode.anbieter-ist-bekannt`. Priorität 10. Mittel: `keines`.
+
+- Voraussetzung: `kontrolliert-zugang(C, R)` und `unabhaengig(C, B, R)`.
+- Teilaufgabe: `prim.anbieter-festlegen`.
+- Wirkung: setzt `anbieter-gebunden(A, C, R)`.
+
+`aufgabe.vereinbarung-mit-anbieter(A, C, R)`. Zieltest: `nutzungsrecht(A, R)` gilt.
+
+`methode.nutzungsrecht-vom-anbieter`. Priorität 10. Mittel: `keines`.
+
+- Voraussetzung: `anbieter-gebunden(A, C, R)`, `verhandlungsfaehig(C)`, `angebot-offen(A, C, R)`, `antwort` dieses Angebots mit Wert `angenommen`.
+- Teilaufgabe: `prim.nutzungsrecht-schreiben`. Die Gegenpartei des Operators ist C.
+- Wirkung: liest `anbieter-gebunden` aus der vorigen Teilaufgabe der übergeordneten Methode und setzt `nutzungsrecht(A, R)`.
+
+`aufgabe.kapazitaet-sichern(A, B, R)`. Zieltest: `abhaengigkeit(A, B, R)` gilt nicht.
+
+`methode.kapazitaet-aus-nutzungsrecht`. Priorität 10. Mittel: `keines`.
+
+- Voraussetzung: `nutzungsrecht(A, R)` und `abhaengigkeit(A, B, R)`.
+- Teilaufgabe: `prim.abhaengigkeit-loesen`.
+- Wirkung: liest das Nutzungsrecht aus der vorigen Teilaufgabe und entfernt `abhaengigkeit(A, B, R)`.
+
+### 4.3 Aufgaben der eigenen Fähigkeit
+
+`aufgabe.voraussetzungen-beschaffen(A, R)`. Zieltest: `voraussetzung-gebunden(A, R)` gilt.
+
+`methode.erreichbares-binden`. Priorität 10. Mittel: `keines`.
+
+- Voraussetzung: `erreichbar(A, technologie)`, `erreichbar(A, personal)`, `erreichbar(A, finanzierung)`.
+- Teilaufgabe: `prim.voraussetzung-binden`.
+- Wirkung: setzt `voraussetzung-gebunden(A, R)`.
+
+`aufgabe.kapazitaet-aufbauen(A, R)`. Zieltest: `kontrolliert-zugang(A, R)` gilt.
+
+`methode.eigene-kapazitaet`. Priorität 10. Mittel: `keines`.
+
+- Voraussetzung: `voraussetzung-gebunden(A, R)`.
+- Teilaufgabe: `prim.kapazitaet-reservieren`.
+- Wirkung: liest `voraussetzung-gebunden` aus der vorigen Teilaufgabe und setzt `kontrolliert-zugang(A, R)`.
+
+`aufgabe.nutzbarkeit-bestaetigen(A, B, R)`. Zieltest: `nutzungsrecht(A, R)` gilt, und `abhaengigkeit(A, B, R)` gilt nicht.
+
+`methode.eigene-nutzung`. Priorität 10. Mittel: `keines`.
+
+- Voraussetzung: `kontrolliert-zugang(A, R)` und `abhaengigkeit(A, B, R)`.
+- Teilaufgabe: `prim.nutzung-bestaetigen`.
+- Wirkung: liest `kontrolliert-zugang(A, R)` aus der vorigen Teilaufgabe, setzt `nutzungsrecht(A, R)` und entfernt `abhaengigkeit(A, B, R)`.
+
+### 4.4 `aufgabe.vereinbarung-erreichen(A, Gegenpartei, R)`
+
+Zieltest: `nutzungsrecht(A, R)` gilt.
+
+`methode.direktes-angebot`. Priorität 10. Mittel: `Partnerschaften`.
+
+- Voraussetzung: `verhandlungsfaehig(A)`, `verhandlungsfaehig(Gegenpartei)`, `angebot-offen(A, Gegenpartei, R)`, `antwort` dieses Angebots mit Wert `angenommen`.
+- Teilaufgabe: `prim.nutzungsrecht-schreiben`. Die Gegenpartei des Operators ist der Parameter Gegenpartei.
+- Wirkung: setzt `nutzungsrecht(A, R)`.
+
+`methode.treffen-neutraler-ort`. Priorität 20. Mittel: `Kooperation`.
+
+- Voraussetzung: `neutraler-ort(Ort, {A, Gegenpartei})`, `verhandlungsfaehig(A)`, `verhandlungsfaehig(Gegenpartei)`, `angebot-offen(A, Gegenpartei, R)`, `antwort` dieses Angebots mit Wert `angenommen`.
+- Teilaufgabe: `prim.nutzungsrecht-schreiben`. Die Gegenpartei des Operators ist der Parameter Gegenpartei.
+- Wirkung: setzt `nutzungsrecht(A, R)`.
+
+Enthalten die bevorzugten Mittel `Kooperation` und enthalten sie `Partnerschaften` nicht, hat `methode.treffen-neutraler-ort` Mittelrang 0 und wird vor `methode.direktes-angebot` geprüft. Gelten dann ihre Voraussetzungen, setzt ihre Primitive das Nutzungsrecht. Fehlt `neutraler-ort`, ist `methode.treffen-neutraler-ort` unpassend, und `methode.direktes-angebot` setzt dasselbe Ziel. Enthalten die bevorzugten Mittel `Partnerschaften`, liegt `methode.direktes-angebot` vorn und setzt das Ziel, sobald ihre eigenen Voraussetzungen gelten.
+
+### 4.5 `aufgabe.information-beschaffen(A, Gegenstand)`
+
+Zieltest: `kennt(A, Gegenstand)` gilt. Beide Methoden schreiben zusätzlich `beleg-kopie(A, Gegenstand)`.
+
+`methode.datenraub-ueber-zugang`. Priorität 10. Mittel: `keines`.
+
+- Voraussetzung: `ist-information(Gegenstand)`, `kennt(A, Gegenstand)` gilt nicht, `nutzungsrecht(A, R)` gilt nicht. R ist der Gegenstand. Im Wissen steht ein H ungleich A, für den `kontrolliert-zugang(H, R)` oder `archiv-haelt(H, R)` gilt. Die Methode folgt von einem dieser Tupel nicht auf das andere. Bei mehreren H bindet sie die aufsteigend erste Akteur-ID.
+- Teilaufgaben: `prim.zugang`, danach `prim.datenraub`, danach `prim.extraktion`.
+- Kette: R ist hier der Gegenstand. `prim.zugang` setzt `zugang-geklaert(A, R)`. `prim.datenraub` liest es und setzt `beleg-bereit(A, R)`. `prim.extraktion` liest `beleg-bereit` und setzt `kennt(A, Gegenstand)` und `beleg-kopie(A, Gegenstand)`. Das gebundene H bleibt Parameter des Plans. Die drei Primitive ändern keine Tupel von H.
+
+`methode.freiwilliger-austausch`. Priorität 20. Mittel: `Informationshandel`.
+
+- Voraussetzung: `ist-information(Gegenstand)`, `kennt(A, Gegenstand)` gilt nicht, `angebot-offen(Besitzer, A, R)` mit einem Besitzer ungleich A und `antwort` dieses Angebots mit Wert `angenommen`. R ist der Gegenstand.
+- Teilaufgabe: `prim.information-uebernehmen`.
+- Wirkung: setzt `kennt(A, Gegenstand)` und `beleg-kopie(A, Gegenstand)`.
+
+Enthält die Mittel-Liste des Planers `Informationshandel`, hat `methode.freiwilliger-austausch` Mittelrang 0 und wird vor `methode.datenraub-ueber-zugang` geprüft, trotz der Priorität 20. Ohne diesen Eintrag bleibt die Priorität 10 vorn.
+
+### 4.6 `aufgabe.anspruch-absichern(A, Gegenseite, Gegenstand)`
+
+Zieltest: `beleg-kopie(A, Gegenstand)` gilt. Das Tupel `anspruch(A, Gegenseite, Gegenstand)` bleibt stehen.
+
+`methode.druckmittel-ueber-archiv`. Priorität 10. Mittel: `keines`.
+
+- Voraussetzung: `anspruch(A, Gegenseite, Gegenstand)`, `beleg-kopie(A, Gegenstand)` gilt nicht, `kennt(A, Gegenstand)` gilt nicht, `nutzungsrecht(A, R)` gilt nicht, `ist-information(Gegenstand)`, und ein H ungleich A und ungleich der Gegenseite mit `archiv-haelt(H, R)` im Wissen. R ist der Gegenstand. Damit gelten die Voraussetzungen von `methode.datenraub-ueber-zugang`, auch wenn `methode.freiwilliger-austausch` unpassend ist.
+- Teilaufgabe: `aufgabe.information-beschaffen(A, Gegenstand)`.
+- Kette: die gerufene Methode schreibt `kennt(A, Gegenstand)` und `beleg-kopie(A, Gegenstand)`. Der Zieltest liest `beleg-kopie`.
+
+### 4.7 Das Netz
+
+Die Einrückung zeigt die Teilaufgaben. Sie ist nicht die Prüfungsordnung aus Abschnitt 2.4.
 
 ```text
-abhängigkeit-verringern
-  unabhängige Alternative
-    Zugang klären → Datenraub-Kante oder vorhandenes Recht
-    Vereinbarung erreichen → direktes Angebot oder Treffen
-    Kapazität sichern → keine Methode
-  eigene Fähigkeit → drei Namen ohne Methoden
-  verbessertes Nutzungsrecht
-    Vereinbarung erreichen → direktes Angebot oder Treffen
-
-information-beschaffen
-  freiwilliger Austausch → auf die Antwort warten
-  Datenraub mit Beobachtung → Zugang, Beobachtung, Datenraub, Extraktion
-  Datenraub über Zugang → Zugang, Datenraub, Extraktion
-
-anspruch-absichern
-  Druckmittel über ein Archiv
-    information-beschaffen
+aufgabe.abhaengigkeit-verringern
+  methode.unabhaengige-alternative
+    aufgabe.anbieter-binden
+      prim.anbieter-festlegen
+    aufgabe.vereinbarung-mit-anbieter
+      prim.nutzungsrecht-schreiben
+    aufgabe.kapazitaet-sichern
+      prim.abhaengigkeit-loesen
+  methode.eigene-faehigkeit
+    aufgabe.voraussetzungen-beschaffen
+      prim.voraussetzung-binden
+    aufgabe.kapazitaet-aufbauen
+      prim.kapazitaet-reservieren
+    aufgabe.nutzbarkeit-bestaetigen
+      prim.nutzung-bestaetigen
+  methode.verbessertes-nutzungsrecht
+    aufgabe.vereinbarung-erreichen
+      methode.direktes-angebot
+        prim.nutzungsrecht-schreiben
+      methode.treffen-neutraler-ort
+        prim.nutzungsrecht-schreiben
+    aufgabe.kapazitaet-sichern
+      prim.abhaengigkeit-loesen
+aufgabe.information-beschaffen
+  methode.datenraub-ueber-zugang
+    prim.zugang
+    prim.datenraub
+    prim.extraktion
+  methode.freiwilliger-austausch
+    prim.information-uebernehmen
+aufgabe.anspruch-absichern
+  methode.druckmittel-ueber-archiv
+    aufgabe.information-beschaffen
 ```
 
 ## 5. Beispiel: Datenraub über Zugang und Extraktion
 
-Katalogpaar, keine neue Lore. `daeyang` hat das wiederkehrende Interesse „Datenzugang erweitern“, die Domäne Daten und Prognosen und das bevorzugte Mittel „Informationshandel“. `ruhrmark` hat die Machtbasis „Register, Verknüpfungswissen, Kundenzugang“ und die Ausgangsbindung „Lieferant und Gegner von Daeyang Intelligence“. Eine Ausgangsbindung ist ein Vorschlag für einen Startgraphen. Sie ist kein Vorfall und setzt `kontrolliert-zugang` nicht.
+Katalogpaar, keine neue Lore. `daeyang` hat das wiederkehrende Interesse „Datenzugang erweitern“, die Domäne „Daten und Prognosen“ und die bevorzugten Mittel „Informationshandel; Integration; Bündnisse“. `ruhrmark` hat die Machtbasis „Register, Verknüpfungswissen, Kundenzugang“ und die Ausgangsbindung „Lieferant und Gegner von Daeyang Intelligence.“ Eine Ausgangsbindung setzt `kontrolliert-zugang` nicht.
 
-Leseskizze, nur damit die passende Methode sichtbar wird. Sie wird nicht in den Katalog geschrieben:
+`register-ruhrmark` ist ein Argumentname der Leseskizze und keine Katalog-ID. Die Skizze wird nicht in den Katalog geschrieben.
 
-- `kontrolliert-zugang(ruhrmark, register-ruhrmark)` liegt in der Skizze vor.
-- `kennt(daeyang, register-ruhrmark)` fehlt.
-- `angebot-offen` fehlt.
-- `nutzungsrecht(daeyang, register-ruhrmark)` fehlt.
+Wissen von `daeyang` in der Skizze:
 
-Wurzel nach der Zielauswahl: `aufgabe.information-beschaffen(daeyang, register-ruhrmark)`. Die Abhängigkeit ist in der Skizze nicht gesetzt, die Ressource ist Information, `kennt` fehlt.
+- `ist-information(register-ruhrmark)` gilt.
+- `kontrolliert-zugang(ruhrmark, register-ruhrmark)` gilt im Wissen.
+- `kennt(daeyang, register-ruhrmark)` gilt nicht.
+- `nutzungsrecht(daeyang, register-ruhrmark)` gilt nicht.
+- `angebot-offen` gilt nicht. `anspruch` gilt nicht. `abhaengigkeit` gilt nicht.
 
-Spur:
+Weltzustand der Skizze: `kontrolliert-zugang(ruhrmark, register-ruhrmark)` gilt. Stünde dieses Tupel nur in der Welt und nicht im Wissen, wäre `methode.datenraub-ueber-zugang` unpassend. Stünde es nur im Wissen und nicht in der Welt, fände die Suche einen Plan und der Weltabgleich verwürfe ihn mit `welt-weicht-ab`. In dieser Skizze steht es in beiden Mengen.
 
-1. `methode.freiwilliger-austausch`, Priorität 10. `angebot-offen` fehlt. Nicht passend.
-2. `methode.datenraub-mit-beobachtung`, Priorität 20. Die Voraussetzung passt. Zugang klären probiert zuerst `methode.zugang-aus-recht`. Das Nutzungsrecht fehlt. Danach passt `methode.zugang-offen` und setzt `prim.zugang`. Die nächste Teilaufgabe ist `prim.beobachtung` mit der Marke `offen`. Der Plan wird nicht an die Crew ausgegeben. Die Suchkopie verfällt. Die Spur nennt `prim.beobachtung`.
-3. `methode.datenraub-ueber-zugang`, Priorität 30. Dieselbe Zugangsklärung liefert wieder `prim.zugang`, danach `prim.datenraub` und `prim.extraktion`.
+Wurzel nach Regel 3: `aufgabe.information-beschaffen(daeyang, register-ruhrmark)`.
 
-Der anbietbare Plan ist ein Auftrag: Zugang, Datenraub, Extraktion, in dieser Reihenfolge, als eine vorhandene Datenraubmission. `ziel-wartet` bleibt stehen, bis ein späteres bestätigtes Ergebnis gelesen wird. Eine Kopie würde `ruhrmark` das Register nicht nehmen. Diese Lesart schreibt der laufende Kern nicht.
+`Informationshandel` gibt `methode.freiwilliger-austausch` den Mittelrang 0. Sie wird vor `methode.datenraub-ueber-zugang` geprüft, obwohl ihre Priorität 20 und die des Datenraubs 10 ist. Spur, `rest` beginnt bei 32:
+
+1. Eintritt `aufgabe.information-beschaffen`. `rest` = 31.
+2. Versuch `methode.freiwilliger-austausch`. `rest` = 30. `angebot-offen` fehlt.
+3. Versuch `methode.datenraub-ueber-zugang`. `rest` = 29. H ist `ruhrmark`, weil `kontrolliert-zugang(ruhrmark, register-ruhrmark)` im Wissen steht.
+4. Eintritt `prim.zugang`. `rest` = 28. Wirkung: `zugang-geklaert(daeyang, register-ruhrmark)`.
+5. Eintritt `prim.datenraub`. `rest` = 27. Liest `zugang-geklaert` und setzt `beleg-bereit(daeyang, register-ruhrmark)`.
+6. Eintritt `prim.extraktion`. `rest` = 26. Liest `beleg-bereit` und setzt `kennt(daeyang, register-ruhrmark)` und `beleg-kopie(daeyang, register-ruhrmark)`.
+
+Der Zieltest liest `kennt(daeyang, register-ruhrmark)`. Der Weltabgleich findet `kontrolliert-zugang(ruhrmark, register-ruhrmark)` in der Welt. Der Plan ist `prim.zugang`, `prim.datenraub`, `prim.extraktion`. Diese Reihenfolge ist die Teilaufgabenliste der Methode. Die Pipeline erhält genau diese drei IDs und verwendet `interact`, `interact` und `extract`. `ruhrmark` behält Register und Wissen. Die Suchkopie entfernt beides nicht.
 
 ## 6. Beispiel: Druckmittel über ein Archiv
 
-Katalogpaar. `kettenbrecher` hat das Interesse „Schuldabhängigkeit verringern“ und die Abhängigkeiten „Belege, Unterstützung, Zugriff auf Register“. Bevorzugte Mittel führt das Profil nicht. `vantier-helvetia` hat die Machtbasis „Kreditlinien, Forderungen, Rücklagen, Risikobewertung“ und das Interesse „Forderungen absichern“.
+Katalogpaar. `kettenbrecher` hat das Interesse „Schuldabhängigkeit verringern“ und die Abhängigkeiten „Belege, Unterstützung, Zugriff auf Register“. Das Profil führt keine bevorzugten Mittel. `vantier-helvetia` hat die Machtbasis „Kreditlinien, Forderungen, Rücklagen, Risikobewertung“ und das Interesse „Forderungen absichern“.
 
-Wurzel der Leseskizze: `aufgabe.anspruch-absichern(kettenbrecher, forderungen-vantier, vantier-helvetia)`. Die Skizze setzt `archiv-haelt` nicht.
+Die drei Wörter des Abhängigkeitsfeldes sind kein Tupel `anspruch` und kein Tupel `abhaengigkeit`. Ohne weitere Tupel im Wissen liefert Regel 4 keine Wurzel. Die Spur nennt `kein-wurzelziel`.
 
-`methode.druckmittel-ueber-archiv` verlangt einen Halter mit `archiv-haelt` für diesen Gegenstand. Im Katalog hat `datenfriedhof` als einziges Profil die Machtbasis „Archive, Wiederherstellungswissen“. Das Archiv gilt den gelöschten Erinnerungen von Kunden von `sogno-ottico`, dem Interesse „Zugang zu eigenen Erinnerungsdaten ermöglichen“. Es ist kein Archiv der Forderungen von `vantier-helvetia`. `offene-schleuse` braucht Belege und veröffentlicht. Ein Archivhalter ist das Profil nicht. `ruhrmark` hat Register und ist an diesem Anspruch nicht gebunden.
+`forderungen-vantier` ist ein Argumentname der folgenden Leseskizze und keine Katalog-ID. Wissen der Skizze:
 
-Die Methode passt nicht. Die Spur endet bei fehlendem `archiv-haelt` und nennt die geprüften Profile. Die Teilaufgaben stehen trotzdem in der Bibliothek, damit das Netz lesbar ist. Wäre der Archivhalter später ein Weltzustand und kein neues Profil, ginge die einzige Teilaufgabe nach `aufgabe.information-beschaffen` und von dort in die Datenraubkante aus Abschnitt 5. Die Planmarke bliebe eine Kopie. Eine Änderung der Forderung, eine Streichung der Schuld oder eine Erpressung ist keine Aufgabe. Die Organisationslandschaft verlangt für so einen Operator eine eigene spätere Grenze. Diese Idee zieht die Grenze, indem sie den Operator nicht aufnimmt.
+- `anspruch(kettenbrecher, vantier-helvetia, forderungen-vantier)` gilt.
+- `ist-information(forderungen-vantier)` gilt.
+- `beleg-kopie(kettenbrecher, forderungen-vantier)` gilt nicht.
+- `archiv-haelt` gilt nicht. `abhaengigkeit` gilt nicht.
 
-## 7. Beispiel: Treffen über einen neutralen Ort
+Wurzel nach Regel 2: `aufgabe.anspruch-absichern`. Regel 3 beginnt nicht, obwohl `ist-information` im Wissen steht.
 
-Katalogpaar. `chengyu-neuro` hängt an „Fertigung, Vertrieb, Patentrechte“, will sich laut Ausgangsbindung von `nakamura-lindahl` unabhängig machen, hat das Interesse „Eigenständigkeit ausbauen“ und die Mittel „Lizenzalternativen, Kooperation, Standardöffnung“. `nakamura-lindahl` hat die Machtbasis „Patente, Wartungsschnittstellen, Fertigung“, das Interesse „Standards kontrollieren“ und die Mittel „Lizenzen, Produktbindung, Partnerschaften“.
+1. Eintritt `aufgabe.anspruch-absichern`. `rest` = 31.
+2. Versuch `methode.druckmittel-ueber-archiv`. `rest` = 30. `archiv-haelt` fehlt.
 
-Leseskizze der Wurzel `aufgabe.abhaengigkeit-verringern(chengyu-neuro, patentrechte, nakamura-lindahl)`:
+Es gibt keinen Plan. `aufgabe.information-beschaffen` wird nicht betreten. Eine zweite Wurzel beginnt nicht.
 
-- Ein Anbieter C außerhalb von `nakamura-lindahl` ist nicht benannt.
-- `erreichbar` ist nicht gesetzt.
-- `verhandlungsfaehig(nakamura-lindahl)` ist nicht gesetzt.
-- `neutraler-ort` ist nicht gesetzt.
+Im Katalog hat `datenfriedhof` die Machtbasis „Archive, Wiederherstellungswissen“. Das Kurzprofil lautet „Sammelt gelöschte Erinnerungen von Sogno-Kunden und gibt sie zurück.“ Das Interesse lautet „Zugang zu eigenen Erinnerungsdaten ermöglichen“. Die Katalog-ID der Medienorganisation ist `sogno-ottico`. Das Tupel `archiv-haelt(datenfriedhof, forderungen-vantier)` steht dort nicht. `offene-schleuse` hat die Machtbasis „Veröffentlichungskanäle, Quellenkontakte“, die Abhängigkeiten „Belege, Quellenschutz, Glaubwürdigkeit“ und das Interesse „Vertrauliche Informationen öffentlich prüfbar machen“. Ein Archivhalter ist das Profil nicht. `ruhrmark` hat die Machtbasis „Register, Verknüpfungswissen, Kundenzugang“ und ist an diesem Anspruch nicht gebunden.
 
-Spur der Wurzel, in Prioritätsreihenfolge:
+Die Idee legt keinen Archivhalter an. Wäre `archiv-haelt(H, forderungen-vantier)` später ein Tupel im Wissen, mit H ungleich `kettenbrecher` und ungleich `vantier-helvetia`, ginge die einzige Teilaufgabe nach `aufgabe.information-beschaffen`. Deren Datenraubmethode kann `archiv-haelt` als H lesen und endet in `prim.extraktion`, das `beleg-kopie` setzt. `anspruch` bliebe stehen. Eine Änderung der Forderung, eine Streichung der Schuld oder eine Erpressung ist keine Aufgabe dieser Bibliothek.
 
-1. `methode.unabhaengige-alternative`. C fehlt.
-2. `methode.eigene-faehigkeit`. `erreichbar` fehlt.
-3. `methode.verbessertes-nutzungsrecht`. `verhandlungsfaehig` fehlt. Der Mittelvermerk trifft „Kooperation“ und „Lizenzalternativen“ und ändert die Priorität 30 nicht.
+## 7. Beispiel: Abhängigkeit und neutraler Ort
 
-Die Vereinbarung wird in dieser Skizze nicht betreten. Ihre Methoden stehen in der Bibliothek:
+Katalogpaar. `chengyu-neuro` hat die Abhängigkeiten „Fertigung, Vertrieb, Patentrechte“, die Ausgangsbindung „Zulieferer von Nakamura-Lindahl, will sich aber unabhängig machen“, das Interesse „Eigenständigkeit ausbauen“ und die Mittel „Lizenzalternativen; Kooperation; Standardöffnung“. `nakamura-lindahl` hat die Machtbasis „Patente, Wartungsschnittstellen, Fertigung“, das Interesse „Standards kontrollieren“ und die Mittel „Lizenzen; Produktbindung; Partnerschaften“.
 
-`methode.direktes-angebot` legt ein Angebot vor und wartet auf die Antwort. Eine Mission entsteht dabei nicht.
+Die Ausgangsbindung setzt `abhaengigkeit` nicht. `patentrechte` in der folgenden Skizze ist das Ressourcenargument zum Profilwort „Patentrechte“ und keine Katalog-ID.
 
-`methode.treffen-neutraler-ort` verlangt `neutraler-ort` für `chengyu-neuro` und `nakamura-lindahl`, mit einem Halter, der keine der beiden Parteien ist. Die Teilaufgaben sind Zugang, Beobachtung, Angebot und Warten auf die Antwort. Beobachtung trägt die Marke `offen`. Selbst bei einem später gesetzten Ort gäbe dieser Zweig keinen Crew-Auftrag aus, solange Beobachtung offen ist.
+Wissen der Skizze: nur `abhaengigkeit(chengyu-neuro, nakamura-lindahl, patentrechte)`. Es gibt kein C, kein `unabhaengig`, kein `erreichbar`, kein `verhandlungsfaehig`, kein `angebot-offen`, kein `antwort` und kein `neutraler-ort`.
 
-Der Katalog hat keinen Akteur, dessen Profil ein neutraler Ort ist.
+Wurzel nach Regel 1: `aufgabe.abhaengigkeit-verringern(chengyu-neuro, nakamura-lindahl, patentrechte)`.
 
-- `vantier-helvetia` wirbt mit dem Slogan „Neutral für jeden Kunden“ und bleibt eine Partei mit dem Interesse „Forderungen absichern“.
+`Kooperation` und `Lizenzalternativen` geben `methode.verbessertes-nutzungsrecht` den Mittelrang 0. Die Priorität 30 steht dadurch vor der Priorität 10. Spur:
+
+1. Eintritt `aufgabe.abhaengigkeit-verringern`. `rest` = 31.
+2. Versuch `methode.verbessertes-nutzungsrecht`. `rest` = 30. Es fehlen `verhandlungsfaehig(chengyu-neuro)`, `verhandlungsfaehig(nakamura-lindahl)`, `angebot-offen(chengyu-neuro, nakamura-lindahl, patentrechte)` und `antwort`.
+3. Versuch `methode.unabhaengige-alternative`. `rest` = 29. Es fehlen `kontrolliert-zugang` eines C und `unabhaengig`.
+4. Versuch `methode.eigene-faehigkeit`. `rest` = 28. Es fehlt `erreichbar`.
+
+Es gibt keinen Plan. `aufgabe.vereinbarung-erreichen` wird nicht betreten. Der Weltabgleich läuft nicht.
+
+Die beiden Methoden der Vereinbarung stehen in der Bibliothek. `methode.treffen-neutraler-ort` setzt bei erfüllten Voraussetzungen `nutzungsrecht` über `prim.nutzungsrecht-schreiben`. Die einzige Teilaufgabe ist `prim.nutzungsrecht-schreiben`.
+
+Der Katalog hat keinen Akteur, dessen Profil das Tupel `neutraler-ort` ist. Die Idee bindet keinen der folgenden Einträge an das Treffen und legt keinen Akteur an.
+
+- `vantier-helvetia` hat den Slogan „Diskret seit 1790. Neutral für jeden Kunden.“ und das Interesse „Forderungen absichern“.
 - `sternenmarkt` hat die Machtbasis „Tauschplatz, Ruf, Vermittlung“ und das Interesse „Handel unabhängig von Passprivilegien ermöglichen“.
-- `bosfor-vektor` nennt „Vermittlung“ unter den Mitteln für Frachtrouten.
-- `freie-zone-sued` hat „Gebietszugang“ und „Schlichtung“. Das Interesse ist örtliche Selbstverwaltung. Das Kurzprofil sagt, dass Falkenfeld-Kessler die Zone nicht betritt.
+- `bosfor-vektor` hat unter den bevorzugten Mitteln „Vermittlung“.
+- `freie-zone-sued` hat die Machtbasis „Gebietszugang, Zusammenhalt, Schlichtung“ und das Interesse „Örtliche Selbstverwaltung erhalten“. Das Kurzprofil lautet „Autonome Zone an der Grenze zur Kuppel, die FKD nicht betritt.“ FKD ist im Katalog der Name von `falkenfeld-kessler`.
 
-Keiner dieser Begriffe erfüllt `neutraler-ort`. Die Idee bindet keinen von ihnen an das Treffen und legt keinen neuen Akteur an.
+Keiner dieser Einträge ist das Tupel `neutraler-ort`.
 
-## 8. Was offen bleibt
+## 8. Nicht-Ziele
 
-- Konkrete Würfel, Proben, Aktionspunkte, Deckung, Sicht und Treffer.
+- Würfel, Proben, Aktionspunkte, Deckung, Sicht, Treffer und die Schussauflösung.
 - Belohnungen, Preise, Ruf und Vertragswerte.
-- Neue Missionsfamilien. Geisel, Sabotage und Eskorte bleiben außerhalb. Beobachtung bleibt eine offene Primitive.
-- Die Zahlen für Suchtiefe, Budget und gleichzeitig aktive Vorhaben.
-- Ob eine spätere reine Funktion im Regelkern, neben dem Generator oder an anderer Stelle liegt. Ein zweiter Kampfweg entsteht dabei nicht.
-- Händler, Lager und eine Auftragswahl auf der Stadtkarte.
-- Drohnen als Einsatzmittel, Alarm, Verstärkung und simultane Planung in der taktischen Runde.
-- Personen, Weltjahr, Bezirk und ein festes Ende.
-- Ein Archivhalter für die Forderungen von `vantier-helvetia` und ein Akteur für `neutraler-ort`.
-- Die Zielklassen ohne Methode in dieser Bibliothek.
-- Eine Umsetzung im Server und jede Änderung an `packages/sim`.
+- Eine Umsetzung in `packages/sim`, im Server oder in der Missionspipeline.
+- Neue Missionsfamilien. Geisel, Sabotage, Eskorte und Beobachtung bleiben außerhalb. Keine Methode nennt eine Beobachtungsprimitive.
+- Händler, Lager, eine Auftragswahl auf der Stadtkarte, Drohnen als Einsatzmittel, Alarm, Verstärkung und simultane Planung in der taktischen Runde.
+- Die Zielklassen Marktposition, Verpflichtung, Kapazität schützen, Konkurrenz und Zusammenhalt. Sie bleiben Namen in der Organisationslandschaft und sind keine Aufgaben dieser Bibliothek.
+- Mehrere Wurzeln in einem Aufruf, Personen, Weltjahr, Bezirk und ein festes Ende.
+- Diese Idee legt keinen Akteur an, damit `archiv-haelt` oder `neutraler-ort` gilt. Fehlt das Tupel im übergebenen Wissen, ist die zugehörige Methode unpassend.
 
 ## 9. Verweise
 
