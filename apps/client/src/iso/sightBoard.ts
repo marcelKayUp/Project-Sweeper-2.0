@@ -31,6 +31,7 @@ export function sightBoard(
       .filter((cell) => floorKeys.has(key(cell)))
       .map((cell) => ({ x: cell.x, y: cell.y })),
     cover: stand.cover.map((cover) => ({ x: cover.x, y: cover.y, protects: cover.protects })),
+    links: stand.links.map((link) => ({ x: link.x, y: link.y, kind: link.kind })),
     units: stand.units
       .filter((unit) => unit.status !== "extracted")
       .map((unit) => ({

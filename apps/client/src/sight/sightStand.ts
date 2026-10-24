@@ -28,12 +28,32 @@ const EDGES = ["n", "e", "s", "w"] as const;
 
 export type SightFamily = (typeof FAMILIES)[number];
 
+export interface SightLink {
+  readonly id: string;
+  readonly kind: "stair" | "passenger" | "freight";
+  readonly x: number;
+  readonly y: number;
+  readonly toZ: number;
+  readonly toX: number;
+  readonly toY: number;
+}
+
+export interface SightFloor {
+  readonly z: number;
+  readonly known: readonly Cell[];
+  readonly visible: readonly Cell[];
+  readonly walls: readonly Cell[];
+  readonly cover: readonly SightCover[];
+  readonly links: readonly SightLink[];
+}
+
 export interface SightUnit {
   readonly id: string;
   readonly name: string;
   readonly team: "crew" | "enemy";
   readonly x: number;
   readonly y: number;
+  readonly z: number;
   readonly hp: number;
   readonly maxHp: number;
   readonly ap: number;
@@ -79,6 +99,9 @@ export interface SightStand {
   readonly terminal: SightPlace | null;
   readonly extraction: readonly Cell[];
   readonly units: readonly SightUnit[];
+  readonly levelCount: number;
+  readonly floors: readonly SightFloor[];
+  readonly links: readonly SightLink[];
   readonly copies: number;
   readonly outcome: "" | "sieg" | "niederlage";
   readonly notice: string;
@@ -94,10 +117,14 @@ interface WishBase {
   readonly commandId: string;
 }
 
+export interface SightStep extends Cell {
+  readonly z?: number;
+}
+
 export interface SightMoveBody extends WishBase {
   readonly kind: "move";
   readonly unitId: string;
-  readonly path: readonly Cell[];
+  readonly path: readonly SightStep[];
 }
 
 export interface SightTargetBody extends WishBase {
@@ -130,14 +157,14 @@ export interface SightPlainBody extends WishBase {
 
 export type SightWishBody = SightMoveBody | SightTargetBody | SightUnitBody | SightHealBody | SightOverwatchBody | SightPlainBody;
 
-export function sightMove(commandId: string, unitId: string, path: readonly Cell[]): SightMoveBody {
+export function sightMove(commandId: string, unitId: string, path: readonly SightStep[]): SightMoveBody {
   return {
     protocol: PROTOCOL_VERSION,
     area: "sicht",
     commandId,
     kind: "move",
     unitId,
-    path: path.map((cell) => ({ x: cell.x, y: cell.y })),
+    path: path.map((cell) => (cell.z === undefined ? { x: cell.x, y: cell.y } : { x: cell.x, y: cell.y, z: cell.z })),
   };
 }
 
@@ -223,12 +250,17 @@ export function readSightStand(payload: unknown): SightStand | null {
   if (!contained(visible, seen) || !contained(walls, seen) || !contained(extraction, seen)) return null;
   if (door && !seen.has(key(door))) return null;
   if (terminal && !seen.has(key(terminal))) return null;
-  const visibleKeys = new Set(visible.map(key));
   for (const item of cover) if (!seen.has(key(item))) return null;
+  const floors = floorsOf(value.floors, value.levelCount, width, height, { known, visible, walls, cover });
+  if (!floors) return null;
   for (const unit of units) {
+    const home = floors.find((floor) => floor.z === unit.z);
+    if (!home) return null;
     const id = key(unit);
-    if (unit.team === "enemy" && !visibleKeys.has(id)) return null;
-    if (unit.team === "crew" && !seen.has(id)) return null;
+    const knownHere = new Set(home.known.map(key));
+    const visibleHere = new Set(home.visible.map(key));
+    if (unit.team === "enemy" && !visibleHere.has(id)) return null;
+    if (unit.team === "crew" && !knownHere.has(id)) return null;
   }
   return {
     ack,
@@ -248,6 +280,9 @@ export function readSightStand(payload: unknown): SightStand | null {
     terminal,
     extraction,
     units,
+    levelCount: floors.length,
+    floors,
+    links: floors.find((floor) => floor.z === 0)?.links ?? [],
     copies,
     outcome: value.outcome,
     notice: value.notice,
@@ -255,6 +290,25 @@ export function readSightStand(payload: unknown): SightStand | null {
     seed,
     method: value.method,
     rooms,
+  };
+}
+
+export function shownSight(stand: SightStand, z: number): SightStand {
+  const floor = stand.floors.find((item) => item.z === z) ?? stand.floors[0];
+  if (!floor) return stand;
+  const units = stand.units.filter((unit) => unit.z === floor.z);
+  if (floor.z === 0) return { ...stand, units, links: floor.links };
+  return {
+    ...stand,
+    known: floor.known,
+    visible: floor.visible,
+    walls: floor.walls,
+    cover: floor.cover,
+    links: floor.links,
+    door: null,
+    terminal: null,
+    extraction: [],
+    units,
   };
 }
 
@@ -409,6 +463,7 @@ function unitsOf(value: unknown, width: number, height: number): SightUnit[] | n
     const record = entry as Record<string, unknown>;
     const x = bounded(record.x, 0, width - 1);
     const y = bounded(record.y, 0, height - 1);
+    const z = record.z === undefined ? 0 : bounded(record.z, 0, 7);
     const hp = bounded(record.hp, 0, 99);
     const maxHp = bounded(record.maxHp, 1, 99);
     const parts = readParts(record.parts);
@@ -420,6 +475,7 @@ function unitsOf(value: unknown, width: number, height: number): SightUnit[] | n
     if (
       x === null ||
       y === null ||
+      z === null ||
       hp === null ||
       maxHp === null ||
       ap === null ||
@@ -450,6 +506,7 @@ function unitsOf(value: unknown, width: number, height: number): SightUnit[] | n
       team: record.team,
       x,
       y,
+      z,
       hp,
       maxHp,
       ap,
@@ -465,6 +522,87 @@ function unitsOf(value: unknown, width: number, height: number): SightUnit[] | n
     });
   }
   return units;
+}
+
+const LINK_KINDS = ["stair", "passenger", "freight"] as const;
+
+function floorsOf(
+  value: unknown,
+  declared: unknown,
+  width: number,
+  height: number,
+  ground: { known: readonly Cell[]; visible: readonly Cell[]; walls: readonly Cell[]; cover: readonly SightCover[] },
+): SightFloor[] | null {
+  if (value === undefined) {
+    if (declared !== undefined && declared !== 1) return null;
+    return [{ z: 0, known: ground.known, visible: ground.visible, walls: ground.walls, cover: ground.cover, links: [] }];
+  }
+  if (!Array.isArray(value) || value.length < 1 || value.length > 8) return null;
+  const floors: SightFloor[] = [];
+  const seenZ = new Set<number>();
+  for (const entry of value) {
+    if (!entry || typeof entry !== "object") return null;
+    const record = entry as Record<string, unknown>;
+    const z = bounded(record.z, 0, 7);
+    const known = cellsOf(record.known, width, height, width * height);
+    const visible = cellsOf(record.visible, width, height, width * height);
+    const walls = cellsOf(record.walls, width, height, width * height);
+    const cover = coverOf(record.cover, width, height);
+    const links = linksOf(record.links, width, height);
+    if (z === null || seenZ.has(z) || !known || !visible || !walls || !cover || !links) return null;
+    const knownKeys = new Set(known.map(key));
+    if (!contained(visible, knownKeys) || !contained(walls, knownKeys)) return null;
+    if (cover.some((item) => !knownKeys.has(key(item))) || links.some((link) => !knownKeys.has(key(link)))) return null;
+    seenZ.add(z);
+    floors.push({ z, known, visible, walls, cover, links });
+  }
+  floors.sort((left, right) => left.z - right.z);
+  const plate = floors.find((floor) => floor.z === 0);
+  if (!plate) return null;
+  if (!sameCells(plate.known, ground.known) || !sameCells(plate.visible, ground.visible) || !sameCells(plate.walls, ground.walls) || !sameCovers(plate.cover, ground.cover)) return null;
+  const count = declared === undefined ? floors.length : bounded(declared, 1, 8);
+  if (count === null || count !== floors.length) return null;
+  return floors;
+}
+
+function linksOf(value: unknown, width: number, height: number): SightLink[] | null {
+  if (!Array.isArray(value) || value.length > 16) return null;
+  const links: SightLink[] = [];
+  const seen = new Set<string>();
+  for (const entry of value) {
+    if (!entry || typeof entry !== "object") return null;
+    const record = entry as Record<string, unknown>;
+    const x = bounded(record.x, 0, width - 1);
+    const y = bounded(record.y, 0, height - 1);
+    const toZ = bounded(record.toZ, 0, 7);
+    const toX = bounded(record.toX, 0, width - 1);
+    const toY = bounded(record.toY, 0, height - 1);
+    if (
+      x === null ||
+      y === null ||
+      toZ === null ||
+      toX === null ||
+      toY === null ||
+      typeof record.id !== "string" ||
+      !OBJECT_ID.test(record.id) ||
+      seen.has(record.id) ||
+      !includes(LINK_KINDS, record.kind)
+    ) {
+      return null;
+    }
+    seen.add(record.id);
+    links.push({ id: record.id, kind: record.kind, x, y, toZ, toX, toY });
+  }
+  return links;
+}
+
+function sameCells(left: readonly Cell[], right: readonly Cell[]): boolean {
+  return left.map(key).sort().join("|") === right.map(key).sort().join("|");
+}
+
+function sameCovers(left: readonly SightCover[], right: readonly SightCover[]): boolean {
+  const mark = (cover: SightCover) => `${cover.id}:${cover.x},${cover.y}:${cover.protects}`;
+  return left.map(mark).sort().join("|") === right.map(mark).sort().join("|");
 }
 
 function placeOf(value: unknown, width: number, height: number): SightPlace | null | undefined {

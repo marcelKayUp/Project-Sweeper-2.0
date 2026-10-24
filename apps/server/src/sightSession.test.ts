@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { generateBuilding } from "@neon/generator";
-import { PROTOCOL_VERSION, type Cell, type MissionSpec } from "@neon/sim";
+import { PROTOCOL_VERSION, stepAp, type Cell, type MissionSpec } from "@neon/sim";
 import { createSightSession, type SightMeta, type SightStand, type SightWish } from "./sightSession.ts";
 import { readSightOptions, readSightWish } from "./sightValidate.ts";
 
@@ -194,9 +194,42 @@ describe("Sicht-Sitzung", () => {
         path: [{ x: 2, y: 1 }],
       }).ok,
     ).toBe(true);
+    expect(
+      readSightWish({
+        protocol: PROTOCOL_VERSION,
+        area: "sicht",
+        commandId: "hoch",
+        kind: "move",
+        unitId: "kite",
+        path: [{ x: 1, y: 1, z: 1 }],
+      }).ok,
+    ).toBe(true);
     const foreign = readSightWish({ protocol: PROTOCOL_VERSION, area: "raster", commandId: "a", kind: "reset" });
     expect(foreign.ok).toBe(false);
     if (!foreign.ok) expect(foreign.notice).toBe("Befehl ist ungültig.");
+  });
+
+  it("wechselt die Etage über die Treppe", () => {
+    const ground = lane();
+    const mission: MissionSpec = {
+      ...ground,
+      levels: [
+        { z: 0, walls: ground.walls, lowCover: ground.lowCover },
+        { z: 1, walls: ground.walls, lowCover: [] },
+      ],
+      links: [{ id: "stair-0", kind: "stair", fromZ: 0, fromX: 1, fromY: 1, toZ: 1, toX: 1, toY: 1 }],
+    };
+    const session = createSightSession(mission, 4, META, () => 0);
+    const start = session.snapshot();
+    expect(start.levelCount).toBe(2);
+    expect(start.floors.map((floor) => floor.z)).toEqual([0, 1]);
+    expect(start.units.find((unit) => unit.id === "kite")).toMatchObject({ z: 0 });
+    expect(start.floors.find((floor) => floor.z === 1)?.known).toEqual([]);
+    const climbed = session.receive({ commandId: "hoch", kind: "move", unitId: "kite", path: [{ x: 1, y: 1, z: 1 }] });
+    expect(climbed.notice).toBe("");
+    expect(climbed.units.find((unit) => unit.id === "kite")).toMatchObject({ x: 1, y: 1, z: 1, ap: 6 });
+    expect(climbed.floors.find((floor) => floor.z === 1)?.known.length).toBeGreaterThan(0);
+    expect(climbed.floors.find((floor) => floor.z === 1)?.links.some((link) => link.kind === "stair")).toBe(true);
   });
 
   it("spielt das Büro bis zum Sieg und benennt Tür und Gegnerzug", async () => {
@@ -215,8 +248,13 @@ describe("Sicht-Sitzung", () => {
       const wish = nextWish(stand, result.package.mission);
       expect(wish).not.toBeNull();
       if (!wish) break;
+      const before = stand.revision;
       stand = session.receive({ ...wish, commandId: `sieg-${step}` });
       if (stand.notice) notices.push(stand.notice);
+      if (stand.revision === before && wish.kind !== "end") {
+        stand = session.receive({ commandId: `ende-${step}`, kind: "end" });
+        if (stand.notice) notices.push(stand.notice);
+      }
     }
     expect(stand.outcome).toBe("sieg");
     expect(stand.copies).toBe(2);
@@ -321,9 +359,11 @@ function nextWish(current: SightStand, mission: MissionSpec): Omit<SightWish, "c
       : mission.extraction;
   const ordered = crew.slice().sort((left, right) => right.ap - left.ap);
   for (const unit of ordered) {
-    if (unit.ap < 1) continue;
+    const stride = stepAp(unit.parts);
+    const steps = Math.floor(unit.ap / stride);
+    if (steps < 1) continue;
     const path = knownPrefix(current, mission, unit, goals);
-    if (path.length > 0) return { kind: "move", unitId: unit.id, path: path.slice(0, unit.ap) };
+    if (path.length > 0) return { kind: "move", unitId: unit.id, path: path.slice(0, steps) };
   }
   return { kind: "end" };
 }

@@ -25,12 +25,32 @@ export interface SightMeta {
   readonly rooms: number;
 }
 
+export interface SightLink {
+  readonly id: string;
+  readonly kind: "stair" | "passenger" | "freight";
+  readonly x: number;
+  readonly y: number;
+  readonly toZ: number;
+  readonly toX: number;
+  readonly toY: number;
+}
+
+export interface SightFloor {
+  readonly z: number;
+  readonly known: readonly Cell[];
+  readonly visible: readonly Cell[];
+  readonly walls: readonly Cell[];
+  readonly cover: readonly SightCover[];
+  readonly links: readonly SightLink[];
+}
+
 export interface SightUnit {
   readonly id: string;
   readonly name: string;
   readonly team: "crew" | "enemy";
   readonly x: number;
   readonly y: number;
+  readonly z: number;
   readonly hp: number;
   readonly maxHp: number;
   readonly ap: number;
@@ -77,6 +97,8 @@ export interface SightStand {
   readonly terminal: SightPlace | null;
   readonly extraction: readonly Cell[];
   readonly units: readonly SightUnit[];
+  readonly levelCount: number;
+  readonly floors: readonly SightFloor[];
   readonly copies: number;
   readonly outcome: OutcomeId | "";
   readonly notice: string;
@@ -87,7 +109,7 @@ export interface SightStand {
 }
 
 export type SightWish =
-  | { readonly commandId: string; readonly kind: "move"; readonly unitId: string; readonly path: readonly Cell[] }
+  | { readonly commandId: string; readonly kind: "move"; readonly unitId: string; readonly path: readonly (Cell & { readonly z?: number })[] }
   | { readonly commandId: string; readonly kind: "shoot"; readonly unitId: string; readonly targetId: string }
   | { readonly commandId: string; readonly kind: "interact"; readonly unitId: string; readonly targetId: string }
   | { readonly commandId: string; readonly kind: "extract"; readonly unitId: string }
@@ -143,6 +165,7 @@ export function createSightSession(
         team: unit.team,
         x: unit.x,
         y: unit.y,
+        z: unit.z,
         hp: unit.hp,
         maxHp: unit.maxHp,
         ap: unit.ap,
@@ -156,6 +179,17 @@ export function createSightSession(
         medkits: unit.medkits,
         parts: unit.parts.map((part) => ({ id: part.id, hp: part.hp, maxHp: part.maxHp, wound: part.wound })),
         overwatch: unit.overwatch,
+      })),
+      levelCount: view.levelCount,
+      floors: view.floors.map((floor) => ({
+        z: floor.z,
+        known: copyCells(floor.knownCells),
+        visible: copyCells(floor.visibleCells),
+        walls: copyCells(floor.walls),
+        cover: floor.lowCover
+          .map((cover) => ({ id: cover.id, x: cover.x, y: cover.y, protects: cover.protects }))
+          .sort((left, right) => left.y - right.y || left.x - right.x || left.protects.localeCompare(right.protects)),
+        links: floor.links.map((link) => ({ id: link.id, kind: link.kind, x: link.x, y: link.y, toZ: link.toZ, toX: link.toX, toY: link.toY })),
       })),
       copies: view.copies,
       outcome: view.result?.outcome ?? "",
@@ -233,17 +267,17 @@ export function createSightSession(
   };
 }
 
-function moveAlong(state: MissionState, spec: MissionSpec, unitId: string, path: readonly Cell[]): StepResult {
-  const known = new Set(state.knownCells.map((cell) => `${cell.x},${cell.y}`));
-  if (path.some((cell) => !known.has(`${cell.x},${cell.y}`))) {
-    return { state, events: [], rejection: "Feld ist nicht erkundet." };
-  }
+function moveAlong(state: MissionState, spec: MissionSpec, unitId: string, path: readonly (Cell & { readonly z?: number })[]): StepResult {
   let current = state;
   const events: MissionEvent[] = [];
   for (const step of path) {
     const mover = current.units.find((unit) => unit.id === unitId);
     if (!mover || mover.status !== "active" || current.result) break;
-    const result = applyCommand(current, spec, { kind: "move", unitId, x: step.x, y: step.y });
+    const toZ = step.z ?? mover.z;
+    if (toZ === mover.z && !explored(current, mover.z, step.x, step.y)) {
+      return { state, events: [], rejection: "Feld ist nicht erkundet." };
+    }
+    const result = applyCommand(current, spec, { kind: "move", unitId, x: step.x, y: step.y, ...(step.z === undefined ? {} : { z: step.z }) });
     if (result.rejection !== null) {
       if (mover.status === "active" && !current.result) return { state, events: [], rejection: result.rejection };
       break;
@@ -252,6 +286,11 @@ function moveAlong(state: MissionState, spec: MissionSpec, unitId: string, path:
     events.push(...result.events);
   }
   return { state: current, events, rejection: null };
+}
+
+function explored(state: MissionState, z: number, x: number, y: number): boolean {
+  const cells = z === 0 ? state.knownCells : state.knownLevels.find((level) => level.z === z)?.cells ?? [];
+  return cells.some((cell) => cell.x === x && cell.y === y);
 }
 
 function endRound(state: MissionState, spec: MissionSpec): StepResult {

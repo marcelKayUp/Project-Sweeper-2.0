@@ -9,6 +9,7 @@ const unitId = z.string().regex(/^[a-z0-9-]{1,24}$/);
 const cell = z.strictObject({
   x: z.number().int().min(0).max(31),
   y: z.number().int().min(0).max(31),
+  z: z.number().int().min(0).max(7).optional(),
 });
 
 const sightWishSchema = z.discriminatedUnion("kind", [

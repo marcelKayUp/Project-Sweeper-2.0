@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Client } from "@colyseus/sdk";
 import { actionAp, canTreat, CREW_AP, EXTRACT_AP, INTERACT_AP, type Cell, type Direction } from "@neon/sim";
+import { floorLabel } from "../mission/tactical.ts";
 import { partLabel, WoundList } from "../mission/WoundList.tsx";
 import { mountIsoBoard, type IsoBoardView } from "../iso/mountIsoBoard.ts";
 import { sightBoard } from "../iso/sightBoard.ts";
@@ -18,6 +19,7 @@ import {
   sightReload,
   sightReset,
   sightShoot,
+  shownSight,
   type SightFamily,
   type SightStand,
   type SightUnit,
@@ -76,6 +78,7 @@ export function SightScreen() {
   const chooseRef = useRef<(cell: Cell) => void>(() => {});
   const adoptRef = useRef<(payload: unknown) => void>(() => {});
   const routeRef = useRef<{ id: string; cells: Cell[] } | null>(null);
+  const viewZRef = useRef(0);
   const seenStand = useRef<SightStand | null>(null);
   const [seat, setSeat] = useState(startingSeat);
   const [draftSeed, setDraftSeed] = useState(String(seat.seed));
@@ -84,6 +87,8 @@ export function SightScreen() {
   const [selected, setSelected] = useState("");
   const [target, setTarget] = useState("");
   const [notice, setNotice] = useState("");
+  const [viewZ, setViewZ] = useState(0);
+  viewZRef.current = viewZ;
   const [status, setStatus] = useState("Verbinde mit dem Server.");
   const [busy, setBusy] = useState(false);
   const [connected, setConnected] = useState(false);
@@ -138,6 +143,8 @@ export function SightScreen() {
   function select(unitId: string) {
     selectedRef.current = unitId;
     setSelected(unitId);
+    const unit = standRef.current?.units.find((item) => item.id === unitId);
+    if (unit) setViewZ(unit.z);
   }
 
   function aimAt(unitId: string) {
@@ -193,19 +200,26 @@ export function SightScreen() {
     const current = standRef.current;
     if (!current || !connectedRef.current || pendingRef.current) return;
     if (current.phase !== "crew" || current.outcome !== "") return;
-    const crew = current.units.find((unit) => unit.team === "crew" && unit.status !== "extracted" && sameCell(unit, cell));
+    const plate = shownSight(current, viewZRef.current);
+    const actor = current.units.find((unit) => unit.id === selectedRef.current);
+    const link = actor && actor.z === viewZRef.current ? plate.links.find((item) => item.x === actor.x && item.y === actor.y && sameCell(actor, cell)) : undefined;
+    if (link && actor && actor.id === selectedRef.current) {
+      sendWish((commandId) => sightMove(commandId, actor.id, [{ x: link.toX, y: link.toY, z: link.toZ }]));
+      return;
+    }
+    const crew = current.units.find((unit) => unit.team === "crew" && unit.status !== "extracted" && unit.z === viewZRef.current && sameCell(unit, cell));
     if (crew) {
       select(crew.id);
       setNotice("");
       return;
     }
-    const enemy = current.units.find((unit) => unit.team === "enemy" && sameCell(unit, cell));
+    const enemy = plate.units.find((unit) => unit.team === "enemy" && sameCell(unit, cell));
     if (enemy) {
       aimAt(enemy.id);
       setNotice("");
       return;
     }
-    const path = sightPath(current, selectedRef.current, cell);
+    const path = sightPath(plate, selectedRef.current, cell);
     if (!path) {
       setNotice("Feld ist nicht erreichbar.");
       return;
@@ -271,8 +285,8 @@ export function SightScreen() {
       }
       routeRef.current = null;
     }
-    viewRef.current?.sync(sightBoard(stand, selected, target, route));
-  }, [stand, selected, target]);
+    viewRef.current?.sync(sightBoard(shownSight(stand, viewZ), selected, target, route));
+  }, [stand, selected, target, viewZ]);
 
   useEffect(() => {
     window.clearTimeout(releaseTimer);
@@ -363,7 +377,9 @@ export function SightScreen() {
   }, []);
 
   const line = busy ? "Warte auf den Server." : status || notice;
-  const aim = stand && selected && target ? shotLine(stand, selected, target) : "";
+  const plate = stand ? shownSight(stand, viewZ) : null;
+  const linkUnder = plate && selectedUnit && selectedUnit.z === viewZ ? plate.links.find((link) => link.x === selectedUnit.x && link.y === selectedUnit.y) ?? null : null;
+  const aim = plate && selectedUnit?.z === viewZ && selected && target ? shotLine(plate, selected, target) : "";
   const crew = stand?.units.filter((unit) => unit.team === "crew") ?? [];
   const enemies = stand?.units.filter((unit) => unit.team === "enemy") ?? [];
   const building = stand
@@ -378,15 +394,15 @@ export function SightScreen() {
         <p>{building}</p>
         <p>{stand ? `Runde ${stand.round} · Kopien ${stand.copies} von 2` : "Runde —"}</p>
         <p>{stand ? assignment(stand) : "Auftrag —"}</p>
-        <p>{selectedUnit ? `Feld ${selectedUnit.x}, ${selectedUnit.y}` : "Feld —"}</p>
+        <p>{selectedUnit ? `Feld ${selectedUnit.x}, ${selectedUnit.y}${stand && stand.levelCount > 1 ? ` · Etage ${selectedUnit.z + 1}` : ""}` : "Feld —"}</p>
         <p>{selectedUnit ? `AP ${selectedUnit.ap} von ${CREW_AP}` : "AP —"}</p>
         <p>{selectedUnit ? `Leben ${selectedUnit.hp} von ${selectedUnit.maxHp}` : "Leben —"}</p>
         {selectedUnit ? <WoundList parts={selectedUnit.parts} /> : null}
         <p>{selectedUnit ? `Magazin ${selectedUnit.magazine} von ${selectedUnit.magazineSize}${selectedUnit.overwatch ? " · 1 reserviert" : ""}` : "Magazin —"}</p>
         <p>{selectedUnit ? `Medkit ${selectedUnit.medkits}` : "Medkit —"}</p>
         <p>{selectedUnit?.aiming ? "Gezielt." : selectedUnit?.overwatch ? `Overwatch ${directionName(selectedUnit.overwatch)}.` : "Keine Haltung."}</p>
-        <p>{stand ? `Bekannt ${stand.known.length} · Sicht ${stand.visible.length}` : "Bekannt —"}</p>
-        <p>{stand ? coverText(stand, selectedUnit) : "Deckung —"}</p>
+        <p>{plate ? `Bekannt ${plate.known.length} · Sicht ${plate.visible.length}` : "Bekannt —"}</p>
+        <p>{plate ? coverText(plate, selectedUnit?.z === viewZ ? selectedUnit : null) : "Deckung —"}</p>
         <p>{stand?.outcome === "sieg" ? "Sieg" : stand?.outcome === "niederlage" ? "Niederlage" : "Laufend"}</p>
         <p className="iso-shot">{aim}</p>
         <p className="iso-notice" role="status">
@@ -402,6 +418,24 @@ export function SightScreen() {
             {unitLine(unit)}
           </button>
         ))}
+        <div className="iso-steps" data-panel="etagen">
+          <button type="button" disabled={!stand || viewZ <= 0} onClick={() => setViewZ((value) => Math.max(0, value - 1))}>
+            Etage runter
+          </button>
+          <p data-floors={stand?.levelCount ?? 1} data-floor={viewZ}>{stand ? floorLabel(stand.levelCount, viewZ) : "eine Ebene"}</p>
+          <button type="button" disabled={!stand || viewZ >= stand.levelCount - 1} onClick={() => setViewZ((value) => Math.min((stand?.levelCount ?? 1) - 1, value + 1))}>
+            Etage hoch
+          </button>
+        </div>
+        {linkUnder ? (
+          <button
+            type="button"
+            disabled={!canAct}
+            onClick={() => selectedUnit && sendWish((commandId) => sightMove(commandId, selectedUnit.id, [{ x: linkUnder.toX, y: linkUnder.toY, z: linkUnder.toZ }]))}
+          >
+            {linkUnder.kind === "stair" ? "Treppe" : linkUnder.kind === "freight" ? "Lastenaufzug" : "Aufzug"}
+          </button>
+        ) : null}
         <div className="iso-steps">
           <button className="iso-north" type="button" disabled={!canAct} onClick={() => stepToward(0, -1)}>
             Nord

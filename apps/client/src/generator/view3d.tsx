@@ -12,7 +12,7 @@ import { Scene } from "@babylonjs/core/scene.js";
 import type { BuildingPackage } from "@neon/generator";
 import { ZONES } from "./screen.tsx";
 
-export default function Building3D({ item, selected, onSelect, finishes }: { item: BuildingPackage; selected: string; onSelect: (id: string) => void; finishes: boolean }) {
+export default function Building3D({ item, selected, onSelect, finishes, level }: { item: BuildingPackage; selected: string; onSelect: (id: string) => void; finishes: boolean; level: number }) {
   const host = useRef<HTMLDivElement>(null);
   const turn = useRef<(direction: number) => void>(() => {});
   const select = useRef(onSelect);
@@ -75,19 +75,29 @@ export default function Building3D({ item, selected, onSelect, finishes }: { ite
         }
       }
       for (const cell of item.building.circulation) box(`hall-${cell.x}-${cell.y}`, cell.x + 0.5, cell.y + 0.5, 0, 1, 0.1, 1, "#457d83");
-      for (const wall of item.mission.walls) box(`wall-${wall.x}-${wall.y}`, wall.x + 0.5, wall.y + 0.5, 0.48, 0.97, 0.9, 0.97, finishes ? item.building.identity.wall : "#435367");
+      const plate = item.mission.levels?.find((entry) => entry.z === level);
+      const walls = plate?.walls ?? item.mission.walls;
+      for (const wall of walls) box(`wall-${wall.x}-${wall.y}`, wall.x + 0.5, wall.y + 0.5, 0.48, 0.97, 0.9, 0.97, finishes ? item.building.identity.wall : "#435367");
       for (const link of item.building.connections.filter((link) => link.kind !== "passage")) box(link.id, link.portal.x + 0.5, link.portal.y + 0.5, 0.03, 0.9, 0.1, 0.9, link.kind === "shortcut" ? "#dca875" : "#88c3b4");
-      for (const cover of item.mission.lowCover) box(cover.id, cover.x + (cover.protects === "w" ? 0.1 : 0.9), cover.y + 0.5, 0.28, 0.16, 0.5, 0.82, "#a2adc1");
-      for (const spawn of item.mission.spawns) box(spawn.id, spawn.x + 0.5, spawn.y + 0.5, 0.56, 0.36, 1, 0.36, spawn.team === "crew" ? "#84edc7" : "#fa9c7c");
-      const terminal = item.mission.terminal;
-      box("terminal", terminal.x + 0.5, terminal.y + 0.5, 0.44, 0.5, 0.8, 0.5, "#f6bb78");
+      for (const vertical of item.building.links) {
+        if (vertical.fromZ !== level && vertical.toZ !== level) continue;
+        const x = vertical.fromZ === level ? vertical.fromX : vertical.toX;
+        const y = vertical.fromZ === level ? vertical.fromY : vertical.toY;
+        box(vertical.id, x + 0.5, y + 0.5, 0.22, 0.62, 0.4, 0.62, vertical.kind === "stair" ? "#f2d48a" : "#9fd0ff");
+      }
+      if (level === 0) {
+        for (const cover of plate?.lowCover ?? item.mission.lowCover) box(cover.id, cover.x + (cover.protects === "w" ? 0.1 : 0.9), cover.y + 0.5, 0.28, 0.16, 0.5, 0.82, "#a2adc1");
+        for (const spawn of item.mission.spawns) box(spawn.id, spawn.x + 0.5, spawn.y + 0.5, 0.56, 0.36, 1, 0.36, spawn.team === "crew" ? "#84edc7" : "#fa9c7c");
+        const terminal = item.mission.terminal;
+        box("terminal", terminal.x + 0.5, terminal.y + 0.5, 0.44, 0.5, 0.8, 0.5, "#f6bb78");
+      }
       for (const decoration of item.building.dressing) {
         const room = item.building.rooms.find((entry) => entry.id === decoration.roomId)!;
         const color = decoration.module === "planter" ? "#7ca96f" : finishes ? room.appearance.accent : "#bed0df";
         box(decoration.id, decoration.x + 0.5, decoration.y + 0.5, 0.17, decoration.module === "table" ? 0.8 : 0.55, 0.25, decoration.module === "desk" ? 0.35 : 0.55, color, 0.65);
         if (decoration.module === "desk") box(`${decoration.id}-screen`, decoration.x + 0.5, decoration.y + 0.4, 0.39, 0.27, 0.18, 0.045, "#a5d0cf");
       }
-      for (const cell of item.mission.extraction) box(`extraction-${cell.x}-${cell.y}`, cell.x + 0.5, cell.y + 0.5, 0.09, 0.92, 0.035, 0.92, "#83e8c3");
+      if (level === 0) for (const cell of item.mission.extraction) box(`extraction-${cell.x}-${cell.y}`, cell.x + 0.5, cell.y + 0.5, 0.09, 0.92, 0.035, 0.92, "#83e8c3");
       function mark(id: string) {
         for (const [roomId, floor] of floors) {
           const sourceRoom = item.building.rooms.find((room) => room.id === roomId)!;
@@ -117,9 +127,9 @@ export default function Building3D({ item, selected, onSelect, finishes }: { ite
       setError(failure instanceof Error ? failure.message : "WebGL ist nicht verfügbar");
     }
     return dispose;
-    // Selection updates materials through highlight; rebuilding only follows a new package.
+    // Selection updates materials through highlight; rebuilding follows a new package or floor.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [item, finishes]);
+  }, [item, finishes, level]);
 
-  return <div className="view3d"><div className="view3d-host" ref={host} />{error ? <p role="alert" className="view3d-note">3D nicht verfügbar: {error}. Grundriss und Raumgraph bleiben nutzbar.</p> : <><p className="view3d-note">45° · orthografisch · Mausrad zum Zoomen · primitive Platzhalter</p><div className="rotate-tools"><button onClick={() => turn.current(-1)} aria-label="Kamera nach links drehen">↶ 90°</button><button onClick={() => turn.current(1)} aria-label="Kamera nach rechts drehen">90° ↷</button></div></>}</div>;
+  return <div className="view3d"><div className="view3d-host" ref={host} />{error ? <p role="alert" className="view3d-note">3D nicht verfügbar: {error}. Grundriss und Raumgraph bleiben nutzbar.</p> : <><p className="view3d-note">Etage {level + 1} · 45° · orthografisch · Mausrad zum Zoomen · primitive Platzhalter</p><div className="rotate-tools"><button onClick={() => turn.current(-1)} aria-label="Kamera nach links drehen">↶ 90°</button><button onClick={() => turn.current(1)} aria-label="Kamera nach rechts drehen">90° ↷</button></div></>}</div>;
 }
