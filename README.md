@@ -1,4 +1,4 @@
-# NEON CONTRACT
+# Sweepers
 
 Deutsch · [English](README.en.md)
 
