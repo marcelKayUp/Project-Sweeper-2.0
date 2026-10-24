@@ -137,6 +137,8 @@ Primitive strategische Schritte können Angebote vorlegen, Angebote annehmen/abl
 
 Dabei gilt: Ein Angebot ist noch kein Vertrag. Ein Auftrag ist noch kein Erfolg. Veröffentlichung verändert Wissen, nicht rückwirkend die Wahrheit. Eine Zusage darf keine nicht verfügbare Kapazität erschaffen. Übernahme, Sabotage und Erpressung brauchen bei späterer Verwendung eigene begrenzte Operatoren; ihre Erwähnung implementiert keine Wirkung.
 
+Die ausformulierte Zerlegung steht als Idee in [HTN-Auftragslogik](HTN_AUFTRAGSIDEE.md) und [0045](decisions/0045-htn-auftragsidee.md). Sie führt keine Regel ein.
+
 ## 8. Mehrere Akteure, Reaktionen und Spielerfreiheit
 
 Der erste Ansatz benötigt keinen global optimalen Plan für alle 70 Organisationen. Ein begrenzter Ausschnitt verfolgt wenige Ziele; die anderen Akteure bleiben potenzielle Lieferanten, Vermittler und Hintergrundpartner.
