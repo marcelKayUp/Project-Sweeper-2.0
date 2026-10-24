@@ -150,6 +150,8 @@ Erster Ausbau: gespeicherte Runner, kleine Auswahl taktischer Verbesserungen, pe
 
 Abnahme: Missionsergebnis wird genau einmal verbucht; Laden/Speichern und eine Save-Migration sind getestet; Neueinsteiger können einen Auftrag sinnvoll mitspielen. Danach erst Fraktionen, Safehouse, weitere Begleiter und größere Contentproduktion priorisieren.
 
+Eine unverbindliche Idee für Ruf, Heat, Narben, Bindungen, Fraktionen, Dossiers und Kodex steht in [KAMPAGNEN_METAPROGRESSION.md](KAMPAGNEN_METAPROGRESSION.md). Sie erweitert den Abschlussumfang von M6 nicht.
+
 Echter Verstärkungs-Hotjoin mit zusätzlichem Runner erhält eine eigene Aufgabe: sicherer Einstieg, Skalierung kommender Wellen, Ressourcenregeln und Kampagnenbesitz gemeinsam definieren.
 
 Die ersten Kampagnenansichten sind Charaktererstellung/-bogen, Skillliste, Levelaufstieg, gespeichertes Loadout, einfacher Safehouse-Hub und Auftragswahl. Strategische Stadtkarte, Händler, Klinik und Fraktionen bleiben einzeln wählbare Ausbaupakete AP-28 bis AP-31. Sie sind nicht alle für den Abschluss von M6 nötig.
