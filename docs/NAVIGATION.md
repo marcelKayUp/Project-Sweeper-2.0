@@ -55,7 +55,7 @@ Vorhanden, ausschließlich nach „Runner anlegen“. Aussehen, die Attribute Ph
 
 ### Stadtkarte
 
-Vorhanden auf `?stueck=stadt`, getrennt vom Missionsstück. Sie zeigt die Rhein-Ruhr-Übersicht: leuchtende Orte, weiße Korridore, Drehen der Ansicht. Die Fläche erzeugt keine Deckung, keine Sichtlinie und keine Mission. Aufträge lassen sich dort nicht wählen. Von Zugang, Lobby und Ergebnis führt kein Sprung hierher, und von der Karte führt keiner zurück.
+Vorhanden auf `?stueck=stadt`, getrennt vom Missionsstück. Sie zeigt die Rhein-Ruhr-Übersicht als Vektorkarte: blaue Gebäudeflächen, weiße Straßen einschließlich der kleineren, Verschieben, Zoomen und Drehen. Die Fläche erzeugt keine Deckung, keine Sichtlinie und keine Mission. Aufträge lassen sich dort nicht wählen. Von Zugang, Lobby und Ergebnis führt kein Sprung hierher, und von der Karte führt keiner zurück.
 
 ### Lobby
 

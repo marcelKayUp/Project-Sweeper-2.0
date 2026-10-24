@@ -23,5 +23,6 @@ test("die Darstellung übernimmt nur Knoten und Kanten", () => {
 
   const screen = readFileSync(new URL("./CityScreen.tsx", import.meta.url), "utf8");
   assert.equal(/@babylonjs|phaser|colyseus|ghostFloor|mission\.ts/.test(screen), false);
-  assert.equal(screen.includes("cityPicture(RHEIN_RUHR.nodes, RHEIN_RUHR.edges)"), true);
+  assert.equal(screen.includes("vectorScene(RHEIN_RUHR_STREETS, RHEIN_RUHR_BUILDINGS, places, turn)"), true);
+  assert.equal(screen.includes("RHEIN_RUHR.edges"), false);
 });

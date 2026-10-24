@@ -99,7 +99,8 @@ export {
   returnFieldKit,
   takeFieldKit,
 } from "./campaign.ts";
-export { CITY_CELL_MARGIN, RHEIN_RUHR, RHEIN_RUHR_SOURCE, cityCellOwner, cityCells, cityNeighbors } from "./city.ts";
+export { CITY_CELL_MARGIN, RHEIN_RUHR, RHEIN_RUHR_BUILDINGS, RHEIN_RUHR_MAP_SOURCE, RHEIN_RUHR_PLACES, RHEIN_RUHR_SOURCE, RHEIN_RUHR_STREETS, cityCellOwner, cityCells, cityNeighbors, rheinRuhrMapPoint } from "./city.ts";
+export type { CityMapBuilding, CityMapPoint, CityMapStreet } from "./city.ts";
 export type { FloorPlate, VerticalKind, VerticalLink } from "./levels.ts";
 export type { ApBattle, ApMark, MovePreview, MoveQuery, ReachTile } from "./ap.ts";
 export type { FlatActor, FlatStep, FlatWalk } from "./flatWalk.ts";

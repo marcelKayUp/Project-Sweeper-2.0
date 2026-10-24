@@ -1,4 +1,6 @@
-export { RHEIN_RUHR, RHEIN_RUHR_SOURCE } from "./rheinRuhr.ts";
+export { RHEIN_RUHR, RHEIN_RUHR_PLACES, RHEIN_RUHR_SOURCE } from "./rheinRuhr.ts";
+export { RHEIN_RUHR_BUILDINGS, RHEIN_RUHR_MAP_SOURCE, RHEIN_RUHR_STREETS, rheinRuhrMapPoint } from "./rheinRuhrMap.ts";
+export type { CityMapBuilding, CityMapPoint, CityMapStreet } from "./rheinRuhrMap.ts";
 
 export interface CityNode {
   readonly id: string;

@@ -27,7 +27,7 @@ export const playerStops: readonly EntryStop[] = [
     id: "stadt",
     title: "Stadtkarte",
     mark: "vorhanden",
-    note: "Prüft Drehung und Voronoi-Zellen der Rhein-Ruhr-Karte, ohne Deckung und ohne Mission.",
+    note: "Prüft die Vektorkarte aus Gebäuden und Straßen, ohne Deckung und ohne Mission.",
     href: "/?stueck=stadt",
   },
   {
